@@ -39,7 +39,7 @@ export default function Navbar() {
 
 
                 </div>
-                <div className='fixed w-full '>
+                <div className='fixd z-3- w-full '>
                     <div className='flex justify-center bg-[#fff]'>
                         <div className='lg:w-3/12 w-9/12 cursor-pointer lg:ml-72 m-2'>
                             <Image src={logo} className='lg:w-5/12 rounded-md' onDragStart={(e) => e.preventDefault()}></Image>
