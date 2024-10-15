@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "course_name": "Graphic Design",
+    "title": "(Photoshop + Illustrator)",
+    "price": 199.99,
+    "rating": 4.5,
+    "Duration": "3 Months",
+    "Date" : "1st July 2024",
+    "total_hours": 30,
+    "image": "https://i.postimg.cc/BntcYz7c/dt.jpg"
+  },
+  {
+    "id": 2,
+    "course_name": "Motion Graphics",
+    "title": "(2D, 3D Motion, Animation, TVC, Video Editing)",
+    "price": 299.99,
+    "rating": 4.8,
+    "date": "2023-02-20",
+    "total_hours": 45,
+    "image": "https://i.postimg.cc/R092yfyT/dt1.jpg"
+  },
+  {
+    "id": 3,
+    "course_name": "Web Development",
+    "title": "(HTML5, CSS3, JavaScript, WordPress)",
+    "price": 249.99,
+    "rating": 4.6,
+    "Duration": "3 Months",
+    "Date" : "1st July 2024",
+    "total_hours": 40,
+    "image": "https://i.postimg.cc/ZqVsQQrT/dt2.jpg"
+  },
+  {
+    "id": 4,
+    "course_name": "Digital Marketing",
+    "title": "(SEO + SEM + SMM)",
+    "price": 199.99,
+    "rating": 4.4,
+    "Duration": "3 Months",
+    "Date" : "1st July 2024",
+    "total_hours": 35,
+    "image": "https://i.postimg.cc/MpxS2hjR/dt3.jpg"
+  },
+  {
+    "id": 5,
+    "course_name": "Affiliate Marketing",
+    "title": "(Amazon + Google Adsense)",
+    "rating": 4.2,
+    "Duration": "3 Months",
+    "Date" : "1st July 2024",
+    "total_hours": 25,
+    "image": "https://i.postimg.cc/mgqyFGN1/dt6.jpg"
+  },
+  {
+    "id": 6,
+    "course_name": "Online Budiness Development",
+    "title": "(eCommerce + Export + Import + Regular)",
+    "rating": 4.2,
+    "Duration": "3 Months",
+    "Date" : "1st July 2024",
+    "total_hours": 25,
+    "image": "https://i.postimg.cc/htHVt1c9/dt7.jpg"
+  }
+]
