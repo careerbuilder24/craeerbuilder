@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Banner from "./components/Banner/Banner";
 import FirstSection from "./components/FirstSection/FirstSection";
 import WelcomeText from "./WelcomeText/WelcomeText";
+import Footer from "./components/Footer/Footer";
 
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <Banner></Banner>
       <WelcomeText></WelcomeText>
       <FirstSection></FirstSection>
+      <Footer></Footer>
     </>
   );
 }

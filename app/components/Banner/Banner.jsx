@@ -8,7 +8,7 @@ import Image from 'next/image';
 export default function Banner() {
     return (
         <>
-            <div className='mt-32 lg:mt-0 relative h-1/12 w-full'>
+            <div className='mt-32 lg:mt-0 relative h-6/12 w-full'>
                 <AwesomeSlider   animation="cubeAnimation"
                     play>
                     <div className='relative h-full w-full'>

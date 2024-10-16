@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { FaFacebookF } from "react-icons/fa6";
 import { ImYoutube2 } from "react-icons/im";
 import { AiOutlineMail } from "react-icons/ai";
+import { CgCloseO } from "react-icons/cg";
+import { LuMenu } from "react-icons/lu";
 import logo from '../../../assets/logo.jpg';
 import logo2 from '../../../assets/new.gif';
 import Image from 'next/image';
@@ -12,11 +14,11 @@ export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
 
     const toggleNav = () => {
-        setIsNavOpen((prev) => !prev); // Toggle the state
+        setIsNavOpen((prev) => !prev); 
     };
 
     const handleScroll = () => {
-        if (window.scrollY > 50) { // Adjust this value based on your design
+        if (window.scrollY > 50) { 
             setIsScrolled(true);
         } else {
             setIsScrolled(false);
@@ -78,35 +80,58 @@ export default function Navbar() {
 
                     <div style={{ background: '#17549A' }} className='h-14 flex items-center'>
                         <button className="md:hidden ml-4" onClick={toggleNav}>
-                            <h1 className='text-white'>Menu</h1> {/* Toggle button */}
+                            <div className=' w-8 h-8 hover:bg-[#0499fd] bg-white rounded-lg'>
+                                <center>
+                                    <LuMenu className='text-3xl font-bold' />
+                                </center>
+                            </div>
                         </button>
-                        <div className='flex-grow justify-center hidden md:flex font-light'>
-                            <ul className='flex space-x-4 text-white'>
+                        <div className='flex-grow  justify-center hidden md:flex font-light'>
+                            <ul className='flex space-x-7 lg:ml-96 text-white '>
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Home</li>
                                 <div className='flex'>
-                                    <div className='lg:mt-1'>
+                                    <div className='lg:mt-1 w-7'>
                                         <Image src={logo2} className='w-full'></Image>
                                     </div>
                                     <div>
-                                        <li className='cursor-pointer'>Virtual Tutor</li>
+                                        <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Virtual Tutor</li>
                                     </div>
                                 </div>
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Courses</li>
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Gallery</li>
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Faq</li>
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>University</li>
+                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Career Guide</li>
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>About us</li>
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Contact</li>
                             </ul>
+                        </div>
+                        <div class="w-full max-w-xs hidden lg:block lg:mr-10">
+                            <form>
+                                <div class="relative">
+                                    <input type="text" class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" placeholder="Search..." />
+                                    <button type="submit" class="absolute inset-y-0 right-0 flex items-center px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                                        Search
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
 
                 {/* Mobile Navbar */}
-                <div className={`bg-blue-300 transition-transform duration-300 ease-in-out ${isNavOpen ? 'translate-y-0' : '-translate-y-full'} fixed top-0 left-0 w-full z-50`}>
+                <div style={{ background: '#17549A' }} className={` transition-transform duration-700 ease-in-out ${isNavOpen ? 'translate-y-0' : '-translate-y-full'} fixed top-0 left-0 w-full z-50`}>
                     <div className="flex justify-between items-center p-4">
-                        <h1 className='text-white'>Menu</h1>
-                        <button onClick={toggleNav} className="text-white">Close</button>
+                        <div>
+
+                        </div>
+
+
+
+                        <button className="md:hidden ml-4" onClick={toggleNav}>
+                           
+                            <CgCloseO className='text-2xl text-white' />
+                        </button>
                     </div>
                     <ul className='flex flex-col items-center space-y-2 py-4 text-white'>
                         <li className='cursor-pointer' onClick={toggleNav}>Home</li>
