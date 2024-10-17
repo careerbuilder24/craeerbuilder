@@ -1,14 +1,16 @@
 import Image from "next/image";
-import Navbar from "./components/Navbar/Navbar";
-import Banner from "./components/Banner/Banner";
-import FirstSection from "./components/FirstSection/FirstSection";
+import Navbar from "./(with-navbar)/componenets/Navbar/Navbar";
+import Banner from "./(with-navbar)/componenets/Banner/Banner";
 import WelcomeText from "./WelcomeText/WelcomeText";
-import Footer from "./components/Footer/Footer";
+import Footer from "./(with-navbar)/componenets/Footer/Footer";
+import FirstSection from "./(with-navbar)/componenets/FirstSection/FirstSection";
+
 
 
 export default function Home() {
   return (
     <>
+      
       <Navbar></Navbar>
       <Banner></Banner>
       <WelcomeText></WelcomeText>

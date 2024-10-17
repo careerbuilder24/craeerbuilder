@@ -2,7 +2,7 @@
 import React from 'react';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
-import img from '../../../assets/img1.jpg';
+import img from '../../../../assets/img1.jpg';
 import Image from 'next/image';
 
 export default function Banner() {

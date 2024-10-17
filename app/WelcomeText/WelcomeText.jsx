@@ -4,9 +4,14 @@ import { BsArrowUpRightCircle } from "react-icons/bs";
 import Image from 'next/image';
 
 import abs from './Welcome.css';
+// import useCourses from '@/hooks/useCourse';
 export default function WelcomeText() {
+  
+  
+
   return (
     <>
+    
       <div className='mt-28 container mx-auto  text-center'>
 
         <center>

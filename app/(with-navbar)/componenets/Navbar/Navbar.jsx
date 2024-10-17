@@ -5,20 +5,21 @@ import { ImYoutube2 } from "react-icons/im";
 import { AiOutlineMail } from "react-icons/ai";
 import { CgCloseO } from "react-icons/cg";
 import { LuMenu } from "react-icons/lu";
-import logo from '../../../assets/logo.jpg';
-import logo2 from '../../../assets/new.gif';
+import logo from '../../../../assets/logo.jpg';
+import logo2 from '../../../../assets/new.gif';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Navbar() {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
     const toggleNav = () => {
-        setIsNavOpen((prev) => !prev); 
+        setIsNavOpen((prev) => !prev);
     };
 
     const handleScroll = () => {
-        if (window.scrollY > 50) { 
+        if (window.scrollY > 50) {
             setIsScrolled(true);
         } else {
             setIsScrolled(false);
@@ -88,7 +89,10 @@ export default function Navbar() {
                         </button>
                         <div className='flex-grow  justify-center hidden md:flex font-light'>
                             <ul className='flex space-x-7 lg:ml-96 text-white '>
+                                <Link href={'/'}>
+                                
                                 <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Home</li>
+                                </Link>
                                 <div className='flex'>
                                     <div className='lg:mt-1 w-7'>
                                         <Image src={logo2} className='w-full'></Image>
@@ -121,15 +125,16 @@ export default function Navbar() {
 
                 {/* Mobile Navbar */}
                 <div style={{ background: '#17549A' }} className={` transition-transform duration-700 ease-in-out ${isNavOpen ? 'translate-y-0' : '-translate-y-full'} fixed top-0 left-0 w-full z-50`}>
+               
                     <div className="flex justify-between items-center p-4">
                         <div>
-
+                        <Image src={logo} className='lg:w-8/12  w-5/12 rounded-md ml-32  lg:ml-0' onDragStart={(e) => e.preventDefault()} />
                         </div>
 
 
 
                         <button className="md:hidden ml-4" onClick={toggleNav}>
-                           
+
                             <CgCloseO className='text-2xl text-white' />
                         </button>
                     </div>

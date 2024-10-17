@@ -22,10 +22,10 @@ export default function FirstSection() {
 
     return (
         <>
-            <div className='container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:mt-10'>
+            <div className='container mx-auto w-10/12 lg:w-ful grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 lg:mt-10'>
                 {
                     course?.map(courses => (
-                        <div key={courses.id} className="relative cursor-pointer bg-gray-200 rounded-2xl mb-3 overflow-hidden group">
+                        <div style={{borderRadius: '5px' }} key={courses.id} className="relative cursor-pointer bg-gray-200  mb-3 overflow-hidden group">
                             <div className="relative">
                                 <img
                                     src={courses.image}
@@ -33,7 +33,7 @@ export default function FirstSection() {
                                     className={`rounded-2xl mb-4 object-cover w-full transition-transform duration-300 group-hover:scale-105`}
                                     onDragStart={(e) => e.preventDefault()}
                                 />
-                                <div className="absolute top-0 left-0 right-0 h-full bg-[#7db2ee] opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+                                {/* <div className="absolute top-0 left-0 right-0 h-full bg-[#7db2ee] opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div> */}
                                 <div className="absolute top-0 left-0 right-0 h-1/2 bg-transparent shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)' }}></div>
 
                                 <div className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -63,13 +63,13 @@ export default function FirstSection() {
                             />
                             <p className="text-gray-700">Enrollment Date: {courses.enrollment_date}</p>
 
-                            <div className="flex justify-between mt-4">
-                                <Link  href={`/course/${courses.id}`} passHref>
-                                    <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 hover:-rotate-2 hover:translate-x-1">
+                            <div className="flex justify-between mt-4 my-5">
+                                <Link  href={`/details/${courses.id}`} passHref>
+                                    <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 ml-5 ">
                                         View Details
                                     </button>
                                 </Link>
-                                <button className="bg-green-500 text-white py-2 mr-5 px-10 rounded transition duration-300 transform hover:bg-green-600 hover:rotate-12 hover:translate-y-1">
+                                <button className="bg-green-500 text-white py-2 mr-5 px-10 rounded transition duration-300 transform hover:bg-green-600">
                                     Enroll
                                 </button>
                             </div>

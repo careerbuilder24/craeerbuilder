@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Course() {
+export default function login() {
   return (
     <div>
-      <h1>ohdf</h1>
+      <h1>yvv</h1>
     </div>
   )
 }
