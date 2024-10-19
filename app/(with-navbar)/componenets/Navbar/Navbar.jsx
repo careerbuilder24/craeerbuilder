@@ -88,13 +88,13 @@ export default function Navbar() {
                             </div>
                         </button>
                         <div className='flex-grow  justify-center hidden md:flex font-light'>
-                            <ul className='flex space-x-16 text-white '>
+                            <ul className='flex space-x-10 text-white '>
 
-                                <div className='bg-[#38b1f1] w-24 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer' >
-                                    <Link href={'/'} className=''>
+                                <Link className='bg-[#38b1f1] w-24 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' href={'/'} >
+                                   
                                         Home
-                                    </Link>
-                                </div>
+                                  
+                                </Link>
 
 
 
@@ -106,20 +106,70 @@ export default function Navbar() {
                                     <div className='lg:mt-1 w-7'>
                                         <Image src={logo2} className='w-full'></Image>
                                     </div>
-                                    <div>
-                                        <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Virtual Tutor</li>
+
+
+
+
+                                    <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                        <Link href={''} className=''>
+                                            Virtual Tutor
+                                        </Link>
                                     </div>
                                 </div>
-                                <Link href={'/Courses'}>
 
-                                    <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Courses</li>
+
+                                <Link className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' href={'/Courses'} >
+                                   
+                                        Courses
+                                   
                                 </Link>
-                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Gallery</li>
-                                <li className='cursor-pointer text-xl  transition-colors duration-300 hover:text-[#53baff]'>Faq</li>
-                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>University</li>
-                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Career Guide</li>
-                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>About us</li>
-                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Contact</li>
+
+                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                    <Link href={''} className=''>
+                                        Gallery
+                                    </Link>
+                                </div>
+
+
+                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                    <Link href={''} className=''>
+                                        Faq
+                                    </Link>
+                                </div>
+
+                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                    <Link href={''} className=''>
+                                        University
+                                    </Link>
+                                </div>
+
+                                <div className='bg-[#38b1f1] w-32 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                    <Link href={''} className=''>
+                                        Career Guide
+                                    </Link>
+                                </div>
+
+                                <div className='bg-[#38b1f1] w-32 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md ' >
+                                    <Link href={''} className=''>
+                                        Career Guide
+                                    </Link>
+                                </div>
+
+                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                    <Link href={''} className=''>
+                                        About us
+                                    </Link>
+                                </div>
+
+                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                    <Link href={''} className=''>
+                                        Contact
+                                    </Link>
+                                </div>
+
+
+
+
                             </ul>
                         </div>
                         {/* <div class="w-full max-w-xs hidden lg:block lg:mr-10">
