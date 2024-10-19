@@ -44,10 +44,10 @@ export default function Navbar() {
     }, []);
 
     return (
-        <>
+        <header>
             <nav>
                 {/* First Section */}
-                <div style={{ backgroundColor: '#e1e1e1' }} className={`h-10 flex flex-col  md:flex-row items-center  justify-center lg:block lg:p-2 p-8 ${isScrolled ? 'fixed top-0 w-full transition-all duration-300 py-16 z-20 bg-gray-200' : ''}`}>
+                <div style={{ backgroundColor: '#e1e1e1' }} className={`h-10 flex flex-col  md:flex-row items-center  justify-center lg:block lg:p-2 p-8 hidden `}>
                     <div className='flex flex-col md:flex-row justify-center items-center lg:gap-5'>
                         <div className='flex items-center lg:gap-5 gap-2 mb-2 md:mb-0'>
                             <h1 className='text-xs'>+8801742540234</h1>
@@ -72,7 +72,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Second Section */}
-                <div className={`fixed z-30 w-full transition-all duration-300 ${isScrolled && window.innerWidth >= 768 ? 'lg:top-0 transition-all duration-300' : 'lg:top-10 '} bg-white`}>
+                <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 ${isScrolled && window.innerWidth >= 768 ? 'lg:top-0 transition-all duration-300' : 'lg:top-10 top-0 '} bg-white`}>
                     <div className='flex justify-center'>
                         <div className='lg:w-4/12 w-9/12 cursor-pointer lg:ml-64 m-2'>
                             <Image src={logo} className='lg:w-8/12 w-8/12 rounded-md ml-14 lg:ml-0' onDragStart={(e) => e.preventDefault()} />
@@ -88,29 +88,41 @@ export default function Navbar() {
                             </div>
                         </button>
                         <div className='flex-grow  justify-center hidden md:flex font-light'>
-                            <ul className='flex space-x-7 lg:ml-96 text-white '>
-                                <Link href={'/'}>
-                                
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Home</li>
-                                </Link>
+                            <ul className='flex space-x-16 text-white '>
+
+                                <div className='bg-[#38b1f1] w-24 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer' >
+                                    <Link href={'/'} className=''>
+                                        Home
+                                    </Link>
+                                </div>
+
+
+
+                                {/* <Link href={'/'}>
+
+                                    <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Home</li>
+                                </Link> */}
                                 <div className='flex'>
                                     <div className='lg:mt-1 w-7'>
                                         <Image src={logo2} className='w-full'></Image>
                                     </div>
                                     <div>
-                                        <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Virtual Tutor</li>
+                                        <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Virtual Tutor</li>
                                     </div>
                                 </div>
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Courses</li>
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Gallery</li>
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Faq</li>
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>University</li>
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Career Guide</li>
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>About us</li>
-                                <li className='cursor-pointer transition-colors duration-300 hover:text-[#53baff]'>Contact</li>
+                                <Link href={'/Courses'}>
+
+                                    <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Courses</li>
+                                </Link>
+                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Gallery</li>
+                                <li className='cursor-pointer text-xl  transition-colors duration-300 hover:text-[#53baff]'>Faq</li>
+                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>University</li>
+                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Career Guide</li>
+                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>About us</li>
+                                <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Contact</li>
                             </ul>
                         </div>
-                        <div class="w-full max-w-xs hidden lg:block lg:mr-10">
+                        {/* <div class="w-full max-w-xs hidden lg:block lg:mr-10">
                             <form>
                                 <div class="relative">
                                     <input type="text" class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" placeholder="Search..." />
@@ -119,16 +131,16 @@ export default function Navbar() {
                                     </button>
                                 </div>
                             </form>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
                 {/* Mobile Navbar */}
                 <div style={{ background: '#17549A' }} className={` transition-transform duration-700 ease-in-out ${isNavOpen ? 'translate-y-0' : '-translate-y-full'} fixed top-0 left-0 w-full z-50`}>
-               
+
                     <div className="flex justify-between items-center p-4">
                         <div>
-                        <Image src={logo} className='lg:w-8/12  w-5/12 rounded-md ml-32  lg:ml-0' onDragStart={(e) => e.preventDefault()} />
+                            <Image src={logo} className='lg:w-8/12  w-5/12 rounded-md ml-32  lg:ml-0' onDragStart={(e) => e.preventDefault()} />
                         </div>
 
 
@@ -149,6 +161,6 @@ export default function Navbar() {
                     </ul>
                 </div>
             </nav>
-        </>
+        </header>
     );
 }

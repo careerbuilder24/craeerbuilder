@@ -21,7 +21,7 @@ export default function WelcomeText() {
         </center>
 
 
-        <div className='mt-10 flex  justify-center gap-10 my-10  px-2'>
+        <div className='mt-10 flex flex-col lg:flex-row  justify-center gap-10 my-10  px-2'>
           <div className='w-full lg:w-1/2'> 
             <div className='relative w-full ' style={{ paddingBottom: '56.25%' }}> 
               <iframe

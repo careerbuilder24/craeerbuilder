@@ -6,7 +6,7 @@ export default function Footer() {
         <>
             <div style={{ background: '#17549A' }} className='text-white w-full h-full py-20'>
                 {/* First Section */}
-                <div className='flex flex-col md:flex-row justify-center gap-7 text-center md:text-left ml-5'>
+                <div className='flex flex-col md:flex-row justify-center lg:gap-32 gap-12 text-center md:text-left ml-5'>
                     {["Apps and Software", "Graphic Design & Printing", "Writing Services", "Website Development Services"].map((category, index) => (
                         <div className='flex flex-col' key={index}>
                             <h1 className='font-bold mb-2 cursor-pointer'>{category}</h1>
@@ -29,7 +29,7 @@ export default function Footer() {
                                 </div>
                             ))}
                             {category === "Website Development Services" && ["Business Website Design", "News Portal Website Design", "Personal Website Design", "eCommerce Website Design", "Educational Website Design", "Garments Buying House Website", "Hotel/Resort Booking Website", "Medical Website Development"].map(item => (
-                                <div key={item} className='flex items-center'>
+                                <div key={item} className='flex items-center '>
                                     <RiArrowRightSLine />
                                     <h1 className='hover:underline cursor-pointer'>{item}</h1>
                                 </div>
@@ -39,34 +39,37 @@ export default function Footer() {
                 </div>
 
                 <center>
-                    <hr className='w-8/12 border-white my-10' />
+                    <hr className='lg:w-8/12 w-11/12 border-white my-10' />
                 </center>
 
                 {/* Second Section */}
-                <div className='flex flex-col md:flex-row justify-center gap-8 text-center md:text-left'>
-                    {["Blogger Outreach Services", "Domain & Hosting Services", "Freelancing and Outsourcing", "Important Links"].map((category, index) => (
+                <div className='flex flex-col md:flex-row justify-center lg:gap-28 gap-12 text-center md:text-left ml-5'>
+                    <div className='flex flex-col lg:mr-16 lg:ml-10'>
+                        <h1 className='font-bold mb-2 cursor-pointer'>Important Links</h1>
+                        {["Company Profile", "Privacy Policy", "Terms and Condition", "Career Opportunity", "B2B Partnership", "Press Release"].map(item => (
+                            <div key={item} className='flex items-center mb-1'>
+                                <RiArrowRightSLine />
+                                <h1 className='hover:underline cursor-pointer'>{item}</h1>
+                            </div>
+                        ))}
+                    </div>
+                    {["Blogger Outreach Services", "Domain & Hosting Services", "Freelancing and Outsourcing"].map((category, index) => (
                         <div className='flex flex-col ml-5' key={index}>
                             <h1 className='font-bold mb-2 cursor-pointer'>{category}</h1>
                             {category === "Blogger Outreach Services" && ["Search Engine Optimization", "Social Media Marketing", "Search Engine Marketing", "YouTube Video Ads Campaign", "Facebook Ads Campaign", "Content Marketing", "Video Marketing Services"].map(item => (
-                                <div key={item} className='flex items-center'>
+                                <div key={item} className='flex items-center mb-1'>
                                     <RiArrowRightSLine />
                                     <h1 className='hover:underline cursor-pointer'>{item}</h1>
                                 </div>
                             ))}
                             {category === "Domain & Hosting Services" && ["Domain Registration", "Shared Hosting", "VPS Hosting", "Dedicated Hosting", "Cloud Hosting", "WordPress Hosting"].map(item => (
-                                <div key={item} className='flex items-center'>
+                                <div key={item} className='flex items-center mb-1'>
                                     <RiArrowRightSLine />
                                     <h1 className='hover:underline cursor-pointer'>{item}</h1>
                                 </div>
                             ))}
                             {category === "Freelancing and Outsourcing" && ["Affiliate Marketing Course", "Digital Marketing Course", "Graphic Design Course", "Search Engine Optimization Course", "Website Design Course", "Website Development Course"].map(item => (
-                                <div key={item} className='flex items-center'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
-                            {category === "Important Links" && ["Company Profile", "Privacy Policy", "Terms and Condition", "Career Opportunity", "B2B Partnership", "Press Release"].map(item => (
-                                <div key={item} className='flex items-center'>
+                                <div key={item} className='flex items-center mb-1'>
                                     <RiArrowRightSLine />
                                     <h1 className='hover:underline cursor-pointer'>{item}</h1>
                                 </div>
@@ -74,6 +77,7 @@ export default function Footer() {
                         </div>
                     ))}
                 </div>
+
             </div>
 
             <div className='bg-[#232256] text-center text-xs py-3 text-white'>
