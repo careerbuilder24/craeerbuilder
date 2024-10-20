@@ -88,7 +88,7 @@ export default function Navbar() {
                             </div>
                         </button>
                         <div className='flex-grow  justify-center hidden md:flex font-light'>
-                            <ul className='flex space-x-10 text-white '>
+                            <ul className='flex space-x-7 text-white '>
 
                                 <Link className='bg-[#38b1f1] w-24 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' href={'/'} >
                                    
@@ -151,7 +151,7 @@ export default function Navbar() {
 
                                 <div className='bg-[#38b1f1] w-32 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md ' >
                                     <Link href={''} className=''>
-                                        Career Guide
+                                        Blog
                                     </Link>
                                 </div>
 
