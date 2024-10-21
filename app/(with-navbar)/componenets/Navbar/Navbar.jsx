@@ -87,21 +87,23 @@ export default function Navbar() {
                                 </center>
                             </div>
                         </button>
-                        <div className='flex-grow  justify-center hidden md:flex font-light'>
-                            <ul className='flex space-x-7 text-white '>
 
-                                <Link className='bg-[#38b1f1] w-24 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' href={'/'} >
-                                   
-                                        Home
-                                  
+
+
+
+
+                        <div className='flex-grow  justify-center hidden md:flex font-light'>
+                            <ul className='flex space-x-16 mt-2 text-white '>
+
+                                <Link className=' duration-300 transition-all font-bold cursor-pointer' href={'/'} >
+
+                                    Home
+
                                 </Link>
 
 
 
-                                {/* <Link href={'/'}>
 
-                                    <li className='cursor-pointer text-xl transition-colors duration-300 hover:text-[#53baff]'>Home</li>
-                                </Link> */}
                                 <div className='flex'>
                                     <div className='lg:mt-1 w-7'>
                                         <Image src={logo2} className='w-full'></Image>
@@ -110,58 +112,58 @@ export default function Navbar() {
 
 
 
-                                    <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
-                                        <Link href={''} className=''>
-                                            Virtual Tutor
+                                    <div className=' hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer' >
+                                        <Link href={'/Students'} className=''>
+                                            Students
                                         </Link>
                                     </div>
                                 </div>
 
 
-                                <Link className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' href={'/Courses'} >
-                                   
-                                        Courses
-                                   
+                                <Link className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} >
+
+                                    Courses
+
                                 </Link>
 
-                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
-                                    <Link href={''} className=''>
+                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
+                                    <Link href={'/Gallery'} className=''>
                                         Gallery
                                     </Link>
                                 </div>
 
 
-                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
                                         Faq
                                     </Link>
                                 </div>
 
-                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
                                         University
                                     </Link>
                                 </div>
 
-                                <div className='bg-[#38b1f1] w-32 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
                                         Career Guide
                                     </Link>
                                 </div>
 
-                                <div className='bg-[#38b1f1] w-32 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md ' >
+                                <div className='      text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer' >
                                     <Link href={''} className=''>
                                         Blog
                                     </Link>
                                 </div>
 
-                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                <div className='      text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
                                         About us
                                     </Link>
                                 </div>
 
-                                <div className='bg-[#38b1f1] w-28 h-10        text-center text-white py-2 hover:text-blue-800  hover:bg-white duration-300 transition-all font-bold cursor-pointer rounded-md' >
+                                <div className='      text-center text-white  hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
                                         Contact
                                     </Link>
@@ -171,7 +173,27 @@ export default function Navbar() {
 
 
                             </ul>
+
+
+                            <div className='relative left-16 group'>
+                                {/* Dropdown Trigger */}
+                                <div className='bg-white rounded-md w-20 h-9 hover:text-white text-blue-500 cursor-pointer hover:bg-blue-400 transition-all duration-300 ease-in-out'>
+                                    <span className='flex items-center justify-center h-full font-bold '>Login</span>
+                                </div>
+
+                               
+                                {/* <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
+                                 
+                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Option 1</a>
+                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Option 2</a>
+                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Option 3</a>
+                                </div> */}
+                            </div>
+
                         </div>
+
+
+                        {/* search bar */}
                         {/* <div class="w-full max-w-xs hidden lg:block lg:mr-10">
                             <form>
                                 <div class="relative">

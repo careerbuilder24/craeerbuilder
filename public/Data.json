@@ -13,9 +13,9 @@
   {
     "id": 2,
     "course_name": "Motion Graphics",
-    "title": "(2D, 3D Motion, Animation,Video Editing)",
+    "title": "(2D, 3D Motion, Animation)",
     "price": 299.99,
-    "rating": 4.8,
+    "rating": 2,
     "Date" : "1st July 2024",
     "total_hours": 45,
     "image": "https://i.postimg.cc/R092yfyT/dt1.jpg"
@@ -23,7 +23,7 @@
   {
     "id": 3,
     "course_name": "Web Development",
-    "title": "(HTML5, CSS3, JavaScript, WordPress)",
+    "title": "(HTML5, CSS3, JavaScript)",
     "price": 249.99,
     "rating": 4.6,
     "Duration": "3 Months",

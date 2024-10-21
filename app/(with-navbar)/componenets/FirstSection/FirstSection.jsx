@@ -30,11 +30,11 @@ export default function FirstSection() {
                                 <img
                                     src={courses.image}
                                     alt={courses.image}
-                                    className={`rounded-2xl mb-4 object-cover w-full transition-transform duration-300 group-hover:scale-105`}
+                                    className={`rounded-2xl mb-4 object-cover w-full transition-transform duration-300 group-hover:scale-110`}
                                     onDragStart={(e) => e.preventDefault()}
                                 />
                                 {/* <div className="absolute top-0 left-0 right-0 h-full bg-[#7db2ee] opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div> */}
-                                <div className="absolute top-0 left-0 right-0 h-1/2 bg-transparent shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)' }}></div>
+                                {/* <div className="absolute top-0 left-0 right-0 h-1/2 bg-transparent shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)' }}></div> */}
 
                                 <div className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <RiHeart3Fill size={24} className='text-red-500' />
