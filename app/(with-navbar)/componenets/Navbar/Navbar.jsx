@@ -14,6 +14,8 @@ export default function Navbar() {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
+
+
     const toggleNav = () => {
         setIsNavOpen((prev) => !prev);
     };
@@ -93,7 +95,7 @@ export default function Navbar() {
 
 
                         <div className='flex-grow  justify-center hidden md:flex font-light'>
-                            <ul className='flex space-x-16 mt-2 text-white '>
+                            <ul className='flex space-x-10 mt-2 text-white '>
 
                                 <Link className=' duration-300 transition-all font-bold cursor-pointer' href={'/'} >
 
@@ -102,7 +104,11 @@ export default function Navbar() {
                                 </Link>
 
 
+                                <Link className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} >
 
+                                    Courses
+
+                                </Link>
 
                                 <div className='flex'>
                                     <div className='lg:mt-1 w-7'>
@@ -112,19 +118,37 @@ export default function Navbar() {
 
 
 
-                                    <div className=' hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer' >
-                                        <Link href={'/Students'} className=''>
-                                            Students
-                                        </Link>
+
+
+                                    <div className='relative group'>
+                                        {/* Dropdown Trigger */}
+                                        <div className='text-white cursor-pointer hover:bg-blue-400'>
+                                            <Link href={'/Students'} className='flex items-center justify-center h-full font-bold'>
+                                                Students
+                                            </Link>
+                                        </div>
+
+                                        {/* Dropdown Content */}
+                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box rounded-lg w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
+                                            <Link href="/running-students" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
+                                            <Link href="/employed-students" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Employed Students</Link>
+                                            <Link href="/intern-students" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Intern Students</Link>
+                                        </div>
                                     </div>
+
+
+
+
+                                    {/* 
+                                    <div className=' hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer' >
+                                        <Link href={''} className=''>
+                                           
+                                        </Link>
+                                    </div> */}
                                 </div>
 
 
-                                <Link className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} >
 
-                                    Courses
-
-                                </Link>
 
                                 <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={'/Gallery'} className=''>
@@ -133,11 +157,7 @@ export default function Navbar() {
                                 </div>
 
 
-                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                    <Link href={''} className=''>
-                                        Faq
-                                    </Link>
-                                </div>
+
 
                                 <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
@@ -151,11 +171,12 @@ export default function Navbar() {
                                     </Link>
                                 </div>
 
-                                <div className='      text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer' >
+                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
-                                        Blog
+                                        Faq
                                     </Link>
                                 </div>
+
 
                                 <div className='      text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
@@ -181,7 +202,7 @@ export default function Navbar() {
                                     <span className='flex items-center justify-center h-full font-bold '>Login</span>
                                 </div>
 
-                               
+
                                 {/* <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
                                  
                                     <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Option 1</a>

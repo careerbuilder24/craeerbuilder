@@ -7,876 +7,365 @@ import instrastor1 from '../../assets/insta1.avif';
 import instrastor2 from '../../assets/insta3.avif';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 
-export default function Page() {
-  const [activeButton, setActiveButton] = useState(1);
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import useStudents from '@/hooks/useStudents';
+import useMotion from '@/hooks/useMotion';
+import useAffiliate from '@/hooks/useAffiliate';
+import useVideo from '@/hooks/useVideo';
+import useBusiness from '@/hooks/useBusiness';
+import useFrontend from '@/hooks/useFrontend';
+import useBackend from '@/hooks/useBackend';
+import useDigital from '@/hooks/useDigital';
+import Link from 'next/link';
 
-  const handleButtonClick = (buttonNumber) => {
-    setActiveButton(buttonNumber);
-  };
+
+export default function Page() {
+
+
+  const student = useStudents()
+
+
+  const Motions = useMotion()
+
+  const Affiliate = useAffiliate()
+
+
+  const Video = useVideo()
+
+  const business = useBusiness()
+
+  const Frontend = useFrontend()
+
+
+  const Backend = useBackend()
+
+  const digital = useDigital()
+
+
+
+
+
+  // console.log(digital)
+
+
 
   return (
     <main>
       <Navbar />
-      <div className='lg:mt-56 mt-40 container mx-auto h-16 w-full flex items-center justify-center '>
-        <div className="flex flex-col justify-center gap-3 mt-10">
-          <button
-            onClick={() => handleButtonClick(1)}
-            className="bg-[#00adea] text-black rounded-md px-4 py-2 hover:bg-blue-600 transition duration-300"
-          >
-            ALL
-          </button>
 
 
 
+      <div className='lg:mt-56 bg-gray-100 h-full w-10/12 lg:w-8/12   container mx-auto'>
+        <h1 className='text-center text-4xl font-bold mb-6'>Running Students</h1>
+        <Tabs className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-10'>
 
-          <div className='flex'>
-            <button
-              onClick={() => handleButtonClick(2)}
-              className="bg-green-500 text-white rounded-md  w-36 hover:bg-green-600 transition duration-300"
-            >
+          {/* Tab List */}
+          <TabList style={{ width: 300 }} className='flex flex-col  border-r border-gray-300 cursor-pointer mt-4'>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
               Graphic Design
-            </button>
-            <button
-              onClick={() => handleButtonClick(2)}
-              className="bg-green-500 text-white rounded-md w-36 hover:bg-green-600 transition duration-300"
-            >
-              Mption Graphics
-            </button>
-            <button
-              onClick={() => handleButtonClick(2)}
-              className="bg-green-500 text-white rounded-md w-32 hover:bg-green-600 transition duration-300"
-            >
-              Video Editing
-            </button>
-
-            <button
-              onClick={() => handleButtonClick(2)}
-              className="bg-green-500 text-white rounded-md w-72 hover:bg-green-600 transition duration-300"
-            >
-              Web Development (Front-end)
-            </button>
-          </div>
-
-
-
-          <div className='flex'>
-            <button
-              onClick={() => handleButtonClick(2)}
-              className="bg-green-500 text-white rounded-md w-72 hover:bg-green-600 transition duration-300"
-            >
-              Web Development (Backend)
-            </button>
-            <button
-              onClick={() => handleButtonClick(3)}
-              className="bg-red-500 text-white rounded-md w-44 hover:bg-red-600 transition duration-300"
-            >
-              Digital Marketing
-            </button>
-            <button
-              onClick={() => handleButtonClick(3)}
-              className="bg-red-500 text-white rounded-md w-44  hover:bg-red-600 transition duration-300"
-            >
+            </Tab>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
+              Motion Graphics
+            </Tab>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
               Affiliate Marketing
-            </button>
-            <button
-              onClick={() => handleButtonClick(3)}
-              className="bg-red-500 text-white rounded-md w-60 hover:bg-red-600 transition duration-300"
-            >
+            </Tab>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
+              Video Editing
+            </Tab>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
               Business Development
-            </button>
+            </Tab>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
+              Frontend Development
+            </Tab>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
+              Backend Development
+            </Tab>
+            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>
+              Digital Marketing
+            </Tab>
+          </TabList>
+
+          {/* Tab Panels */}
+          <div className='p-4 w-full'>
+            <TabPanel>
+
+              {/* tab panel 1 */}
+
+
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  student?.map(student => (
+
+                    <div key={student.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={student.image}
+                            className='w-full rounded-lg '
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {student.name}</p>
+                            <p>Batch: {student.batch}</p>
+                            <p>Course ID: {student.courseId}</p>
+                            <p>Course Name: {student.courseName}</p>
+                            <p>Duration: {student.duration}</p>
+                            <p>Internship: {student.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+
+
+            </TabPanel>
+
+            <TabPanel>
+
+              {/* tab panel 2 */}
+
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  Motions?.map(Motion => (
+
+                    <div key={Motions.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={Motion.image}
+                            className='w-full rounded-lg'
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {Motion.name}</p>
+                            <p>Batch: {Motion.batch}</p>
+                            <p>Course ID: {Motion.courseId}</p>
+                            <p>Course Name: {Motion.courseName}</p>
+                            <p>Duration: {Motion.duration}</p>
+                            <p>Internship: {Motion.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+
+            </TabPanel>
+
+            <TabPanel>
+
+              {/* tab panel 3 */}
+
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  Affiliate?.map(Affiliates => (
+
+                    <div key={Affiliates.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={Affiliates.image}
+                            className='w-full rounded-lg'
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {Affiliates.name}</p>
+                            <p>Batch: {Affiliates.batch}</p>
+                            <p>Course ID: {Affiliates.courseId}</p>
+                            <p>Course Name: {Affiliates.courseName}</p>
+                            <p>Duration: {Affiliates.duration}</p>
+                            <p>Internship: {Affiliates.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+
+              {/* tab panel 4 */}
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  Video?.map(videos => (
+
+                    <div key={videos.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={videos.image}
+                            className='w-full rounded-lg'
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {videos.name}</p>
+                            <p>Batch: {videos.batch}</p>
+                            <p>Course ID: {videos.courseId}</p>
+                            <p>Course Name: {videos.courseName}</p>
+                            <p>Duration: {videos.duration}</p>
+                            <p>Internship: {videos.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+
+              {/* tab panel 5 */}
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  business?.map(businesse => (
+
+                    <div key={businesse.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={businesse.image}
+                            className='w-full rounded-lg'
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {businesse.name}</p>
+                            <p>Batch: {businesse.batch}</p>
+                            <p>Course ID: {businesse.courseId}</p>
+                            <p>Course Name: {businesse.courseName}</p>
+                            <p>Duration: {businesse.duration}</p>
+                            <p>Internship: {businesse.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+
+              {/* tab panel 6 */}
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  Frontend?.map(Frontends => (
+
+                    <div key={Frontends.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={Frontends.image}
+                            className='w-full rounded-lg'
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {Frontends.name}</p>
+                            <p>Batch: {Frontends.batch}</p>
+                            <p>Course ID: {Frontends.courseId}</p>
+                            <p>Course Name: {Frontends.courseName}</p>
+                            <p>Duration: {Frontends.duration}</p>
+                            <p>Internship: {Frontends.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+              {/* tab panel 7 */}
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  Backend?.map(Backends => (
+
+                    <div key={Backends.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={Backends.image}
+                            className='w-full rounded-lg'
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {Backends.name}</p>
+                            <p>Batch: {Backends.batch}</p>
+                            <p>Course ID: {Backends.courseId}</p>
+                            <p>Course Name: {Backends.courseName}</p>
+                            <p>Duration: {Backends.duration}</p>
+                            <p>Internship: {Backends.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+            </TabPanel>
+
+            <TabPanel>
+              {/* tab panel 8 */}
+              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                {
+                  digital?.map(digitals => (
+
+                    <div key={digitals.id}>
+                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                        <div className='lg:w-full'>
+                          <img
+                            src={digitals.image}
+                            className='w-full rounded-lg'
+                            alt="Instructor"
+                          />
+                        </div>
+                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
+                          <div className='mt-20 ml-2'>
+                            <p>Name: {digitals.name}</p>
+                            <p>Batch: {digitals.batch}</p>
+                            <p>Course ID: {digitals.courseId}</p>
+                            <p>Course Name: {digitals.courseName}</p>
+                            <p>Duration: {digitals.duration}</p>
+                            <p>Internship: {digitals.internship}</p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+                }
+              </div>
+            </TabPanel>
           </div>
-
-
-
-
-
-
-
-
-        </div>
+        </Tabs>
       </div>
 
-      {/* card section */}
-      <div className="text-center my-6 mt-16">
-        {activeButton === 1 && (
-          <div className='container mx-auto'>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5'>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
 
 
 
-            </div>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5'>
 
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5'>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        )}
-        {activeButton === 2 && (
-          <div className='container mx-auto'>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5 '>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5 '>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5 '>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor1}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        )
-        }
-        {activeButton === 3 && (
-          <div className='container mx-auto'>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5'>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5'>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-            <div className='flex flex-grow flex-col lg:flex-row lg:w-11/12 lg:ml-24  gap-4 mt-5'>
-
-
-              <div className='lg:w-6/12 relative gap-4 overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-              <div className='lg:w-6/12 relative overflow-hidden cursor-pointer'>
-                <div className='lg:w-11/12'>
-                  <Image
-                    src={instrastor2}
-                    className='w-full rounded-lg'
-                    alt="Instructor"
-                  />
-                </div>
-                <div className='absolute top-0 lg:w-11/12 w-full h-full left-0 bg-gray-500 bg-opacity-50 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                  <div className='mt-14'>
-                    <p>Sushmita Shen</p>
-                    <p>Batch: 01</p>
-                    <p>Course ID: 127894</p>
-                    <p>Course Name: Graphics Design</p>
-                    <p>Duration: 6 Months</p>
-                    <p>Internship: 2 Months</p>
-                  </div>
-                </div>
-              </div>
-
-
-
-            </div>
-          </div>
-        )}
-      </div>
       <Footer></Footer>
     </main>
   );
