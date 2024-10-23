@@ -122,7 +122,7 @@ export default function Navbar() {
 
                                     <div className='relative group'>
                                         {/* Dropdown Trigger */}
-                                        <div className='text-white cursor-pointer hover:bg-blue-400'>
+                                        <div className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer'>
                                             <Link href={'/Students'} className='flex items-center justify-center h-full font-bold'>
                                                 Students
                                             </Link>
@@ -130,11 +130,12 @@ export default function Navbar() {
 
                                         {/* Dropdown Content */}
                                         <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box rounded-lg w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
-                                            <Link href="/running-students" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
-                                            <Link href="/employed-students" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Employed Students</Link>
-                                            <Link href="/intern-students" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Intern Students</Link>
+                                            <Link href="/RunningStudents"  className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
+                                            <Link href="/RunningIntern" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Intern</Link>
+                                            <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Employee </Link>
                                         </div>
                                     </div>
+
 
 
 

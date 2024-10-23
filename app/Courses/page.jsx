@@ -22,39 +22,108 @@ export default function Courses() {
       <Navbar></Navbar>
 
 
-      <div className="py-14 px-16 mt-8 lg:mt-56 relative container mx-auto">
-        <div className='bg-[#17549A] opacity-30 w-11/12 h-80  absolute top-16 right-16'>
-          {/* <h1>adfh</h1> */}
+      <div className="lg:py-14 lg:px-16 mt-8 lg:mt-56 relative lg:container lg:mx-auto">
+        <div className='bg-[#17549A] hidden lg:block opacity-30 w-11/12 h-80 absolute top-16 right-16'></div>
+
+        <div className='flex flex-col items-center'>
+          <Image src={img1} className='w-full hidden lg:block' />
+
+          {/* search bar */}
+
+
+
+
+
+
+          {/* input filed  */}
+          <div className='hidden md:block'>
+            <div
+
+              className="flex top-28 right-52 left-52 overflow-hidden bg-[#c0d9f3] w-9/12    shadow-lg absolute py-8 px-14 rounded-full mt-8 lg:mt-16 gap-3 items-center ">
+              
+                <div style={{ border: '1px solid black' }} className="w-fit ">
+                  <select style={{ padding: '10px 8px' }} className="bg-transparent cursor-pointer">
+                    <option>Grapics Designe</option>
+                    <option>Motion Grapics Designe</option>
+
+                  </select>
+                </div>
+                <div style={{ border: '1px solid black' }} className="w-fit mathewMan">
+                  <select style={{ padding: '10px 8px' }} className="bg-transparent cursor-pointer">
+                    <option>Frontend Development</option>
+                    <option>Backend Development</option>
+
+                  </select>
+                </div>
+                <div style={{ border: '1px solid black' }} className="w-fit mathewMan">
+                  <select style={{ padding: '10px 8px' }} className="bg-transparent cursor-pointer">
+                    <option>Video Editing</option>
+                    <option>Business Development</option>
+
+                  </select>
+                </div>
+
+                <div className="lg:w-5/12 w-full    mb-10 absolute right-0 mt-9">
+                  <form>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        className="block w-8/12 px-4 py-2 text-gray-700 placeholder-gray-400 border rounded ml-10 focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Search..."
+                        alt='search bar'
+                      />
+                      <button
+                        type="submit"
+                        className="absolute inset-y-0 right-11 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                
+
+
+              </div>
+
+
+            </div>
+
+
+        
+          </div>
+              {/* search button for mobile */}
+
+              <div className="lg:w-5/12 w-full md:hidden      mb-10 absolute right-0 mt-36">
+                  <form>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        className="block w-8/12 px-4 py-2 text-gray-700 placeholder-gray-400 border rounded ml-10 focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Search..."
+                        alt='search bar'
+                      />
+                      <button
+                        type="submit"
+                        className="absolute inset-y-0 right-11 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                
+
+
+              </div>
         </div>
-
-        <Image src={img1} className='w-full'></Image>
-
-
-
-
-
-
-
       </div>
 
 
 
 
-      {/* <div>
-          <input
-            type="text"
-            placeholder="Search for businesses..."
-            className="w-3/12 border border-gray-300 rounded-full py-5 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-          />
-          <button className="bg-blue-500 text-white rounded-full py-2 px-6 ml-2 hover:bg-blue-600 transition duration-200">
-            Search
-          </button>
-        </div> */}
 
 
 
-
-      <div className='container mx-auto w-10/12 lg:w-9/12 lg:w-ful grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 lg:mt-0'>
+      <div className='container mx-auto w-10/12 lg:w-9/12 lg:w-ful grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 lg:mt-0 mt-56' >
         {
           courses?.map(course => (
             <div style={{ borderRadius: '5px' }} key={course.id} className="relative cursor-pointer bg-gray-200  mb-3 overflow-hidden group">
@@ -65,8 +134,7 @@ export default function Courses() {
                   className={`rounded-2xl mb-4 object-cover w-full transition-transform duration-300 group-hover:scale-110`}
                   onDragStart={(e) => e.preventDefault()}
                 />
-                {/* <div className="absolute top-0 left-0 right-0 h-full bg-[#7db2ee] opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div> */}
-                {/* <div className="absolute top-0 left-0 right-0 h-1/2 bg-transparent shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)' }}></div> */}
+
 
                 <div className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <RiHeart3Fill size={24} className='text-red-500' />

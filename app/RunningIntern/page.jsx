@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
+// import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import Image from 'next/image';
 import instrastor from '../../assets/insta.avif';
 import instrastor1 from '../../assets/insta1.avif';
@@ -19,7 +19,8 @@ import useBackend from '@/hooks/useBackend';
 import useDigital from '@/hooks/useDigital';
 import Link from 'next/link';
 
-import './Students.css'
+import './RunningIntern.css'
+import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 
 export default function Page() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -81,7 +82,7 @@ export default function Page() {
 
 
       <div className='lg:mt-56 bg-gray-100 h-full w-10/12 lg:w-8/12 container mx-auto'>
-        <h1 className='text-center text-4xl mt-36 font-bold mb-6'>Running Students</h1>
+        <h1 className='text-center text-4xl mt-36 font-bold mb-6'>Running Interns</h1>
 
         {/* Mobile Sidebar Toggle Button */}
         <div className='block lg:hidden text-right mb-4'>
