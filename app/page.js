@@ -9,8 +9,7 @@ import FirstSection from "./(with-navbar)/componenets/FirstSection/FirstSection"
 
 export default function Home() {
   return (
-    <>
-      
+    <>  
       <Navbar></Navbar>
       <Banner></Banner>
       <WelcomeText></WelcomeText>

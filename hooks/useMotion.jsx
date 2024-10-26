@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 
 export default function useStudents() {
-    const [courses, setCourses] = useState([]);
+    const [Motion, setMotion] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch('/StudentsMotion.json');
             const data = await res.json();
-            setCourses(data);
+            setMotion(data);
         };
         fetchData();
     }, []);
 
-    return courses; 
+    return Motion; 
 }

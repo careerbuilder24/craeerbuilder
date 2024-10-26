@@ -197,19 +197,19 @@ export default function Navbar() {
                             </ul>
 
 
-                            <div className='relative left-16 group'>
+                            <div className='relative left-16 group bg-white rounded-md w-20 h-9  text-blue-500 cursor-pointer hover:bg-blue-400 transition-all duration-300 ease-in-out hover:text-white' >
                                 {/* Dropdown Trigger */}
-                                <div className='bg-white rounded-md w-20 h-9 hover:text-white text-blue-500 cursor-pointer hover:bg-blue-400 transition-all duration-300 ease-in-out'>
+                                <Link href={'/log_in'} className=' '>
                                     <span className='flex items-center justify-center h-full font-bold '>Login</span>
-                                </div>
+                                </Link>
 
 
-                                {/* <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
+                                <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
                                  
-                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Option 1</a>
-                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Option 2</a>
-                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Option 3</a>
-                                </div> */}
+                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Profile</a>
+                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Dashboard</a>
+                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>LogOut</a>
+                                </div>
                             </div>
 
                         </div>

@@ -1,19 +1,19 @@
-// hooks/useCourses.js
+// hooks/useDigital.js
 import { useEffect, useState } from 'react';
 
-const useCourses = () => {
-    const [courses, setCourses] = useState([]);
+const useDigital = () => {
+    const [Digital, setDigital] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch('/DigitalStudents.json');
             const data = await res.json();
-            setCourses(data);
+            setDigital(data);
         };
         fetchData();
     }, []);
 
-    return courses; 
+    return Digital; 
 };
 
-export default useCourses;
+export default useDigital;

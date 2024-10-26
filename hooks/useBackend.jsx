@@ -1,19 +1,19 @@
-// hooks/useCourses.js
+// hooks/useBackend.js
 import { useEffect, useState } from 'react';
 
-const useCourses = () => {
-    const [courses, setCourses] = useState([]);
+const useBackend = () => {
+    const [Backend, setBackend] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch('/BackendStudents.json');
             const data = await res.json();
-            setCourses(data);
+            setBackend(data);
         };
         fetchData();
     }, []);
 
-    return courses; 
+    return Backend; 
 };
 
-export default useCourses;
+export default useBackend;

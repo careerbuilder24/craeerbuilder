@@ -1,0 +1,114 @@
+ [
+    {
+      "id": 1,
+      "date": "2024-10-01",
+      "title": "Art Exhibition Opening",
+      "image": "https://i.postimg.cc/rpBBYRfk/gl2.jpg",
+      "description": "Join us for the grand opening."
+    },
+    {
+      "id": 2,
+      "date": "2024-10-15",
+      "title": "Music Festival",
+      "image": "https://i.postimg.cc/R0S6Jq7v/gl1.jpg",
+      "description": "Enjoy live performances."
+    },
+    {
+      "id": 3,
+      "date": "2024-11-05",
+      "title": "Food and Wine Tasting",
+      "image": "https://i.postimg.cc/JhpyNmxZ/gl3.jpg",
+      "description": "Savor delicious food."
+    },
+    {
+      "id": 4,
+      "date": "2024-11-20",
+      "title": "Photography Workshop",
+      "image": "https://i.postimg.cc/G2NHfQZp/gl4.jpg",
+      "description": "Learn photography skills."
+    },
+    {
+      "id": 5,
+      "date": "2024-12-10",
+      "title": "Holiday Market",
+      "image": "https://i.postimg.cc/nrDCfmJG/gl5.jpg",
+      "description": "Shop for unique gifts."
+    },
+    {
+      "id": 6,
+      "date": "2025-01-14",
+      "title": "Winter Gala",
+      "image": "https://i.postimg.cc/grbrz0cF/gallery3.png",
+      "description": "Celebrate the season."
+    },
+    {
+      "id": 7,
+      "date": "2025-02-11",
+      "title": "Valentine's Day Dance",
+      "image": "https://i.postimg.cc/nrDCfmJG/gl5.jpg",
+      "description": "Dance the night away at our."
+    },
+    {
+      "id": 8,
+      "date": "2025-03-08",
+      "title": "Spring Arts Fair",
+      "image": "https://i.postimg.cc/G2NHfQZp/gl4.jpg",
+      "description": "Celebrate spring with local."
+    },
+    {
+      "id": 9,
+      "date": "2025-04-22",
+      "title": "Earth Day Celebration",
+      "image": "https://i.postimg.cc/JhpyNmxZ/gl3.jpg",
+      "description": "Participate in activities.."
+    },
+    {
+      "id": 10,
+      "date": "2025-05-16",
+      "title": "Food Truck Festival",
+      "image": "https://i.postimg.cc/R0S6Jq7v/gl1.jpg",
+      "description": "Taste a variety of cuisines."
+    },
+    {
+      "id": 11,
+      "date": "2025-06-12",
+      "title": "Outdoor Movie Night",
+      "image": "https://i.postimg.cc/rpBBYRfk/gl2.jpg",
+      "description": "Enjoy a classic film under."
+    },
+    {
+      "id": 12,
+      "date": "2025-07-04",
+      "title": "Independence Day Parade",
+      "image": "https://i.postimg.cc/G2NHfQZp/gl4.jpg",
+      "description": "Join the festivities at."
+    },
+    {
+      "id": 13,
+      "date": "2025-04-22",
+      "title": "Earth Day Celebration",
+      "image": "https://i.postimg.cc/JhpyNmxZ/gl3.jpg",
+      "description": "Participate in activities.."
+    },
+    {
+      "id": 14,
+      "date": "2025-05-16",
+      "title": "Food Truck Festival",
+      "image": "https://i.postimg.cc/R0S6Jq7v/gl1.jpg",
+      "description": "Taste a variety of cuisines."
+    },
+    {
+      "id": 15,
+      "date": "2025-06-12",
+      "title": "Outdoor Movie Night",
+      "image": "https://i.postimg.cc/rpBBYRfk/gl2.jpg",
+      "description": "Enjoy a classic film under."
+    },
+    {
+      "id": 16,
+      "date": "2025-07-04",
+      "title": "Independence Day Parade",
+      "image": "https://i.postimg.cc/G2NHfQZp/gl4.jpg",
+      "description": "Join the festivities at."
+    }
+  ]

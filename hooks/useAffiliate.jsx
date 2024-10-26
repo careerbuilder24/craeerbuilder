@@ -1,19 +1,19 @@
-// hooks/useCourses.js
+// hooks/useAffiliate.js
 import { useEffect, useState } from 'react';
 
-const useCourses = () => {
-    const [courses, setCourses] = useState([]);
+const useAffiliate = () => {
+    const [Affiliate, setAffiliate] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch('/StudentsAffiliate.json');
             const data = await res.json();
-            setCourses(data);
+            setAffiliate(data);
         };
         fetchData();
     }, []);
 
-    return courses; 
+    return Affiliate; 
 };
 
-export default useCourses;
+export default useAffiliate;

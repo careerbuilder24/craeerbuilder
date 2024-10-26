@@ -11,23 +11,19 @@ import instrastor2 from '../../assets/insta3.avif';
 // image part
 
 
-import img1 from '../../assets/chr1.PNG';
-import img2 from '../../assets/gaallrymd.PNG';
+import img1 from '../../assets/gallery3.PNG';
+import img4 from '../../assets/gl1.jpg';
+import img5 from '../../assets/gl2.jpg';
+// import img2 from '../../assets/gaallrymd.PNG';
 import img3 from '../../assets/img6.jpg';
 
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import useStudents from '@/hooks/useStudents';
-import useMotion from '@/hooks/useMotion';
-import useAffiliate from '@/hooks/useAffiliate';
-import useVideo from '@/hooks/useVideo';
-import useBusiness from '@/hooks/useBusiness';
-import useFrontend from '@/hooks/useFrontend';
-import useBackend from '@/hooks/useBackend';
-import useDigital from '@/hooks/useDigital';
+
+import useGallery from '@/hooks/useGallery';
 import Image from 'next/image'
-import TextReveal from '../TextReveal/TextReveal'
+// import TextReveal from '../TextReveal/TextReveal'
 
 export default function page() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -62,23 +58,18 @@ export default function page() {
 
     // data rendering
 
-    const student = useStudents();
-    const Motions = useMotion();
-    const Affiliate = useAffiliate();
-    const Video = useVideo();
-    const business = useBusiness();
-    const Frontend = useFrontend();
-    const Backend = useBackend();
-    const digital = useDigital();
+    const Gallery = useGallery();
+
+    console.log(Gallery)
 
 
 
     const handleSidebarItemClick = (index) => {
         setActiveTabIndex(index);
-        // Keep the sidebar open when clicking an item
+
     };
 
-    // console.log(digital)
+    console.log(Gallery)
 
 
 
@@ -129,74 +120,85 @@ export default function page() {
                             <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-5'>
                                 {/* Tab List */}
                                 <TabList style={{ width: 300 }} className='flex flex-col border-r border-gray-300 cursor-pointer mt-4 hidden lg:flex'>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Graphic Design</Tab>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Motion Graphics</Tab>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Affiliate Marketing</Tab>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Video Editing</Tab>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Business Development</Tab>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Frontend Development</Tab>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Backend Development</Tab>
-                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Digital Marketing</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>All Events</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Orientation</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Certification</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Awards Giving</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Pohela Boishakh</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Eidal-Fitr</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Eid al-Adha</Tab>
+                                    <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Charity Programe</Tab>
                                 </TabList>
 
                                 {/* Tab Panels */}
-                                <div className='p-4 w-full'>
+                                <div className=' w-full'>
                                     <TabPanel>
 
                                         {/* tab panel 1 */}
 
-
-
-
-
-
-
-
-                                        <div className='flex flex-col md:flex-row lg:flex-row  gap-10 '>
-                                            
-                                            <div>
-                                                <Image src={img1} className='rounded-md'></Image>
-                                            </div>
-
-
-
-                                            <div>
-                                                <Image src={img2} className='w-10/12 rounded-md'></Image>
-                                            </div>
-                                        </div>
-
-
-
-
-
-                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5  lg:mt-0'>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
                                             {
-                                                student?.map(student => (
+                                                Gallery?.map(Gallery => (
 
-                                                    <div key={student.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                                                    <div key={Gallery.id}>
+                                                        <div className=' relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
-                                                                    src={student.image}
-                                                                    className='w-full rounded-lg '
-                                                                    alt="Instructor"
-                                                                />
+                                                                <img src={Gallery.image} className='w-full h-full rounded-md'></img>
                                                             </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {student.name}</p>
-                                                                    <p>Batch: {student.batch}</p>
-                                                                    <p>Course ID: {student.courseId}</p>
-                                                                    <p>Course Name: {student.courseName}</p>
-                                                                    <p>Duration: {student.duration}</p>
-                                                                    <p>Internship: {student.internship}</p>
+                                                            <div className='relative bottom-11 rounded-md flex-col  bg-black opacity-75 '>
+                                                                <div className='ml-3'>
+                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallery.date}</time>
+
+                                                                    <h3 className='text-white text-base'>{Gallery.description} </h3>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 ))
                                             }
+                                        </div>
+
+
+
+
+
+
+                                        {/* <div className='flex flex-col md:flex-row lg:flex-row  gap-5 '>
+
+                                            {
+                                                Gallery.map(Gallerys => {
+                                                    <div key={Gallerys.id}>
+
+
+
+                                                        <img src={Gallerys.image} className=' rounded-md'></img>
+                                                        <div className='relative bottom-12 flex-col  bg-black opacity-75 '>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white'>{Gallerys.date}</time>
+
+                                                                <h3 className='text-white'>{Gallerys.description} </h3>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                })
+                                            }
+
+
+
+
+
+
+
+
                                         </div> */}
+
+
+
+
+
+
 
 
                                     </TabPanel>
@@ -205,33 +207,37 @@ export default function page() {
 
                                         {/* tab panel 2 */}
 
-                                        <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                                            {
-                                                Motions?.map(Motion => (
+                                        <div className='flex flex-col md:flex-row lg:flex-row  gap-5 '>
 
-                                                    <div key={Motions.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    src={Motion.image}
-                                                                    className='w-full rounded-lg'
-                                                                    alt="Instructor"
-                                                                />
-                                                            </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {Motion.name}</p>
-                                                                    <p>Batch: {Motion.batch}</p>
-                                                                    <p>Course ID: {Motion.courseId}</p>
-                                                                    <p>Course Name: {Motion.courseName}</p>
-                                                                    <p>Duration: {Motion.duration}</p>
-                                                                    <p>Internship: {Motion.internship}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                            <div>
+
+
+
+                                                <Image src={img1} className=' rounded-md'></Image>
+                                                <div className='relative bottom-12 flex-col  bg-black opacity-75 '>
+                                                    <div className='ml-3'>
+                                                        <time datetime="2008-02-14 20:00" className='text-white'>19/06/2024</time>
+
+                                                        <h3 className='text-white'>Orientation class: Graphic Design (2) </h3>
                                                     </div>
-                                                ))
-                                            }
+                                                </div>
+
+                                            </div>
+
+                                            <div>
+                                                <Image src={img5} className=' rounded-md'></Image>
+                                                <div className='relative bottom-12 flex-col  bg-black opacity-75 '>
+                                                    <div className='ml-3'>
+                                                        <time datetime="2008-02-14 20:00" className='text-white'>19/06/2024</time>
+
+                                                        <h3 className='text-white'>Orientation class: Web Development  (2) </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
                                         </div>
 
                                     </TabPanel>
@@ -240,7 +246,7 @@ export default function page() {
 
                                         {/* tab panel 3 */}
 
-                                        <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
                                             {
                                                 Affiliate?.map(Affiliates => (
 
@@ -267,13 +273,13 @@ export default function page() {
                                                     </div>
                                                 ))
                                             }
-                                        </div>
+                                        </div> */}
                                     </TabPanel>
 
                                     <TabPanel>
 
                                         {/* tab panel 4 */}
-                                        <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
                                             {
                                                 Video?.map(videos => (
 
@@ -300,13 +306,13 @@ export default function page() {
                                                     </div>
                                                 ))
                                             }
-                                        </div>
+                                        </div> */}
                                     </TabPanel>
 
                                     <TabPanel>
 
                                         {/* tab panel 5 */}
-                                        <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
                                             {
                                                 business?.map(businesse => (
 
@@ -333,13 +339,13 @@ export default function page() {
                                                     </div>
                                                 ))
                                             }
-                                        </div>
+                                        </div> */}
                                     </TabPanel>
 
                                     <TabPanel>
 
                                         {/* tab panel 6 */}
-                                        <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
                                             {
                                                 Frontend?.map(Frontends => (
 
@@ -366,12 +372,12 @@ export default function page() {
                                                     </div>
                                                 ))
                                             }
-                                        </div>
+                                        </div> */}
                                     </TabPanel>
 
                                     <TabPanel>
                                         {/* tab panel 7 */}
-                                        <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
                                             {
                                                 Backend?.map(Backends => (
 
@@ -398,12 +404,12 @@ export default function page() {
                                                     </div>
                                                 ))
                                             }
-                                        </div>
+                                        </div> */}
                                     </TabPanel>
 
                                     <TabPanel>
                                         {/* tab panel 8 */}
-                                        <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
+                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
                                             {
                                                 digital?.map(digitals => (
 
@@ -430,7 +436,7 @@ export default function page() {
                                                     </div>
                                                 ))
                                             }
-                                        </div>
+                                        </div> */}
                                     </TabPanel>
                                 </div>
                             </Tabs>
@@ -458,15 +464,15 @@ export default function page() {
 
                                     <p className='text-[#0054a5]  mt-3 text-center font-bold'>IT Feast</p>
                                     <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
-                                    <Image
-                                        src={img3}
-                                        className='w-full lg:w-11/12 h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
-                                    />
+                                        <Image
+                                            src={img3}
+                                            className='w-full lg:w-11/12 h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
+                                        />
 
-                                    <div className='bg-green-600 opacity-80 relative bottom-7 text-white font-bold'>
+                                        <div className='bg-green-600 opacity-80 relative bottom-7 text-white font-bold w-11/12'>
                                             CAREER BUILDER
+                                        </div>
                                     </div>
-                                </div>
 
 
                                 </div>

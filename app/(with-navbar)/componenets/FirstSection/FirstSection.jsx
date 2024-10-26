@@ -63,13 +63,13 @@ export default function FirstSection() {
                             />
                             <p className="text-gray-700">Enrollment Date: {courses.enrollment_date}</p>
 
-                            <div className="flex justify-between mt-4 my-5">
+                            <div className="flex justify-between mt-4 my-5 ">
                                 <Link  href={`/details/${courses.id}`} passHref>
-                                    <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 ml-5 ">
-                                        View Details
+                                    <button className="bg-blue-500 text-white py-2 mr-5 px-8 rounded hover:bg-blue-600 transition duration-300 ml-4 ">
+                                         Details
                                     </button>
                                 </Link>
-                                <button className="bg-green-500 text-white py-2 mr-5 px-10 rounded transition duration-300 transform hover:bg-green-600">
+                                <button className="bg-green-500 text-white py-2 mr-5 px-8 rounded transition duration-300 transform hover:bg-green-600">
                                     Enroll
                                 </button>
                             </div>
