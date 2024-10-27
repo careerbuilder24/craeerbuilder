@@ -9,8 +9,28 @@ import logo from '../../../../assets/logo.jpg';
 import logo2 from '../../../../assets/new.gif';
 import Image from 'next/image';
 import Link from 'next/link';
+import { UserAuth } from "../../../context/AuthContext";
 
 export default function Navbar() {
+
+    // Auth context
+    const { user, logOut } = UserAuth();
+
+
+
+    // google logout
+
+    const handleSignOut = async () => {
+        try {
+            await logOut();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    console.log(user);
+
+    // navbar funtions
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -130,7 +150,7 @@ export default function Navbar() {
 
                                         {/* Dropdown Content */}
                                         <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box rounded-lg w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
-                                            <Link href="/RunningStudents"  className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
+                                            <Link href="/RunningStudents" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
                                             <Link href="/RunningIntern" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Intern</Link>
                                             <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Employee </Link>
                                         </div>
@@ -199,18 +219,61 @@ export default function Navbar() {
 
                             <div className='relative left-16 group bg-white rounded-md w-20 h-9  text-blue-500 cursor-pointer hover:bg-blue-400 transition-all duration-300 ease-in-out hover:text-white' >
                                 {/* Dropdown Trigger */}
+
+
                                 <Link href={'/log_in'} className=' '>
                                     <span className='flex items-center justify-center h-full font-bold '>Login</span>
                                 </Link>
 
 
+
+
+
+
                                 <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
+
+                                    {
+                                        user ? (<ul>
+                                            <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>{user?.displayName}</li>
+                                            {/* <Image
+                                                tabIndex={0}
+                                                height={50}
+                                                width={50}
+                                                className="rounded-full mr-3"
+                                                src={user?.photoURL || ''}
+                                                alt="" /> */}
+                                            {/* <img className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>{user.photoURL}</img> */}
+                                            <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded' onClick={handleSignOut}>LogOut</li>
+
+                                        </ul>
+
+                                        ) : (
+                                            <div className='text-black'>
+                                                <p>Dashboard</p>
+                                                <p>man</p>
+                                                <p>women</p>
+                                            </div>
+                                        )
+                                    }
+
                                  
-                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Profile</a>
-                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Dashboard</a>
-                                    <a href="#" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>LogOut</a>
+
+
                                 </div>
+
                             </div>
+                            
+                            {
+                                        user ? (<div>
+                                            <Image
+                                                tabIndex={0}
+                                                height={50}
+                                                width={50}
+                                                className="rounded-full ml-24"
+                                                src={user?.photoURL || ''}
+                                                alt="" />
+                                        </div>) : ''
+                                    }
 
                         </div>
 

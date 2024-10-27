@@ -1,77 +1,153 @@
-import React from 'react'
-import Navbar from '../(with-navbar)/componenets/Navbar/Navbar'
-import { FaFacebook } from "react-icons/fa6";
-import { SiGmail } from "react-icons/si";
+'use client';
 
-
-import Link from 'next/link'
-
-import './re_gister.css'
+import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
+import { SiGmail } from 'react-icons/si';
+import Link from 'next/link';
+import './re_gister.css';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+// import { useRouter } from 'next/router';
 
-export default function login() {
+export default function Login() {
+
+  const { createUser } = useContext(AuthContext);
+ 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    const {  email, password } = data;
+
+    try {
+      const result = await createUser(email, password);
+      const loggedUser = result.user;
+
+      if (loggedUser.email) {
+        toast.success("Successfully Sign Up");
+        // router.replace('/'); // Use the router to navigate
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Sign up failed. Please try again."); // Show error message
+    }
+  };
 
 
   return (
-
     <main>
-      <Navbar></Navbar>
-      <div className='lg:mt-56 mb-16 h-full container mx-auto bg-white '>
-
+      <Navbar />
+      <div className='lg:mt-56 md:mt-56 mb-16 h-full container mx-auto bg-white'>
         <div className='flex justify-center items-center'>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='gap-6 flex flex-col justify-center items-center w-full max-w-md shadow-lg bg-[#00adea] border-gray-500 rounded-xl p-6'
+          >
+            <h1 className='text-3xl font-bold font-serif text-white'>Register</h1>
 
-          <center className='gap-5 flex flex-col justify-center items-center w-3/12 h-[600px]  shadow-lg bg-[#00adea] border-gray-500 rounded-xl   '>
-            <h1 className='text-3xl font-bold font-serif text-white '>Register</h1>
-            <input type="text" placeholder='Name' className=' lg:w-10/12 p-2 border border-gray-300 rounded' />
-            <input type="text" placeholder='Email' className=' lg:w-10/12 p-2 border border-gray-300 rounded' />
-            <input type="text" placeholder='Address' className=' lg:w-10/12 p-2 border border-gray-300 rounded' />
-            <input type="text" placeholder='City' className=' lg:w-10/12 p-2 border border-gray-300 rounded' />
-            <input type="text" placeholder='Passowrd' className=' lg:w-10/12 p-2 border border-gray-300 rounded' />
-            {/* <input type="text" placeholder='Re-type Passowrd' className=' lg:w-10/12 p-2 border border-gray-300 rounded' /> */}
+            {/* Name field */}
+            <div className='w-full '>
+              <input
+                type="text"
+                placeholder='Name'
+                className={`w-full p-2 border rounded ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                {...register("name", { required: "Name is required" })}
+              />
+              <div className="h-5">
+                {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
+              </div>
+            </div>
 
-            <div className="flex mr-16  items-center">
+            {/* Email field */}
+            <div className='w-full '>
+              <input
+                type="email"
+                placeholder='Email'
+                className={`w-full p-2 border rounded ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                {...register("email", { required: "Email is required" })}
+              />
+              <div className="h-5">
+                {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+              </div>
+            </div>
+
+            {/* Address field */}
+            <div className='w-full '>
+              <input
+                type="text"
+                placeholder='Address'
+                className={`w-full p-2 border rounded ${errors.address ? 'border-red-500' : 'border-gray-300'}`}
+                {...register("address", { required: "Address is required" })}
+              />
+              <div className="h-5">
+                {errors.address && <span className="text-red-500 text-sm">{errors.address.message}</span>}
+              </div>
+            </div>
+
+            {/* City field */}
+            <div className='w-full '>
+              <input
+                type="text"
+                placeholder='City'
+                className={`w-full p-2 border rounded ${errors.city ? 'border-red-500' : 'border-gray-300'}`}
+                {...register("city", { required: "City name is required" })}
+              />
+              <div className="h-5">
+                {errors.city && <span className="text-red-500 text-sm">{errors.city.message}</span>}
+              </div>
+            </div>
+
+            {/* Password field */}
+            <div className='w-full '>
+              <input
+                type="password"
+                placeholder='Password'
+                className={`w-full p-2 border rounded ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: { value: 6, message: "Password must be at least 6 characters" },
+                  pattern: {
+                    value: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])/,
+                    message: "Password must have one uppercase, lowercase & symbol",
+                  },
+                })}
+              />
+              <div className="h-5">
+                {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+              </div>
+            </div>
+
+            <div className="flex items-center ">
               <input type="checkbox" className='cursor-pointer' required />
-              <label className="ml-2  flex gap-3">
-                <p className='text-gray-800 text-sm '>I agree to the</p>
-                <Link href="/ter_ms" className="text-white underline text-sm ">Terms and Conditions</Link>
+              <label className="ml-2 flex gap-3">
+                <p className='text-gray-800 text-sm'>I agree to the</p>
+                <Link href="/ter_ms" className="text-white underline text-sm">Terms and Conditions</Link>
               </label>
             </div>
 
+            <button type="submit" className='bg-blue-500 w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300'>Sign Up</button>
 
-
-
-            <button className='bg-blue-500 w-10/12 h-10 rounded-md text-white hover:bg-[#17549A]  ease-in-out duration-300'>Sign Up</button>
-
-            <div className='flex gap-3 text-sm text-white'>
+            <div className='flex gap-3 text-sm text-white mt-4'>
               <p>Already have an account?</p>
               <Link href={'/log_in'} className='text-blue-700 font-bold'>Login</Link>
             </div>
 
-
-            <div className='flex justify-center items-center gap-5'>
-              <div
-                style={{ borderRadius: '50px' }}
-                className='bg-[#8fbff7] w-16 h-16 text-center flex items-center justify-center cursor-pointer gem-box'
-              >
+            <div className='flex justify-center items-center gap-5 mt-4'>
+              <div style={{ borderRadius: '50px' }} className='bg-[#8fbff7] w-16 h-16 text-center flex items-center justify-center cursor-pointer gem-box'>
                 <h2 className='mt-2'>
                   <SiGmail className='text-2xl' />
                 </h2>
               </div>
-            
             </div>
-
-
-
-
-          </center>
-
-
+          </form>
         </div>
-
-
       </div>
-      <Footer></Footer>
-    
+      <Footer />
     </main>
-  )
+  );
 }

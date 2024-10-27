@@ -7,21 +7,36 @@ import { SiGmail } from "react-icons/si";
 import Link from 'next/link';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
-
+import { UserAuth } from "../context/AuthContext";
 
 
 export default function login() {
+
+     // Auth context
+     const { user, googleSignIn } = UserAuth();
+
+     // Google login 
+     const handleSignIn = async () => {
+         try {
+             await googleSignIn();
+         } catch (error) {
+             console.log(error)
+         }
+     }
+
+ 
+     console.log(user);
 
   const [show, setShow] = useState(false);
 
 
   const [captchaValue, setCaptchaValue] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Captcha value:', captchaValue);
-    // Handle form submission and captcha verification
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log('Captcha value:', captchaValue);
+   
+  // };
 
   const onChange = (value) => {
     setCaptchaValue(value);
@@ -93,7 +108,7 @@ export default function login() {
 
             <p className='text-sm  text-white '>If you dont't have an account, Please register <Link className='text-blue-700 hover:underline font-bold' href={'/re_gister'}>here</Link>.</p>
 
-            <div className='flex justify-center items-center gap-5'>
+            <div onClick={googleSignIn} className='flex justify-center items-center gap-5'>
               <div
                 style={{ borderRadius: '50px' }}
                 className='bg-[#8fbff7] w-16 h-16 text-center flex items-center justify-center cursor-pointer gem-box'
