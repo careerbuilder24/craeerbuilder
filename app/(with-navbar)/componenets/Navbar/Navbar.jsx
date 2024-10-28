@@ -7,6 +7,7 @@ import { CgCloseO } from "react-icons/cg";
 import { LuMenu } from "react-icons/lu";
 import logo from '../../../../assets/logo.jpg';
 import logo2 from '../../../../assets/new.gif';
+import logo3 from '../../../../assets/propfilelogo.PNG';
 import Image from 'next/image';
 import Link from 'next/link';
 import { UserAuth } from "../../../context/AuthContext";
@@ -95,6 +96,7 @@ export default function Navbar() {
 
                 {/* Second Section */}
                 <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 ${isScrolled && window.innerWidth >= 768 ? 'lg:top-0 transition-all duration-300' : 'lg:top-10 top-0 '} bg-white`}>
+
                     <div className='flex justify-center'>
                         <div className='lg:w-4/12 w-9/12 cursor-pointer lg:ml-64 m-2'>
                             <Image src={logo} className='lg:w-8/12 w-8/12 rounded-md ml-14 lg:ml-0' onDragStart={(e) => e.preventDefault()} />
@@ -149,10 +151,10 @@ export default function Navbar() {
                                         </div>
 
                                         {/* Dropdown Content */}
-                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box rounded-lg w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
+                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box rounded-lg w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
                                             <Link href="/RunningStudents" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
-                                            <Link href="/RunningIntern" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Intern</Link>
-                                            <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Employee </Link>
+                                            <Link href="/RunningIntern" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Interns</Link>
+                                            <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blacklue-400 rounded'>Running Employeed </Link>
                                         </div>
                                     </div>
 
@@ -160,12 +162,6 @@ export default function Navbar() {
 
 
 
-                                    {/* 
-                                    <div className=' hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer' >
-                                        <Link href={''} className=''>
-                                           
-                                        </Link>
-                                    </div> */}
                                 </div>
 
 
@@ -210,6 +206,19 @@ export default function Navbar() {
                                         Contact
                                     </Link>
                                 </div>
+                                
+                                    {
+                                        !user ? (
+                                            <div className='      text-center text-white  hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
+                                                <Link href={'/log_in'} className=''>
+                                                    Login
+                                                </Link>
+                                            </div>
+                                        ) : ''
+                                    }
+                                
+
+
 
 
 
@@ -217,78 +226,57 @@ export default function Navbar() {
                             </ul>
 
 
-                            <div className='relative left-16 group bg-white rounded-md w-20 h-9  text-blue-500 cursor-pointer hover:bg-blue-400 transition-all duration-300 ease-in-out hover:text-white' >
-                                {/* Dropdown Trigger */}
-
-
-                                <Link href={'/log_in'} className=' '>
-                                    <span className='flex items-center justify-center h-full font-bold '>Login</span>
-                                </Link>
-
-
-
-
-
-
-                                <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-0 mt-2 hidden group-hover:block transition-all">
+                            <div className='  ml-10   flex flex-row   items-center'>
+                                <div className=' ml-4 group transition-all fixed duration-300 ease-in-out' >
+                                    {/* Dropdown Trigger */}
 
                                     {
-                                        user ? (<ul>
-                                            <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>{user?.displayName}</li>
-                                            {/* <Image
-                                                tabIndex={0}
-                                                height={50}
-                                                width={50}
-                                                className="rounded-full mr-3"
-                                                src={user?.photoURL || ''}
-                                                alt="" /> */}
-                                            {/* <img className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>{user.photoURL}</img> */}
-                                            <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded' onClick={handleSignOut}>LogOut</li>
-
-                                        </ul>
-
-                                        ) : (
-                                            <div className='text-black'>
-                                                <p>Dashboard</p>
-                                                <p>man</p>
-                                                <p>women</p>
-                                            </div>
-                                        )
-                                    }
-
-                                 
-
-
-                                </div>
-
-                            </div>
-                            
-                            {
-                                        user ? (<div>
+                                        user ? (<div className='flex flex-row items-center gap-4  cursor-pointer'>
                                             <Image
                                                 tabIndex={0}
                                                 height={50}
                                                 width={50}
-                                                className="rounded-full ml-24"
-                                                src={user?.photoURL || ''}
+                                                className="rounded-full"
+                                                src={user?.photoURL || logo3 || ''}
                                                 alt="" />
+                                            <p className='text-white'>{user?.displayName || 'Anonymus'}</p>
                                         </div>) : ''
                                     }
+
+
+
+
+
+                                    <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-6  hidden group-hover:block transition-all cursor-pointer">
+
+                                        {
+                                            user ? (<ul>
+                                                <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Profile</li>
+                                                <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded' onClick={handleSignOut}>LogOut</li>
+
+                                            </ul>
+
+                                            ) : ''
+                                        }
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
 
                         </div>
 
 
-                        {/* search bar */}
-                        {/* <div class="w-full max-w-xs hidden lg:block lg:mr-10">
-                            <form>
-                                <div class="relative">
-                                    <input type="text" class="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" placeholder="Search..." />
-                                    <button type="submit" class="absolute inset-y-0 right-0 flex items-center px-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-                                        Search
-                                    </button>
-                                </div>
-                            </form>
-                        </div> */}
+
                     </div>
                 </div>
 

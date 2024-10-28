@@ -5,8 +5,9 @@ export default function Footer() {
     return (
         <>
             <div style={{ background: '#17549A' }} className='text-white w-full h-full py-20'>
+
                 {/* First Section */}
-                <div className='flex flex-col md:flex-row justify-center lg:gap-32 gap-12 text-center md:text-left ml-5'>
+                <div style={{ lineHeight: '25px', fontWeight: '300' }}  className='flex  text-[15px] flex-col  text-[#dddddd] md:flex-row justify-center lg:gap-32 gap-12 text-center md:text-left ml-5 '>
                     {["Apps and Software", "Graphic Design & Printing", "Writing Services", "Website Development Services"].map((category, index) => (
                         <div className='flex flex-col' key={index}>
                             <h1 className='font-bold mb-2 cursor-pointer'>{category}</h1>
@@ -43,7 +44,7 @@ export default function Footer() {
                 </center>
 
                 {/* Second Section */}
-                <div className='flex flex-col md:flex-row justify-center lg:gap-28 gap-12 text-center md:text-left ml-5'>
+                <div style={{ lineHeight: '25px', fontWeight: '300' }} className='flex flex-col md:flex-row justify-center text-[#dddddd] text-[15px] lg:gap-28 gap-12 text-center md:text-left ml-5'>
                     <div className='flex flex-col lg:mr-16 lg:ml-10'>
                         <h1 className='font-bold mb-2 cursor-pointer'>Important Links</h1>
                         {["Company Profile", "Privacy Policy", "Terms and Condition", "Career Opportunity", "B2B Partnership", "Press Release"].map(item => (

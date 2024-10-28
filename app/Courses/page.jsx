@@ -15,8 +15,10 @@ import Image from 'next/image';
 
 
 export default function Courses() {
+  
+  
   const courses = useCourses();
-  console.log(courses)
+  // console.log(courses)
   return (
     <>
       <Navbar></Navbar>
@@ -39,42 +41,33 @@ export default function Courses() {
           <div className='hidden md:block'>
             <div
 
-              className="flex top-36  lg:right-52 lg:left-52 overflow-hidden bg-[#c0d9f3] w-9/12    shadow-lg absolute py-8 px-14 rounded-full mt-8 lg:mt-5 gap-3 items-center  ">
+              className="flex top-36   lg:left-52 overflow-hidden bg-[#c0d9f3] w-9/12    shadow-lg absolute  px-10 rounded-full  lg:mt-5  items-center  ">
 
-              <div style={{ border: '1px solid black' }} className="w-fit ">
-                <select style={{ padding: '10px 8px' }} className="bg-transparent cursor-pointer">
+              <from  className="w-3/12  ">
+                <select style={{ padding: '10px 8px', borderRadius: '4px' }} className="bg-white cursor-pointer">
                   <option>Grapics Designe</option>
                   <option>Motion Grapics Designe</option>
-
-                </select>
-              </div>
-              <div style={{ border: '1px solid black' }} className="w-fit mathewMan">
-                <select style={{ padding: '10px 8px' }} className="bg-transparent cursor-pointer">
+                  <option>Video Editing</option>
+                  <option>Business Development</option>
                   <option>Frontend Development</option>
                   <option>Backend Development</option>
 
                 </select>
-              </div>
-              <div style={{ border: '1px solid black' }} className="w-fit mathewMan">
-                <select style={{ padding: '10px 8px' }} className="bg-transparent cursor-pointer">
-                  <option>Video Editing</option>
-                  <option>Business Development</option>
+              </from>
+              
 
-                </select>
-              </div>
-
-              <div className="lg:w-5/12 w-full    mb-10 absolute right-0 mt-9">
+              <div className=" w-full    mb-10  mt-10">
                 <form>
-                  <div className="relative">
+                  <div className="relative  flex flex-row">
                     <input
                       type="text"
-                      className="block w-8/12 px-4 py-2 text-gray-700 placeholder-gray-400 border rounded ml-10 focus:outline-none focus:ring focus:ring-blue-300"
+                      className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded  focus:outline-none focus:ring focus:ring-blue-300"
                       placeholder="Search..."
                       alt='search bar'
                     />
                     <button
                       type="submit"
-                      className="absolute inset-y-0 right-11 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+                      className=" inset-y-0 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
                     >
                       Search
                     </button>
@@ -104,7 +97,7 @@ export default function Courses() {
                 />
                 <button
                   type="submit"
-                  className="absolute inset-y-0 right-11 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+                  className="absolute inset-y-0 right-11  flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
                 >
                   Search
                 </button>

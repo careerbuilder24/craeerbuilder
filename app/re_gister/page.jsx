@@ -6,38 +6,48 @@ import Link from 'next/link';
 import './re_gister.css';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useRouter } from 'next/navigation';
 // import { useRouter } from 'next/router';
 
 export default function Login() {
 
-  const { createUser } = useContext(AuthContext);
  
+
+
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+
+  // onsubmit funtions
   const onSubmit = async (data) => {
-    const {  email, password } = data;
+    const { email, password, name } = data;
 
     try {
       const result = await createUser(email, password);
       const loggedUser = result.user;
 
+
+      await updateUserProfile(loggedUser, name);
+
       if (loggedUser.email) {
-        toast.success("Successfully Sign Up");
-        // router.replace('/'); // Use the router to navigate
+        toast.success("Successfully Signed Up");
+        setTimeout(() => router.replace('/'), 2000);
       }
     } catch (err) {
       console.error(err);
-      toast.error("Sign up failed. Please try again."); // Show error message
+      toast.error("Sign up failed. Please try again.");
     }
   };
-
 
   return (
     <main>
@@ -148,6 +158,7 @@ export default function Login() {
         </div>
       </div>
       <Footer />
+      <ToastContainer /> {/* Ensure this is included */}
     </main>
   );
 }

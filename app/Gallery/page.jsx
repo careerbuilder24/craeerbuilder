@@ -3,10 +3,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar'
 import Footer from '../(with-navbar)/componenets/Footer/Footer'
 
-import instrastor from '../../assets/insta.avif';
-import instrastor1 from '../../assets/insta1.avif';
-import instrastor2 from '../../assets/insta3.avif';
-
+// import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
 
 // image part
 
@@ -25,10 +28,31 @@ import useGallery from '@/hooks/useGallery';
 import Image from 'next/image'
 // import TextReveal from '../TextReveal/TextReveal'
 
+
+
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    boxShadow: 24,
+    p: 1,
+
+
+};
 export default function page() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const sidebarRef = useRef(null);
+
+
+
+
+
 
     const toggleSidebar = () => {
         setIsSidebarOpen((prev) => !prev);
@@ -72,6 +96,21 @@ export default function page() {
     console.log(Gallery)
 
 
+    const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const handleOpen = (index) => {
+        setSelectedImage(Gallery[index]); // Store the selected image object
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setSelectedImage(null); // Clear selected image on close
+    };
+
+
+
+
 
 
     return (
@@ -83,6 +122,37 @@ export default function page() {
 
 
                 <div className='container mx-auto my-9 lg:w-9/12 w-10/12'>
+
+                    <div className='container mx-auto my-9 lg:w-9/12 w-10/12'>
+
+
+                        {/* Modal Part */}
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-title"
+                            aria-describedby="modal-description"
+                        >
+                            <Box sx={style}>
+
+                                {selectedImage && ( // Check if there is a selected image
+                                    <div >
+                                        <div>
+                                            <img src={selectedImage.image} className="w-full h-auto rounded-md" />
+                                            {/* You can add description or any additional info here */}
+                                            <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                <div className='ml-3'>
+                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{selectedImage.date}</time>
+                                                    <h3 className='text-white text-base'>{selectedImage.description}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                            </Box>
+                        </Modal>
+                    </div>
                     <div className="flex flex-row gap-10 h-auto">
                         <div className="w-full   bg-white  mb-4 lg:mb-0 shadow-lg p-4 rounded">
 
@@ -137,62 +207,31 @@ export default function page() {
                                         {/* tab panel 1 */}
 
                                         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
-                                            {
-                                                Gallery?.map(Gallery => (
-
-                                                    <div key={Gallery.id}>
-                                                        <div className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img src={Gallery.image} className='w-full h-full rounded-md'></img>
-                                                            </div>
-                                                            <div className='relative bottom-11 rounded-md flex-col  bg-black opacity-75 '>
-                                                                <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallery.date}</time>
-
-                                                                    <h3 className='text-white text-base'>{Gallery.description} </h3>
-                                                                </div>
+                                            {Gallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                ))
-                                            }
+                                                </div>
+                                            ))}
                                         </div>
 
 
 
 
 
-
-                                        {/* <div className='flex flex-col md:flex-row lg:flex-row  gap-5 '>
-
-                                            {
-                                                Gallery.map(Gallerys => {
-                                                    <div key={Gallerys.id}>
-
-
-
-                                                        <img src={Gallerys.image} className=' rounded-md'></img>
-                                                        <div className='relative bottom-12 flex-col  bg-black opacity-75 '>
-                                                            <div className='ml-3'>
-                                                                <time datetime="2008-02-14 20:00" className='text-white'>{Gallerys.date}</time>
-
-                                                                <h3 className='text-white'>{Gallerys.description} </h3>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                })
-                                            }
-
-
-
-
-
-
-
-
-                                        </div> */}
 
 
 
