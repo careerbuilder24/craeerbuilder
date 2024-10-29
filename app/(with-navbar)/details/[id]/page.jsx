@@ -8,17 +8,32 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import img1 from '../../../../assets/kmn.jpg';
 import logo from '../../../../assets/logo.jpg';
 import instrastor from '../../../../assets/inst.jpg';
 import Navbar from '../../componenets/Navbar/Navbar';
 import Footer from '../../componenets/Footer/Footer';
 import StarRatings from 'react-star-ratings';
+import useDigital from '@/hooks/useDetailsDs';
+import ToggleBar from '@/app/ToggleBar/ToggleBar';
+
+
 
 export default function Page() {
+    const [visibleDropdown, setvisibleDropdown] = useState(null);
     const { id } = useParams();
     const courses = useCourses();
+
+    const ditails = useDigital();
+
+    console.log(ditails)
+
+
+
+    const toggleDropdown = (id) => {
+        setvisibleDropdown(visibleDropdown === id ? null : id);
+    };
 
     // Loading state
     if (!courses) {
@@ -129,8 +144,9 @@ export default function Page() {
             {/* Second part */}
             <div className='container mx-auto my-9 lg:w-9/12 w-10/12'>
                 <div className="flex flex-col  gap-4 lg:flex-row items-center justify-center h-auto">
-                    <div className="w-full lg:w-4/5  bg-white mb-4 lg:mb-0 shadow-lg p-4 rounded">
-                        <div>
+                    <div className="w-full lg:w-4/5 h-auto lg:h-[2000px]  bg-red-500 mb-4 lg:mb-0 shadow-lg p-4 rounded">
+                        {/* <div>
+                       <div>
                             <p style={{ fontWeight: '700' }} className='font-medium text-sm'>Certificate Course on Software Testing & Quality Assurance</p>
                             <h1 tyle={{ fontWeight: '700' }} className='text-base mt-3 font-semibold mb-4'>Course Outline:</h1>
                             <h1 style={{ fontWeight: '400' }} className='mb-3 text-xl'>Manual Testing</h1>
@@ -301,6 +317,41 @@ export default function Page() {
 
 
                         </div>
+                       </div> */}
+
+
+                        <div>
+
+                            <div className="my-10 flex flex-col lg:flex-row bg-green-500">
+                                <div className='lg:w-3/5'>
+                                    {ditails?.map(({ id, description, question }) => (
+                                        <ToggleBar
+                                            key={id}
+                                            id={id}
+                                            question={question}
+                                            description={description}
+                                            visibleDropdown={visibleDropdown}
+                                            toggleDropdown={toggleDropdown}
+                                        />
+                                    ))}
+                                </div>
+                                <div className='lg:w-2/5'>
+
+                                    <div className=' shadow-xl rounded py-10 mt-5 bg-pink-500 mr-4'>
+                                        <div className='ml-4 '>
+                                            <p className='text-[#0054a5] font-semibold mt-3'>who can join</p>
+                                            <hr className='w-10 h-1 bg-[#0054a6]' />
+
+                                            <p className='mt-4 text-base'>This course is intended for <br /> those who want to work as a <br /> Software Tester. This course covers <br /> software testing in detail.</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     </div>
 
                     <div className="w-full  lg:w-1/5  rounded h-auto lg:h-[2000px] bg-white  ">
@@ -399,15 +450,7 @@ export default function Page() {
 
 
 
-                                {/* <div className='w-11/12 mt-4'>
 
-
-
-                                    <div className={` bg-blue-500 opacity-30 h-10 wfull relative `}>
-
-                                    </div>
-                                  
-                                </div> */}
 
 
 

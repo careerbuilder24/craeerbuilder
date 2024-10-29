@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { RiHeart3Fill } from 'react-icons/ri';
 import { SlCalender } from "react-icons/sl";
 import { LuClock9 } from "react-icons/lu";
@@ -22,15 +23,20 @@ export default function FirstSection() {
 
     return (
         <>
+         <Head>
+            <link rel='preload' href={course.image} as='image'></link>
+        </Head>
             <div className='container mx-auto w-10/12 lg:w-ful grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 lg:mt-10'>
                 {
                     course?.map(courses => (
                         <div style={{borderRadius: '5px' }} key={courses.id} className="relative cursor-pointer bg-gray-200  mb-3 overflow-hidden group">
                             <div className="relative">
                                 <img
+                                style={{ height: '250px' }}
+                                
                                     src={courses.image}
-                                    alt={courses.image}
-                                    className={`rounded-2xl mb-4 object-cover w-full transition-transform duration-300 group-hover:scale-110`}
+                                    alt='Banner Image'
+                                    className={`rounded-2xl mb-4  object-cover w-full transition-transform duration-300 group-hover:scale-110`}
                                     onDragStart={(e) => e.preventDefault()}
                                 />
                                 {/* <div className="absolute top-0 left-0 right-0 h-full bg-[#7db2ee] opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div> */}

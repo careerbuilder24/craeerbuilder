@@ -9,7 +9,17 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+
+
+// import required modules
+import { Navigation } from 'swiper/modules';
+
+
 
 // image part
 
@@ -26,6 +36,7 @@ import 'react-tabs/style/react-tabs.css';
 
 import useGallery from '@/hooks/useGallery';
 import Image from 'next/image'
+import { Head } from 'next/document';
 // import TextReveal from '../TextReveal/TextReveal'
 
 
@@ -36,18 +47,23 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
+    width: '90%', // Use a percentage for responsiveness
+    maxWidth: 600, // Set a max width for larger screens
     bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
     p: 1,
-
-
+    borderRadius: '8px', // Optional: Add rounded corners for aesthetics
 };
+
+
 export default function page() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const sidebarRef = useRef(null);
+
+    const [activeIndex, setActiveIndex] = useState(0);
+
 
 
 
@@ -99,8 +115,9 @@ export default function page() {
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const handleOpen = (index) => {
-        setSelectedImage(Gallery[index]); // Store the selected image object
-        setOpen(true);
+        setSelectedImage(Gallery[index]); // Set the selected image based on the clicked index
+        setActiveIndex(index); // Set the active index for Swiper
+        setOpen(true); // Open the modal
     };
 
     const handleClose = () => {
@@ -114,7 +131,9 @@ export default function page() {
 
 
     return (
+           
         <main>
+            
             <Navbar></Navbar>
 
 
@@ -134,26 +153,52 @@ export default function page() {
                             aria-describedby="modal-description"
                         >
                             <Box sx={style}>
-
-                                {selectedImage && ( // Check if there is a selected image
-                                    <div >
-                                        <div>
-                                            <img src={selectedImage.image} className="w-full h-auto rounded-md" />
-                                            {/* You can add description or any additional info here */}
-                                            <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
-                                                <div className='ml-3'>
-                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{selectedImage.date}</time>
-                                                    <h3 className='text-white text-base'>{selectedImage.description}</h3>
+                                {selectedImage && (
+                                    <Swiper
+                                        className="mySwiper"
+                                        initialSlide={activeIndex}
+                                        spaceBetween={30}
+                                        pagination={{ clickable: true }}
+                                        navigation={true}
+                                        modules={[Navigation]}
+                                        onSlideChange={(swiper) => setSelectedImage(Gallery[swiper.activeIndex])}
+                                        breakpoints={{
+                                            640: {
+                                                slidesPerView: 1, // 1 slide per view on mobile
+                                                spaceBetween: 20,
+                                            },
+                                            768: {
+                                                slidesPerView: 1, // 1 slide per view on tablet
+                                                spaceBetween: 30,
+                                            },
+                                            1024: {
+                                                slidesPerView: 1, // 1 slide per view on desktop
+                                                spaceBetween: 30,
+                                            },
+                                        }}
+                                    >
+                                        {Gallery.map((image, index) => (
+                                            <SwiperSlide key={index}>
+                                                <img
+                                                    onDragStart={(e) => e.preventDefault()} // Prevent drag
+                                                    src={image.image}
+                                                    className="w-full h-auto rounded-md"
+                                                    alt={`Slide ${index + 1}`} // Add alt text for accessibility
+                                                />
+                                                <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
+                                                    <time datetime={image.date} className="text-white text-sm">{image.date}</time>
+                                                    <h3 className="text-white text-base">{image.description}</h3>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            </SwiperSlide>
+                                        ))}
+                                    </Swiper>
                                 )}
-
                             </Box>
                         </Modal>
+
+
                     </div>
-                    <div className="flex flex-row gap-10 h-auto">
+                    <div className="flex flex-col lg:flex-row gap-10 h-auto">
                         <div className="w-full   bg-white  mb-4 lg:mb-0 shadow-lg p-4 rounded">
 
                             <h1 className='text-center text-4xl mt-5 font-bold mb-6'>Picture Gallery</h1>
@@ -212,6 +257,8 @@ export default function page() {
                                                     <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                         <div className='lg:w-full'>
                                                             <img
+                                                              width={600} 
+                                                              height={400} 
                                                                 src={Gallerys.image}
                                                                 onClick={() => handleOpen(index)}
                                                                 className='w-full h-full rounded-md'
@@ -252,7 +299,7 @@ export default function page() {
 
 
 
-                                                <Image src={img1} className=' rounded-md'></Image>
+                                                <Image  src={img1} className=' rounded-md'></Image>
                                                 <div className='relative bottom-12 flex-col  bg-black opacity-75 '>
                                                     <div className='ml-3'>
                                                         <time datetime="2008-02-14 20:00" className='text-white'>19/06/2024</time>

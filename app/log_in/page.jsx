@@ -84,7 +84,7 @@ export default function Login() {
                 <small className='text-white'>{show ? 'Hide Password' : 'Show Password'}</small>
               </label>
             </div>
-            <div className="form-control mb-4 w-full">
+            <div className="form-control mb-4 w-full lg:ml-20">
               <ReCAPTCHA
                 sitekey="6LftpWwqAAAAAP64cCjeY0hQ927AQu0OgA0LJxSo"
                 onChange={onChange}

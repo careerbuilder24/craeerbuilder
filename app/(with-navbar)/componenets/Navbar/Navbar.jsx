@@ -50,21 +50,25 @@ export default function Navbar() {
     };
 
     useEffect(() => {
-        const handleResize = () => {
-            // Reset scroll state on resize
-            if (window.innerWidth < 768) {
-                setIsScrolled(false);
-            }
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 0);
         };
+
+        // Check the initial scroll position and set isScrolled accordingly
+        handleScroll();
 
         window.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleResize);
-
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    const handleResize = () => {
+        // Reset scroll state on resize if necessary
+        if (window.innerWidth < 768) {
+            setIsScrolled(false);
+        }
+    };
 
     return (
         <header>
@@ -95,7 +99,9 @@ export default function Navbar() {
                 </div>
 
                 {/* Second Section */}
-                <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 ${isScrolled && window.innerWidth >= 768 ? 'lg:top-0 transition-all duration-300' : 'lg:top-10 top-0 '} bg-white`}>
+                <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 bg-white ${
+                    isScrolled ? 'top-0' : 'top-10'
+                }`}>
 
                     <div className='flex justify-center'>
                         <div className='lg:w-4/12 w-9/12 cursor-pointer lg:ml-64 m-2'>
@@ -116,31 +122,16 @@ export default function Navbar() {
 
 
 
-                        <div className='flex-grow  justify-center hidden md:flex font-light'>
-                            <ul className='flex space-x-10 mt-2 text-white '>
+                        <div className='flex-grow  justify-center hidden md:flex font-light '>
+                            <ul className='flex space-x-10 mt-2  text-white  '>
 
-                                <Link className=' duration-300 transition-all font-bold cursor-pointer' href={'/'} >
-
-                                    Home
-
-                                </Link>
-
-
-                                <Link className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} >
-
-                                    Courses
-
-                                </Link>
-
+                                <Link className=' duration-300 transition-all font-bold cursor-pointer' href={'/'} >Home</Link>
+                                <Link className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} > Courses</Link>
                                 <div className='flex'>
+
                                     <div className='lg:mt-1 w-7'>
                                         <Image src={logo2} className='w-full'></Image>
                                     </div>
-
-
-
-
-
 
                                     <div className='relative group'>
                                         {/* Dropdown Trigger */}
@@ -157,24 +148,13 @@ export default function Navbar() {
                                             <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blacklue-400 rounded'>Running Employeed </Link>
                                         </div>
                                     </div>
-
-
-
-
-
                                 </div>
-
-
-
 
                                 <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={'/Gallery'} className=''>
                                         Gallery
                                     </Link>
                                 </div>
-
-
-
 
                                 <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
                                     <Link href={''} className=''>
@@ -206,7 +186,8 @@ export default function Navbar() {
                                         Contact
                                     </Link>
                                 </div>
-                                
+
+                                <div>
                                     {
                                         !user ? (
                                             <div className='      text-center text-white  hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
@@ -216,18 +197,14 @@ export default function Navbar() {
                                             </div>
                                         ) : ''
                                     }
-                                
 
-
-
-
-
-
+                                </div>
                             </ul>
 
 
-                            <div className='  ml-10   flex flex-row   items-center'>
-                                <div className=' ml-4 group transition-all fixed duration-300 ease-in-out' >
+
+                            <div className='  ml-10   flex flex-row   items-center '>
+                                <div className=' ml-4 group transition-all fixed duration-300 ease-in-out ' >
                                     {/* Dropdown Trigger */}
 
                                     {
@@ -243,10 +220,6 @@ export default function Navbar() {
                                         </div>) : ''
                                     }
 
-
-
-
-
                                     <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-6  hidden group-hover:block transition-all cursor-pointer">
 
                                         {
@@ -259,24 +232,11 @@ export default function Navbar() {
                                             ) : ''
                                         }
 
-
-
-
                                     </div>
 
                                 </div>
                             </div>
-
-
-
-
-
-
-
                         </div>
-
-
-
                     </div>
                 </div>
 
@@ -287,9 +247,6 @@ export default function Navbar() {
                         <div>
                             <Image src={logo} className='lg:w-8/12  w-5/12 rounded-md ml-32  lg:ml-0' onDragStart={(e) => e.preventDefault()} />
                         </div>
-
-
-
                         <button className="md:hidden ml-4" onClick={toggleNav}>
 
                             <CgCloseO className='text-2xl text-white' />

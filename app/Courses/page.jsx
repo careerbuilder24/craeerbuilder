@@ -12,15 +12,20 @@ import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import img1 from '../../assets/details.PNG'
 import Image from 'next/image';
+import Head from 'next/head';
 
 
 export default function Courses() {
-  
-  
+
+
   const courses = useCourses();
   // console.log(courses)
   return (
     <>
+     <Head>
+            <link rel='preload' href={img1} as='image'></link>
+            <link rel='preload' href={courses.image} as='image'></link>
+        </Head>
       <Navbar></Navbar>
 
 
@@ -43,8 +48,9 @@ export default function Courses() {
 
               className="flex top-36   lg:left-52 overflow-hidden bg-[#c0d9f3] w-9/12    shadow-lg absolute  px-10 rounded-full  lg:mt-5  items-center  ">
 
-              <from  className="w-3/12  ">
+              <from className="w-3/12  ">
                 <select style={{ padding: '10px 8px', borderRadius: '4px' }} className="bg-white cursor-pointer">
+                  <option className='font-bold'>All Courses</option>
                   <option>Grapics Designe</option>
                   <option>Motion Grapics Designe</option>
                   <option>Video Editing</option>
@@ -54,7 +60,7 @@ export default function Courses() {
 
                 </select>
               </from>
-              
+
 
               <div className=" w-full    mb-10  mt-10">
                 <form>
@@ -116,12 +122,14 @@ export default function Courses() {
             <div style={{ borderRadius: '5px' }} key={course.id} className="relative cursor-pointer bg-gray-200  mb-3 overflow-hidden group">
               <div className="relative">
                 <img
+                  width={600} 
+                  height={400} 
                   src={course.image}
                   alt={course.image}
                   className={`rounded-2xl mb-4 object-cover w-full transition-transform duration-300 group-hover:scale-110`}
                   onDragStart={(e) => e.preventDefault()}
                 />
-            
+
 
                 <div className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <RiHeart3Fill size={24} className='text-red-500' />
@@ -131,27 +139,27 @@ export default function Courses() {
                 <h2 className="text-lg font-bold">{course.course_name}</h2>
                 <p className="text-black">{course.title}</p>
               </div>
-             <div className='ml-4'>
-             <p className="text-gray-700 mt-4 ">Price: ${course.price}</p>
-              <div className='gap-2 flex items-center '>
-                <SlCalender className='text-xs ' />
-                <p className="text-gray-700">{course.Date}</p>
-              </div>
-              <div className='gap-2 flex items-center '>
-                <LuClock9 className='text-xs' />
-                <p className="text-gray-700">Total Hours: {course.total_hours}</p>
-              </div>
-              <StarRatings
-                rating={course.rating}
-                starDimension="20px"
-                starSpacing="2px"
-                starRatedColor="gold"
-                numberOfStars={5}
-                name='rating'
-              />
-              <p className="text-gray-700">Enrollment Date: {course.enrollment_date}</p>
+              <div className='ml-4'>
+                <p className="text-gray-700 mt-4 ">Price: ${course.price}</p>
+                <div className='gap-2 flex items-center '>
+                  <SlCalender className='text-xs ' />
+                  <p className="text-gray-700">{course.Date}</p>
+                </div>
+                <div className='gap-2 flex items-center '>
+                  <LuClock9 className='text-xs' />
+                  <p className="text-gray-700">Total Hours: {course.total_hours}</p>
+                </div>
+                <StarRatings
+                  rating={course.rating}
+                  starDimension="20px"
+                  starSpacing="2px"
+                  starRatedColor="gold"
+                  numberOfStars={5}
+                  name='rating'
+                />
+                <p className="text-gray-700">Enrollment Date: {course.enrollment_date}</p>
 
-             </div>
+              </div>
 
               <div className="flex justify-between mt-4 my-5 ">
                 <Link href={`/details/${course.id}`} passHref>

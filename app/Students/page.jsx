@@ -1,13 +1,10 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
-import Image from 'next/image';
-import instrastor from '../../assets/insta.avif';
-import instrastor1 from '../../assets/insta1.avif';
-import instrastor2 from '../../assets/insta3.avif';
-import Footer from '../(with-navbar)/componenets/Footer/Footer';
-
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
+import Footer from '../(with-navbar)/componenets/Footer/Footer';
+import Image from 'next/image';
+import Link from 'next/link';
 import 'react-tabs/style/react-tabs.css';
 import useStudents from '@/hooks/useStudents';
 import useMotion from '@/hooks/useMotion';
@@ -17,9 +14,11 @@ import useBusiness from '@/hooks/useBusiness';
 import useFrontend from '@/hooks/useFrontend';
 import useBackend from '@/hooks/useBackend';
 import useDigital from '@/hooks/useDigital';
-import Link from 'next/link';
 
 import './Students.css'
+
+
+// import { Head } from 'next/document';
 
 export default function Page() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -65,18 +64,21 @@ export default function Page() {
 
 
 
+
   const handleSidebarItemClick = (index) => {
     setActiveTabIndex(index);
     // Keep the sidebar open when clicking an item
   };
 
-  // console.log(digital)
+  console.log(digital)
 
 
 
   return (
     <main>
+
       <Navbar />
+
 
 
 
