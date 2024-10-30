@@ -139,7 +139,7 @@ export default function Page() {
                   student?.map(student => (
 
                     <div key={student.id}>
-                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                      <Link href={`/Students_Graphics/${student.id}`} className=' relative gap-4 overflow-hidden cursor-pointer'>
                         <div className='lg:w-full'>
                           <img
                             src={student.image}
