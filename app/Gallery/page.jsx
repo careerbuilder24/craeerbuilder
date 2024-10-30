@@ -37,6 +37,7 @@ import 'react-tabs/style/react-tabs.css';
 import useGallery from '@/hooks/useGallery';
 import Image from 'next/image'
 import { Head } from 'next/document';
+import ButtonTopMaker from '../buttonTopMaker/ButtonTopMaker';
 // import TextReveal from '../TextReveal/TextReveal'
 
 
@@ -68,7 +69,7 @@ export default function page() {
 
 
 
-
+    // menu togglebar section
 
     const toggleSidebar = () => {
         setIsSidebarOpen((prev) => !prev);
@@ -114,6 +115,7 @@ export default function page() {
 
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    
     const handleOpen = (index) => {
         setSelectedImage(Gallery[index]); // Set the selected image based on the clicked index
         setActiveIndex(index); // Set the active index for Swiper
@@ -127,13 +129,36 @@ export default function page() {
 
 
 
+    // filter those events
+    const filterEvents = () => {
+        const categories = [
+            'All Events',
+            'orientation',
+            'certification',
+            'awards',
+            'pohela',
+            'eidf',
+            'eida',
+            'cahrity',
+        ];
+
+        if (activeTabIndex === 0) return Gallery; // All events
+
+        const selectedCategory = categories[activeTabIndex];
+        return Gallery.filter(event => event.events === selectedCategory.toLowerCase());
+    };
+
+    const filteredGallery = filterEvents();
+
+    console.log(filteredGallery)
+
 
 
 
     return (
-           
+
         <main>
-            
+            <ButtonTopMaker></ButtonTopMaker>
             <Navbar></Navbar>
 
 
@@ -147,54 +172,54 @@ export default function page() {
 
                         {/* Modal Part */}
                         <Modal
-                            open={open}
-                            onClose={handleClose}
-                            aria-labelledby="modal-title"
-                            aria-describedby="modal-description"
-                        >
-                            <Box sx={style}>
-                                {selectedImage && (
-                                    <Swiper
-                                        className="mySwiper"
-                                        initialSlide={activeIndex}
-                                        spaceBetween={30}
-                                        pagination={{ clickable: true }}
-                                        navigation={true}
-                                        modules={[Navigation]}
-                                        onSlideChange={(swiper) => setSelectedImage(Gallery[swiper.activeIndex])}
-                                        breakpoints={{
-                                            640: {
-                                                slidesPerView: 1, // 1 slide per view on mobile
-                                                spaceBetween: 20,
-                                            },
-                                            768: {
-                                                slidesPerView: 1, // 1 slide per view on tablet
-                                                spaceBetween: 30,
-                                            },
-                                            1024: {
-                                                slidesPerView: 1, // 1 slide per view on desktop
-                                                spaceBetween: 30,
-                                            },
-                                        }}
-                                    >
-                                        {Gallery.map((image, index) => (
-                                            <SwiperSlide key={index}>
-                                                <img
-                                                    onDragStart={(e) => e.preventDefault()} // Prevent drag
-                                                    src={image.image}
-                                                    className="w-full h-auto rounded-md"
-                                                    alt={`Slide ${index + 1}`} // Add alt text for accessibility
-                                                />
-                                                <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
-                                                    <time datetime={image.date} className="text-white text-sm">{image.date}</time>
-                                                    <h3 className="text-white text-base">{image.description}</h3>
-                                                </div>
-                                            </SwiperSlide>
-                                        ))}
-                                    </Swiper>
-                                )}
-                            </Box>
-                        </Modal>
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Box sx={style}>
+                            {selectedImage && (
+                                <Swiper
+                                    className="mySwiper"
+                                    initialSlide={activeIndex}
+                                    spaceBetween={30}
+                                    pagination={{ clickable: true }}
+                                    navigation={true}
+                                    modules={[Navigation]}
+                                    onSlideChange={(swiper) => setSelectedImage(filteredGallery[swiper.activeIndex])}
+                                    breakpoints={{
+                                        640: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 20,
+                                        },
+                                        768: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 30,
+                                        },
+                                        1024: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 30,
+                                        },
+                                    }}
+                                >
+                                    {filteredGallery.map((image, index) => (
+                                        <SwiperSlide key={index}>
+                                            <img
+                                                onDragStart={(e) => e.preventDefault()} // Prevent drag
+                                                src={image.image}
+                                                className="w-full h-auto rounded-md"
+                                                alt={`Slide ${index + 1}`}
+                                            />
+                                            <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
+                                                <time dateTime={image.date} className="text-white text-sm">{image.date}</time>
+                                                <h3 className="text-white text-base">{image.description}</h3>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </Swiper>
+                            )}
+                        </Box>
+                    </Modal>
 
 
                     </div>
@@ -257,8 +282,94 @@ export default function page() {
                                                     <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                         <div className='lg:w-full'>
                                                             <img
-                                                              width={600} 
-                                                              height={400} 
+                                                                width={600}
+                                                                height={400}
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </TabPanel>
+
+                                    <TabPanel>
+
+                                        {/* tab panel 2 */}
+
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
+                                            {filteredGallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                width={600}
+                                                                height={400}
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </TabPanel>
+
+                                    <TabPanel>
+
+                                        {/* tab panel 3 */}
+
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
+                                            {filteredGallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                width={600}
+                                                                height={400}
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </TabPanel>
+                                    <TabPanel>
+
+                                        {/* tab panel 4 */}
+
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
+                                            {filteredGallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                width={600}
+                                                                height={400}
                                                                 src={Gallerys.image}
                                                                 onClick={() => handleOpen(index)}
                                                                 className='w-full h-full rounded-md'
@@ -275,254 +386,122 @@ export default function page() {
                                             ))}
                                         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-                                    </TabPanel>
-
-                                    <TabPanel>
-
-                                        {/* tab panel 2 */}
-
-                                        <div className='flex flex-col md:flex-row lg:flex-row  gap-5 '>
-
-                                            <div>
-
-
-
-                                                <Image  src={img1} className=' rounded-md'></Image>
-                                                <div className='relative bottom-12 flex-col  bg-black opacity-75 '>
-                                                    <div className='ml-3'>
-                                                        <time datetime="2008-02-14 20:00" className='text-white'>19/06/2024</time>
-
-                                                        <h3 className='text-white'>Orientation class: Graphic Design (2) </h3>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div>
-                                                <Image src={img5} className=' rounded-md'></Image>
-                                                <div className='relative bottom-12 flex-col  bg-black opacity-75 '>
-                                                    <div className='ml-3'>
-                                                        <time datetime="2008-02-14 20:00" className='text-white'>19/06/2024</time>
-
-                                                        <h3 className='text-white'>Orientation class: Web Development  (2) </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-
-
-                                        </div>
-
-                                    </TabPanel>
-
-                                    <TabPanel>
-
-                                        {/* tab panel 3 */}
-
-                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                                            {
-                                                Affiliate?.map(Affiliates => (
-
-                                                    <div key={Affiliates.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    src={Affiliates.image}
-                                                                    className='w-full rounded-lg'
-                                                                    alt="Instructor"
-                                                                />
-                                                            </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {Affiliates.name}</p>
-                                                                    <p>Batch: {Affiliates.batch}</p>
-                                                                    <p>Course ID: {Affiliates.courseId}</p>
-                                                                    <p>Course Name: {Affiliates.courseName}</p>
-                                                                    <p>Duration: {Affiliates.duration}</p>
-                                                                    <p>Internship: {Affiliates.internship}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                            }
-                                        </div> */}
-                                    </TabPanel>
-
-                                    <TabPanel>
-
-                                        {/* tab panel 4 */}
-                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                                            {
-                                                Video?.map(videos => (
-
-                                                    <div key={videos.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    src={videos.image}
-                                                                    className='w-full rounded-lg'
-                                                                    alt="Instructor"
-                                                                />
-                                                            </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {videos.name}</p>
-                                                                    <p>Batch: {videos.batch}</p>
-                                                                    <p>Course ID: {videos.courseId}</p>
-                                                                    <p>Course Name: {videos.courseName}</p>
-                                                                    <p>Duration: {videos.duration}</p>
-                                                                    <p>Internship: {videos.internship}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                            }
-                                        </div> */}
                                     </TabPanel>
 
                                     <TabPanel>
 
                                         {/* tab panel 5 */}
-                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                                            {
-                                                business?.map(businesse => (
 
-                                                    <div key={businesse.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    src={businesse.image}
-                                                                    className='w-full rounded-lg'
-                                                                    alt="Instructor"
-                                                                />
-                                                            </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {businesse.name}</p>
-                                                                    <p>Batch: {businesse.batch}</p>
-                                                                    <p>Course ID: {businesse.courseId}</p>
-                                                                    <p>Course Name: {businesse.courseName}</p>
-                                                                    <p>Duration: {businesse.duration}</p>
-                                                                    <p>Internship: {businesse.internship}</p>
-                                                                </div>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
+                                            {filteredGallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                width={600}
+                                                                height={400}
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                ))
-                                            }
-                                        </div> */}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </TabPanel>
 
                                     <TabPanel>
 
                                         {/* tab panel 6 */}
-                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                                            {
-                                                Frontend?.map(Frontends => (
 
-                                                    <div key={Frontends.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    src={Frontends.image}
-                                                                    className='w-full rounded-lg'
-                                                                    alt="Instructor"
-                                                                />
-                                                            </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {Frontends.name}</p>
-                                                                    <p>Batch: {Frontends.batch}</p>
-                                                                    <p>Course ID: {Frontends.courseId}</p>
-                                                                    <p>Course Name: {Frontends.courseName}</p>
-                                                                    <p>Duration: {Frontends.duration}</p>
-                                                                    <p>Internship: {Frontends.internship}</p>
-                                                                </div>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
+                                            {filteredGallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                width={600}
+                                                                height={400}
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                ))
-                                            }
-                                        </div> */}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </TabPanel>
 
                                     <TabPanel>
+
                                         {/* tab panel 7 */}
-                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                                            {
-                                                Backend?.map(Backends => (
 
-                                                    <div key={Backends.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    src={Backends.image}
-                                                                    className='w-full rounded-lg'
-                                                                    alt="Instructor"
-                                                                />
-                                                            </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {Backends.name}</p>
-                                                                    <p>Batch: {Backends.batch}</p>
-                                                                    <p>Course ID: {Backends.courseId}</p>
-                                                                    <p>Course Name: {Backends.courseName}</p>
-                                                                    <p>Duration: {Backends.duration}</p>
-                                                                    <p>Internship: {Backends.internship}</p>
-                                                                </div>
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
+                                            {filteredGallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                width={600}
+                                                                height={400}
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                ))
-                                            }
-                                        </div> */}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </TabPanel>
 
                                     <TabPanel>
-                                        {/* tab panel 8 */}
-                                        {/* <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                                            {
-                                                digital?.map(digitals => (
 
-                                                    <div key={digitals.id}>
-                                                        <div href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    src={digitals.image}
-                                                                    className='w-full rounded-lg'
-                                                                    alt="Instructor"
-                                                                />
-                                                            </div>
-                                                            <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                                                                <div className='mt-20 ml-2'>
-                                                                    <p>Name: {digitals.name}</p>
-                                                                    <p>Batch: {digitals.batch}</p>
-                                                                    <p>Course ID: {digitals.courseId}</p>
-                                                                    <p>Course Name: {digitals.courseName}</p>
-                                                                    <p>Duration: {digitals.duration}</p>
-                                                                    <p>Internship: {digitals.internship}</p>
-                                                                </div>
+                                        {/* tab panel 8 */}
+
+                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
+                                            {filteredGallery?.map((Gallerys, index) => (
+                                                <div key={Gallerys.id}>
+                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                        <div className='lg:w-full'>
+                                                            <img
+                                                                width={600}
+                                                                height={400}
+                                                                src={Gallerys.image}
+                                                                onClick={() => handleOpen(index)}
+                                                                className='w-full h-full rounded-md'
+                                                            />
+                                                        </div>
+                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                            <div className='ml-3'>
+                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                ))
-                                            }
-                                        </div> */}
+                                                </div>
+                                            ))}
+                                        </div>
                                     </TabPanel>
                                 </div>
                             </Tabs>
@@ -532,16 +511,6 @@ export default function page() {
                         </div>
 
                         <div className="w-full  lg:w-1/5  rounded h-auto lg:h-[2000px] bg-white  ">
-
-
-
-
-
-
-
-
-
-
                             <div className=' shadow-xl rounded py-10 mt-5'>
                                 <div className='ml-4'>
                                     <p className='text-[#0054a5] font-semibold mt-3'>UP COMING EVENTS</p>

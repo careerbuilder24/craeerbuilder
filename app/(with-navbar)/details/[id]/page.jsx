@@ -17,6 +17,10 @@ import Footer from '../../componenets/Footer/Footer';
 import StarRatings from 'react-star-ratings';
 import useDigital from '@/hooks/useDetailsDs';
 import ToggleBar from '@/app/ToggleBar/ToggleBar';
+import Video from 'next-video';
+// import myVideo from '../../../..';
+
+// import madia from '../../../../assets/madlia.mp4'
 
 
 
@@ -47,7 +51,7 @@ export default function Page() {
             <Navbar />
             {/* First Section */}
             <div className='lg:mt-52 flex justify-center items-center'>
-                <div className=' flex-col  bg-[#17549A] lg:w-9/12 rounded-md lg:mb-5 py-4'>
+                <div className=' flex-col  bg-[#17549A] lg:w-9/12 rounded-md lg:mb-5 py-7'>
                     <div className='mt-36 lg:mr-80 lg:mt-0 lg:p-4 md:p-6'>
                         {cr ? (
                             <div className='flex flex-col lg:flex-row text-white lg:ml-6 '>
@@ -65,9 +69,9 @@ export default function Page() {
                         ) : 'Loading......'}
                     </div>
 
-                    <div className='text-white lg:mt-0 lg:p-4 md:p-6'>
+                    <div className='text-white lg:mt-0 lg:p-4 md:p-6 '>
                         {cr ? (
-                            <div className='flex flex-col justify-between lg:flex-row text-[#17549A] mt-5  bg-white   rounded-md lg:ml-8 mr-8  lg:w-12/12 ml-8'>
+                            <div className='flex flex-col justify-between  lg:flex-row text-[#17549A] mt-5  bg-white   rounded-md lg:ml-8 mr-8  lg:w-12/12 ml-8 py-5'>
                                 <div className='lg:ml-5'>
                                     <h1 className='text-3xl my-3'>Course at a Glance</h1>
                                     <div className='gap-3 flex flex-col lg:flex-col items-start'>
@@ -82,7 +86,7 @@ export default function Page() {
                                             </div>
                                         </div>
 
-                                        <div className='flex items-center gap-2'>
+                                        <div className='flex items-center gap-2 '>
                                             <LuClock9 className='text-xs' />
                                             <h1>Class Schedule:</h1>
                                             <div className='flex items-center'>
@@ -108,7 +112,7 @@ export default function Page() {
                                     </div>
                                 </div>
 
-                                <div className='lg:mt-4 lg:mr-20 mt-4'>
+                                <div className='lg:mt-4 lg:mr-20 mt-4 ml-5'>
                                     <h2 className="text-2xl font-bold md:text-3xl">Price: TK. 85,000</h2>
                                     <p className="text-lg md:text-xl">Price: TK. 85,000 (including VAT & TAX)</p>
                                     <p className="text-lg md:text-xl text-[#1df81d]">One time full payment: BDT 21,000.</p>
@@ -118,7 +122,7 @@ export default function Page() {
 
 
 
-                                        <div className='w-36 h-10 bg-[#0054a6] text-white text-center relative overflow-hidden group cursor-pointer'>
+                                        <div className='w-36 h-10 bg-[#0054a6] text-white text-center relative overflow-hidden group cursor-pointer '>
                                             <h1 className='mt-2 font-bold '>Enroll Now</h1>
                                             <div className='bg-[#a6ce39] opacity-70 w-11/12 h-8 transition-transform duration-300 
                     group-hover:translate-x-16 group-hover:scale-y-150 group-hover:rounded-full 
@@ -322,7 +326,7 @@ export default function Page() {
 
                         <div>
 
-                            <div className="my-10 flex flex-col lg:flex-row bg-green-500">
+                            <div className="my-10 flex flex-col lg:flex-row bg-green-500 py-10">
                                 <div className='lg:w-3/5'>
                                     {ditails?.map(({ id, description, question }) => (
                                         <ToggleBar
@@ -337,12 +341,17 @@ export default function Page() {
                                 </div>
                                 <div className='lg:w-2/5'>
 
-                                    <div className=' shadow-xl rounded py-10 mt-5 bg-pink-500 mr-4'>
-                                        <div className='ml-4 '>
+                                    <div className=' shadow-xl rounded py-10 mt-5 bg-pink-500 lg:mr-4 '>
+                                        <div className=' '>
                                             <p className='text-[#0054a5] font-semibold mt-3'>who can join</p>
                                             <hr className='w-10 h-1 bg-[#0054a6]' />
+                                            {/* 
+                                            <video controls width="600">
+                                                <source src={madia} type="video/mp4" />
+                                                Your browser does not support the video tag.
+                                            </video> */}
+                                              <Video src="/videos/madlia.mp4" controls />
 
-                                            <p className='mt-4 text-base'>This course is intended for <br /> those who want to work as a <br /> Software Tester. This course covers <br /> software testing in detail.</p>
                                         </div>
 
                                     </div>

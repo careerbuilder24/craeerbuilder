@@ -100,7 +100,7 @@ export default function Navbar() {
 
                 {/* Second Section */}
                 <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 bg-white ${
-                    isScrolled ? 'top-0' : 'top-10'
+                    isScrolled ? 'top-0' : 'lg:top-10 top-0'
                 }`}>
 
                     <div className='flex justify-center'>
