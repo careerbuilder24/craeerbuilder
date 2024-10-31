@@ -24,11 +24,9 @@ import { Navigation } from 'swiper/modules';
 // image part
 
 
-import img1 from '../../assets/gallery3.PNG';
-import img4 from '../../assets/gl1.jpg';
-import img5 from '../../assets/gl2.jpg';
 // import img2 from '../../assets/gaallrymd.PNG';
-import img3 from '../../assets/img6.jpg';
+import img1 from '../../assets/img6.jpg';
+import img2 from '../../assets/sideimage.PNG';
 
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -115,7 +113,7 @@ export default function page() {
 
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    
+
     const handleOpen = (index) => {
         setSelectedImage(Gallery[index]); // Set the selected image based on the clicked index
         setActiveIndex(index); // Set the active index for Swiper
@@ -172,58 +170,58 @@ export default function page() {
 
                         {/* Modal Part */}
                         <Modal
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="modal-title"
-                        aria-describedby="modal-description"
-                    >
-                        <Box sx={style}>
-                            {selectedImage && (
-                                <Swiper
-                                    className="mySwiper"
-                                    initialSlide={activeIndex}
-                                    spaceBetween={30}
-                                    pagination={{ clickable: true }}
-                                    navigation={true}
-                                    modules={[Navigation]}
-                                    onSlideChange={(swiper) => setSelectedImage(filteredGallery[swiper.activeIndex])}
-                                    breakpoints={{
-                                        640: {
-                                            slidesPerView: 1,
-                                            spaceBetween: 20,
-                                        },
-                                        768: {
-                                            slidesPerView: 1,
-                                            spaceBetween: 30,
-                                        },
-                                        1024: {
-                                            slidesPerView: 1,
-                                            spaceBetween: 30,
-                                        },
-                                    }}
-                                >
-                                    {filteredGallery.map((image, index) => (
-                                        <SwiperSlide key={index}>
-                                            <img
-                                                onDragStart={(e) => e.preventDefault()} // Prevent drag
-                                                src={image.image}
-                                                className="w-full h-auto rounded-md"
-                                                alt={`Slide ${index + 1}`}
-                                            />
-                                            <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
-                                                <time dateTime={image.date} className="text-white text-sm">{image.date}</time>
-                                                <h3 className="text-white text-base">{image.description}</h3>
-                                            </div>
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            )}
-                        </Box>
-                    </Modal>
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-title"
+                            aria-describedby="modal-description"
+                        >
+                            <Box sx={style}>
+                                {selectedImage && (
+                                    <Swiper
+                                        className="mySwiper"
+                                        initialSlide={activeIndex}
+                                        spaceBetween={30}
+                                        pagination={{ clickable: true }}
+                                        navigation={true}
+                                        modules={[Navigation]}
+                                        onSlideChange={(swiper) => setSelectedImage(filteredGallery[swiper.activeIndex])}
+                                        breakpoints={{
+                                            640: {
+                                                slidesPerView: 1,
+                                                spaceBetween: 20,
+                                            },
+                                            768: {
+                                                slidesPerView: 1,
+                                                spaceBetween: 30,
+                                            },
+                                            1024: {
+                                                slidesPerView: 1,
+                                                spaceBetween: 30,
+                                            },
+                                        }}
+                                    >
+                                        {filteredGallery.map((image, index) => (
+                                            <SwiperSlide key={index}>
+                                                <img
+                                                    onDragStart={(e) => e.preventDefault()} // Prevent drag
+                                                    src={image.image}
+                                                    className="w-full h-auto rounded-md"
+                                                    alt={`Slide ${index + 1}`}
+                                                />
+                                                <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
+                                                    <time dateTime={image.date} className="text-white text-sm">{image.date}</time>
+                                                    <h3 className="text-white text-base">{image.description}</h3>
+                                                </div>
+                                            </SwiperSlide>
+                                        ))}
+                                    </Swiper>
+                                )}
+                            </Box>
+                        </Modal>
 
 
                     </div>
-                    <div className="flex flex-col lg:flex-row gap-10 h-auto">
+                    <div className="flex flex-col lg:flex-row gap-10 ">
                         <div className="w-full   bg-white  mb-4 lg:mb-0 shadow-lg p-4 rounded">
 
                             <h1 className='text-center text-4xl mt-5 font-bold mb-6'>Picture Gallery</h1>
@@ -520,7 +518,7 @@ export default function page() {
                                     <p className='text-[#0054a5]  mt-3 text-center font-bold'>IT Feast</p>
                                     <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
                                         <Image
-                                            src={img3}
+                                            src={img1}
                                             className='w-full lg:w-11/12 h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
                                         />
 
@@ -528,6 +526,28 @@ export default function page() {
                                             CAREER BUILDER
                                         </div>
                                     </div>
+
+
+                                </div>
+
+                            </div>
+                            <div className=' shadow-xl rounded py-10 mt-5'>
+                                <div className='ml-4'>
+
+
+
+
+                                    <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
+                                        <div className='bg-gray-500 opacity-100 text-center text-white font-bold w-11/12'>
+                                            <p>Best Platform Form to create your career</p>
+                                        </div>
+                                        <Image
+                                            src={img2}
+                                            className='w-full lg:w-11/12 h-full object-cover '
+                                        />
+
+                                    </div>
+
 
 
                                 </div>
