@@ -63,12 +63,12 @@ export default function Navbar() {
         };
     }, []);
 
-    const handleResize = () => {
-        // Reset scroll state on resize if necessary
-        if (window.innerWidth < 768) {
-            setIsScrolled(false);
-        }
-    };
+    // const handleResize = () => {
+       
+    //     if (window.innerWidth < 768) {
+    //         setIsScrolled(false);
+    //     }
+    // };
 
     return (
         <header>

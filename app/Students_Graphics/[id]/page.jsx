@@ -5,15 +5,23 @@ import useStudents from '@/hooks/useStudents';
 import Navbar from '@/app/(with-navbar)/componenets/Navbar/Navbar';
 import img1 from '../../../assets/image1.PNG'
 import { IoLocationOutline } from "react-icons/io5";
-import gif1 from '../../../assets/8i75.gif'
-import gif2 from '../../../assets/gif2.gif'
 import { AiOutlineMail } from "react-icons/ai";
+import { GoDotFill } from "react-icons/go";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaEarthAfrica } from "react-icons/fa6";
 import Image from 'next/image';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import Footer from '@/app/(with-navbar)/componenets/Footer/Footer';
+
+
+
+
 
 export default function page() {
+
+    // pdf
+    
+    
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     const student = useStudents();
@@ -26,8 +34,8 @@ export default function page() {
         <main>
             <Navbar></Navbar>
 
-            <div className='mt-44'>
-                <div className='w-full flex flex-col justify-center items-center'>
+            <div className='mt-44 mb-10 '>
+                <div className='w-full flex flex-col justify-center items-center '>
                     <div className='relative lg:w-7/12 overflow-hidden rounded-lg mt-5'>
 
 
@@ -62,90 +70,7 @@ export default function page() {
 
 
 
-                <div className='  bg-orange-400  w-7/12 container mx-auto rounded-xl '>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {/* second part */}
-
-                    {/* <div className='w-6/12  h-[1000px]'>
-                            <div className='flex flex-col'>
-                                <div className=' shadow-xl rounded py-10 mt-5'>
-                                    <div className='ml-4'>
-                                        <p className='text-[#0054a5] font-semibold mt-3'>Available Seat</p>
-                                        <hr className='w-10 h-1 bg-[#0054a6]' />
-                                    </div>
-                                    <h1 className='text-center text-[#3c763d] font-bold mt-3 text-2xl'>23rd October, 2024</h1>
-
-                                    <center>
-                                        <h1 className='text-[0054a5] font-bold text-[#0054a6] text-3xl'>10 / 25</h1>
-                                        <div className='w-36 h-10 bg-[#0054a6] text-white text-center relative overflow-hidden group cursor-pointer'>
-                                            <h1 className='mt-2 font-bold '>Enroll Now</h1>
-                                            <div className='bg-[#a6ce39] opacity-70 w-11/12 h-8 transition-transform duration-300 
-                    group-hover:translate-x-16 group-hover:scale-y-150 group-hover:rounded-full 
-                    absolute bottom-1 left-1/2 transform -translate-x-1/2'>
-                                            </div>
-                                        </div>
-                                    </center>
-
-                                </div>
-
-                                <div className=' shadow-xl rounded py-10 mt-5'>
-                                    <div className='ml-4'>
-                                        <p className='text-[#0054a5] font-semibold mt-3'>Available Seat</p>
-                                        <hr className='w-10 h-1 bg-[#0054a6]' />
-                                    </div>
-                                    <h1 className='text-center text-[#3c763d] font-bold mt-3 text-2xl'>23rd October, 2024</h1>
-
-                                    <center>
-                                        <h1 className='text-[0054a5] font-bold text-[#0054a6] text-3xl'>10 / 25</h1>
-                                        <div className='w-36 h-10 bg-[#0054a6] text-white text-center relative overflow-hidden group cursor-pointer'>
-                                            <h1 className='mt-2 font-bold '>Enroll Now</h1>
-                                            <div className='bg-[#a6ce39] opacity-70 w-11/12 h-8 transition-transform duration-300 
-                    group-hover:translate-x-16 group-hover:scale-y-150 group-hover:rounded-full 
-                    absolute bottom-1 left-1/2 transform -translate-x-1/2'>
-                                            </div>
-                                        </div>
-                                    </center>
-
-                                </div>
-
-                                <div className=' shadow-xl rounded py-10 mt-5'>
-                                    <div className='ml-4'>
-                                        <p className='text-[#0054a5] font-semibold mt-3'>Available Seat</p>
-                                        <hr className='w-10 h-1 bg-[#0054a6]' />
-                                    </div>
-                                    <h1 className='text-center text-[#3c763d] font-bold mt-3 text-2xl'>23rd October, 2024</h1>
-
-                                    <center>
-                                        <h1 className='text-[0054a5] font-bold text-[#0054a6] text-3xl'>10 / 25</h1>
-                                        <div className='w-36 h-10 bg-[#0054a6] text-white text-center relative overflow-hidden group cursor-pointer'>
-                                            <h1 className='mt-2 font-bold '>Enroll Now</h1>
-                                            <div className='bg-[#a6ce39] opacity-70 w-11/12 h-8 transition-transform duration-300 
-                    group-hover:translate-x-16 group-hover:scale-y-150 group-hover:rounded-full 
-                    absolute bottom-1 left-1/2 transform -translate-x-1/2'>
-                                            </div>
-                                        </div>
-                                    </center>
-
-                                </div>
-
-
-                            </div>
-                        </div> */}
-
-
+                <div className='  border-b-2 border-slate-200  w-7/12 container mx-auto rounded-xl '>
                     <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col  md:flex-row   w-full'>
                         {/* Tab List */}
                         <TabList className='flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 '>
@@ -158,6 +83,7 @@ export default function page() {
                                         className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8"
                                         width={100}
                                         height={100}
+                                        
 
                                         style={{ border: '4px solid #ffffff' }} // Custom border radius
                                         onError={(e) => { e.target.src = 'fallback-image-url.jpg'; }} // Fallback image in case of error
@@ -271,7 +197,7 @@ export default function page() {
                                                     />
                                                     <p className='text-center text-2xl font-bold'>{graphic.name}</p>
                                                     <p className='text-xl text-center'>Student</p>
-                                                    <p className='text-center mt-20 text-base font-bold mb-2'>Contact Details</p>
+                                                    <p className='text-center mt-20 text-xl font-bold mb-2'>Contact Details</p>
                                                     <hr className='w-96 h-1  ml-1' />
                                                     <div className='flex flex-row gap-2 justify-center items-center  mt-1'>
                                                         <BsFillTelephoneFill className='text-white' />
@@ -286,8 +212,32 @@ export default function page() {
                                                         <p>London</p>
                                                     </div>
 
-                                                    <p className='text-center mt-20 text-base font-bold mb-2'>Core Skills</p>
-                                                    <hr className='w-60 h-1  ml-16' />
+                                                    <p className='text-center mt-20 text-xl font-bold mb-2'>Core Skills</p>
+                                                    <hr className='w-80 h-1  ml-5' />
+                                                    <div className='flex mt-3 ml-5'>
+                                                        <GoDotFill className='mt-1 text-sm mr-3' />
+                                                        <p>Communication and delegation</p>
+                                                    </div>
+                                                    <div className='flex mt-2 ml-5'>
+                                                        <GoDotFill className='mt-1 text-sm mr-3' />
+                                                        <p>Fundraising experience</p>
+                                                    </div>
+                                                    <div className='flex  ml-5 mt-2'>
+                                                        <GoDotFill className=' text-sm mr-3' />
+                                                        <p>Captain of the school netball team</p>
+                                                    </div>
+                                                    <div className='flex  ml-5 mt-2'>
+                                                        <GoDotFill className=' text-sm mr-3' />
+                                                        <p>Member of the school piano club</p>
+                                                    </div>
+                                                    <div className='flex  ml-5 mt-2'>
+                                                        <GoDotFill className=' text-sm mr-3' />
+                                                        <p>School coding national competitor</p>
+                                                    </div>
+                                                    <div className='flex  ml-5 mt-2'>
+                                                        <GoDotFill className=' text-sm mr-3' />
+                                                        <p>IT skills - predicted 6 at GCSE</p>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -513,6 +463,7 @@ export default function page() {
 
 
             </div>
+            <Footer></Footer>
         </main>
     )
 }

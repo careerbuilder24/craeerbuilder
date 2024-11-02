@@ -1,7 +1,7 @@
 // hooks/useCourses.js
 import { useEffect, useState } from 'react';
 
-const useCourses = () => {
+const useGallery = () => {
     const [Gallery, setGallery] = useState([]);
 
     useEffect(() => {
@@ -16,4 +16,4 @@ const useCourses = () => {
     return Gallery; 
 };
 
-export default useCourses;
+export default useGallery;
