@@ -142,10 +142,10 @@ export default function Navbar() {
                                         </div>
 
                                         {/* Dropdown Content */}
-                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box rounded-lg w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
+                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box  w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
                                             <Link href="/RunningStudents" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
                                             <Link href="/RunningIntern" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Interns</Link>
-                                            <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blacklue-400 rounded'>Running Employeed </Link>
+                                            <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Employeed </Link>
                                         </div>
                                     </div>
                                 </div>

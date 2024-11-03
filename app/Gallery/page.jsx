@@ -159,7 +159,7 @@ export default function page() {
 
         <>
             <HelmetHead
-                title="Welcome to Gallery"
+                title="Gallery"
                 description="Explore a collection of stunning images showcasing our best moments."
                 keywords="gallery, pictures, photography, events"
                 author="Muhibullah"

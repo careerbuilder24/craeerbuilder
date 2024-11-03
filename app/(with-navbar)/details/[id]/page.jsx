@@ -11,6 +11,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import img1 from '../../../../assets/kmn.jpg';
 import logo from '../../../../assets/logo.jpg';
+import gif1 from '../../../../assets/webgify.gif';
 import instrastor from '../../../../assets/inst.jpg';
 import Navbar from '../../componenets/Navbar/Navbar';
 import Footer from '../../componenets/Footer/Footer';
@@ -18,13 +19,15 @@ import StarRatings from 'react-star-ratings';
 import useDigital from '@/hooks/useDetailsDs';
 import ToggleBar from '@/app/ToggleBar/ToggleBar';
 import Video from 'next-video';
+import img2 from '../../../../assets/sidelogo.jpg';
 // import myVideo from '../../../..';
 
 // import madia from '../../../../assets/madlia.mp4'
-
+import './Details.css'
 
 
 export default function Page() {
+    const [isHovered, setIsHovered] = useState(false);
     const [visibleDropdown, setvisibleDropdown] = useState(null);
     const { id } = useParams();
     const courses = useCourses();
@@ -148,7 +151,7 @@ export default function Page() {
             {/* Second part */}
             <div className='container mx-auto my-9 lg:w-9/12 w-10/12'>
                 <div className="flex flex-col  gap-4 lg:flex-row items-center justify-center h-auto">
-                    <div className="w-full lg:w-4/5 h-auto lg:h-[2000px]  bg-red-500 mb-4 lg:mb-0 shadow-lg p-4 rounded">
+                    <div className="w-full lg:w-4/5 h-auto lg:h-[2000px]   mb-4 lg:mb-0 shadow-lg p-4 rounded">
                         {/* <div>
                        <div>
                             <p style={{ fontWeight: '700' }} className='font-medium text-sm'>Certificate Course on Software Testing & Quality Assurance</p>
@@ -324,39 +327,35 @@ export default function Page() {
                        </div> */}
 
 
-                        <div>
 
-                            <div className="my-10 flex flex-col lg:flex-row bg-green-500 py-10">
-                                <div className='lg:w-3/5'>
-                                    {ditails?.map(({ id, description, question }) => (
-                                        <ToggleBar
-                                            key={id}
-                                            id={id}
-                                            question={question}
-                                            description={description}
-                                            visibleDropdown={visibleDropdown}
-                                            toggleDropdown={toggleDropdown}
-                                        />
-                                    ))}
-                                </div>
-                                <div className='lg:w-2/5'>
 
-                                    <div className=' shadow-xl rounded py-10 mt-5 bg-pink-500 lg:mr-4 '>
-                                        <div className=' '>
-                                            <p className='text-[#0054a5] font-semibold mt-3'>who can join</p>
-                                            <hr className='w-10 h-1 bg-[#0054a6]' />
-                                            {/* 
-                                            <video controls width="600">
-                                                <source src={madia} type="video/mp4" />
-                                                Your browser does not support the video tag.
-                                            </video> */}
-                                              <Video src="/videos/madlia.mp4" controls />
+                        <div className="my-10 flex flex-col lg:flex-row  py-10">
+                            <div className='lg:w-3/5'>
+                                {ditails?.map(({ id, description, question }) => (
+                                    <ToggleBar
+                                        key={id}
+                                        id={id}
+                                        question={question}
+                                        description={description}
+                                        visibleDropdown={visibleDropdown}
+                                        toggleDropdown={toggleDropdown}
+                                    />
+                                ))}
+                            </div>
+                            <div className='lg:w-2/5'>
 
-                                        </div>
+                                <div className='   lg:mr-4 px-4'>
+                                    <div className=' '>
+                                        <p className='text-[#0054a5] font-semibold '>Why Want to Join here/</p>
+                                        <hr className='w-20 h-1 bg-[#0054a6] mb-10' />
+
+                                        <Video src="/videos/madlia.mp4" controls />
 
                                     </div>
+
                                 </div>
                             </div>
+
                         </div>
 
 
@@ -364,36 +363,42 @@ export default function Page() {
                     </div>
 
                     <div className="w-full  lg:w-1/5  rounded h-auto lg:h-[2000px] bg-white  ">
+
+
+                        <div className='w-12/12 shadow-xl rounded p-4 hover:bg-blue-300 mt-5'>
+                            <Image
+                                onDragStart={(e) => e.preventDefault()}
+                                src={img2}
+                                className='w-full  h-full object-cover '
+                            />
+                        </div>
                         <div className=' shadow-xl rounded py-10'>
-                            <div className='ml-4'>
-                                <p className='text-[#0054a5] font-semibold mt-3'>Tentative Class Start</p>
-                                <hr className='w-10 h-1 bg-[#0054a6]' />
+                            <div className='font-bold'>
+                                <Image src={gif1} onDragStart={(e) => e.preventDefault()}></Image>
+                                <p className='text-[#0054a5]  mt-3 text-center '>Build Career in Web</p>
                             </div>
-                            <h1 className='text-center text-[#3c763d] font-bold mt-3 text-2xl'>23rd October, 2024</h1>
+
                         </div>
 
-
-
-
-                        <div className=' shadow-xl rounded py-10 mt-5'>
-                            <div className='ml-4'>
-                                <p className='text-[#0054a5] font-semibold mt-3'>Available Seat</p>
-                                <hr className='w-10 h-1 bg-[#0054a6]' />
+                        {/* part */}
+                        {/* <div
+                            className={`shadow-xl rounded py-10 transition-transform duration-300 ease-in-out ${isHovered ? 'transform perspective-300 rotateX-10 rotateY-10' : ''}`}
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            <div className='font-bold'>
+                                <Image
+                                    src={gif1}
+                                    onDragStart={(e) => e.preventDefault()}
+                                    alt="Career in Web" // Always include an alt tag
+                                />
+                                <p className='text-[#0054a5] mt-3 text-center'>Build Career in Web</p>
                             </div>
-                            <h1 className='text-center text-[#3c763d] font-bold mt-3 text-2xl'>23rd October, 2024</h1>
+                        </div> */}
 
-                            <center>
-                                <h1 className='text-[0054a5] font-bold text-[#0054a6] text-3xl'>10 / 25</h1>
-                                <div className='w-36 h-10 bg-[#0054a6] text-white text-center relative overflow-hidden group cursor-pointer'>
-                                    <h1 className='mt-2 font-bold '>Enroll Now</h1>
-                                    <div className='bg-[#a6ce39] opacity-70 w-11/12 h-8 transition-transform duration-300 
-                    group-hover:translate-x-16 group-hover:scale-y-150 group-hover:rounded-full 
-                    absolute bottom-1 left-1/2 transform -translate-x-1/2'>
-                                    </div>
-                                </div>
-                            </center>
 
-                        </div>
+
+
 
 
                         <div className=' shadow-xl rounded py-10 mt-5'>
