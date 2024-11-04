@@ -17,12 +17,14 @@ import useDetailsCourse from '@/hooks/useDetailsCourse';
 
 import './Graphics.css'
 import Link from 'next/link';
+import useGallery from '@/hooks/useGallery';
 
 
 
 export default function page() {
 
     const course = useDetailsCourse();
+    const achivements = useGallery();
 
 
 
@@ -32,7 +34,7 @@ export default function page() {
 
     const graphic = student.find(Onestudent => Onestudent?.id === Number(id));
     // console.log(graphic)
-    console.log(course)
+    console.log(achivements)
 
     return (
         <>
@@ -84,7 +86,7 @@ export default function page() {
                 <div className='  border-b-2 border-slate-200  lg:w-7/12 container mx-auto rounded-xl '>
                     <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col   md:flex-row   w-full'>
                         {/* Tab List */}
-                        <TabList className='flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 h-auto '>
+                        <TabList className='flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 h-[1000px] '>
                             {graphic ? (
                                 <div className='flex flex-col text-white  w-full '>
                                     <Image
@@ -195,10 +197,10 @@ export default function page() {
                                         </div>
                                     </div>
 
-                                    <div className='bg-[#44b5e6] lg:w-4/12    rounded-lg  lg:mt-0'>
+                                    <div className='bg-[#44b5e6] lg:w-4/12    rounded-lg '>
 
                                         {graphic ? (
-                                            <div className='flex flex-col   w-full '>
+                                            <div className='flex flex-col   w-full h-full '>
                                                 <div className='w-ful mt-4 text-white'>
                                                     <Image
                                                         src={graphic.image}
@@ -269,17 +271,41 @@ export default function page() {
 
                             </TabPanel>
 
-                            <TabPanel>
+                             {/* tab panel 2  flex-1 h-[600px] overflow-auto*/}
+                                <TabPanel>
 
-                                {/* tab panel 2 */}
+                               
 
-
+                                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-4 h-[1000px] overflow-auto w-full mt-3'>
+                                                {achivements?.map((achivement) => (
+                                                    <div key={achivement.id}>
+                                                        <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                            <div className='lg:w-full'>
+                                                                <img
+                                                                    width={600}
+                                                                    height={400}
+                                                                    src={achivement.image}
+                                                                
+                                                                    className='w-full h-full rounded-md'
+                                                                />
+                                                            </div>
+                                                            <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                                <div className='ml-3'>
+                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{achivement.date}</time>
+                                                                    <h3 className='text-white text-base'>{achivement.description}</h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
 
 
 
 
 
                             </TabPanel>
+                            
 
                             <TabPanel>
 

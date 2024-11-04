@@ -6,7 +6,7 @@ const useDetailsCourse = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('/DetailsCporse.json');
+            const res = await fetch('/DetailsCourse.json');
             const data = await res.json();
             setDigital(data);
         };

@@ -3,7 +3,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md'; // Import icons
 
-const ToggleBar = ({ question, description, id, visibleDropdown, toggleDropdown }) => {
+const ToggleBar = ({ subject, description, id, visibleDropdown, toggleDropdown }) => {
     const isOpen = visibleDropdown === id; // Check if the dropdown is open
 
     return (
@@ -12,7 +12,10 @@ const ToggleBar = ({ question, description, id, visibleDropdown, toggleDropdown 
                 className="bg-[#17549A] w-full md:w-9/12 mx-auto sm:w-full text-white p-4 cursor-pointer mb-1 flex justify-between items-center"
                 onClick={() => toggleDropdown(id)}
             >
-                <h2>{question}</h2>
+                <div className='flex flex-row gap-2'>
+                    <h2>Class 0{id}:</h2>
+                    <h2>{subject}</h2>
+                </div>
                 {isOpen ? <MdExpandLess size={24} /> : <MdExpandMore size={24} />} {/* Toggle icon */}
             </div>
 

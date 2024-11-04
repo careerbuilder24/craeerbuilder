@@ -1,82 +1,82 @@
 [
     {
         "id": 1,
-        "question": "What is Quality?",
+        "subject": "What is Quality?",
         "description": "Quality refers to the degree of excellence of a product or service. It encompasses various attributes that meet customer expectations."
     },
     {
         "id": 2,
-        "question": "Functional and Non-Functional Quality Attributes",
+        "subject": "Functional and Non-Functional Quality Attributes",
         "description": "Functional attributes define what a system does, while non-functional attributes describe how it performs under certain conditions."
     },
     {
         "id": 3,
-        "question": "Test Levels",
+        "subject": "Test Levels",
         "description": "Test levels represent different stages of testing, including unit testing, integration testing, and system testing."
     },
     {
         "id": 4,
-        "question": "Importance of Quality Assurance",
+        "subject": "Importance of Quality Assurance",
         "description": "Quality assurance ensures that a product meets specified requirements. It reduces risks and enhances customer satisfaction."
     },
     {
         "id": 5,
-        "question": "Quality Control vs. Quality Assurance",
+        "subject": "Quality Control vs. Quality Assurance",
         "description": "Quality control focuses on identifying defects, while quality assurance emphasizes preventing defects in processes."
     },
     {
         "id": 6,
-        "question": "Defining Quality Metrics",
+        "subject": "Defining Quality Metrics",
         "description": "Quality metrics are standards used to measure the quality of a product. They help in evaluating performance and improvement areas."
     },
     {
         "id": 7,
-        "question": "Continuous Improvement",
+        "subject": "Continuous Improvement",
         "description": "Continuous improvement is an ongoing effort to enhance products, services, or processes. It involves regular feedback and adaptation."
     },
     {
         "id": 8,
-        "question": "User Acceptance Testing",
+        "subject": "User Acceptance Testing",
         "description": "User acceptance testing ensures that a product meets user needs and requirements before it goes live. It's the final validation step."
     },
     {
         "id": 9,
-        "question": "The Role of Test Automation",
+        "subject": "The Role of Test Automation",
         "description": "Test automation improves efficiency and accuracy in testing. It allows for faster feedback and more frequent testing cycles."
     },
     {
         "id": 10,
-        "question": "Risk-Based Testing",
+        "subject": "Risk-Based Testing",
         "description": "Risk-based testing prioritizes testing efforts based on the potential impact of identified risks. It ensures critical areas are tested first."
     },
     {
         "id": 11,
-        "question": "Performance Testing",
+        "subject": "Performance Testing",
         "description": "Performance testing evaluates how a system performs under load. It identifies bottlenecks and ensures reliability under stress."
     },
     {
         "id": 12,
-        "question": "Regression Testing",
+        "subject": "Regression Testing",
         "description": "Regression testing ensures that new code changes do not adversely affect existing functionality. It verifies stability over time."
     },
     {
         "id": 13,
-        "question": "The Importance of Documentation",
+        "subject": "The Importance of Documentation",
         "description": "Documentation in testing provides a reference for future projects. It ensures consistency and facilitates knowledge transfer."
     },
     {
         "id": 14,
-        "question": "Exploratory Testing",
+        "subject": "Exploratory Testing",
         "description": "Exploratory testing allows testers to explore the application without predefined tests. It uncovers issues that scripted tests might miss."
     },
     {
         "id": 15,
-        "question": "The Significance of Test Plans",
+        "subject": "The Significance of Test Plans",
         "description": "Test plans outline the testing strategy, objectives, and scope. They ensure all aspects of testing are considered and organized."
     },
     {
         "id": 16,
-        "question": "Collaboration in Testing",
+        "subject": "Collaboration in Testing",
         "description": "Collaboration among team members enhances the testing process. It fosters communication and ensures all perspectives are considered."
     }
 ]

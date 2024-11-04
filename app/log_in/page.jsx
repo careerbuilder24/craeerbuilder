@@ -102,7 +102,7 @@ export default function Login() {
               If you don't have an account, please register <Link className='text-blue-700 hover:underline font-bold' href={'/re_gister'}>here</Link>.
             </p>
             <div onClick={handleGoogleSignIn} className='flex justify-center items-center gap-5 mt-4 cursor-pointer'>
-              <div className='bg-[#8fbff7] w-16 h-16 text-center flex items-center justify-center rounded-full'>
+              <div style={{ borderRadius: '50px' }} className='bg-[#8fbff7] w-16 h-16 text-center flex items-center justify-center cursor-pointer gem-box'>
                 <h2 className='mt-2'>
                   <SiGmail className='text-2xl' />
                 </h2>

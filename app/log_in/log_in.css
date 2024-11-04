@@ -1,3 +1,21 @@
 .captcha-text {
     color: white !important; 
   }
+
+  .gem-box {
+    box-shadow: 
+      inset 2px 2px 5px rgba(0, 0, 0, 0.1), 
+      inset -2px -2px 5px rgba(255, 255, 255, 0.5), 
+      8px 0 16px rgba(0, 0, 0, 0.1) , /* Right side shadow */
+      -8px 0 16px rgba(255, 255, 255, 0.5); /* Right side highlight */
+    transition: box-shadow 0.3s ease; /* Add a transition effect for a smoother hover */
+  }
+  
+  .gem-box:hover {
+    box-shadow: 
+      inset 4px 4px 10px rgba(0, 0, 0, 0.2), 
+      inset -4px -4px 10px rgba(255, 255, 255, 0.8), 
+      4px 0 8px   rgba(255, 255, 255, 0.8)  , /* Right side shadow on hover */
+      -4px 0 8px rgba(0, 0, 0, 0.2) ; /* Right side highlight on hover */
+  }
+  
