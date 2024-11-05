@@ -11,9 +11,12 @@ import logo3 from '../../../../assets/propfilelogo.PNG';
 import Image from 'next/image';
 import Link from 'next/link';
 import { UserAuth } from "../../../context/AuthContext";
+import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/router';
 
 export default function Navbar() {
-
+    
+    const router = useRouter();
     // Auth context
     const { user, logOut } = UserAuth();
 
@@ -41,13 +44,7 @@ export default function Navbar() {
         setIsNavOpen((prev) => !prev);
     };
 
-    const handleScroll = () => {
-        if (window.scrollY > 50) {
-            setIsScrolled(true);
-        } else {
-            setIsScrolled(false);
-        }
-    };
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -63,12 +60,25 @@ export default function Navbar() {
         };
     }, []);
 
-    // const handleResize = () => {
-       
-    //     if (window.innerWidth < 768) {
-    //         setIsScrolled(false);
-    //     }
-    // };
+
+
+
+    const handleSelectChange = (event) => {
+        const selectedOption = event.target.value;
+
+        // If the option is 'Running Students', navigate to the RunningStudents page
+        if (selectedOption === 'Running Students') {
+            router.push('/Students');
+        } else if (selectedOption === 'Running Interns') {
+            // Handle Running Interns navigation
+            router.push('/RunningInterns');
+        } else if (selectedOption === 'Running Employee') {
+            // Handle Running Employee navigation
+            router.push('/RunningEmployee');
+        }
+    };
+
+
 
     return (
         <header>
@@ -99,9 +109,8 @@ export default function Navbar() {
                 </div>
 
                 {/* Second Section */}
-                <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 bg-white ${
-                    isScrolled ? 'top-0' : 'lg:top-10 top-0'
-                }`}>
+                <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 bg-white ${isScrolled ? 'top-0' : 'lg:top-10 top-0'
+                    }`}>
 
                     <div className='flex justify-center'>
                         <div className='lg:w-4/12 w-9/12 cursor-pointer lg:ml-64 m-2'>
@@ -110,7 +119,7 @@ export default function Navbar() {
                     </div>
 
                     <div style={{ background: '#17549A' }} className='h-14 flex items-center'>
-                        <button className="md:hidden ml-4" onClick={toggleNav}>
+                        <button className="lg:hidden ml-4" onClick={toggleNav}>
                             <div className=' w-8 h-8 hover:bg-[#0499fd] bg-white rounded-lg'>
                                 <center>
                                     <LuMenu className='text-3xl font-bold' />
@@ -122,8 +131,8 @@ export default function Navbar() {
 
 
 
-                        <div className='flex-grow  justify-center hidden md:flex font-light '>
-                            <ul className='flex space-x-10 mt-2  text-white  '>
+                        <div className='flex-grow  justify-center hidden md:hidden lg:block  font-light '>
+                            <div className='flex justify-center items-center space-x-10 mt-2 text-lg  text-white  '>
 
                                 <Link className=' duration-300 transition-all font-bold cursor-pointer' href={'/'} >Home</Link>
                                 <Link className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} > Courses</Link>
@@ -199,68 +208,139 @@ export default function Navbar() {
                                     }
 
                                 </div>
-                            </ul>
 
-
-
-                            <div className='  ml-10   flex flex-row   items-center '>
-                                <div className=' ml-4 group transition-all fixed duration-300 ease-in-out ' >
-                                    {/* Dropdown Trigger */}
-
-                                    {
-                                        user ? (<div className='flex flex-row items-center gap-4  cursor-pointer'>
-                                            <Image
-                                                tabIndex={0}
-                                                height={50}
-                                                width={50}
-                                                className="rounded-full"
-                                                src={user?.photoURL || logo3 || ''}
-                                                alt="" />
-                                            <p className='text-white'>{user?.displayName || 'Anonymus'}</p>
-                                        </div>) : ''
-                                    }
-
-                                    <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-6  hidden group-hover:block transition-all cursor-pointer">
+                                <div className='     flex flex-row   items-center '>
+                                    <div className=' ml-4 group transition-all fixed duration-300 ease-in-out ' >
+                                        {/* Dropdown Trigger */}
 
                                         {
-                                            user ? (<ul>
-                                                <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Profile</li>
-                                                <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded' onClick={handleSignOut}>LogOut</li>
-
-                                            </ul>
-
-                                            ) : ''
+                                            user ? (<div className='flex flex-row items-center gap-4  cursor-pointer'>
+                                                <Image
+                                                    tabIndex={0}
+                                                    height={50}
+                                                    width={50}
+                                                    className="rounded-full"
+                                                    src={user?.photoURL || logo3 || ''}
+                                                    alt="" />
+                                                <p className='text-white'>{user?.displayName || 'Anonymus'}</p>
+                                            </div>) : ''
                                         }
 
-                                    </div>
+                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-6  hidden group-hover:block transition-all cursor-pointer">
 
+                                            {
+                                                user ? (<ul>
+                                                    <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Profile</li>
+                                                    <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded' onClick={handleSignOut}>LogOut</li>
+
+                                                </ul>
+
+                                                ) : ''
+                                            }
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+
+
+
+
                         </div>
                     </div>
                 </div>
 
-                {/* Mobile Navbar */}
-                <div style={{ background: '#17549A' }} className={` transition-transform duration-700 ease-in-out ${isNavOpen ? 'translate-y-0' : '-translate-y-full'} fixed top-0 left-0 w-full z-50`}>
+                <div>
+                    {/* Mobile Navbar */}
+                    <div
+                        style={{ background: '#2DA9E1' }}
+                        className={`transition-transform duration-700 ease-in-out lg:hidden fixed top-32 right-0 h-full z-50 w-64 transform ${isNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                    >
+                        <div className="flex justify-between items-center p-4">
 
-                    <div className="flex justify-between items-center p-4">
-                        <div>
-                            <Image src={logo} className='lg:w-8/12  w-5/12 rounded-md ml-32  lg:ml-0' onDragStart={(e) => e.preventDefault()} />
+                            <button className="lg:hidden absolute left-5 top-5 " onClick={toggleNav}>
+                                <CgCloseO className="text-2xl text-white" />
+                            </button>
                         </div>
-                        <button className="md:hidden ml-4" onClick={toggleNav}>
+                        <div className="flex flex-col items-center space-y-2 py-4 gap-3 ">
 
-                            <CgCloseO className='text-2xl text-white' />
-                        </button>
+
+                        <Link href={'/'} style={{ borderRadius: '4px' }} className='h-10 mt-10 w-[245px]  bg-white '>
+                                <h3 className='ml-10 mt-1'>Home</h3>
+                            </Link>
+
+                            {/* <div className='flex'>
+
+                                <div className='lg:mt-1 w-7'>
+                                    <Image src={logo2} className='w-full'></Image>
+                                </div>
+
+                                <div className='relative group'>
+
+
+                                    
+
+                                    <div className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer'>
+                                        <Link href={'/Students'} className='flex items-center justify-center h-full font-bold'>
+                                            Students
+                                        </Link>
+                                    </div>
+
+
+                                </div>
+                            </div> */}
+
+
+
+
+                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                                <h3 className='ml-10 mt-1'>Gallery</h3>
+                            </div>
+
+
+
+
+            
+
+                            <div>
+                                <div className="w-11/12">
+                                    <select
+                                        style={{ padding: '10px 44px', borderRadius: '4px' }}
+                                        className="cursor-pointer"
+                                        onChange={handleSelectChange}
+                                    >
+                                      
+                                        <option className='font-bold'>Students</option>
+                                        <option>Running Students</option>
+                                        <option>Running Interns</option>
+                                        <option>Running Employee</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                                <h3 className='ml-10 mt-1'>Craeer Guide</h3>
+                            </div>
+
+                            
+                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                                <h3 className='ml-10 mt-1'>Faq</h3>
+                            </div>
+
+                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                                <h3 className='ml-10 mt-1'>About us</h3>
+                            </div>
+
+                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                                <h3 className='ml-10 mt-1'>Contact</h3>
+                            </div>
+
+                        
+
+                        </div>
                     </div>
-                    <ul className='flex flex-col items-center space-y-2 py-4 text-white'>
-                        <li className='cursor-pointer' onClick={toggleNav}>Home</li>
-                        <li className='cursor-pointer' onClick={toggleNav}>Courses</li>
-                        <li className='cursor-pointer' onClick={toggleNav}>Gallery</li>
-                        <li className='cursor-pointer' onClick={toggleNav}>Faq</li>
-                        <li className='cursor-pointer' onClick={toggleNav}>Univeristy</li>
-                        <li className='cursor-pointer' onClick={toggleNav}>About us</li>
-                        <li className='cursor-pointer' onClick={toggleNav}>Contact</li>
-                    </ul>
                 </div>
             </nav>
         </header>

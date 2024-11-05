@@ -12,10 +12,12 @@ const ToggleBar = ({ subject, description, id, visibleDropdown, toggleDropdown }
                 className="bg-[#17549A] w-full md:w-9/12 mx-auto sm:w-full text-white p-4 cursor-pointer mb-1 flex justify-between items-center"
                 onClick={() => toggleDropdown(id)}
             >
-                <div className='flex flex-row gap-2'>
+                <div className='flex flex-row lg:gap-2'>
                     <h2>Class 0{id}:</h2>
                     <h2>{subject}</h2>
                 </div>
+
+
                 {isOpen ? <MdExpandLess size={24} /> : <MdExpandMore size={24} />} {/* Toggle icon */}
             </div>
 

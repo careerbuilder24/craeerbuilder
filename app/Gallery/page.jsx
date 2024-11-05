@@ -69,7 +69,7 @@ export default function page() {
 
 
 
-    // menu togglebar section
+    // menu togglebar section for mbile section
 
     const toggleSidebar = () => {
         setIsSidebarOpen((prev) => !prev);
@@ -81,7 +81,7 @@ export default function page() {
         }
     };
 
-    // use effect for scroll and outside click part
+    // use effect for scroll and outside click part for mobile responsive
     useEffect(() => {
         if (isSidebarOpen) {
             document.body.classList.add('no-scroll');
@@ -104,7 +104,7 @@ export default function page() {
     console.log(Gallery)
 
 
-
+// for mobile device
     const handleSidebarItemClick = (index) => {
         setActiveTabIndex(index);
 

@@ -1,6 +1,7 @@
 'use client'
 import { useParams } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import 'react-tabs/style/react-tabs.css';
 import useStudents from '@/hooks/useStudents';
 import Navbar from '@/app/(with-navbar)/componenets/Navbar/Navbar';
 import img1 from '../../../assets/image1.PNG'
@@ -18,11 +19,18 @@ import useDetailsCourse from '@/hooks/useDetailsCourse';
 import './Graphics.css'
 import Link from 'next/link';
 import useGallery from '@/hooks/useGallery';
+import usePortfolio from '@/hooks/usePortfolio';
 
 
 
 export default function page() {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+    const sidebarRef = useRef(null);
+
+
+    // data calling
+    const portfolio = usePortfolio();
     const course = useDetailsCourse();
     const achivements = useGallery();
 
@@ -34,7 +42,39 @@ export default function page() {
 
     const graphic = student.find(Onestudent => Onestudent?.id === Number(id));
     // console.log(graphic)
-    console.log(achivements)
+    console.log(portfolio)
+
+    // for mobile Sections
+    const handleSidebarItemClick = (index) => {
+        setActiveTabIndex(index);
+
+    };
+    const toggleSidebar = () => {
+        setIsSidebarOpen((prev) => !prev);
+    };
+    const handleClickOutside = (event) => {
+        if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+            setIsSidebarOpen(false);
+        }
+    };
+
+    // use effect for scroll and outside click part for mobile responsive
+    useEffect(() => {
+        if (isSidebarOpen) {
+            document.body.classList.add('no-scroll');
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.body.classList.remove('no-scroll');
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.body.classList.remove('no-scroll');
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isSidebarOpen]);
+
+
 
     return (
         <>
@@ -84,9 +124,40 @@ export default function page() {
 
 
                 <div className='  border-b-2 border-slate-200  lg:w-7/12 container mx-auto rounded-xl '>
+
+
+
+
+                    {/* Mobile Sidebar Toggle Button */}
+                    <div className='block lg:hidden text-right mb-4'>
+                        <button onClick={toggleSidebar} className='p-2 bg-blue-500 text-white rounded'>
+                            {isSidebarOpen ? 'Category' : 'Category'}
+                        </button>
+                    </div>
+
+                    {/* Mobile Sidebar */}
+                    {isSidebarOpen && (
+                        <div className='fixed inset-0   bg-gray-800 bg-opacity-75 z-50 lg:hidden'>
+                            <div ref={sidebarRef} className='w-64 bg-[#17549A] text-white h-full p-4'>
+                                <h2 className='text-lg font-bold'>Categories</h2>
+                                <ul className='flex flex-col'>
+                                    {['Profile (CV)', 'Achievements', 'Courses', 'Portfolio', 'Certificate', 'Gallery', 'Blog'].map((category, index) => (
+                                        <li
+                                            key={index}
+                                            className='p-2 hover:bg-gray-200 hover:text-black cursor-pointer'
+                                            onClick={() => handleSidebarItemClick(index)}
+                                        >
+                                            {category}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    )}
+
                     <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col   md:flex-row   w-full'>
                         {/* Tab List */}
-                        <TabList className='flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 h-[1000px] '>
+                        <TabList className='flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 h-[1045px] '>
                             {graphic ? (
                                 <div className='flex flex-col text-white  w-full '>
                                     <Image
@@ -114,7 +185,7 @@ export default function page() {
                             </div>
 
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600   focus:outline-none'>Profile (CV)</Tab>
-                            <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Achievements </Tab>
+                            <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Achievements</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Courses</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Portfolio</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Certificate</Tab>
@@ -206,7 +277,7 @@ export default function page() {
                                                         src={graphic.image}
                                                         onDragStart={(e) => e.preventDefault()}
                                                         alt={graphic.title}
-                                                        className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8  "
+                                                        className="mt-4 shadow-lg w-10/12 mx-auto mb-8  "
                                                         width={100}
                                                         height={100}
 
@@ -271,46 +342,38 @@ export default function page() {
 
                             </TabPanel>
 
-                             {/* tab panel 2  flex-1 h-[600px] overflow-auto*/}
-                                <TabPanel>
-
-                               
-
+                            {/* tab panel 2  flex-1 h-[600px] overflow-auto*/}
+                            <TabPanel>
                                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-4 h-[1000px] overflow-auto w-full mt-3'>
-                                                {achivements?.map((achivement) => (
-                                                    <div key={achivement.id}>
-                                                        <div className='relative gap-4 overflow-hidden cursor-pointer'>
-                                                            <div className='lg:w-full'>
-                                                                <img
-                                                                    width={600}
-                                                                    height={400}
-                                                                    src={achivement.image}
-                                                                
-                                                                    className='w-full h-full rounded-md'
-                                                                />
-                                                            </div>
-                                                            <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
-                                                                <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{achivement.date}</time>
-                                                                    <h3 className='text-white text-base'>{achivement.description}</h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                    {achivements?.map((achivement) => (
+                                        <div key={achivement.id}>
+                                            <div className='relative gap-4 overflow-hidden cursor-pointer'>
+                                                <div className='lg:w-full'>
+                                                    <img
+                                                        width={600}
+                                                        height={400}
+                                                        src={achivement.image}
+
+                                                        className='w-full h-full rounded-md'
+                                                    />
+                                                </div>
+                                                <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
+                                                    <div className='ml-3'>
+                                                        <time datetime="2008-02-14 20:00" className='text-white text-sm'>{achivement.date}</time>
+                                                        <h3 className='text-white text-base'>{achivement.description}</h3>
                                                     </div>
-                                                ))}
+                                                </div>
                                             </div>
-
-
-
-
+                                        </div>
+                                    ))}
+                                </div>
 
                             </TabPanel>
-                            
+
 
                             <TabPanel>
 
                                 {/* tab panel 3 */}
-
 
                                 {/* courses  */}
                                 <div className="overflow-x-auto">
@@ -342,9 +405,6 @@ export default function page() {
                                     </table>
                                 </div>
 
-
-
-
                                 {/* <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
                                             {filteredGallery?.map((Gallerys, index) => (
                                                 <div key={Gallerys.id}>
@@ -370,33 +430,54 @@ export default function page() {
                                         </div> */}
                             </TabPanel>
                             <TabPanel>
-
                                 {/* tab panel 4 */}
-                                {/* 
-                                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2'>
-                                            {filteredGallery?.map((Gallerys, index) => (
-                                                <div key={Gallerys.id}>
-                                                    <div className='relative gap-4 overflow-hidden cursor-pointer'>
-                                                        <div className='lg:w-full'>
+                                <div className={'border-2'}>
+                                    <Tabs className="my-5">
+                                        <TabList className="flex justify-center items-center space-x-4">
+                                            <Tab className="cursor-pointer p-2 border-2 transition-all duration-200 hover:border-blue-500 focus:outline-blue-500 hover:bg-blue-100 selected:bg-blue-200">
+                                                All Works
+                                            </Tab>
+                                            <Tab className="cursor-pointer p-2 border-2 transition-all duration-200 hover:border-blue-500 focus:outline-blue-500 hover:bg-blue-100 selected:bg-blue-200">
+                                                Html and CSS Work
+                                            </Tab>
+                                            <Tab className="cursor-pointer p-2 border-2 transition-all duration-200 hover:border-blue-500 focus:outline-blue-600 hover:bg-blue-100 selected:bg-blue-200">
+                                                Figma to React Work
+                                            </Tab>
+                                        </TabList>
+
+                                        {/* Tab Panels */}
+                                        <TabPanel>
+                                            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                                                {portfolio.map((portfolios) => (
+                                                    <div key={portfolios.id} className="card w-96 bg-base-100 shadow-xl">
+                                                        <figure className="relative overflow-hidden">
+                                                            {/* Image with scrolling effect on hover */}
                                                             <img
-                                                                width={600}
-                                                                height={400}
-                                                                src={Gallerys.image}
-                                                                onClick={() => handleOpen(index)}
-                                                                className='w-full h-full rounded-md'
+                                                                className="w-full transition-transform duration-500 ease-in-out transform hover:translate-y-80"
+                                                                src={portfolios.image}
+                                                                alt="Portfolio"
                                                             />
-                                                        </div>
-                                                        <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
-                                                            <div className='ml-3'>
-                                                                <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
-                                                                <h3 className='text-white text-base'>{Gallerys.description}</h3>
-                                                            </div>
+                                                        </figure>
+                                                        <div className="card-body">
+                                                            <h2 className="card-title"> {portfolios.title} </h2>
+                                                            <p>Price: ${portfolios.text}</p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            ))}
-                                        </div> */}
+                                                ))}
+                                            </div>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <h1>hello2</h1>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <h1>hello3</h1>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <h1>hello4</h1>
+                                        </TabPanel>
+                                    </Tabs>
 
+                                </div>
                             </TabPanel>
 
                             <TabPanel>

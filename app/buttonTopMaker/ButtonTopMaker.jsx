@@ -31,7 +31,7 @@ export default function ButtonTopMaker() {
         button: {
             position: 'fixed',
             bottom: '20px',
-            right: '20px',
+            left: '20px',
             backgroundColor: '#0070f3',
             color: '#fff',
             border: 'none',

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "image": "https://i.postimg.cc/d1QJrvGr/webtech-com-bd.png",
+    "title": "Introduction to React",
+    "text": "Live link"
+  },
+  {
+    "id": 2,
+    "image": "https://i.postimg.cc/d1QJrvGr/webtech-com-bd.png",
+    "title": "JavaScript Fundamentals",
+    "text": "Live link"
+  },
+  {
+    "id": 3,
+    "image": "https://i.postimg.cc/d1QJrvGr/webtech-com-bd.png",
+    "title": "Web Development Tools",
+    "text": "Live link"
+  },
+  {
+    "id": 4,
+    "image": "https://i.postimg.cc/d1QJrvGr/webtech-com-bd.png",
+    "title": "CSS Grid Layout",
+    "text": "Live link"
+  }
+  
+]
