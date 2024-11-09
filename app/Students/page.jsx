@@ -16,6 +16,8 @@ import useBackend from '@/hooks/useBackend';
 import useDigital from '@/hooks/useDigital';
 
 import './Students.css'
+import Time from '../Time/Time';
+import useDateTime from '@/hooks/useDateTime';
 
 
 // import { Head } from 'next/document';
@@ -61,6 +63,9 @@ export default function Page() {
   const Frontend = useFrontend();
   const Backend = useBackend();
   const digital = useDigital();
+  const DateTime = useDateTime();
+
+
 
 
 
@@ -70,7 +75,10 @@ export default function Page() {
     // Keep the sidebar open when clicking an item
   };
 
-  console.log(digital)
+
+
+
+  console.log(student)
 
 
 
@@ -130,41 +138,38 @@ export default function Page() {
           {/* Tab Panels */}
           <div className='p-4 w-full'>
             <TabPanel>
-
               {/* tab panel 1 */}
-
-
-              <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
-                {
-                  student?.map(student => (
-
-                    <div key={student.id}>
-                      <Link href={`/Students_Graphics/${student.id}`} className=' relative gap-4 overflow-hidden cursor-pointer'>
-                        <div className='lg:w-full'>
-                          <img
-                            src={student.image}
-                            className='w-full rounded-lg '
-                            alt="Instructor"
-                          />
+              <div className="container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:mt-0">
+                {student?.map((students) => (
+                  <div key={students.id}>
+                    <Link href={`/Students_Graphics/${students.id}`} className="relative gap-4 overflow-hidden cursor-pointer">
+                      <div className="lg:w-full">
+                        <img
+                          src={students.image}
+                          className="w-full rounded-lg"
+                          alt="Motion Graphics"
+                        />
+                      </div>
+                      <div className="absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100">
+                        <div className="mt-20 ml-2">
+                          <p>Name: {students.name}</p>
+                          <p>Batch: {students.batch}</p>
+                          <p>Course ID: {students.courseId}</p>
+                          <p>Course Name: {students.courseName}</p>
+                          <p>Duration: {students.duration}</p>
+                          {/* <div>
+                            <p>Target Date: {new Date(students?.date).toLocaleDateString()}</p>
+                           
+                            <Time targetDate={students?.date} />
+                          </div> */}
                         </div>
-                        <div className='absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100'>
-                          <div className='mt-20 ml-2'>
-                            <p>Name: {student.name}</p>
-                            <p>Batch: {student.batch}</p>
-                            <p>Course ID: {student.courseId}</p>
-                            <p>Course Name: {student.courseName}</p>
-                            <p>Duration: {student.duration}</p>
-                            <p>Internship: {student.internship}</p>
-                          </div>
-                        </div>
-                      </Link>
-                    </div>
-                  ))
-                }
+                      </div>
+                    </Link>
+                  </div>
+                ))}
               </div>
-
-
             </TabPanel>
+
 
             <TabPanel>
 
@@ -191,6 +196,7 @@ export default function Page() {
                             <p>Course Name: {Motion.courseName}</p>
                             <p>Duration: {Motion.duration}</p>
                             <p>Internship: {Motion.internship}</p>
+
                           </div>
                         </div>
                       </Link>

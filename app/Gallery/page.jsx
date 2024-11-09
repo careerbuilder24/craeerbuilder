@@ -175,7 +175,7 @@ export default function page() {
                 <div className='lg:mt-56'>
 
 
-                    <div className='container mx-auto my-9 lg:w-9/12 w-10/12'>
+                    <div className='container mx-auto my-9 lg:w-9/12 w-10/12 h-auto'>
 
                         <div className='container mx-auto my-5 lg:w-9/12 w-10/12'>
 
@@ -267,21 +267,21 @@ export default function page() {
 
 
 
-                                <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-5'>
+                                <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-5 gap-5 h-auto  '>
                                     {/* Tab List */}
-                                    <TabList style={{ width: 300 }} className='flex flex-col border-r border-gray-300 cursor-pointer mt-4 hidden lg:flex sticky top-0 z-10'>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>All Events</Tab>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Orientation</Tab>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Certification</Tab>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Awards Giving</Tab>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Pohela Boishakh</Tab>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Eidal-Fitr</Tab>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Eid al-Adha</Tab>
-                                        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Charity Programe</Tab>
+                                    <TabList  className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer mt-4 hidden  lg:flex sticky top-0 z-10   '>
+                                        <Tab className='p-4 text-left  focus:outline-none hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600  mt-10'>All Events</Tab>
+                                        <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Orientation</Tab>
+                                        <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Certification</Tab>
+                                        <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Awards Giving</Tab>
+                                        <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Pohela Boishakh</Tab>
+                                        <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600'>Eidal-Fitr</Tab>
+                                        <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600'>Eid al-Adha</Tab>
+                                        <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600'>Charity Programe</Tab>
                                     </TabList>
 
                                     {/* Tab Panels */}
-                                    <div className='flex-1 h-[600px] overflow-auto'>
+                                    <div  className='flex-1 h-[1000px] overflow-auto'>
                                         <TabPanel>
 
                                             {/* tab panel 1 */}

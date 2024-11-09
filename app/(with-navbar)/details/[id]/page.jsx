@@ -225,7 +225,24 @@ export default function Page() {
 
                     <div className="w-full  lg:w-1/5  rounded h-auto lg:h-[2000px] bg-white  ">
 
+                        <div className=' shadow-xl rounded py-10 mt-5'>
+                            <div className='lg:ml-4'>
+                                <p className='text-[#0054a5] font-semibold mt-3'>MEET THE INSTRUCTOR</p>
+                                <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
+                                <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
+                                    <Image
+                                        src={instrastor}
+                                        className='w-full h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
+                                    />
 
+                                    <div className='bg-green-600 opacity-80 relative bottom-7 text-white font-bold'>
+                                        SUSHMITA DEBI
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
                         <div className='w-12/12 shadow-xl rounded p-4  mt-5'>
                             <Image
                                 onDragStart={(e) => e.preventDefault()}
@@ -287,25 +304,6 @@ export default function Page() {
 
                         </div>
 
-
-
-
-                        <div className=' shadow-xl rounded py-10 mt-5'>
-                            <div className='lg:ml-4'>
-                                <p className='text-[#0054a5] font-semibold mt-3'>MEET THE INSTRUCTOR</p>
-                                <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
-                                <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
-                                    <Image
-                                        src={instrastor}
-                                        className='w-full h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
-                                    />
-
-                                    <div className='bg-green-600 opacity-80 relative bottom-7 text-white font-bold'>
-                                        SUSHMITA DEBI
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

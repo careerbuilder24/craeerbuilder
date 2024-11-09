@@ -7,7 +7,8 @@
       "courseName": "Graphic Design",
       "duration": "6 Months",
       "internship": "2 Months",
-      "image": "https://i.postimg.cc/MK4T03zv/insta11.avif"
+      "image": "https://i.postimg.cc/MK4T03zv/insta11.avif",
+      "date": "2025-01-01T00:00:00"
     },
     {
       "id": 2,
@@ -17,7 +18,8 @@
       "courseName": "Motion Graphics",
       "duration": "4 Months",
       "internship": "1 Month",
-      "image": "https://i.postimg.cc/PrNJwnsg/insta10.avif"
+      "image": "https://i.postimg.cc/PrNJwnsg/insta10.avif",
+      "date": "2025-06-01T00:00:00"
     },
     {
       "id": 3,
@@ -27,7 +29,8 @@
       "courseName": "Affiliate Marketing",
       "duration": "5 Months",
       "internship": "3 Months",
-      "image": "https://i.postimg.cc/V6RvjYN8/insta9.avif"
+      "image": "https://i.postimg.cc/V6RvjYN8/insta9.avif",
+      "date": "2025-11-10T09:00:00"
     },
     {
       "id": 4,
@@ -37,7 +40,8 @@
       "courseName": "Video Editing",
       "duration": "3 Months",
       "internship": "1 Month",
-      "image": "https://i.postimg.cc/vZJ4yqKp/insta8.avif"
+      "image": "https://i.postimg.cc/vZJ4yqKp/insta8.avif",
+      "date": "2025-01-01T00:00:00"
     },
     {
       "id": 5,
@@ -47,7 +51,8 @@
       "courseName": "Business Development",
       "duration": "8 Months",
       "internship": "4 Months",
-      "image": "https://i.postimg.cc/V6RvjYN8/insta9.avif"
+      "image": "https://i.postimg.cc/V6RvjYN8/insta9.avif",
+      "date": "2025-06-01T00:00:00"
     },
     {
       "id": 6,
@@ -57,7 +62,8 @@
       "courseName": "Web Development (Front-end)",
       "duration": "6 Months",
       "internship": "2 Months",
-      "image": "https://i.postimg.cc/vZJ4yqKp/insta8.avif"
+      "image": "https://i.postimg.cc/vZJ4yqKp/insta8.avif",
+      "date": "2025-11-10T09:00:00"
     },
     {
       "id": 7,
@@ -67,7 +73,8 @@
       "courseName": "Web Development (Back-end)",
       "duration": "7 Months",
       "internship": "3 Months",
-      "image": "https://i.postimg.cc/3JLGsZYT/insta1.avif"
+      "image": "https://i.postimg.cc/3JLGsZYT/insta1.avif",
+       "date": "2025-01-01T00:00:00"
     },
     {
       "id": 8,
@@ -77,7 +84,8 @@
       "courseName": "Digital Marketing",
       "duration": "5 Months",
       "internship": "2 Months",
-      "image": "https://i.postimg.cc/2y1qmszN/insta13.avif"
+      "image": "https://i.postimg.cc/2y1qmszN/insta13.avif",
+      "date": "2025-06-01T00:00:00"
     },
     {
       "id": 9,
@@ -87,7 +95,8 @@
       "courseName": "UI/UX Design",
       "duration": "4 Months",
       "internship": "1 Month",
-      "image": "https://i.postimg.cc/2y1qmszN/insta13.avif"
+      "image": "https://i.postimg.cc/2y1qmszN/insta13.avif",
+      "date": "2025-11-10T09:00:00"
     },
     {
       "id": 10,
@@ -97,7 +106,8 @@
       "courseName": "SEO Specialist",
       "duration": "6 Months",
       "internship": "2 Months",
-      "image": "https://i.postimg.cc/P5x7HKDz/insta12.avif"
+      "image": "https://i.postimg.cc/P5x7HKDz/insta12.avif",
+      "date": "2025-11-10T09:00:00"
     },
     {
       "id": 11,
@@ -107,7 +117,8 @@
       "courseName": "Content Writing",
       "duration": "3 Months",
       "internship": "1 Month",
-      "image": "https://i.postimg.cc/P5x7HKDz/insta12.avif"
+      "image": "https://i.postimg.cc/P5x7HKDz/insta12.avif",
+       "date": "2025-01-01T00:00:00"
     },
     {
       "id": 12,
@@ -117,7 +128,8 @@
       "courseName": "Data Science",
       "duration": "9 Months",
       "internship": "5 Months",
-      "image": "https://i.postimg.cc/Z5CN4y5y/insta3.avif"
+      "image": "https://i.postimg.cc/Z5CN4y5y/insta3.avif",
+      "date": "2025-06-01T00:00:00"
     }
   ]
   

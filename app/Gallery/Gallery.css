@@ -3,4 +3,6 @@
     overflow: hidden;
   }
   
-  
+  .modal-content {
+    z-index: 9999; /* Make sure the modal is on top */
+}
