@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import { SiGmail } from "react-icons/si";
@@ -9,6 +9,8 @@ import Link from 'next/link';
 import ReCAPTCHA from 'react-google-recaptcha';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import { UserAuth } from "../context/AuthContext";
+import Loader from '../(with-navbar)/componenets/Loader/Loader';
+ // Import the loader component
 
 export default function Login() {
   const { googleSignIn, signInUser } = UserAuth();
@@ -18,19 +20,24 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [show, setShow] = useState(false);
   const [captchaValue, setCaptchaValue] = useState(null);
+  const [loading, setLoading] = useState(false);  // Track loading state
 
   const handleGoogleSignIn = async () => {
+    setLoading(true); // Start loading when Google SignIn begins
     try {
       await googleSignIn();
       toast.success("Successfully logged in!");
     } catch (error) {
       console.log(error);
       toast.error("Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false); // Stop loading when sign-in is complete
     }
   };
 
   const handleManualSignIn = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading when manual sign-in begins
     try {
       await signInUser(email, password);
       toast.success("Successfully logged in!");
@@ -38,6 +45,8 @@ export default function Login() {
     } catch (error) {
       console.error(error);
       toast.error("Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false); // Stop loading when sign-in is complete
     }
   };
 
@@ -113,6 +122,7 @@ export default function Login() {
       </div>
       <Footer />
       <ToastContainer />
+      {loading && <Loader />} {/* Show loader when loading is true */}
     </main>
   );
 }

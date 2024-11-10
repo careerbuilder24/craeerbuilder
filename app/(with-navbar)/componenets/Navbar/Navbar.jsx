@@ -251,7 +251,7 @@ export default function Navbar() {
                     </div>
                 </div>
 
-                <div>
+              
                     {/* Mobile Navbar */}
                     <div
                         style={{ background: '#2DA9E1' }}
@@ -341,7 +341,7 @@ export default function Navbar() {
 
                         </div>
                     </div>
-                </div>
+                
             </nav>
         </header>
     );

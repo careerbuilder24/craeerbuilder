@@ -9,8 +9,8 @@ import Image from 'next/image';
 
 export default function CuriculamVite() {
     const { id } = useParams();
-    const student = useStudents();
-    const graphic = student.find(Onestudent => Onestudent?.id === Number(id));
+    const [students, loading] = useStudents();
+    const graphic = students.find(Onestudent => Onestudent?.id === Number(id));
     console.log(graphic)
     return (
         <>

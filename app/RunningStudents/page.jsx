@@ -54,8 +54,7 @@ export default function Page() {
   }, [isSidebarOpen]);
 
   // data rendering
-
-  const student = useStudents();
+  const [students, loading] = useStudents();
   const Motions = useMotion();
   const Affiliate = useAffiliate();
   const Video = useVideo();
@@ -71,7 +70,7 @@ export default function Page() {
     // Keep the sidebar open when clicking an item
   };
 
-  // console.log(digital)
+  console.log(students)
 
 
 
@@ -82,7 +81,7 @@ export default function Page() {
 
 
       <div className='lg:mt-56 bg-gray-100 h-full w-10/12 lg:w-8/12 container mx-auto'>
-        <h1 className='text-center text-4xl mt-36 font-bold mb-6'>Running Interns</h1>
+        <h1 className='text-center text-4xl mt-36 font-bold mb-6 text-[#2CAAE1]'>Running Students</h1>
 
         {/* Mobile Sidebar Toggle Button */}
         <div className='block lg:hidden text-right mb-4'>
@@ -135,7 +134,7 @@ export default function Page() {
 
               <div className='container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5  lg:mt-0'>
                 {
-                  student?.map(student => (
+                  students?.map(student => (
 
                     <div key={student.id}>
                       <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>

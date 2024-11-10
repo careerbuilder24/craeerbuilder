@@ -18,6 +18,7 @@ import useDigital from '@/hooks/useDigital';
 import './Students.css'
 import Time from '../Time/Time';
 import useDateTime from '@/hooks/useDateTime';
+import Loader from '../(with-navbar)/componenets/Loader/Loader';
 
 
 // import { Head } from 'next/document';
@@ -55,7 +56,7 @@ export default function Page() {
 
   // data rendering
 
-  const student = useStudents();
+  const [students, loading] = useStudents();
   const Motions = useMotion();
   const Affiliate = useAffiliate();
   const Video = useVideo();
@@ -78,7 +79,7 @@ export default function Page() {
 
 
 
-  console.log(student)
+  // console.log(student)
 
 
 
@@ -91,7 +92,7 @@ export default function Page() {
 
 
       <div className='lg:mt-56 bg-gray-100 h-full w-10/12 lg:w-8/12 container mx-auto'>
-        <h1 className='text-center text-4xl mt-36 font-bold mb-6'>Running Students</h1>
+      <h1 className='text-center text-4xl mt-36 font-bold mb-6 text-[#2CAAE1]'>Running Students</h1>
 
         {/* Mobile Sidebar Toggle Button */}
         <div className='block lg:hidden text-right mb-4'>
@@ -122,53 +123,54 @@ export default function Page() {
 
 
 
-        <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-10'>
-          {/* Tab List */}
-          <TabList style={{ width: 300 }} className='flex flex-col border-r border-gray-300 cursor-pointer mt-4 hidden lg:flex'>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Graphic Design</Tab>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Motion Graphics</Tab>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Affiliate Marketing</Tab>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Video Editing</Tab>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Business Development</Tab>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Frontend Development</Tab>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Backend Development</Tab>
-            <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Digital Marketing</Tab>
-          </TabList>
+<Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-10'>
+      {/* Tab List */}
+      <TabList style={{ width: 300 }} className='flex flex-col border-r border-gray-300 cursor-pointer mt-4 hidden lg:flex'>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Graphic Design</Tab>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Motion Graphics</Tab>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Affiliate Marketing</Tab>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Video Editing</Tab>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Business Development</Tab>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Frontend Development</Tab>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Backend Development</Tab>
+        <Tab className='p-4 text-left hover:bg-gray-200 focus:outline-none'>Digital Marketing</Tab>
+      </TabList>
 
-          {/* Tab Panels */}
-          <div className='p-4 w-full'>
-            <TabPanel>
-              {/* tab panel 1 */}
-              <div className="container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:mt-0">
-                {student?.map((students) => (
-                  <div key={students.id}>
-                    <Link href={`/Students_Graphics/${students.id}`} className="relative gap-4 overflow-hidden cursor-pointer">
-                      <div className="lg:w-full">
-                        <img
-                          src={students.image}
-                          className="w-full rounded-lg"
-                          alt="Motion Graphics"
-                        />
-                      </div>
-                      <div className="absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100">
-                        <div className="mt-20 ml-2">
-                          <p>Name: {students.name}</p>
-                          <p>Batch: {students.batch}</p>
-                          <p>Course ID: {students.courseId}</p>
-                          <p>Course Name: {students.courseName}</p>
-                          <p>Duration: {students.duration}</p>
-                          {/* <div>
-                            <p>Target Date: {new Date(students?.date).toLocaleDateString()}</p>
-                           
-                            <Time targetDate={students?.date} />
-                          </div> */}
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
+      {/* Tab Panels */}
+      <div className='p-4 w-full'>
+        <TabPanel>
+          {/* tab panel 1 */}
+          <div className="container mx-auto w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:mt-0">
+            {loading ? ( // Step 1: Conditionally render the loader
+              <div className="col-span-full flex justify-center items-center h-full">
+                <Loader /> {/* Show the loader while fetching */}
               </div>
-            </TabPanel>
+            ) : (
+              students?.map((student) => (
+                <div key={student.id}>
+                  <Link href={`/Students_Graphics/${student.id}`} className="relative gap-4 overflow-hidden cursor-pointer">
+                    <div className="lg:w-full">
+                      <img
+                        src={student.image}
+                        className="w-full rounded-lg"
+                        alt="Motion Graphics"
+                      />
+                    </div>
+                    <div className="absolute top-0 lg:w-12/12 w-full h-full left-0 rounded-md bg-gray-700 bg-opacity-70 text-white transition-transform duration-700 ease-in-out transform translate-y-[-20px] opacity-0 hover:translate-y-0 hover:opacity-100">
+                      <div className="mt-20 ml-2">
+                        <p>Name: {student.name}</p>
+                        <p>Batch: {student.batch}</p>
+                        <p>Course ID: {student.courseId}</p>
+                        <p>Course Name: {student.courseName}</p>
+                        <p>Duration: {student.duration}</p>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              ))
+            )}
+          </div>
+        </TabPanel>
 
 
             <TabPanel>

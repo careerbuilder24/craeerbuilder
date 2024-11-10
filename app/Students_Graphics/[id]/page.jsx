@@ -2,12 +2,11 @@
 import { useParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 import 'react-tabs/style/react-tabs.css';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
+
 import useStudents from '@/hooks/useStudents';
 import Navbar from '@/app/(with-navbar)/componenets/Navbar/Navbar';
 import img1 from '../../../assets/image1.PNG'
-import pageFold from '../../../assets/pagefold.PNG'
+
 
 
 
@@ -16,7 +15,8 @@ import Image from 'next/image';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import Footer from '@/app/(with-navbar)/componenets/Footer/Footer';
 import HelmetHead from '@/app/HelmetHead/HelmetHead';
-import useDetailsCourse from '@/hooks/useDetailsCourse';
+import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri'
+
 
 import './Graphics.css'
 // Import Swiper styles
@@ -26,13 +26,8 @@ import 'swiper/css/navigation';
 
 
 // import required modules
-import { Navigation } from 'swiper/modules';
-import Link from 'next/link';
-import useGallery from '@/hooks/useGallery';
-import usePortfolio from '@/hooks/usePortfolio';
-import useCertificates from '@/hooks/useCertificates';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import Time from '@/app/Time/Time';
+
+
 
 import useMotion from '@/hooks/useMotion';
 
@@ -57,12 +52,12 @@ export default function page() {
     const sidebarRef = useRef(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
-    const student = useStudents();
+    const [students, loading] = useStudents();
 
 
     // data calling
 
-    const certificate = useCertificates();
+
 
 
 
@@ -129,9 +124,9 @@ export default function page() {
 
 
 
-    const graphic = student.find(Onestudent => Onestudent?.id === Number(id));
+    const graphic = students?.find(Onestudent => Onestudent?.id === Number(id));
     // console.log(graphic)
-    console.log(certificate)
+    console.log(students)
 
     // for mobile Sections
     const handleSidebarItemClick = (index) => {
@@ -148,20 +143,20 @@ export default function page() {
     };
 
     // use effect for scroll and outside click part for mobile responsive
-    // useEffect(() => {
-    //     if (isSidebarOpen) {
-    //         document.body.classList.add('no-scroll');
-    //         document.addEventListener('mousedown', handleClickOutside);
-    //     } else {
-    //         document.body.classList.remove('no-scroll');
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     }
+    useEffect(() => {
+        if (isSidebarOpen) {
+            document.body.classList.add('no-scroll');
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.body.classList.remove('no-scroll');
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
 
-    //     return () => {
-    //         document.body.classList.remove('no-scroll');
-    //         document.removeEventListener('mousedown', handleClickOutside);
-    //     };
-    // }, [isSidebarOpen]);
+        return () => {
+            document.body.classList.remove('no-scroll');
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isSidebarOpen]);
 
     // certification filter part
     // modal part
@@ -182,9 +177,13 @@ export default function page() {
                 author="Muhibullah"
 
             />
+
             <Navbar></Navbar>
 
+
+
             <main className='lg:mt-40 mt-24 mb-10 overflow-hidden'>
+
                 <div className='w-full flex flex-col justify-center items-center '>
                     <div className='relative lg:w-7/12 overflow-hidden rounded-lg mt-5'>
 
@@ -226,31 +225,43 @@ export default function page() {
 
 
                     {/* Mobile Sidebar Toggle Button */}
-                    <div className='block lg:hidden text-right mb-4'>
-                        <button onClick={toggleSidebar} className='p-2 bg-blue-500 text-white rounded'>
-                            {isSidebarOpen ? 'Category' : 'Category'}
+
+                    <div className="block lg:hidden fixed top-64 right-1 z-40">
+                        <button
+                            onClick={toggleSidebar}
+                            className="p-2 bg-[#87d3ec] rounded-full text-white transition-all duration-300 transform hover:scale-110"
+                        >
+                            {isSidebarOpen ? (
+                                <RiArrowLeftSLine size={24} /> // Left Arrow when sidebar is open
+                            ) : (
+                                <RiArrowRightSLine size={24} /> // Right Arrow when sidebar is closed
+                            )}
                         </button>
+
                     </div>
 
                     {/* Mobile Sidebar */}
-                    {isSidebarOpen && (
-                        <div className='fixed inset-0   bg-gray-800 bg-opacity-75 z-50 lg:hidden'>
-                            <div ref={sidebarRef} className='w-64 bg-[#17549A] text-white h-full p-4'>
-                                <h2 className='text-lg font-bold'>Categories</h2>
-                                <ul className='flex flex-col'>
-                                    {['Profile (CV)', 'Achievements', 'Courses', 'Portfolio', 'Certificate', 'Gallery', 'Blog'].map((category, index) => (
-                                        <li
-                                            key={index}
-                                            className='p-2 hover:bg-gray-200 hover:text-black cursor-pointer'
-                                            onClick={() => handleSidebarItemClick(index)}
-                                        >
-                                            {category}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                    <div
+                        className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+                    >
+                        <div ref={sidebarRef} className="w-64 bg-[#17549A] text-white h-full p-4">
+                            <h2 className="text-lg font-bold">Categories</h2>
+                            <ul className="flex flex-col">
+                                {['Profile (CV)', 'Achievements', 'Courses', 'Portfolio', 'Certificate', 'Gallery', 'Blog'].map((category, index) => (
+                                    <li
+                                        key={index}
+                                        className="p-2 hover:bg-gray-200 hover:text-black cursor-pointer"
+                                        onClick={() => handleSidebarItemClick(index)}
+                                    >
+                                        {category}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    )}
+                    </div>
+
+
+
 
                     <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col   md:flex-row  h-auto w-full'>
                         {/* Tab List */}

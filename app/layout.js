@@ -14,7 +14,10 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+
+
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>

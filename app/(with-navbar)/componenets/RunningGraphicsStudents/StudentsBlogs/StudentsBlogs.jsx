@@ -1,10 +1,41 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import img1 from '../../../../../assets/blogimg3.PNG';
+import img2 from '../../../../../assets/blogimg2.PNG';
+import img3 from '../../../../../assets/blogimg3.PNG'; // You can replace these with actual images
 
 import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 export default function StudentsBlogs() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 2; // Number of items per page
+
+    // Example related content (replace with actual content)
+    const relatedContent = [
+        { img: img1, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "Web Development 101" },
+        { img: img1, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "Advanced React Techniques" },
+        { img: img2, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "JavaScript Best Practices" },
+        { img: img3, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "Node.js for Beginners" },
+        { img: img1, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "CSS Grid and Flexbox" },
+    ];
+
+    // Selected content state
+    const [selectedContent, setSelectedContent] = useState(relatedContent[0]);
+
+    // Calculate the number of pages
+    const totalPages = Math.ceil(relatedContent.length / itemsPerPage);
+
+    // Get current items to display based on the page
+    const currentItems = relatedContent.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
+
+    // Handle page change
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
     const [comments, setComments] = useState([
         { id: 1, user: 'Sushmita Shen', text: 'Great article, really informative!' },
         { id: 2, user: 'Robert Jr', text: 'I learned a lot, thanks for sharing!' },
@@ -19,21 +50,33 @@ export default function StudentsBlogs() {
             setNewComment('');
         }
     };
+
     const shareUrl = "https://your-blog-post-url.com";
+
+    // Function to handle click on related content
+    const handleRelatedContentClick = (content) => {
+        setSelectedContent(content);
+    };
+
     return (
         <>
             <div className="flex flex-col md:flex-row lg:flex-row md:space-x-4">
-
-                {/* First part */}
-                <div className="flex flex-col w-full md:w-8/12 mt-5 mx-3">
+                {/* First part - Blog content */}
+                <div className="flex flex-col w-full md:w-9/12 mt-5 mx-3">
                     <div className="mt-3">
-                        <Image src={img1} alt="Blog Image" width={500} height={500} onDragStart={(e) => e.preventDefault()} className="w-full rounded-lg" />
-                        <h2 className="my-4 font-bold">Modern Web Development</h2>
-                        <p className="text-sm">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas
-                            modi, sit quod sequi consequatur praesentium unde maxime nisi itaque soluta hic autem pariatur
-                            dolor vitae.
-                        </p>
+                        {/* Blog Content */}
+                        <div>
+                            <Image
+                                src={selectedContent.img}
+                                alt="Blog Image"
+                                width={500}
+                                height={500}
+                                onDragStart={(e) => e.preventDefault()}
+                                className="w-full rounded-lg"
+                            />
+                            <h2 className="my-4 font-bold">{selectedContent.title}</h2>
+                            <p className="text-sm">{selectedContent.text}</p>
+                        </div>
 
                         {/* Share Buttons */}
                         <div className="flex space-x-4 mt-5 text-sm">
@@ -101,37 +144,67 @@ export default function StudentsBlogs() {
                     </div>
                 </div>
 
-
-
-
-                {/* Third part */}
-                <div className="flex flex-col w-full md:w-5/12 mt-5 mx-3">
+                {/* Second part - Related Content */}
+                <div className="flex flex-col w-full md:w-4/12 mt-5 mx-3">
                     <div className="mt-3">
-
-                        <h2 className="my-4 font-bold text-xl">Work & Life</h2>
-                        <hr className="border-t-2 border-gray-800 shadow-lg my-4" />
-                        <p className="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas modi.</p>
-                    </div>
-                    <div className="mt-5">
-
+                        <div className="mt-3">
+                            <h2 className="my-4 font-bold text-xl">Work & Life</h2>
+                            <hr className="border-t-2 border-gray-800 shadow-lg my-4" />
+                            <p className="text-sm">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas
+                                modi sit amet consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas modi sit amet
+                                consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas modi.
+                            </p>
+                        </div>
                         <h2 className="my-4 font-bold text-xl">Related Content</h2>
-
                         <hr className="border-t-2 border-gray-800 shadow-lg my-4" />
-
-
-                        <div className='grid grid-cols-2 gap-3'>
-                            <p className="text-sm mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. .</p>
-                            <Image onDragStart={(e) => e.preventDefault()} src={img1} width={100} height={100} className='w-full rounded-lg'></Image>
-                        </div>
-
-                        <div className='grid grid-cols-2 gap-3 mt-10'>
-                            <p className="text-sm mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. .</p>
-                            <Image onDragStart={(e) => e.preventDefault()} src={img1} width={100} height={100} className='w-full rounded-lg'></Image>
+                        <div className="grid grid-cols-1 gap-3">
+                            {currentItems.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="flex flex-row gap-4 cursor-pointer"
+                                    onClick={() => handleRelatedContentClick(item)} // Update the selected content when clicked
+                                >
+                                    <Image
+                                        onDragStart={(e) => e.preventDefault()}
+                                        src={item.img}
+                                        width={100}
+                                        height={100}
+                                        className="w-full rounded-lg"
+                                    />
+                                    <p className="text-sm mt-4">{item.text}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
+                    {/* Pagination Controls */}
+                    <div className="flex justify-center gap-7 mt-6">
+                        <button
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="px-4 py-2 bg-gray-300 text-black rounded-l-lg"
+                        >
+                            Previous
+                        </button>
+                        {[...Array(totalPages)].map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handlePageChange(index + 1)}
+                                className={`px-4 py-2 rounded-lg ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'} border`}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="px-4 py-2 rounded-lg bg-gray-300 text-black rounded-r-lg"
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
-
             </div>
         </>
     );

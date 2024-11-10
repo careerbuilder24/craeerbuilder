@@ -25,7 +25,7 @@ import img2 from '../../../../assets/image-logo.PNG';
 
 // import madia from '../../../../assets/madlia.mp4'
 import './Details.css'
-import WhatsAppButton from '@/app/WhatsAppButton/WhatsAppButton';
+import WhatsAppButton from '@/app/(with-navbar)/componenets/WhatsAppButton/WhatsAppButton';
 
 
 export default function Page() {
@@ -208,7 +208,9 @@ export default function Page() {
 
                                         </ul>
                                     </div>
-                                    <WhatsAppButton></WhatsAppButton>
+                                    <div className='mt-5'>
+                                        <WhatsAppButton></WhatsAppButton>
+                                    </div>
 
 
 
@@ -242,7 +244,7 @@ export default function Page() {
                             </div>
                         </div>
 
-                        
+
                         <div className='w-12/12 shadow-xl rounded p-4  mt-5'>
                             <Image
                                 onDragStart={(e) => e.preventDefault()}

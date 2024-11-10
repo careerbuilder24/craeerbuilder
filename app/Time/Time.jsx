@@ -9,6 +9,8 @@ const Time = () => {
 
   useEffect(() => {
     if (motionsData && motionsData.length > 0) {
+
+    
       const updatedCountdowns = motionsData.map((motion) => {
         const targetDate = new Date(motion.date); // Target date from each motion
         return {
