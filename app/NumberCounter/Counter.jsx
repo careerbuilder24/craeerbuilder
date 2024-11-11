@@ -19,8 +19,8 @@ const Counter = ({ target = 200 }) => {
     }, [target]);
 
     return (
-        <div  style={{  fontSize: '48px', fontWeight: 'normal', font: 'white' }}>
-            <span className='flex flex-row items-center' ><FaPlus className='text-3xl font-extrabold' />{count}</span>
+        <div  style={{  fontSize: '24px', fontWeight: 'normal', font: 'white' }}>
+            <span className='flex flex-row items-center' ><FaPlus className='text-lg font-extrabold' />{count}</span>
         </div>
     );
 };

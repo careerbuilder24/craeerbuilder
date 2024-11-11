@@ -17,3 +17,17 @@
         padding: 20px;
     }
 }
+/* Custom Media Query to Maintain 3 Columns Between 1613px and 1141px */
+@media (min-width: 1141px) and (max-width: 1613px) {
+    .custom-grid-layout {
+      grid-template-columns: repeat(3, 1fr) !important; /* Force 3 columns */
+    }
+  }
+  
+  /* Prevent Text Overflow in Course Name and Title */
+  .custom-grid-layout .overflow-hidden {
+    text-overflow: ellipsis; /* Adds ... to overflowed text */
+    white-space: nowrap; /* Prevents text from breaking onto new lines */
+    overflow: hidden; /* Hides overflowing text */
+  }
+  

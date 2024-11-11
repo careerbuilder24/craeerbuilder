@@ -6,13 +6,11 @@ import Image from 'next/image';
 import abs from './Welcome.css';
 import CountingPage from '../CountingPage/CountingPage';
 // import useCourses from '@/hooks/useCourse';
+
 export default function WelcomeText() {
-
-
 
   return (
     <>
-
       <div className='mt-28 container mx-auto  text-center'>
 
         <center>
@@ -23,36 +21,32 @@ export default function WelcomeText() {
         </center>
 
 
-        <div className='mt-10 flex flex-col lg:flex-row  justify-center gap-10 my-10  px-2'>
-          <div className='w-full lg:w-1/2'>
-            <div className='relative w-full ' style={{ paddingBottom: '56.25%' }}>
-              <iframe
-                className='absolute top-0  left-0 w-full h-full'
-                src="https://www.youtube.com/embed/d4dLKSnumkU"
-                title="YouTube Video Player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen>
-              </iframe>
+        <center>
+          <div className='mt-10 flex flex-col lg:flex-row  justify-center items-center  gap-10 my-10  px-2 w-8/12 '>
+            <div className='w-full lg:w-1/2'>
+              <div className='relative w-full ' style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className='absolute top-0  left-0 w-full h-full'
+                  src="https://www.youtube.com/embed/d4dLKSnumkU"
+                  title="YouTube Video Player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen>
+                </iframe>
+              </div>
+            </div>
+            <div className='w-full lg:w-1/2'>
+              <div className='relative w-full' style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  className='absolute top-0 left-0 w-full h-full'
+                  src="https://www.youtube.com/embed/6wIuE_kdw7E"
+                  title="YouTube Video Player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen>
+                </iframe>
+              </div>
             </div>
           </div>
-          <div className='w-full lg:w-1/2'>
-            <div className='relative w-full' style={{ paddingBottom: '56.25%' }}>
-              <iframe
-                className='absolute top-0 left-0 w-full h-full'
-                src="https://www.youtube.com/embed/6wIuE_kdw7E"
-                title="YouTube Video Player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen>
-              </iframe>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
+        </center>
       </div>
     </>
   )

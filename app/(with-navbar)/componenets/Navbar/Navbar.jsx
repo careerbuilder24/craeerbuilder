@@ -132,7 +132,7 @@ export default function Navbar() {
 
 
                         <div className='flex-grow  justify-center hidden md:hidden lg:block  font-light '>
-                            <div className='flex justify-center items-center space-x-10 mt-2 text-lg  text-white  '>
+                            <div className='flex justify-center items-center space-x-10 mt-2 lg:ml-10 text-lg  text-white  '>
 
                                 <Link className=' duration-300 transition-all font-bold cursor-pointer' href={'/'} >Home</Link>
                                 <Link className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} > Courses</Link>

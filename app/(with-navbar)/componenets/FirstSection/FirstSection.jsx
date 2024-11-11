@@ -29,10 +29,12 @@ export default function FirstSection() {
             <Head>
                 <link rel='preload' href={course.image} as='image'></link>
             </Head>
-            <div className='container mx-auto w-full md:w-10/12 lg:w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:mt-10 '>
+            <div className='container mx-auto w-full md:w-10/12 lg:w-7/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:mt-10 custom-grid-layout'>
                 {
                     course?.map(courses => (
                         <div key={courses.id} className="relative cursor-pointer shadow-lg mb-3 overflow-hidden rounded-xl border hover:border-black border-[#DDDD] transition-all duration-300 group">
+
+                            {/* Image Section */}
                             <div className="relative">
                                 <Image
                                     style={{ height: '160px' }}
@@ -49,8 +51,9 @@ export default function FirstSection() {
                                     <RiHeart3Fill size={24} className='text-red-500' />
                                 </div>
 
+                                {/* Info Section (Batch, Seats, Time Left) */}
                                 <div className="flex flex-row gap-1 justify-center items-center text-xs">
-                                    <div className="w-20 h-5 bg-gray-300 rounded-md flex justify-center items-center">
+                                    <div className="w-16 h-5 bg-gray-300 rounded-md flex justify-center items-center">
                                         <p>Batch</p>
                                         <p>5th</p>
                                     </div>
@@ -65,8 +68,9 @@ export default function FirstSection() {
                                 </div>
                             </div>
 
+                            {/* Course Info Section */}
                             <div className='ml-3 mt-2 text-sm'>
-                                <h2 className="text-lg font-bold">{courses.course_name}</h2>
+                                <h2 className="text-base font-bold">{courses.course_name}</h2>
                                 <p className="text-sm text-black">{courses.title}</p>
 
                                 <div className='gap-1 flex items-center my-1'>
@@ -78,6 +82,7 @@ export default function FirstSection() {
                                     <p className="text-gray-700">Duration {courses.total_hours}h</p>
                                 </div>
 
+                                {/* Ratings */}
                                 <StarRatings
                                     rating={courses.rating}
                                     starDimension="15px"
@@ -87,12 +92,14 @@ export default function FirstSection() {
                                     name='rating'
                                 />
 
+                                {/* Enrollment Date */}
                                 <p className="text-gray-700">{courses.enrollment_date}</p>
                             </div>
 
-                            <div className="mt-4 my-5 px-2">
+                            {/* Button Section */}
+                            <div className="mt-4 px-2 mb-3">
                                 <Link href={`/details/${courses.id}`} passHref>
-                                    <button className="bg-[#b3dfee] text-white py-2 mr-5 px-8 rounded hover:bg-[#56d3fd] transition w-full duration-300 font-bold">
+                                    <button className="bg-[#b3dfee] text-white py-2 px-8 rounded hover:bg-[#56d3fd] transition w-full duration-300 font-bold">
                                         View Details
                                     </button>
                                 </Link>
@@ -101,6 +108,7 @@ export default function FirstSection() {
                     ))
                 }
             </div>
+
         </>
     );
 }
