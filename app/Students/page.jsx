@@ -64,7 +64,7 @@ export default function Page() {
   const Frontend = useFrontend();
   const Backend = useBackend();
   const digital = useDigital();
-  const DateTime = useDateTime();
+  // const DateTime = useDateTime();
 
 
 
@@ -92,7 +92,7 @@ export default function Page() {
 
 
       <div className='lg:mt-56 bg-gray-100 h-full w-10/12 lg:w-8/12 container mx-auto'>
-      <h1 className='text-center text-4xl mt-36 font-bold mb-6 text-[#2CAAE1]'>Running Students</h1>
+      <h1 className='text-center text-4xl mt-36 font-bold mb-6 text-[#2CAAE1]'>All Students</h1>
 
         {/* Mobile Sidebar Toggle Button */}
         <div className='block lg:hidden text-right mb-4'>
@@ -182,7 +182,7 @@ export default function Page() {
                   Motions?.map(Motion => (
 
                     <div key={Motions.id}>
-                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                      <Link href={`/Students_Motions/${Motion.id}`} className=' relative gap-4 overflow-hidden cursor-pointer'>
                         <div className='lg:w-full'>
                           <img
                             src={Motion.image}
@@ -218,7 +218,7 @@ export default function Page() {
                   Affiliate?.map(Affiliates => (
 
                     <div key={Affiliates.id}>
-                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                      <Link href={`/Students_Affiliating/${Affiliates.id}`} className=' relative gap-4 overflow-hidden cursor-pointer'>
                         <div className='lg:w-full'>
                           <img
                             src={Affiliates.image}
@@ -251,7 +251,7 @@ export default function Page() {
                   Video?.map(videos => (
 
                     <div key={videos.id}>
-                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                      <Link href={`/Students_Video/${videos.id}`} className=' relative gap-4 overflow-hidden cursor-pointer'>
                         <div className='lg:w-full'>
                           <img
                             src={videos.image}
@@ -284,7 +284,7 @@ export default function Page() {
                   business?.map(businesse => (
 
                     <div key={businesse.id}>
-                      <Link href={'/StudentsDetails'} className=' relative gap-4 overflow-hidden cursor-pointer'>
+                      <Link href={`/Students_Business_Development/${businesse.id}`} className=' relative gap-4 overflow-hidden cursor-pointer'>
                         <div className='lg:w-full'>
                           <img
                             src={businesse.image}

@@ -71,7 +71,7 @@ export default function FirstSection() {
                             {/* Course Info Section */}
                             <div className='ml-3 mt-2 text-sm'>
                                 <h2 className="text-base font-bold">{courses.course_name}</h2>
-                                <p className="text-sm text-black">{courses.title}</p>
+                                {/* <p className="text-sm text-black">{courses.title}</p> */}
 
                                 <div className='gap-1 flex items-center my-1'>
                                     <div className='flex flex-row items-center gap-1'>

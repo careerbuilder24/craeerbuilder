@@ -14,6 +14,7 @@ import img1 from '../../assets/details.PNG';
 import Image from 'next/image';
 import Head from 'next/head';
 
+import './Course.css'
 export default function Courses() {
   const courses = useCourses();
   const [searchTerm, setSearchTerm] = useState(''); // State for search input
@@ -56,7 +57,7 @@ export default function Courses() {
 
       <Navbar />
 
-      <div className="lg:py-14 lg:px-24 mt-8 lg:mt-48 relative lg:container lg:mx-auto lg:w-8/12 left-1">
+      <div className="lg:py-14 lg:px-24 mt-8 lg:mt-48 relative lg:container lg:mx-auto lg:w-8/12 left-1 " >
         {/* Upper gradient of Banner image */}
         <div className='bg-[#17549A] hidden lg:block opacity-30 w-10/12 container h-64 absolute top-12 right-24'></div>
 
@@ -65,8 +66,8 @@ export default function Courses() {
 
           {/* Search bar */}
           <div className='hidden md:block'>
-            <div className="flex top-28 lg:left-40 overflow-hidden bg-[#c0d9f3] w-9/12 shadow-lg absolute px-10 rounded-full lg:mt-5 items-center">
-              
+            <div className="flex top-32 right-24  lg:left-40  overflow-hidden bg-[#c0d9f3] w-9/12 shadow-lg absolute px-10 rounded-full lg:mt-5 items-center md:mt-16">
+
               {/* Dropdown for course titles */}
               <form className="w-3/12">
                 <select
@@ -105,7 +106,7 @@ export default function Courses() {
           </div>
 
           {/* Mobile search button */}
-          <div className="lg:w-5/12 w-full md:hidden lg:hidden mb-10 relative top-32">
+          <div className="lg:w-5/12 w-full md:hidden lg:hidden mb-10 relative top-32 overflow-hidden">
             <form>
               <div className="relative">
                 <input
@@ -127,15 +128,14 @@ export default function Courses() {
         </div>
       </div>
 
-      {/* Render filtered courses or loader */}
-      <div className="container mx-auto w-full md:w-10/12 lg:w-7/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 custom-grid-layout">
+      <div className="container mx-auto md:w-10/12 lg:w-7/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 custom-grid-layout mt-72 lg:mt-0 w-9/12 md:mt-96">
         {loading ? (
           // Show loader in the center of the page
           <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-50 z-10">
             <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent border-solid rounded-full animate-spin"></div>
           </div>
         ) : filteredCourses?.length > 0 ? (
-          filteredCourses.map(course => (
+          filteredCourses?.map(course => (
             <div key={course.id} className="relative cursor-pointer shadow-lg mb-3 overflow-hidden rounded-xl border hover:border-black border-[#DDDD] transition-all duration-300 group bg-[#edf5f8]">
               {/* Image Section */}
               <div className="relative">
@@ -144,14 +144,14 @@ export default function Courses() {
                   height={1000}
                   width={1000}
                   src={course.image}
-                  alt='Banner Image'
-                  className={`rounded-t-xl mb-4 object-cover w-full transition-transform duration-300 hover:scale-110`}
+                  alt="Banner Image"
+                  className="rounded-t-xl mb-4 object-cover w-full transition-transform duration-300 hover:scale-110"
                   onDragStart={(e) => e.preventDefault()}
                 />
 
                 {/* Heart Icon */}
                 <div className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <RiHeart3Fill size={24} className='text-red-500' />
+                  <RiHeart3Fill size={24} className="text-red-500" />
                 </div>
 
                 {/* Info Section */}
@@ -160,11 +160,11 @@ export default function Courses() {
                     <p>Batch</p>
                     <p>5th</p>
                   </div>
-                  <div className="flex flex-row justify-center items-center w-28 h-5 bg-gray-300 rounded-md">
+                  <div className="flex flex-row justify-center items-center w-24 lg:w-28 h-5 bg-gray-300 rounded-md">
                     <MdPeopleAlt />
                     <p>Seat Left 140</p>
                   </div>
-                  <div className="flex flex-row items-center w-24 h-5 bg-gray-300 rounded-md">
+                  <div className="flex flex-row items-center w-20 h-5 bg-gray-300 rounded-md">
                     <MdAccessTime />
                     <p>Time left 16</p>
                   </div>
@@ -172,16 +172,16 @@ export default function Courses() {
               </div>
 
               {/* Course Info Section */}
-              <div className='ml-3 mt-2 text-sm'>
+              <div className="ml-3 mt-2 text-sm">
                 <h2 className="text-base font-bold">{course.course_name}</h2>
                 {/* <p className="text-sm text-black">{course.title}</p> */}
 
-                <div className='gap-1 flex items-center my-1'>
-                  <div className='flex flex-row items-center gap-1'>
-                    <SlCalender className='text-xs' />
+                <div className="gap-1 flex items-center my-1">
+                  <div className="flex flex-row items-center gap-1">
+                    <SlCalender className="text-xs" />
                     <p className="text-gray-700 mr-3">{course.Date}</p>
                   </div>
-                  <LuClock9 className='text-xs' />
+                  <LuClock9 className="text-xs" />
                   <p className="text-gray-700">Duration {course.total_hours}h</p>
                 </div>
 
@@ -192,7 +192,7 @@ export default function Courses() {
                   starSpacing="2px"
                   starRatedColor="gold"
                   numberOfStars={5}
-                  name='rating'
+                  name="rating"
                 />
 
                 {/* Enrollment Date */}
@@ -213,6 +213,7 @@ export default function Courses() {
           <p className="text-center text-lg">No courses found</p>
         )}
       </div>
+
 
       <Footer />
     </>

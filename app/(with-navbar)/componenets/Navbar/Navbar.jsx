@@ -255,7 +255,7 @@ export default function Navbar() {
                     {/* Mobile Navbar */}
                     <div
                         style={{ background: '#2DA9E1' }}
-                        className={`transition-transform duration-700 ease-in-out lg:hidden fixed top-32 right-0 h-full z-50 w-64 transform ${isNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                        className={`transition-transform duration-700 ease-in-out lg:hidden fixed top-32 md:top-48 right-0 h-full z-50 w-64 transform ${isNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
                     >
                         <div className="flex justify-between items-center p-4">
 
