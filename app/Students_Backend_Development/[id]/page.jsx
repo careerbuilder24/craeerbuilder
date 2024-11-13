@@ -19,10 +19,12 @@ import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri'
 
 
 import useBusiness from '@/hooks/useBusiness';
+import useFrontend from '@/hooks/useFrontend';
+import useBackend from '@/hooks/useBackend';
 
 
 
-import './BusinessDevelopment.css'
+import './BackendDevelopmnent.css'
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -37,7 +39,7 @@ import useMotion from '@/hooks/useMotion';
 
 
 
-import CuriculamVite from '@/app/(with-navbar)/componenets/RunningBusinessStudents/RunningBusinessStudentsCV/RunningBusinessStudentsCV';
+import CuriculamVite from '@/app/(with-navbar)/componenets/RunningBackendStudents/RunningBackendStudentsCv/BackendCv';
 
 
 import Achivements from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/Achivements/Achivements';
@@ -58,7 +60,7 @@ export default function page() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     // const [students, loading] = useStudents();
-    const business = useBusiness();
+    const BackEnd = useBackend();
 
 
     // data calling
@@ -130,7 +132,7 @@ export default function page() {
 
 
 
-    const businesses = business?.find(Onestudent => Onestudent?.id === Number(id));
+    const BackEnds = BackEnd?.find(Onestudent => Onestudent?.id === Number(id));
     // console.log(graphic)
     // console.log(motion)
 
@@ -202,10 +204,10 @@ export default function page() {
 
 
                         {
-                            businesses ? (
+                            BackEnds ? (
                                 <div className='absolute  bottom-5 right-6'>
                                     <a
-                                        href={businesses?.pdfUrl}
+                                        href={BackEnds?.pdfUrl}
                                         download
                                         className="mt-2 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
                                     >
@@ -272,12 +274,12 @@ export default function page() {
                     <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col   md:flex-row  h-auto w-full'>
                         {/* Tab List */}
                         <TabList className=' flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 h-auto '>
-                            {businesses ? (
+                            {BackEnds ? (
                                 <div className='flex flex-col text-white  w-full '>
                                     <Image
-                                        src={businesses?.image}
+                                        src={BackEnds?.image}
                                         onDragStart={(e) => e.preventDefault()}
-                                        alt={businesses?.title}
+                                        alt={BackEnds?.title}
                                         className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8"
                                         width={100}
                                         height={100}

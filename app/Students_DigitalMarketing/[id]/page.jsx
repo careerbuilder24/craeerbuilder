@@ -22,7 +22,7 @@ import useBusiness from '@/hooks/useBusiness';
 
 
 
-import './BusinessDevelopment.css'
+import './DigitalMarketing.css'
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -34,10 +34,10 @@ import 'swiper/css/navigation';
 
 
 import useMotion from '@/hooks/useMotion';
+import useDigital from '@/hooks/useDigital';
 
 
-
-import CuriculamVite from '@/app/(with-navbar)/componenets/RunningBusinessStudents/RunningBusinessStudentsCV/RunningBusinessStudentsCV';
+import CuriculamVite from '@/app/(with-navbar)/componenets/RunningDigitalMarketingStudents/RunningDigitalMarketingStudentsCv/RunningDigitalMarketingStudentsCv';
 
 
 import Achivements from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/Achivements/Achivements';
@@ -59,6 +59,7 @@ export default function page() {
     const [activeTabIndex, setActiveTabIndex] = useState(0);
     // const [students, loading] = useStudents();
     const business = useBusiness();
+    const digital = useDigital();
 
 
     // data calling
@@ -130,7 +131,7 @@ export default function page() {
 
 
 
-    const businesses = business?.find(Onestudent => Onestudent?.id === Number(id));
+    const digitals = digital?.find(Onestudent => Onestudent?.id === Number(id));
     // console.log(graphic)
     // console.log(motion)
 
@@ -202,10 +203,10 @@ export default function page() {
 
 
                         {
-                            businesses ? (
+                            digitals ? (
                                 <div className='absolute  bottom-5 right-6'>
                                     <a
-                                        href={businesses?.pdfUrl}
+                                        href={digitals?.pdfUrl}
                                         download
                                         className="mt-2 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
                                     >
@@ -272,12 +273,12 @@ export default function page() {
                     <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col   md:flex-row  h-auto w-full'>
                         {/* Tab List */}
                         <TabList className=' flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 h-auto '>
-                            {businesses ? (
+                            {digitals ? (
                                 <div className='flex flex-col text-white  w-full '>
                                     <Image
-                                        src={businesses?.image}
+                                        src={digitals?.image}
                                         onDragStart={(e) => e.preventDefault()}
-                                        alt={businesses?.title}
+                                        alt={digitals?.title}
                                         className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8"
                                         width={100}
                                         height={100}
