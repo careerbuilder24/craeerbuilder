@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import img1 from '../../../../../assets/blogimg3.PNG';
 import img2 from '../../../../../assets/blogimg2.PNG';
-import img3 from '../../../../../assets/blogimg3.PNG'; // You can replace these with actual images
+import img3 from '../../../../../assets/blogimg3.PNG';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
@@ -51,7 +52,7 @@ export default function StudentsBlogs() {
         }
     };
 
-    const shareUrl = "https://your-blog-post-url.com";
+    const shareUrl = "https://blog-post-url.com";
 
     // Function to handle click on related content
     const handleRelatedContentClick = (content) => {
@@ -78,41 +79,43 @@ export default function StudentsBlogs() {
                             <p className="text-sm">{selectedContent.text}</p>
                         </div>
 
+                        
                         {/* Share Buttons */}
-                        <div className="flex space-x-4 mt-5 text-sm">
+                        <div className="flex flex-col gap-4 mt-5 text-sm sm:flex-row sm:space-x-4 sm:mt-6 w-6/12 lg:w-full sm:text-base">
                             <a
                                 href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
+                                className="flex items-center space-x-2 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 w-full sm:w-auto"
                             >
                                 <FaFacebook size={20} />
-                                <span>Share on Facebook</span>
+                                <span className=" sm:inline">Share on Facebook</span>
                             </a>
 
                             <a
                                 href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-800"
+                                className="flex items-center space-x-2 bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-800 w-full sm:w-auto"
                             >
                                 <FaLinkedin size={20} />
-                                <span>Share on LinkedIn</span>
+                                <span className=" sm:inline">Share on LinkedIn</span>
                             </a>
 
                             <a
                                 href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-500"
+                                className="flex items-center space-x-2 bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-500 w-full sm:w-auto"
                             >
                                 <FaTwitter size={20} />
-                                <span>Share on Twitter</span>
+                                <span className=" sm:inline">Share on Twitter</span>
                             </a>
                         </div>
 
+
                         {/* Comment Section */}
-                        <div className="mt-10 mx-3">
+                        <div className="mt-10 mx-3  mr-9">
                             <h3 className="text-xl font-bold">Comments</h3>
                             {/* Existing Comments */}
                             <div className="mt-4">
@@ -179,31 +182,40 @@ export default function StudentsBlogs() {
                     </div>
 
                     {/* Pagination Controls */}
-                    <div className="flex justify-center gap-7 mt-6">
-                        <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                            className="px-4 py-2 bg-gray-300 text-black rounded-l-lg"
-                        >
-                            Previous
-                        </button>
-                        {[...Array(totalPages)].map((_, index) => (
+                    <div className="flex justify-center mt-4">
+                        <nav className="inline-flex items-center space-x-2">
+                            {/* Left Arrow */}
                             <button
-                                key={index}
-                                onClick={() => handlePageChange(index + 1)}
-                                className={`px-4 py-2 rounded-lg ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'} border`}
+                                className="px-4 py-2 bg-[#0054A5] text-white hover:bg-[#2CAAE1] border rounded-md cursor-pointer"
+                                disabled={currentPage === 1}
+                                onClick={() => handlePageChange(currentPage - 1)}
                             >
-                                {index + 1}
+                                &laquo; {/* Left arrow */}
                             </button>
-                        ))}
-                        <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                            className="px-4 py-2 rounded-lg bg-gray-300 text-black rounded-r-lg"
-                        >
-                            Next
-                        </button>
+
+                            {/* Page Numbers */}
+                            {[...Array(totalPages).keys()].map((pageIndex) => (
+                                <button
+                                    key={pageIndex + 1}
+                                    className={`px-4 py-2 bg-[#0054A5] text-white rounded-md hover:bg-[#2CAAE1] ${currentPage === pageIndex + 1 ? 'bg-blue-500 text-white' : ''}`}
+                                    onClick={() => handlePageChange(pageIndex + 1)}
+                                >
+                                    {pageIndex + 1}
+                                </button>
+                            ))}
+
+                            {/* Right Arrow */}
+                            <button
+                                className="px-4 py-2 bg-[#0054A5] text-white hover:bg-[#2CAAE1] border rounded-md cursor-pointer"
+                                disabled={currentPage === totalPages}
+                                onClick={() => handlePageChange(currentPage + 1)}
+                            >
+                                &raquo; {/* Right arrow */}
+                            </button>
+                        </nav>
                     </div>
+
+
                 </div>
             </div>
         </>

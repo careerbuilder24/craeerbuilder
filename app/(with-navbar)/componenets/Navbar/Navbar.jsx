@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 // import { useRouter } from 'next/router';
 
 export default function Navbar() {
-    
+
     const router = useRouter();
     // Auth context
     const { user, logOut } = UserAuth();
@@ -109,168 +109,153 @@ export default function Navbar() {
                 </div>
 
                 {/* Second Section */}
-                <div style={{ borderBottom: '1px solid white' }} className={`fixed z-30 w-full transition-all duration-300 bg-white ${isScrolled ? 'top-0' : 'lg:top-10 top-0'
-                    }`}>
-
-                    <div className='flex justify-center'>
-                        <div className='lg:w-4/12 w-9/12 cursor-pointer lg:ml-64 m-2'>
-                            <Image src={logo} className='lg:w-8/12 w-8/12 rounded-md ml-14 lg:ml-0' onDragStart={(e) => e.preventDefault()} />
+                <div
+                    style={{ borderBottom: '1px solid white' }}
+                    className={`fixed z-30 w-full transition-all duration-300 bg-white ${isScrolled ? 'top-0' : 'lg:top-10 top-0'}`}
+                >
+                    <div className="flex justify-center">
+                        <div className="w-9/12 lg:w-4/12 cursor-pointer mx-2 lg:ml-64">
+                            <Image
+                                src={logo}
+                                className="w-8/12 lg:w-8/12 rounded-md ml-14 lg:ml-0"
+                                onDragStart={(e) => e.preventDefault()}
+                            />
                         </div>
                     </div>
 
-                    <div style={{ background: '#17549A' }} className='h-14 flex items-center'>
+                    {/* Navbar */}
+                    <div style={{ background: '#17549A' }} className="h-14 flex items-center">
                         <button className="lg:hidden ml-4" onClick={toggleNav}>
-                            <div className=' w-8 h-8 hover:bg-[#0499fd] bg-white rounded-lg'>
+                            <div className="w-8 h-8 hover:bg-[#0499fd] bg-white rounded-lg">
                                 <center>
-                                    <LuMenu className='text-3xl font-bold' />
+                                    <LuMenu className="text-3xl font-bold" />
                                 </center>
                             </div>
                         </button>
 
+                        {/* Desktop Navbar */}
+                        <div className="hidden lg:flex grow justify-center font-light">
+                            <div className="flex justify-center items-center space-x-10 mt-2 lg:ml-10 text-base text-white">
+                                <Link
+                                    href="/"
+                                    className="duration-300 transition-all font-bold cursor-pointer whitespace-nowrap"
+                                >
+                                    Home
+                                </Link>
+                                <Link
+                                    href="/Courses"
+                                    className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap"
+                                >
+                                    Courses
+                                </Link>
 
-
-
-
-                        <div className='flex-grow  justify-center hidden md:hidden lg:block  font-light '>
-                            <div className='flex justify-center items-center space-x-10 mt-2 lg:ml-10 text-lg  text-white  '>
-
-                                <Link className=' duration-300 transition-all font-bold cursor-pointer' href={'/'} >Home</Link>
-                                <Link className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' href={'/Courses'} > Courses</Link>
-                                <div className='flex'>
-
-                                    <div className='lg:mt-1 w-7'>
-                                        <Image src={logo2} className='w-full'></Image>
+                                {/* Dropdown */}
+                                <div className="relative group">
+                                    <div className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                        <Link href="/Students" className="flex items-center justify-center h-full font-bold">
+                                            Students
+                                        </Link>
                                     </div>
 
-                                    <div className='relative group'>
-                                        {/* Dropdown Trigger */}
-                                        <div className='text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer'>
-                                            <Link href={'/Students'} className='flex items-center justify-center h-full font-bold'>
-                                                Students
-                                            </Link>
-                                        </div>
-
-                                        {/* Dropdown Content */}
-                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box  w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
-                                            <Link href="/RunningStudents" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Students</Link>
-                                            <Link href="/RunningIntern" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Interns</Link>
-                                            <Link href="/RunningEmployee" className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Running Employeed </Link>
-                                        </div>
+                                    <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
+                                        <Link href="/RunningStudents" className="block py-2 text-gray-800 hover:bg-blue-400 rounded">
+                                            Running Students
+                                        </Link>
+                                        <Link href="/RunningIntern" className="block py-2 text-gray-800 hover:bg-blue-400 rounded">
+                                            Running Interns
+                                        </Link>
+                                        <Link href="/RunningEmployee" className="block py-2 text-gray-800 hover:bg-blue-400 rounded">
+                                            Running Employees
+                                        </Link>
                                     </div>
                                 </div>
 
-                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                    <Link href={'/Gallery'} className=''>
-                                        Gallery
-                                    </Link>
-                                </div>
+                                {/* Other Links */}
+                                <Link href="/Gallery" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                    Gallery
+                                </Link>
+                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                    University
+                                </Link>
+                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                    Career Guide
+                                </Link>
+                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                    Faq
+                                </Link>
+                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                    About us
+                                </Link>
+                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                    Contact
+                                </Link>
 
-                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                    <Link href={''} className=''>
-                                        University
-                                    </Link>
-                                </div>
+                                {/* Login/Logout Button */}
+                                {user ? (
+                                    ''
+                                ) : (
+                                    <div className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                        <Link href="/log_in">Login</Link>
+                                    </div>
+                                )}
 
-                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                    <Link href={''} className=''>
-                                        Career Guide
-                                    </Link>
-                                </div>
-
-                                <div className='       text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                    <Link href={''} className=''>
-                                        Faq
-                                    </Link>
-                                </div>
-
-
-                                <div className='      text-center text-white  hover:hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                    <Link href={''} className=''>
-                                        About us
-                                    </Link>
-                                </div>
-
-                                <div className='      text-center text-white  hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                    <Link href={''} className=''>
-                                        Contact
-                                    </Link>
-                                </div>
-
-                                <div>
-                                    {
-                                        !user ? (
-                                            <div className='      text-center text-white  hover:text-blue-400   duration-300 transition-all font-bold cursor-pointer ' >
-                                                <Link href={'/log_in'} className=''>
-                                                    Login
-                                                </Link>
-                                            </div>
-                                        ) : ''
-                                    }
-
-                                </div>
-
-                                <div className='     flex flex-row   items-center '>
-                                    <div className=' ml-4 group transition-all fixed duration-300 ease-in-out ' >
-                                        {/* Dropdown Trigger */}
-
-                                        {
-                                            user ? (<div className='flex flex-row items-center gap-4  cursor-pointer'>
-                                                <Image
-                                                    tabIndex={0}
-                                                    height={50}
-                                                    width={50}
-                                                    className="rounded-full"
-                                                    src={user?.photoURL || logo3 || ''}
-                                                    alt="" />
-                                                <p className='text-white'>{user?.displayName || 'Anonymus'}</p>
-                                            </div>) : ''
-                                        }
-
-                                        <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg  w-52 font-bold bg-white absolute left-6  hidden group-hover:block transition-all cursor-pointer">
-
-                                            {
-                                                user ? (<ul>
-                                                    <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded'>Profile</li>
-                                                    <li className='block py-2 text-gray-800 hover:bg-blue-400 rounded' onClick={handleSignOut}>LogOut</li>
-
-                                                </ul>
-
-                                                ) : ''
-                                            }
-
+                                {/* User Profile Dropdown */}
+                                <div className="ml-4 group relative">
+                                    {user ? (
+                                        <div className="flex flex-row items-center gap-4 cursor-pointer">
+                                            <Image
+                                                tabIndex={0}
+                                                height={50}
+                                                width={50}
+                                                className="rounded-full"
+                                                src={user?.photoURL || logo3 || ''}
+                                                alt=""
+                                            />
+                                            <p className="text-white">{user?.displayName || 'Anonymous'}</p>
                                         </div>
+                                    ) : (
+                                        ''
+                                    )}
 
+                                    <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-lg w-52 font-bold bg-white absolute left-6 hidden group-hover:block transition-all cursor-pointer">
+                                        {user ? (
+                                            <ul>
+                                                <li className="block py-2 text-gray-800 hover:bg-blue-400 rounded">Profile</li>
+                                                <li className="block py-2 text-gray-800 hover:bg-blue-400 rounded" onClick={handleSignOut}>
+                                                    LogOut
+                                                </li>
+                                            </ul>
+                                        ) : (
+                                            ''
+                                        )}
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>
 
-              
-                    {/* Mobile Navbar */}
-                    <div
-                        style={{ background: '#2DA9E1' }}
-                        className={`transition-transform duration-700 ease-in-out lg:hidden fixed top-32 md:top-48 right-0 h-full z-50 w-64 transform ${isNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
-                    >
-                        <div className="flex justify-between items-center p-4">
 
-                            <button className="lg:hidden absolute left-5 top-5 " onClick={toggleNav}>
-                                <CgCloseO className="text-2xl text-white" />
-                            </button>
-                        </div>
-                        <div className="flex flex-col items-center space-y-2 py-4 gap-3 ">
+
+                {/* Mobile Navbar */}
+                <div
+                    style={{ background: '#2DA9E1' }}
+                    className={`transition-transform duration-700 ease-in-out lg:hidden fixed top-32 md:top-48 right-0 h-full z-50 w-64 transform ${isNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                >
+                    <div className="flex justify-between items-center p-4">
+
+                        <button className="lg:hidden absolute left-5 top-5 " onClick={toggleNav}>
+                            <CgCloseO className="text-2xl text-white" />
+                        </button>
+                    </div>
+                    <div className="flex flex-col items-center space-y-2 py-4 gap-3 ">
 
 
                         <Link href={'/'} style={{ borderRadius: '4px' }} className='h-10 mt-10 w-[245px]  bg-white '>
-                                <h3 className='ml-10 mt-1'>Home</h3>
-                            </Link>
+                            <h3 className='ml-10 mt-1'>Home</h3>
+                        </Link>
 
-                            {/* <div className='flex'>
+                        {/* <div className='flex'>
 
                                 <div className='lg:mt-1 w-7'>
                                     <Image src={logo2} className='w-full'></Image>
@@ -294,54 +279,54 @@ export default function Navbar() {
 
 
 
-                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
-                                <h3 className='ml-10 mt-1'>Gallery</h3>
-                            </div>
-
-
-
-
-            
-
-                            <div>
-                                <div className="w-11/12">
-                                    <select
-                                        style={{ padding: '10px 44px', borderRadius: '4px' }}
-                                        className="cursor-pointer"
-                                        onChange={handleSelectChange}
-                                    >
-                                      
-                                        <option className='font-bold'>Students</option>
-                                        <option>Running Students</option>
-                                        <option>Running Interns</option>
-                                        <option>Running Employee</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
-                                <h3 className='ml-10 mt-1'>Craeer Guide</h3>
-                            </div>
-
-                            
-                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
-                                <h3 className='ml-10 mt-1'>Faq</h3>
-                            </div>
-
-                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
-                                <h3 className='ml-10 mt-1'>About us</h3>
-                            </div>
-
-                            <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
-                                <h3 className='ml-10 mt-1'>Contact</h3>
-                            </div>
-
-                        
-
+                        <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                            <h3 className='ml-10 mt-1'>Gallery</h3>
                         </div>
+
+
+
+
+
+
+                        <div>
+                            <div className="w-11/12">
+                                <select
+                                    style={{ padding: '10px 44px', borderRadius: '4px' }}
+                                    className="cursor-pointer"
+                                    onChange={handleSelectChange}
+                                >
+
+                                    <option className='font-bold'>Students</option>
+                                    <option>Running Students</option>
+                                    <option>Running Interns</option>
+                                    <option>Running Employee</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                            <h3 className='ml-10 mt-1'>Craeer Guide</h3>
+                        </div>
+
+
+                        <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                            <h3 className='ml-10 mt-1'>Faq</h3>
+                        </div>
+
+                        <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                            <h3 className='ml-10 mt-1'>About us</h3>
+                        </div>
+
+                        <div style={{ borderRadius: '4px' }} className='h-10 w-[245px]  bg-white '>
+                            <h3 className='ml-10 mt-1'>Contact</h3>
+                        </div>
+
+
+
                     </div>
-                
+                </div>
+
             </nav>
         </header>
     );

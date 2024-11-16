@@ -170,12 +170,12 @@ export default function Page() {
           className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div ref={sidebarRef} className="w-44 bg-[#17549A] text-white h-full">
-            <h2 className="text-lg font-bold mb-4 text-center ">All Students</h2> {/* Add margin bottom here */}
-            <ul className="flex flex-col">
+            <h2 className="text-lg font-bold mb-4 text-center">All Students</h2> {/* Add margin bottom here */}
+            <ul className="flex flex-col items-center  ">
               {['Graphic Design', 'Motion Graphics', 'Affiliate Marketing', 'Video Editing', 'Business Development', 'Frontend Development', 'Backend Development', 'Digital Marketing'].map((category, index) => (
                 <li
                   key={index}
-                  className="hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 mt-4 border-b border-[#DDDDDD] w-full cursor-pointer"
+                  className="hover:bg-blue-200 text-[#34E5EB] focus:outline-none hover:text-blue-600 border-b border-[#DDDDDD] w-full h-10 cursor-pointer transition-all duration-200 text-center "
                   onClick={() => handleSidebarItemClick(index)}
                 >
                   {category}
@@ -186,12 +186,13 @@ export default function Page() {
             {/* <div className='flex-col text-center text-2xl mt-4 font-semibold'>
               <h2>Welcome To</h2>
               <h2>Career Builder</h2>
-            </div> */}
-            {/* <div className='w-11/12 mt-6 ml-1'>
-              <Image src={gif} width={500} height={500}></Image>
+            </div>
+            <div className='w-11/12 mt-6 ml-1'>
+              <Image src={gif} width={500} height={500} className='rounded-lg' />
             </div> */}
           </div>
         </div>
+
 
 
 

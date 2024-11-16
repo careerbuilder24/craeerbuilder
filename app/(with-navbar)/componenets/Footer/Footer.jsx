@@ -48,43 +48,43 @@ export default function Footer() {
                 <div style={{ lineHeight: '25px', fontWeight: '300' }} className='flex flex-col md:flex-row justify-center text-[#dddddd] text-[15px] lg:gap-32 gap-12 text-center md:text-left ml-5'>
                     {/* Important Links Column */}
                     <div className='flex flex-col lg:mr-16 lg:ml-10 text-left ml-4'>
-    <h1 className='font-bold mb-2 cursor-pointer'>{'Important Links'}</h1>
-    {["Company Profile", "Privacy Policy", "Terms and Condition", "Career Opportunity", "B2B Partnership", "Press Release"].map(item => (
-        <div key={item} className='flex items-center mb-1'>
-            <RiArrowRightSLine />
-            <h1 className='hover:underline cursor-pointer'>{item}</h1>
-        </div>
-    ))}
-</div>
+                        <h1 className='font-bold mb-2 cursor-pointer'>{'Important Links'}</h1>
+                        {["Company Profile", "Privacy Policy", "Terms and Condition", "Career Opportunity", "B2B Partnership", "Press Release"].map(item => (
+                            <div key={item} className='flex items-center mb-1'>
+                                <RiArrowRightSLine />
+                                <h1 className='hover:underline cursor-pointer'>{item}</h1>
+                            </div>
+                        ))}
+                    </div>
 
 
                     {/* Other Service Categories */}
                     {["Blogger Outreach Services", "Domain & Hosting Services", "Freelancing and Outsourcing"].map((category, index) => (
-    <div className='flex flex-col ml-5 text-left' key={index}> {/* Apply text-left here */}
-        <h1 className='font-bold mb-2 cursor-pointer'>{category}</h1>
-        
-        {category === "Blogger Outreach Services" && ["Search Engine Optimization", "Social Media Marketing", "Search Engine Marketing", "YouTube Video Ads Campaign", "Facebook Ads Campaign", "Content Marketing", "Video Marketing Services"].map(item => (
-            <div key={item} className='flex items-center mb-1'>
-                <RiArrowRightSLine />
-                <h1 className='hover:underline cursor-pointer'>{item}</h1>
-            </div>
-        ))}
+                        <div className='flex flex-col ml-5 text-left' key={index}> {/* Apply text-left here */}
+                            <h1 className='font-bold mb-2 cursor-pointer'>{category}</h1>
 
-        {category === "Domain & Hosting Services" && ["Domain Registration", "Shared Hosting", "VPS Hosting", "Dedicated Hosting", "Cloud Hosting", "WordPress Hosting"].map(item => (
-            <div key={item} className='flex items-center mb-1'>
-                <RiArrowRightSLine />
-                <h1 className='hover:underline cursor-pointer'>{item}</h1>
-            </div>
-        ))}
+                            {category === "Blogger Outreach Services" && ["Search Engine Optimization", "Social Media Marketing", "Search Engine Marketing", "YouTube Video Ads Campaign", "Facebook Ads Campaign", "Content Marketing", "Video Marketing Services"].map(item => (
+                                <div key={item} className='flex items-center mb-1'>
+                                    <RiArrowRightSLine />
+                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
+                                </div>
+                            ))}
 
-        {category === "Freelancing and Outsourcing" && ["Affiliate Marketing Course", "Digital Marketing Course", "Graphic Design Course", "Search Engine Optimization Course", "Website Design Course", "Website Development Course"].map(item => (
-            <div key={item} className='flex items-center mb-1'>
-                <RiArrowRightSLine />
-                <h1 className='hover:underline cursor-pointer'>{item}</h1>
-            </div>
-        ))}
-    </div>
-))}
+                            {category === "Domain & Hosting Services" && ["Domain Registration", "Shared Hosting", "VPS Hosting", "Dedicated Hosting", "Cloud Hosting", "WordPress Hosting"].map(item => (
+                                <div key={item} className='flex items-center mb-1'>
+                                    <RiArrowRightSLine />
+                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
+                                </div>
+                            ))}
+
+                            {category === "Freelancing and Outsourcing" && ["Affiliate Marketing Course", "Digital Marketing Course", "Graphic Design Course", "Search Engine Optimization Course", "Website Design Course", "Website Development Course"].map(item => (
+                                <div key={item} className='flex items-center mb-1'>
+                                    <RiArrowRightSLine />
+                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
 
                 </div>
 

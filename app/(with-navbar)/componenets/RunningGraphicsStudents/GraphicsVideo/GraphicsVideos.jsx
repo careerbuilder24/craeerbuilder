@@ -5,130 +5,99 @@ import img1 from '../../../../../assets/blogimg3.PNG';
 import img2 from '../../../../../assets/blogimg2.PNG';
 import img3 from '../../../../../assets/blogimg3.PNG';
 import Image from 'next/image';
+import useYoutubeStudents from '@/hooks/useYoutubeStudents';
 
 export default function GraphicsVideos() {
+    const { youtubeVideos, loading, error } = useYoutubeStudents();  // Call the custom hook to get the data
+
+    // Conditional rendering based on loading or error states
+    if (loading) {
+        return <div>Loading videos...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
     return (
         <>
             <main>
-                <div className='flex flex-row mt-10'>
-                    {/* First part */}
-                    <div className='w-8/12'>
-                        {/* Video Section 1 */}
-                        <div className='flex flex-row gap-4 rounded-xl ml-4 shadow-lg bg-[#272727] text-white'>
-                            <div>
-                                <h2 className='mt-10 ml-3'>This video is about my resume video where I talk about my skills and why I am the best.</h2>
-                            </div>
-                            <div className='w-11/12 lg:w-9/12 rounded-xl overflow-hidden'>
-                                <Video src="/videos/madlia.mp4" controls />
-                            </div>
-                        </div>
+                <div className="flex flex-col lg:flex-row mt-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-center items-center gap-4 my-3 px-2 w-full lg:w-9/12">
+                        {youtubeVideos.map((video) => (
+                            <div
+                                key={video.id}
+                                className="bg-[#002C47] p-3 shadow-lg rounded-lg overflow-hidden w-full flex flex-col"
+                            >
+                                {/* Video Title/Text - Moved to top */}
+                                <h3 className="text-lg font-semibold text-center text-white">
+                                    {video.title}
+                                </h3>
 
-                        {/* Video Section 2 */}
-                        <div className='flex flex-row gap-4 rounded-xl ml-4 shadow-lg mt-10 bg-[#272727] text-white'>
-                            <div className='w-11/12 rounded-xl overflow-hidden'>
-                                <Video src="/videos/madlia.mp4" controls />
-                            </div>
-                            <div>
-                                <h2 className='mt-10 ml-3'>This video is about my resume video where I talk about my skills and why I am the best.</h2>
-                            </div>
-                            <div>
-                                <h1 className='text-white relative rounded-lg w-11 text-center h-5 top-0 right-0 bg-red-600 font-bold text-sm'>NEW</h1>
-                            </div>
-                        </div>
+                                {/* Video iframe with controls */}
+                                <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                                    <iframe
+                                        className="absolute top-0 left-0 w-full h-full"
+                                        src={`https://www.youtube.com/embed/${video.videoId}?controls=1&modestbranding=1&mute=0`}
+                                        title={video.title}
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    ></iframe>
 
-                        {/* Video Section 3 */}
-                        <div className='flex flex-row gap-4 rounded-xl ml-4 shadow-lg mt-10 bg-[#272727] text-white'>
-                            <div>
-                                <h1 className='text-white relative rounded-lg w-11 text-center h-5 top-0 left-0 bg-red-600 font-bold text-sm'>NEW</h1>
+                                </div>
                             </div>
-                            <div>
-                                <h2 className='mt-10 ml-3'>Here I have showed my skill test in type.</h2>
-                            </div>
-                            <div className='w-6/12 rounded-xl overflow-hidden'>
-                                <Video src="/videos/madlia.mp4" controls />
-                            </div>
-                        </div>
-
-                        {/* Video Section 4 */}
-                        <div className='flex flex-row gap-4 rounded-xl ml-4 shadow-lg mt-10 bg-[#272727] text-white'>
-                            <div className='w-6/12 rounded-xl overflow-hidden'>
-                                <Video src="/videos/madlia.mp4" controls />
-                            </div>
-                            <div>
-                                <h2 className='mt-10 ml-3'>Here I have showed my skill test in type.</h2>
-                            </div>
-                        </div>
+                        ))}
                     </div>
 
+
+
                     {/* Second part - Follow Us Section */}
-                    <div className='w-4/12 p-4 bg-gray-100 rounded-lg shadow-lg ml-3'>
-
-
-
-
-                        <h3 className='text-center text-2xl mb-6 text-[#2CAAE1]'>New Blog</h3>
-
-                        <div className='flex flex-row gap-2'>
-                            <div>
-                                <h3 className='text-xs'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. <span className="text-blue-500 cursor-pointer hover:underline">Read more..</span></h3>
+                    <div className="w-full lg:w-3/12 p-4 bg-gray-100 rounded-lg shadow-lg lg:ml-3">
+                        <h3 className="text-center text-xl mb-6 text-[#2CAAE1]">My Videos</h3>
+                        <div className="mt-10 w-full lg:max-w-[1120px] overflow-y-auto h-[300px]">
+                            <div className="flex flex-col space-y-4"> {/* Vertical flex layout */}
+                                {youtubeVideos.map((video) => (
+                                    <div key={video.id} className="w-full">
+                                        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                                            <iframe
+                                                className="absolute top-0 left-0 w-full h-full"
+                                                src={`https://www.youtube.com/embed/${video.videoId}`}
+                                                title={video.title}
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                            ></iframe>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                            <div>
-                                <Image width={500} height={500} src={img1} className='rounded-lg'></Image>
-                            </div>
-
                         </div>
 
-                        <div className='flex flex-row gap-2 mt-5'>
-
-                            <div>
-                            <h3 className='text-xs'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. <span className="text-blue-500 cursor-pointer hover:underline">Read more..</span></h3>
-                            </div>
-                            <div className=''>
-                                <Image width={500} height={500} src={img1} className='rounded-lg'></Image>
-                            </div>
-
-                        </div>
-                        <div className='flex flex-row gap-2 mt-5'>
-
-                            <div>
-                            <h3 className='text-xs'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. <span className="text-blue-500 cursor-pointer hover:underline">Read more..</span></h3>
-                            </div>
-                            <div>
-                                <Image width={500} height={500} src={img1} className='rounded-lg'></Image>
-                            </div>
-
-                        </div>
-
-
-
-
-
-                        <h2 className='text-2xl  my-6 text-[#2CAAE1] font-bold text-center'>Follow Us</h2>
+                        <h2 className="text-2xl my-6 text-[#2CAAE1] font-bold text-center">Follow Us</h2>
 
                         {/* Social Media Icons and Text */}
-                        <div className='space-y-6 cursor-pointer'>
+                        <div className="space-y-6 cursor-pointer">
                             {/* Instagram */}
-                            <div className='flex items-center space-x-4'>
+                            <div className="flex items-center space-x-4">
                                 <FaInstagram className="text-3xl text-purple-500 hover:text-purple-700 transition duration-300" />
-                                <span className='text-lg text-gray-700'>Instagram</span>
+                                <span className="text-lg text-gray-700">Instagram</span>
                             </div>
 
                             {/* LinkedIn */}
-                            <div className='flex items-center space-x-4'>
+                            <div className="flex items-center space-x-4">
                                 <FaLinkedin className="text-3xl text-blue-700 hover:text-blue-900 transition duration-300" />
-                                <span className='text-lg text-gray-700'>LinkedIn</span>
+                                <span className="text-lg text-gray-700">LinkedIn</span>
                             </div>
 
                             {/* Facebook */}
-                            <div className='flex items-center space-x-4'>
+                            <div className="flex items-center space-x-4">
                                 <FaFacebookF className="text-3xl text-blue-600 hover:text-blue-800 transition duration-300" />
-                                <span className='text-lg text-gray-700'>Facebook</span>
+                                <span className="text-lg text-gray-700">Facebook</span>
                             </div>
 
                             {/* YouTube */}
-                            <div className='flex items-center space-x-4'>
+                            <div className="flex items-center space-x-4">
                                 <FaYoutube className="text-3xl text-red-600 hover:text-red-800 transition duration-300" />
-                                <span className='text-lg text-gray-700'>YouTube</span>
+                                <span className="text-lg text-gray-700">YouTube</span>
                             </div>
                         </div>
                     </div>

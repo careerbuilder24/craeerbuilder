@@ -185,6 +185,7 @@ export default function page() {
 
             <main className='lg:mt-40 mt-24 mb-10 overflow-hidden'>
 
+
                 <div className='w-full flex flex-col justify-center items-center '>
                     <div className='relative lg:w-7/12 overflow-hidden rounded-lg mt-5'>
 
@@ -212,7 +213,7 @@ export default function page() {
 
                         <Image
                             src={img1}
-                            className='mt-4 w-full transition-transform duration-300 ease-in-out'
+                            className='mt-4 w-full transition-transform duration-300 ease-in-out hidden md:block lg:block'
                             alt="Cover Image"
                         />
                     </div>
@@ -243,23 +244,32 @@ export default function page() {
 
                     {/* Mobile Sidebar */}
                     <div
-                        className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+                        className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
                     >
-                        <div ref={sidebarRef} className="w-64 bg-[#17549A] text-white h-full p-4">
-                            <h2 className="text-lg font-bold">Categories</h2>
-                            <ul className="flex flex-col">
-                                {['Profile (CV)', 'Achievements', 'Courses', 'Portfolio', 'Certificate', 'Gallery', 'Blog'].map((category, index) => (
+                        <div ref={sidebarRef} className="w-44 bg-[#17549A] text-white h-full">
+                            <h2 className="text-lg font-bold mb-4 text-center">All Students</h2> {/* Add margin bottom here */}
+                            <ul className="flex flex-col items-center  ">
+                                {['Graphic Design', 'Motion Graphics', 'Affiliate Marketing', 'Video Editing', 'Business Development', 'Frontend Development', 'Backend Development', 'Digital Marketing'].map((category, index) => (
                                     <li
                                         key={index}
-                                        className="p-2 hover:bg-gray-200 hover:text-black cursor-pointer"
+                                        className="hover:bg-blue-200 text-[#34E5EB] focus:outline-none hover:text-blue-600 border-b border-[#DDDDDD] w-full h-10 cursor-pointer transition-all duration-200 text-center "
                                         onClick={() => handleSidebarItemClick(index)}
                                     >
                                         {category}
                                     </li>
                                 ))}
                             </ul>
+
+                            {/* <div className='flex-col text-center text-2xl mt-4 font-semibold'>
+              <h2>Welcome To</h2>
+              <h2>Career Builder</h2>
+            </div>
+            <div className='w-11/12 mt-6 ml-1'>
+              <Image src={gif} width={500} height={500} className='rounded-lg' />
+            </div> */}
                         </div>
                     </div>
+
 
 
 
