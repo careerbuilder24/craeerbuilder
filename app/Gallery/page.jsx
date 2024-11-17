@@ -269,8 +269,8 @@ export default function page() {
 
                                 <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-5 gap-5 h-auto  '>
                                     {/* Tab List */}
-                                    <TabList  className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer mt-4 hidden  lg:flex sticky top-0 z-10   rounded-md '>
-                                        <Tab className='p-4 text-left  focus:outline-none hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600  mt-10'>All Events</Tab>
+                                    <TabList  className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer  hidden  lg:flex sticky top-0 z-10 mt-4  rounded-md '>
+                                        <Tab className='p-4 text-left  focus:outline-none hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 mt-5'>All Events</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Orientation</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Certification</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Awards Giving</Tab>

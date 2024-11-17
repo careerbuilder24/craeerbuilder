@@ -46,6 +46,7 @@ import Certifactes from '@/app/(with-navbar)/componenets/RunningGraphicsStudents
 import PortFolio from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/PortFolio/PortFolio';
 import GraphicsStudentsGallery from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/GraphicsStudentsGallery/GraphicsStudentsGallery';
 import StudentsBlogs from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/StudentsBlogs/StudentsBlogs';
+import GraphicsVideos from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/GraphicsVideo/GraphicsVideos';
 
 
 
@@ -321,6 +322,7 @@ export default function page() {
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Portfolio</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Certificate</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Gallery</Tab>
+                            <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Videos</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Blog</Tab>
                         </TabList>
 
@@ -377,10 +379,16 @@ export default function page() {
                                 <GraphicsStudentsGallery></GraphicsStudentsGallery>
 
                             </TabPanel>
-
                             <TabPanel>
 
                                 {/* tab panel 7 */}
+                                {/* video section */}
+                                <GraphicsVideos></GraphicsVideos>
+                            </TabPanel>
+
+                            <TabPanel>
+
+                                {/* tab panel 8 */}
 
                                 {/* Blog Sections */}
 

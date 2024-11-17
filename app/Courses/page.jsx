@@ -20,12 +20,23 @@ export default function Courses() {
   const [searchTerm, setSearchTerm] = useState(''); // State for search input
   const [selectedTitle, setSelectedTitle] = useState(''); // State for selected title
   const [loading, setLoading] = useState(true); // Loading state
-
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   // Handle search input change
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
+    const value = e.target.value;
+    setSearchTerm(value);
+    filterSuggestions(value);
   };
-
+  const filterSuggestions = (term) => {
+    if (term === '') {
+      setFilteredSuggestions([]);
+    } else {
+      const filtered = courseTitles.filter(title =>
+        title.toLowerCase().includes(term.toLowerCase())
+      );
+      setFilteredSuggestions(filtered);
+    }
+  };
   // Handle title select change
   const handleTitleChange = (e) => {
     setSelectedTitle(e.target.value);
@@ -57,24 +68,29 @@ export default function Courses() {
 
       <Navbar />
 
-      <div className="lg:py-14 lg:px-24 mt-8 lg:mt-48 relative lg:container lg:mx-auto lg:w-8/12 left-1 " >
-        {/* Upper gradient of Banner image */}
-        <div className='bg-[#17549A] hidden lg:block opacity-30 w-10/12 container h-64 absolute top-12 right-24'></div>
-
-        <div className='flex flex-col items-center'>
-          <Image src={img1} className='w-full hidden lg:block' />
+      <div className="lg:py-14 lg:px-24 mt-8 lg:mt-48  relative lg:container lg:mx-auto lg:w-8/12 left-1">
+        {/* Upper gradient of Banner image applied as background */}
+        <div className="flex flex-col items-center relative z-0">
+          {/* Image section (with gradient as background) */}
+          <div
+            className="w-full h-72 lg:h-[400px] md:h-[400px] bg-cover bg-center bg-[#77b1eb] opacity-80 relative"
+            style={{ backgroundImage: `url(${img1.src})` }} // Ensure img1.src contains the image URL
+          >
+            {/* The gradient is applied over the image */}
+            {/* <div className="absolute inset-0 bg-gradient-to-t from-[#2CAAE1] to-transparent opacity-45"></div> */}
+          </div>
 
           {/* Search bar */}
           <div className='hidden md:block'>
-            <div className="flex top-32 right-24  lg:left-40  overflow-hidden bg-[#c0d9f3] w-9/12 shadow-lg absolute px-10 rounded-full lg:mt-5 items-center md:mt-16">
+            <div className="flex top-32 right-24  lg:left-40 overflow-hidden bg-[#2CAAE1] w-9/12 shadow-lg absolute px-10 rounded-full lg:mt-5 items-center md:mt-16">
 
               {/* Dropdown for course titles */}
-              <form className="w-3/12">
+              <form className="w-full md:w-6/12">
                 <select
                   value={selectedTitle}
                   onChange={handleTitleChange}
                   style={{ padding: '10px 8px', borderRadius: '4px' }}
-                  className="bg-white cursor-pointer"
+                  className="bg-[#17549A] text-white cursor-pointer w-full"
                 >
                   <option className='font-bold' value=''>All Courses</option>
                   {courseTitles.map((title, index) => (
@@ -83,12 +99,12 @@ export default function Courses() {
                 </select>
               </form>
 
-              <div className="w-full mb-10 mt-10">
+              <div className="w-full mb-10 mt-10 ">
                 <form>
-                  <div className="relative flex flex-row">
+                  <div className="relative flex flex-row w-full">
                     <input
                       type="text"
-                      className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+                      className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded-sm focus:outline-none focus:ring focus:ring-blue-300"
                       placeholder="Search..."
                       value={searchTerm}
                       onChange={handleSearchChange}
@@ -99,14 +115,28 @@ export default function Courses() {
                     >
                       Search
                     </button>
+                    {/* Suggestions Box */}
+                    {searchTerm && filteredSuggestions.length > 0 && (
+                      <div style={{ width: '573px' }} className="absolute left-0 right-0 top-9 mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-10">
+                        {filteredSuggestions.map((suggestion, index) => (
+                          <div
+                            key={index}
+                            className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                            onClick={() => setSearchTerm(suggestion)}
+                          >
+                            {suggestion}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </form>
               </div>
             </div>
           </div>
 
-          {/* Mobile search button */}
-          <div className="lg:w-5/12 w-full md:hidden lg:hidden mb-10 relative top-32 overflow-hidden">
+          {/* Mobile Search Button (visible only on small screens) */}
+          <div className="lg:w-5/12 w-full md:hidden lg:hidden mb-10 relative bottom-28 overflow-hidden ">
             <form>
               <div className="relative">
                 <input
@@ -123,12 +153,30 @@ export default function Courses() {
                   Search
                 </button>
               </div>
+
+
+              {/* Dropdown for course titles */}
+              <form className="w-11/12  mt-5">
+                <select
+                  value={selectedTitle}
+                  onChange={handleTitleChange}
+                  style={{ padding: '10px 8px', borderRadius: '4px' }}
+                  className="bg-white cursor-pointer w-full"
+                >
+                  <option className='font-bold' value=''>All Courses</option>
+                  {courseTitles.map((title, index) => (
+                    <option key={index} value={title}>{title}</option>
+                  ))}
+                </select>
+              </form>
             </form>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto md:w-10/12 lg:w-7/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 custom-grid-layout mt-72 lg:mt-0 w-9/12 md:mt-96">
+
+
+      <div className="container mx-auto md:w-10/12 lg:w-7/12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 custom-grid-layout  lg:mt-0 w-9/12 md:mt-10">
         {loading ? (
           // Show loader in the center of the page
           <div className="absolute inset-0 flex justify-center items-center bg-white bg-opacity-50 z-10">

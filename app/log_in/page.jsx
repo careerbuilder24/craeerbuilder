@@ -57,13 +57,13 @@ export default function Login() {
   return (
     <main>
       <Navbar />
-      <div className='lg:mt-52 mt-28 md:mt-32 h-full mb-10 container mx-auto bg-white px-4 sm:px-6 md:px-8'>
+      <div className='lg:mt-52 mt-28 md:mt-32 h-full mb-10 container mx-auto bg-white px-4 sm:px-6 md:px-8 text-black'>
         <div className='flex justify-center items-center'>
           <form
             onSubmit={handleManualSignIn}
-            className='gap-3 flex flex-col justify-center items-center w-full max-w-md h-auto mt-10 shadow-lg bg-[#00adea] border-gray-500 rounded-xl p-6'
+            className='gap-3 flex flex-col justify-center items-center w-full max-w-md h-auto mt-10 shadow-lg  border-gray-500 rounded-xl p-6'
           >
-            <h1 className='text-3xl font-bold font-serif text-white text-center'>Login</h1>
+            <h1 className='text-3xl font-bold font-serif text-black text-center'>Login</h1>
             <div className='w-full mb-4'>
               <input
                 type="text"
@@ -90,7 +90,7 @@ export default function Login() {
                   onChange={() => setShow(!show)}
                   className='mr-2 cursor-pointer'
                 />
-                <small className='text-white'>{show ? 'Hide Password' : 'Show Password'}</small>
+                <small className='text-black'>{show ? 'Hide Password' : 'Show Password'}</small>
               </label>
             </div>
             <div className="form-control mb-4 w-full lg:ml-20">
@@ -107,7 +107,7 @@ export default function Login() {
             >
               Login
             </button>
-            <p className='text-sm text-white text-center mt-4'>
+            <p className='text-sm text-black text-center mt-4'>
               If you don't have an account, please register <Link className='text-blue-700 hover:underline font-bold' href={'/re_gister'}>here</Link>.
             </p>
             <div onClick={handleGoogleSignIn} className='flex justify-center items-center gap-5 mt-4 cursor-pointer'>

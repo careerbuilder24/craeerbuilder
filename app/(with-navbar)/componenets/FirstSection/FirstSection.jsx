@@ -29,7 +29,7 @@ export default function FirstSection() {
             <Head>
                 <link rel='preload' href={course.image} as='image'></link>
             </Head>
-            <div className='container mx-auto w-full md:w-10/12 lg:w-7/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:mt-10 custom-grid-layout'>
+            <div className='container mx-auto w-10/12 md:w-10/12 lg:w-7/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:mt-10 custom-grid-layout'>
                 {
                     course?.map(courses => (
                         <div key={courses.id} className="relative cursor-pointer shadow-lg mb-3 overflow-hidden rounded-xl border hover:border-black border-[#DDDD] transition-all duration-300 group">

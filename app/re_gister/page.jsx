@@ -56,9 +56,9 @@ export default function Login() {
         <div className='flex justify-center items-center'>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className='gap-6 flex flex-col justify-center items-center w-full max-w-md shadow-lg bg-[#00adea] border-gray-500 rounded-xl p-6'
+            className='gap-6 flex flex-col justify-center items-center w-full max-w-md shadow-lg  border-gray-500 rounded-xl p-6'
           >
-            <h1 className='text-3xl font-bold font-serif text-white'>Register</h1>
+            <h1 className='text-3xl font-bold font-serif '>Register</h1>
 
             {/* Name field */}
             <div className='w-full '>
@@ -136,13 +136,13 @@ export default function Login() {
               <input type="checkbox" className='cursor-pointer' required />
               <label className="ml-2 flex gap-3">
                 <p className='text-gray-800 text-sm'>I agree to the</p>
-                <Link href="/ter_ms" className="text-white underline text-sm">Terms and Conditions</Link>
+                <Link href="/ter_ms" className=" underline text-sm">Terms and Conditions</Link>
               </label>
             </div>
 
-            <button type="submit" className='bg-blue-500 w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300'>Sign Up</button>
+            <button type="submit" className='bg-blue-500 w-full h-10 rounded-md  hover:bg-[#17549A] ease-in-out duration-300'>Sign Up</button>
 
-            <div className='flex gap-3 text-sm text-white mt-4'>
+            <div className='flex gap-3 text-sm  mt-4'>
               <p>Already have an account?</p>
               <Link href={'/log_in'} className='text-blue-700 font-bold'>Login</Link>
             </div>
