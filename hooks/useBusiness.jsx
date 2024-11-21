@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export default function useStudents() {
+export default function useBusiness() {
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {

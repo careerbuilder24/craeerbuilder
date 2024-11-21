@@ -68,7 +68,7 @@ export default function Courses() {
 
       <Navbar />
 
-      <div className="lg:py-14 lg:px-24 mt-8 lg:mt-48  relative lg:container lg:mx-auto lg:w-8/12 left-1">
+      <div className="lg:py-14 lg:px-24 mt-8 lg:mt-48   relative lg:container lg:mx-auto lg:w-8/12 left-1">
         {/* Upper gradient of Banner image applied as background */}
         <div className="flex flex-col items-center relative z-0">
           {/* Image section (with gradient as background) */}
@@ -81,95 +81,100 @@ export default function Courses() {
           </div>
 
           {/* Search bar */}
-          <div className='hidden md:block'>
-            <div className="flex top-32 right-24  lg:left-40 overflow-hidden bg-[#2CAAE1] w-9/12 shadow-lg absolute px-10 rounded-full lg:mt-5 items-center md:mt-16">
-
+          <div className="hidden md:block">
+            <div className="flex top-32 right-24 lg:left-40 overflow-hidden bg-[#2CAAE1] w-9/12 shadow-lg absolute px-10 rounded-full lg:mt-5 items-center md:mt-16">
               {/* Dropdown for course titles */}
-              <form className="w-full md:w-6/12">
+              <div className="w-full md:w-6/12">
                 <select
                   value={selectedTitle}
                   onChange={handleTitleChange}
                   style={{ padding: '10px 8px', borderRadius: '4px' }}
                   className="bg-[#17549A] text-white cursor-pointer w-full"
                 >
-                  <option className='font-bold' value=''>All Courses</option>
+                  <option className="font-bold" value="">
+                    All Courses
+                  </option>
                   {courseTitles.map((title, index) => (
-                    <option key={index} value={title}>{title}</option>
+                    <option key={index} value={title}>
+                      {title}
+                    </option>
                   ))}
                 </select>
-              </form>
+              </div> {/* End of the first form */}
 
-              <div className="w-full mb-10 mt-10 ">
-                <form>
-                  <div className="relative flex flex-row w-full">
-                    <input
-                      type="text"
-                      className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded-sm focus:outline-none focus:ring focus:ring-blue-300"
-                      placeholder="Search..."
-                      value={searchTerm}
-                      onChange={handleSearchChange}
-                    />
-                    <button
-                      type="submit"
-                      className="inset-y-0 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+              <div className="w-full mb-10 mt-10">
+                <div className="relative flex flex-row w-full">
+                  <input
+                    type="text"
+                    className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded-sm focus:outline-none focus:ring focus:ring-blue-300"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                  />
+                  <button
+                    type="submit"
+                    className="inset-y-0 flex items-center px-4 text-white bg-[#17549A] rounded hover:bg-blue-600 ease-in-out duration-300 cursor-pointer"
+                  >
+                    Search
+                  </button>
+                  {/* Suggestions Box */}
+                  {searchTerm && filteredSuggestions.length > 0 && (
+                    <div
+                      style={{ width: '400px' }}
+                      className="absolute left-0 right-0 top-9 mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-10"
                     >
-                      Search
-                    </button>
-                    {/* Suggestions Box */}
-                    {searchTerm && filteredSuggestions.length > 0 && (
-                      <div style={{ width: '573px' }} className="absolute left-0 right-0 top-9 mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-10">
-                        {filteredSuggestions.map((suggestion, index) => (
-                          <div
-                            key={index}
-                            className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                            onClick={() => setSearchTerm(suggestion)}
-                          >
-                            {suggestion}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </form>
+                      {filteredSuggestions.map((suggestion, index) => (
+                        <div
+                          key={index}
+                          className="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                          onClick={() => setSearchTerm(suggestion)}
+                        >
+                          {suggestion}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
 
+
           {/* Mobile Search Button (visible only on small screens) */}
           <div className="lg:w-5/12 w-full md:hidden lg:hidden mb-10 relative bottom-28 overflow-hidden ">
-            <form>
-              <div className="relative">
-                <input
-                  type="text"
-                  className="block w-8/12 px-4 py-2 text-gray-700 placeholder-gray-400 border rounded ml-10 focus:outline-none focus:ring focus:ring-blue-300"
-                  placeholder="Search..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                />
-                <button
-                  type="submit"
-                  className="absolute inset-y-0 right-11 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
-                >
-                  Search
-                </button>
-              </div>
+
+            <div className="relative">
+              <input
+                type="text"
+                className="block w-8/12 px-4 py-2 text-gray-700 placeholder-gray-400 border rounded ml-10 focus:outline-none focus:ring focus:ring-blue-300"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <button
+                type="submit"
+                className="absolute inset-y-0 right-11 flex items-center px-4 text-white bg-blue-500 rounded hover:bg-blue-600"
+              >
+                Search
+              </button>
+            </div>
 
 
-              {/* Dropdown for course titles */}
-              <form className="w-11/12  mt-5">
-                <select
-                  value={selectedTitle}
-                  onChange={handleTitleChange}
-                  style={{ padding: '10px 8px', borderRadius: '4px' }}
-                  className="bg-white cursor-pointer w-full"
-                >
-                  <option className='font-bold' value=''>All Courses</option>
-                  {courseTitles.map((title, index) => (
-                    <option key={index} value={title}>{title}</option>
-                  ))}
-                </select>
-              </form>
-            </form>
+            {/* Dropdown for course titles */}
+            <div className="w-11/12  mt-5">
+              <select
+                value={selectedTitle}
+                onChange={handleTitleChange}
+                style={{ padding: '10px 8px', borderRadius: '4px' }}
+                className="bg-white cursor-pointer w-full"
+              >
+                <option className='font-bold' value=''>All Courses</option>
+                {courseTitles.map((title, index) => (
+                  <option key={index} value={title}>{title}</option>
+                ))}
+              </select>
+            </div>
+
           </div>
         </div>
       </div>

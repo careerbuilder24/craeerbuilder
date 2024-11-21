@@ -5,8 +5,7 @@ import './Footer.css';
 export default function Footer() {
     return (
         <>
-            <div style={{ background: '#17549A' }} className='text-white w-full h-full py-20'>
-
+            <div className='bg-[#2BAAE3] lg:bg-[#17549A] text-white w-full h-full py-20'> {/* Added responsive background color */}
                 {/* First Section */}
                 <div style={{ lineHeight: '25px', fontWeight: '300' }} className='flex text-[15px] flex-col text-[#dddddd] md:flex-row justify-center lg:gap-32 gap-12 text-center md:text-left ml-9'>
                     {["Apps and Software", "Graphic Design & Printing", "Writing Services", "Website Development Services"].map((category, index) => (
@@ -57,10 +56,9 @@ export default function Footer() {
                         ))}
                     </div>
 
-
                     {/* Other Service Categories */}
                     {["Blogger Outreach Services", "Domain & Hosting Services", "Freelancing and Outsourcing"].map((category, index) => (
-                        <div className='flex flex-col ml-5 text-left' key={index}> {/* Apply text-left here */}
+                        <div className='flex flex-col ml-5 text-left' key={index}>
                             <h1 className='font-bold mb-2 cursor-pointer'>{category}</h1>
 
                             {category === "Blogger Outreach Services" && ["Search Engine Optimization", "Social Media Marketing", "Search Engine Marketing", "YouTube Video Ads Campaign", "Facebook Ads Campaign", "Content Marketing", "Video Marketing Services"].map(item => (

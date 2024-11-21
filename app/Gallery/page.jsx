@@ -101,7 +101,7 @@ export default function page() {
 
     const Gallery = useGallery();
 
-    console.log(Gallery)
+    // console.log(Gallery)
 
 
 // for mobile device
@@ -236,7 +236,7 @@ export default function page() {
                         <div className="flex flex-col lg:flex-row gap-10 ">
                             <div className="w-full   bg-white  mb-4 lg:mb-0 shadow-lg p-4 rounded">
 
-                                <h1 className='text-center text-4xl mt-5 font-bold mb-6'>Picture Gallery</h1>
+                                <h1 className='text-center text-[#2CAAE1] text-4xl mt-5 font-bold mb-6'>Picture Gallery</h1>
 
                                 {/* Mobile Sidebar Toggle Button */}
                                 <div className='block lg:hidden text-right mb-4'>
@@ -525,17 +525,17 @@ export default function page() {
                                 <div className=' shadow-xl rounded  mt-5 '>
                                     <div className='ml-4'>
                                         <h3 className='text-[#0054a5] font-semibold mt-3'>Graphics Orientation Class</h3>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5]text-sm'>Time: 06:00 PM </time></p>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5]text-sm'>Date:17 Novembmer 2024 </time></p>
+                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Time: 06:00 PM </time></p>
+                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Date:17 Novembmer 2024 </time></p>
                                         <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
 
                                         <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
                                             <Image
                                                 src={img1}
-                                                className='w-full lg:w-11/12 h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
+                                                className='w-full lg:w-11/12 h-full object-cover '
                                             />
 
-                                            <div className='bg-green-600 opacity-80 relative bottom-7 text-white font-bold w-11/12'>
+                                            <div className='bg-[#B1AFB2] opacity-80 relative bottom-7 text-black font-bold w-11/12'>
                                                 CAREER BUILDER
                                             </div>
                                         </div>
@@ -549,17 +549,17 @@ export default function page() {
                                 <div className=' shadow-xl rounded  mt-5 '>
                                     <div className='ml-4'>
                                         <h3 className='text-[#0054a5] font-semibold mt-3'>Motion Graphics Orientation Class</h3>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5]text-sm'>Time: 06:00 PM </time></p>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5]text-sm'>Date:17 Novembmer 2024 </time></p>
+                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Time: 06:00 PM </time></p>
+                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Date:17 Novembmer 2024 </time></p>
                                         <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
 
                                         <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
                                             <Image
                                                 src={img1}
-                                                className='w-full lg:w-11/12 h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
+                                                className='w-full lg:w-11/12 h-full object-cover '
                                             />
 
-                                            <div className='bg-green-600 opacity-80 relative bottom-7 text-white font-bold w-11/12'>
+                                            <div className='bg-[#B1AFB2] opacity-80 relative bottom-7 text-black font-bold w-11/12'>
                                                 CAREER BUILDER
                                             </div>
                                         </div>

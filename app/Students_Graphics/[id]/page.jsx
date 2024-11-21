@@ -1,7 +1,6 @@
 'use client'
 import { useParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
-import 'react-tabs/style/react-tabs.css';
 
 import useStudents from '@/hooks/useStudents';
 import Navbar from '@/app/(with-navbar)/componenets/Navbar/Navbar';
@@ -13,6 +12,7 @@ import img1 from '../../../assets/image1.PNG'
 
 import Image from 'next/image';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import Footer from '@/app/(with-navbar)/componenets/Footer/Footer';
 import HelmetHead from '@/app/HelmetHead/HelmetHead';
 import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri'

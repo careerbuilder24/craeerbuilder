@@ -141,7 +141,7 @@ export default function Page() {
       <div className='lg:mt-52 bg-gray-100 h-full w-10/12 lg:w-7/12 container mx-auto mb-10'>
         <div className="flex flex-col lg:flex-row justify-center lg:justify-between mt-10 md:mt-44 md:px-5 custom-flex-layout">
           <div className="text-center lg:text-left lg:ml-96">
-            <h1 className="text-4xl font-bold mb-6 text-[#2CAAE1] mt-5 whitespace-nowrap">
+            <h1 className="text-4xl font-bold mb-6 text-[#2CAAE1]  whitespace-nowrap">
               All Students
             </h1>
           </div>

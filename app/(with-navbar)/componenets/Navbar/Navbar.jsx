@@ -157,7 +157,7 @@ export default function Navbar() {
                                         </Link>
                                     </div>
 
-                                    <div className="dropdown-content z-[1] menu py-3 px-4 shadow rounded-box w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
+                                    <div className="dropdown-content z-[1] menu py-3 px-4 shadow  w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
                                         <Link href="/RunningStudents" className="block py-2 text-gray-800 hover:bg-blue-400 rounded">
                                             Running Students
                                         </Link>
@@ -174,10 +174,10 @@ export default function Navbar() {
                                 <Link href="/Gallery" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     Gallery
                                 </Link>
-                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                <Link href="/University" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     University
                                 </Link>
-                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                <Link href="/CraeerGuide" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     Career Guide
                                 </Link>
                                 <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
