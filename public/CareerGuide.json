@@ -1,6 +1,7 @@
 [
     {
       "id": 1,
+      "career_Category_name": "Accounting",
       "title": "Accounting Trends in 2024",
       "category_name": "Accounting",
       "category_text": "Exploring the latest trends and technologies shaping the accounting industry.technologies shaping the accounting industry.",
@@ -8,6 +9,7 @@
     },
     {
       "id": 2,
+      "career_Category_name": "Agriculture",
       "title": "Agriculture Innovations for Sustainable Farming",
       "category_name": "Agriculture",
       "category_text": "A look at the new techniques and tools improving agricultural practices worldwide.technologies shaping the accounting industry.",
@@ -15,6 +17,7 @@
     },
     {
       "id": 3,
+      "career_Category_name": "Animal",
       "title": "Agriculture Farms: A Growing Sector",
       "category_name": "Agriculture Farm",
       "category_text": "Understanding the rise of farm operations in global markets and their environmental impact.technologies shaping the accounting industry.",
@@ -22,6 +25,7 @@
     },
     {
       "id": 4,
+      "career_Category_name": "Apparel",
       "title": "The Future of Animal Husbandry",
       "category_name": "Animal",
       "category_text": "Advancements in animal care, breeding, and biotechnology to support livestock industries.technologies shaping the accounting industry.",
@@ -29,6 +33,7 @@
     },
     {
       "id": 5,
+      "career_Category_name": "Aquarium Fish Farm",
       "title": "The Apparel Industry's Response to Fast Fashion",
       "category_name": "Apparel",
       "category_text": "Exploring the ongoing battle between fast fashion and sustainability efforts in the clothing industry.technologies shaping the accounting industry.",
@@ -36,6 +41,7 @@
     },
     {
       "id": 6,
+      "career_Category_name": "Arts & Handicraft",
       "title": "Aquarium Fish Farming: A Sustainable Practice",
       "category_name": "Aquarium Fish Farm",
       "category_text": "The impact of aquarium fish farming on the environment and how it's evolving.technologies shaping the accounting industry.",
@@ -43,6 +49,7 @@
     },
     {
       "id": 7,
+      "career_Category_name": "Automotive Industry",
       "title": "Arts & Handicraft: The Growing Market",
       "category_name": "Arts & Handicraft",
       "category_text": "An overview of the growing interest in handmade goods and the importance of craftsmanship.technologies shaping the accounting industry.",
@@ -50,6 +57,7 @@
     },
     {
       "id": 8,
+      "career_Category_name": "Automotive & Automobile",
       "title": "Automotive Industry's Future with Electric Vehicles",
       "category_name": "Automotive Industry",
       "category_text": "Exploring how electric vehicles are reshaping the automotive landscape.technologies shaping the accounting industry.",
@@ -57,6 +65,7 @@
     },
     {
       "id": 9,
+      "career_Category_name": "Banks",
       "title": "The Role of Automotive & Automobile in Modern Life",
       "category_name": "Automotive & Automobile",
       "category_text": "How the automotive industry is adapting to the demands of modern transportation.technologies shaping the accounting industry.",
@@ -64,6 +73,7 @@
     },
     {
       "id": 10,
+      "career_Category_name": "Beauty Parlor & Spa",
       "title": "Banking Innovations in the Digital Age",
       "category_name": "Banks",
       "category_text": "A look at how digital banking is transforming the financial sector.technologies shaping the accounting industry.",
@@ -71,6 +81,7 @@
     },
     {
       "id": 11,
+      "career_Category_name": "Blogs & Magazines",
       "title": "The Impact of Basin Design on Architecture",
       "category_name": "Basin",
       "category_text": "How basin designs influence modern architectural trends.technologies shaping the accounting industry.",
@@ -78,6 +89,7 @@
     },
     {
       "id": 12,
+      "career_Category_name": "Books Stationary",
       "title": "Beauty Parlors & Spas: The Rise of Wellness",
       "category_name": "Beauty Parlor & Spa",
       "category_text": "The boom in the beauty and wellness industry and its global impact.technologies shaping the accounting industry.",
@@ -85,6 +97,7 @@
     },
     {
       "id": 13,
+      "career_Category_name": "Brassware Industry",
       "title": "Blogging & Magazines in the Digital Era",
       "category_name": "Blogs & Magazines",
       "category_text": "How the digital age is shaping the future of blogging and traditional magazines.technologies shaping the accounting industry.",
@@ -92,6 +105,7 @@
     },
     {
       "id": 14,
+      "career_Category_name": "Building Construction",
       "title": "Books and Stationary Industry Outlook",
       "category_name": "Books Stationary",
       "category_text": "Examining the future of books and stationery in a digital world.technologies shaping the accounting industry.",
@@ -99,6 +113,7 @@
     },
     {
       "id": 15,
+      "career_Category_name": "Buying House",
       "title": "Brassware Industry: A Timeless Craft",
       "category_name": "Brassware Industry",
       "category_text": "The ongoing demand for brassware and its place in modern design.technologies shaping the accounting industry.",

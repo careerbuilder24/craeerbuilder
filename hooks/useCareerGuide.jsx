@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 export default function useCareerGuide() {
-    const [useCareerGuide, setuseCareerGuide] = useState([]);
+    const [CareerGuide, setuseCareerGuide] = useState([]);
     const [loading, setLoading] = useState(true);
     
 
@@ -21,5 +21,5 @@ export default function useCareerGuide() {
         fetchData();
     }, []);
 
-    return [useCareerGuide, loading]; 
+    return [CareerGuide, loading]; 
 }
