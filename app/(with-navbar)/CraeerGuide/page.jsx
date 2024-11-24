@@ -160,7 +160,7 @@ export default function Page() {
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                         </p>
                                     </div>
-                                    {/* eighth Item */}
+                                    {/* eighth Item here */}
                                     <div className='flex flex-row items-center text-blue-500 hover:underline cursor-pointer duration-300 ease-in-out'>
                                         <div className="mr-2">
                                             <BsBoxArrowInUpRight />
