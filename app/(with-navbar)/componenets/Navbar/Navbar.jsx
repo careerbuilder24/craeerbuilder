@@ -177,7 +177,7 @@ export default function Navbar() {
                                 <Link href="/University" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     University
                                 </Link>
-                                <Link href="/CraeerGuide" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                <Link href="/CareerGuide" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     Career Guide
                                 </Link>
                                 <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
