@@ -4,6 +4,7 @@ const nextConfig = {
     images: {
         domains: ["i.ibb.co", "ibb.co", "img.freepik.com", "lh3.googleusercontent.com",'i.postimg.cc'],
     },
+    
 };
 
 export default withBundleAnalyzer({

@@ -6,6 +6,7 @@ import { FaEarthAfrica } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
 import React from 'react'
 import Image from 'next/image';
+import { FaFacebookF, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
 export default function CuriculamVite() {
     const { id } = useParams();
@@ -104,7 +105,7 @@ export default function CuriculamVite() {
                                 />
                                 <p className='text-center text-2xl font-bold'>{graphic.name}</p>
                                 <p className='text-xl text-center'>Student</p>
-                                <p className='text-center mt-20 text-xl font-bold mb-2'>Contact Details</p>
+                                <p className='text-center mt-5 text-xl font-bold mb-2'>Contact Details</p>
                                 <hr className='w-96 h-1  ml-1' />
                                 <div className='flex flex-row gap-2 justify-center items-center  mt-1'>
                                     <BsFillTelephoneFill className='text-white' />
@@ -119,7 +120,7 @@ export default function CuriculamVite() {
                                     <p>London</p>
                                 </div>
 
-                                <p className='text-center mt-20 text-xl font-bold mb-2'>Core Skills</p>
+                                <p className='text-center mt-5 text-xl font-bold mb-2'>Core Skills</p>
                                 <hr className='w-80 h-1  ' />
                                 <div className='flex mt-3 ml-5'>
                                     <GoDotFill className='mt-1 text-sm mr-3' />
@@ -147,6 +148,39 @@ export default function CuriculamVite() {
                                     <p>IT skills - predicted 6 at GCSE</p>
                                 </div>
                             </div>
+
+
+
+
+
+
+                            {/* Social Media Icons and Text */}
+                            <div className="space-y-6 cursor-pointer">
+                                {/* Instagram */}
+                                <div className="flex items-center space-x-4">
+                                    <FaInstagram className="text-3xl text-purple-500 hover:text-purple-700 transition duration-300" />
+                                    <span className="text-lg text-gray-700">Instagram</span>
+                                </div>
+
+                                {/* LinkedIn */}
+                                <div className="flex items-center space-x-4">
+                                    <FaLinkedin className="text-3xl text-blue-700 hover:text-blue-900 transition duration-300" />
+                                    <span className="text-lg text-gray-700">LinkedIn</span>
+                                </div>
+
+                                {/* Facebook */}
+                                <div className="flex items-center space-x-4">
+                                    <FaFacebookF className="text-3xl text-blue-600 hover:text-blue-800 transition duration-300" />
+                                    <span className="text-lg text-gray-700">Facebook</span>
+                                </div>
+
+                                {/* YouTube */}
+                                <div className="flex items-center space-x-4">
+                                    <FaYoutube className="text-3xl text-red-600 hover:text-red-800 transition duration-300" />
+                                    <span className="text-lg text-gray-700">YouTube</span>
+                                </div>
+                            </div>
+
 
                         </div>
                     ) : (

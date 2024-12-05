@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev & npx next-video sync -w",
     "build": "next build",
+    "export": "next build && next export",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint"
   },

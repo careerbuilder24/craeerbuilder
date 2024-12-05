@@ -1,4 +1,5 @@
 'use client'
+
 import { useState } from 'react';
 import Navbar from '../componenets/Navbar/Navbar';
 import { BsBoxArrowInUpRight } from "react-icons/bs";
@@ -6,22 +7,29 @@ import Image from 'next/image';
 import useCareerGuide from '@/hooks/useCareerGuide';
 import Footer from '../componenets/Footer/Footer';
 import Link from 'next/link';
+import { PiHandsClappingFill } from "react-icons/pi";
+import { BiSolidDislike } from "react-icons/bi";
 
 export default function Page() {
-    // State to control the visibility of the additional checkboxes
-    const [showMore, setShowMore] = useState(false);
     const [CareerGuide] = useCareerGuide();
     const [searchTerm, setSearchTerm] = useState(''); // State for search term
-    // console.log(CareerGuide);
+    const [liked, setLiked] = useState(false); // State for like button
+    const [disliked, setDisliked] = useState(false); // State for dislike button
 
-    // Toggle visibility when "See More" is clicked
-    const [visibleCount, setVisibleCount] = useState(10); // Start by showing 10 checkboxes
-    const totalCheckboxes = 30; // Total number of checkboxes to potentially show
+    // Handle Like Button click
+    const handleLikeClick = () => {
+        setLiked(!liked);  // Toggle like button
+        if (!liked) {
+            setDisliked(false);  // If liked, remove dislike
+        }
+    };
 
-    // Handle "See More" button click
-    const handleSeeMoreClick = () => {
-        setVisibleCount(prev => Math.min(prev + 10, totalCheckboxes)); // Increase by 10 or show all checkboxes
-        setShowMore(true);
+    // Handle Dislike Button click
+    const handleDislikeClick = () => {
+        setDisliked(!disliked);  // Toggle dislike button
+        if (!disliked) {
+            setLiked(false);  // If disliked, remove like
+        }
     };
 
     // Filter the CareerGuide based on the search term
@@ -42,24 +50,23 @@ export default function Page() {
                 <div className='lg:mt-48 mt-20'>
                     <section className="mb-12 bg-[#F1F2F4] py-10">
                         <div className="container mx-auto text-center">
-                              {/* Sticky Search Input */}
-                              <div className="sticky top-0 z-10  lg:mr-36 mb-4">
-                                        <input
-                                            type="text"
-                                            className="mt-4 p-2 border border-gray-300 rounded-md w-6/12"
-                                            placeholder="Search blog title, category or text"
-                                            value={searchTerm}
-                                            onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm on input change
-                                        />
-                                    </div>
+                            {/* Sticky Search Input */}
+                            <div className="sticky top-0 z-10 lg:mr-36 mb-4">
+                                <input
+                                    type="text"
+                                    className="mt-4 p-2 border border-gray-300 rounded-md w-6/12"
+                                    placeholder="Search blog title, category or text"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)} // Update searchTerm on input change
+                                />
+                            </div>
                             <div className="flex flex-col md:flex-col lg:flex-row justify-between gap-5 ">
                                 {/* First Section - Sticky */}
                                 <div
-                                    className={`bg-white p-6 rounded-lg shadow-md w-full md:w-3/12 transition-all duration-300 hidden lg:block ${showMore ? 'h-auto' : 'h-[700px]'} sticky top-0`}
+                                    className={`bg-white p-6 rounded-lg shadow-md w-full md:w-3/12 transition-all duration-300 hidden lg:block`}
                                 >
                                     <div className='bg-[#17549A] p-2'>
                                         <h3 className="text-xl font-medium text-white">Blog Category</h3>
-
                                         <input
                                             type="text"
                                             className="mt-4 p-2 border border-gray-300 rounded-md w-full"
@@ -68,32 +75,17 @@ export default function Page() {
                                     </div>
 
                                     {/* Checkboxes */}
-                                    {Array.from({ length: visibleCount }).map((_, index) => (
+                                    {Array.from({ length: 10 }).map((_, index) => (
                                         <div className="flex gap-3 mt-1" key={index}>
                                             <input type="checkbox" name="animation" id="" />
                                             <h3>{`Category ${index + 1}`}</h3>
                                         </div>
                                     ))}
-                                    {visibleCount < totalCheckboxes && (
-                                        <button
-                                            onClick={handleSeeMoreClick}
-                                            className="mt-4 hover:underline bg-white"
-                                        >
-                                            See More
-                                        </button>
-                                    )}
                                 </div>
 
                                 {/* Second Section - Scrollable Middle Section */}
                                 <div className="p-3 w-full md:w-10/12 h-auto overflow-y-auto max-h-screen">
-
-                                  
-
                                     {/* Tablet Cards - Display filtered results */}
-
-
-
-
                                     {filteredCareerGuide?.length > 0 ? (
                                         filteredCareerGuide.map((CareerDatas) => (
                                             <Link href={`/Cereer_Guide_Details/${CareerDatas.id}`} key={CareerDatas.id} className="container mx-auto">
@@ -119,8 +111,10 @@ export default function Page() {
                                 </div>
 
                                 {/* Third Section - Sticky */}
-                                <div className="bg-white rounded-lg shadow-lg w-full  lg:w-4/12 h-[500px] p-6 sticky top-0">
-                                    <h3 className="  text-blue-600 text-center text-2xl font-bold">Recent Top Blogs</h3>
+                                <div className="bg-white rounded-lg shadow-lg w-full lg:w-4/12 h-[500px] p-6 sticky top-0">
+                                    <h3 className="text-blue-600 text-center text-2xl font-bold">Recent Top Blogs</h3>
+
+                                   
 
                                     {/* List Items */}
                                     {['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'].map((item, index) => (
