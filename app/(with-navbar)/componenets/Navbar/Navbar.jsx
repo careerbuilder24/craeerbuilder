@@ -150,6 +150,8 @@ export default function Navbar() {
                                 </Link>
 
                                 {/* Dropdown */}
+
+
                                 <div className="relative group">
                                     <div className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                         <Link href="/Students" className="flex items-center justify-center h-full font-bold">
@@ -180,13 +182,13 @@ export default function Navbar() {
                                 <Link href="/CareerGuide" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     Career Guide
                                 </Link>
-                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
-                                    Faq
+                                <Link href="/FA_Q" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                    FAQ
                                 </Link>
-                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                <Link href="/About_Us" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     About us
                                 </Link>
-                                <Link href="" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
+                                <Link href="/Contuct_US" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                     Contact
                                 </Link>
 
@@ -240,7 +242,7 @@ export default function Navbar() {
                 {/* Mobile Navbar */}
                 <div
                     style={{ background: '#2DA9E1' }}
-                    className={`transition-transform duration-700 ease-in-out lg:hidden fixed top-32 md:top-44 right-0 h-full z-50 w-64 transform ${isNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                    className={`transition-transform duration-700 ease-in-out lg:hidden fixed top-28 md:top-44 right-0 h-full z-50 w-64 transform ${isNavOpen ? 'translate-x-0' : 'translate-x-full'}`}
                 >
                     <div className="flex justify-between items-center p-4">
 

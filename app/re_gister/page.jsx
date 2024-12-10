@@ -2,24 +2,44 @@
 
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import { SiGmail } from 'react-icons/si';
+import gmailimg from '../../assets/gml.PNG'
+import gmailwrite from '../../assets/googleWrite.png'
 import Link from 'next/link';
 import './re_gister.css';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
+import { useContext, useState } from 'react';
+import { AuthContext, UserAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import Loader from '../(with-navbar)/componenets/Loader/Loader';
+import Image from 'next/image';
 // import { useRouter } from 'next/router';
 
 export default function Login() {
 
- 
+  const { googleSignIn } = UserAuth();
 
 
   const { createUser, updateUserProfile } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);  // Track loading state
   const router = useRouter();
+
+
+  
+  const handleGoogleSignIn = async () => {
+    setLoading(true); // Start loading when Google SignIn begins
+    try {
+      await googleSignIn();
+      toast.success("Successfully logged in!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false); // Stop loading when sign-in is complete
+    }
+  };
 
   const {
     register,
@@ -49,6 +69,7 @@ export default function Login() {
     }
   };
 
+
   return (
     <main>
       <Navbar />
@@ -58,7 +79,7 @@ export default function Login() {
             onSubmit={handleSubmit(onSubmit)}
             className='gap-6 flex flex-col justify-center items-center w-full max-w-md shadow-lg  border-gray-500 rounded-xl p-6'
           >
-            <h1 className='text-3xl font-bold font-serif '>Register</h1>
+            <h1 className='text-3xl font-bold font-serif text-[#17549A]'>Register</h1>
 
             {/* Name field */}
             <div className='w-full '>
@@ -147,18 +168,39 @@ export default function Login() {
               <Link href={'/log_in'} className='text-blue-700 font-bold'>Login</Link>
             </div>
 
-            <div className='flex justify-center items-center gap-5 mt-4'>
-              <div style={{ borderRadius: '50px' }} className='bg-[#8fbff7] w-16 h-16 text-center flex items-center justify-center cursor-pointer gem-box'>
-                <h2 className='mt-2'>
-                  <SiGmail className='text-2xl' />
-                </h2>
+            <div
+              onClick={handleGoogleSignIn}
+              className="cursor-pointer"
+            >
+              <div
+                className="mt-2 flex flex-row justify-center items-center gap-4 px-5 py-1 shadow-md rounded-md hover:shadow-xl transition-shadow duration-300 bg-white"
+              >
+                {/* Gmail Image */}
+                <Image
+                  width={100}
+                  height={100}
+                  src={gmailimg}
+                  alt="Gmail Icon"
+                  className="w-12 h-12 rounded-full "
+                />
+
+                {/* Gmail Write Image */}
+                <Image
+                  width={100}
+                  height={100}
+                  src={gmailwrite}
+                  alt="Gmail Write Icon"
+                  className="w-28 h-12 "
+                />
               </div>
             </div>
           </form>
         </div>
       </div>
       <Footer />
-      <ToastContainer /> {/* Ensure this is included */}
+    
+      <ToastContainer />
+      {loading && <Loader />} 
     </main>
   );
 }

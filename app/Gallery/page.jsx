@@ -104,7 +104,7 @@ export default function page() {
     // console.log(Gallery)
 
 
-// for mobile device
+    // for mobile device
     const handleSidebarItemClick = (index) => {
         setActiveTabIndex(index);
 
@@ -163,7 +163,7 @@ export default function page() {
                 description="Explore a collection of stunning images showcasing our best moments."
                 keywords="gallery, pictures, photography, events"
                 author="Muhibullah"
-                
+
             />
 
             <ButtonTopMaker></ButtonTopMaker>
@@ -214,11 +214,14 @@ export default function page() {
                                         >
                                             {filteredGallery.map((image, index) => (
                                                 <SwiperSlide key={index}>
-                                                    <img
+                                                    <Image
+                                                        width={600}
+                                                        height={600}
                                                         onDragStart={(e) => e.preventDefault()} // Prevent drag
                                                         src={image.image}
                                                         className="w-full h-auto rounded-md"
                                                         alt={`Slide ${index + 1}`}
+                                                        loading='lazy'
                                                     />
                                                     <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
                                                         <time dateTime={image.date} className="text-white text-sm">{image.date}</time>
@@ -267,10 +270,10 @@ export default function page() {
 
 
 
-                                <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row md:mt-40 lg:mt-5 gap-5 h-auto  '>
+                                <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col  lg:flex-row md:flex-row  md:mt-40 lg:mt-5 gap-5 h-auto  '>
                                     {/* Tab List */}
-                                    <TabList  className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer  hidden  lg:flex sticky top-0 z-10 mt-4  rounded-md '>
-                                        <Tab className='p-4 text-left  focus:outline-none hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 mt-5'>All Events</Tab>
+                                    <TabList className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer   hidden  lg:flex sticky top-0 z-10   rounded-md '>
+                                        <Tab className='p-4 text-left  focus:outline-none hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600'>All Events</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Orientation</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Certification</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Awards Giving</Tab>
@@ -281,7 +284,7 @@ export default function page() {
                                     </TabList>
 
                                     {/* Tab Panels */}
-                                    <div  className='flex-1 h-[1000px] overflow-auto'>
+                                    <div className='flex-1 h-[1000px] overflow-auto'>
                                         <TabPanel>
 
                                             {/* tab panel 1 */}
@@ -291,7 +294,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -320,7 +323,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -349,7 +352,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -377,7 +380,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -407,7 +410,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -436,7 +439,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -465,7 +468,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -494,7 +497,7 @@ export default function page() {
                                                     <div key={Gallerys.id}>
                                                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                                                             <div className='lg:w-full'>
-                                                                <img
+                                                                <Image
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
@@ -531,6 +534,8 @@ export default function page() {
 
                                         <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
                                             <Image
+                                                width={400}
+                                                height={400}
                                                 src={img1}
                                                 className='w-full lg:w-11/12 h-full object-cover '
                                             />
@@ -555,6 +560,8 @@ export default function page() {
 
                                         <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
                                             <Image
+                                                width={400}
+                                                height={400}
                                                 src={img1}
                                                 className='w-full lg:w-11/12 h-full object-cover '
                                             />
@@ -574,6 +581,8 @@ export default function page() {
 
                                     <div className='w-full h-full relative overflow-hidden group cursor-pointer '>
                                         <Image
+                                            width={400}
+                                            height={400}
                                             src={img2}
                                             className='w-full  h-full object-cover '
                                         />

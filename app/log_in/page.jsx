@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import { SiGmail } from "react-icons/si";
+import gmailimg from '../../assets/gml.PNG'
+import gmailwrite from '../../assets/googleWrite.png'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
@@ -10,7 +12,8 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import { UserAuth } from "../context/AuthContext";
 import Loader from '../(with-navbar)/componenets/Loader/Loader';
- // Import the loader component
+import Image from 'next/image';
+// Import the loader component
 
 export default function Login() {
   const { googleSignIn, signInUser } = UserAuth();
@@ -63,7 +66,7 @@ export default function Login() {
             onSubmit={handleManualSignIn}
             className='gap-3 flex flex-col justify-center items-center w-full max-w-md h-auto mt-10 shadow-lg  border-gray-500 rounded-xl p-6'
           >
-            <h1 className='text-3xl font-bold font-serif text-black text-center'>Login</h1>
+            <h1 className='text-3xl font-bold font-serif text-[#17549A] text-center'>Login</h1>
             <div className='w-full mb-4'>
               <input
                 type="text"
@@ -110,13 +113,33 @@ export default function Login() {
             <p className='text-sm text-black text-center mt-4'>
               If you don't have an account, please register <Link className='text-blue-700 hover:underline font-bold' href={'/re_gister'}>here</Link>.
             </p>
-            <div onClick={handleGoogleSignIn} className='flex justify-center items-center gap-5 mt-4 cursor-pointer'>
-              <div style={{ borderRadius: '50px' }} className='bg-[#8fbff7] w-16 h-16 text-center flex items-center justify-center cursor-pointer gem-box'>
-                <h2 className='mt-2'>
-                  <SiGmail className='text-2xl' />
-                </h2>
+            <div
+              onClick={handleGoogleSignIn}
+              className="cursor-pointer"
+            >
+              <div
+                className="mt-2 flex flex-row justify-center items-center gap-4 px-5 py-1 shadow-md rounded-md hover:shadow-xl transition-shadow duration-300 bg-white"
+              >
+                {/* Gmail Image */}
+                <Image
+                  width={100}
+                  height={100}
+                  src={gmailimg}
+                  alt="Gmail Icon"
+                  className="w-12 h-12 rounded-full "
+                />
+
+                {/* Gmail Write Image */}
+                <Image
+                  width={100}
+                  height={100}
+                  src={gmailwrite}
+                  alt="Gmail Write Icon"
+                  className="w-28 h-12 "
+                />
               </div>
             </div>
+
           </form>
         </div>
       </div>

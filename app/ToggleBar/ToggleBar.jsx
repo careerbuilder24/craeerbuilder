@@ -17,17 +17,20 @@ const ToggleBar = ({ subject, description, id, visibleDropdown, toggleDropdown }
                     <h2>{subject}</h2>
                 </div>
 
-
                 {isOpen ? <MdExpandLess size={24} /> : <MdExpandMore size={24} />} {/* Toggle icon */}
             </div>
 
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.1, ease: [0.42, 0, 0.58, 1] }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ 
+                            opacity: { duration: 0.4, ease: [0.42, 0, 0.58, 1] },
+                            scale: { duration: 0.4, ease: [0.42, 0, 0.58, 1] },
+                        }}
+                        layout
                         className="bg-gray-300 p-4 w-full md:w-9/12 mx-auto sm:w-full shadow-md overflow-hidden mb-2"
                     >
                         <p className='text-sm text-[#3e3e3e]'>{description}</p>
