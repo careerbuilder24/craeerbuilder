@@ -8,13 +8,21 @@ import Footer from '../componenets/Footer/Footer';
 import loti from '../../../public/animationData/lottie/contact.json';
 import dynamic from 'next/dynamic';
 import { Marker, useJsApiLoader } from '@react-google-maps/api';
+
+
+
+
+const GoogleMap = dynamic(() => import('@react-google-maps/api').then(mod => mod.GoogleMap), {
+    ssr: false,
+  });
+
+  
+
 const defaultCenter = {
     lat: 23.822092060593015,
     lng: 90.39310646674065,
 };
-const GoogleMap = dynamic(() => import('@react-google-maps/api').then(mod => mod.GoogleMap), {
-    ssr: false,
-  });
+
   
 export default function ContactUs() {
     const [isClient, setIsClient] = useState(false);

@@ -76,7 +76,7 @@ export default function Login() {
                 required
               />
             </div>
-            <div className=' w-full mb-4'>
+            <div className=' w-full '>
               <input
                 type={show ? 'text' : 'password'}
                 placeholder="Enter your password"
@@ -97,20 +97,6 @@ export default function Login() {
             </div>
 
 
-            {/* Terms and Conditions Scrollable Area */}
-            <div className="mt-4 text-sm text-gray-600">
-              <div className="mt-2 p-4 border border-gray-300 rounded-md max-h-16 overflow-y-auto text-xs text-gray-600">
-                <p><strong className='text-blue-600'>Terms and Conditions</strong></p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum varius, urna eu consequat tincidunt, odio enim dapibus ligula, et luctus orci mi non urna. Sed at nisi nec odio accumsan efficitur. Etiam interdum, purus ut fermentum volutpat, justo urna condimentum turpis, nec tristique erat ipsum non urna. Donec sed ligula ex. Vivamus aliquet sapien eu erat dapibus suscipit. Donec vestibulum fringilla sapien. Integer at fringilla lorem. Etiam posuere egestas interdum.</p>
-                <p>...</p> {/* You can continue with the rest of the terms here */}
-              </div>
-
-              <label htmlFor="terms" className="flex items-center mt-5">
-                <input type="checkbox" id="terms" className="mr-2" />
-                I agree to the
-                <Link href="/terms-and-conditions" className="text-blue-600 hover:underline ml-1">Terms and Conditions</Link>
-              </label>
-            </div>
 
             <div className="form-control mb-4 w-full ">
               <ReCAPTCHA
