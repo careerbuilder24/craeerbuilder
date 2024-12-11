@@ -1,5 +1,5 @@
-'use client';
-import React, { useState } from 'react';
+'use client'
+import React, { useState, useEffect } from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Navbar from '../componenets/Navbar/Navbar';
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
@@ -7,16 +7,22 @@ import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import Footer from '../componenets/Footer/Footer';
 import loti from '../../../public/animationData/lottie/contact.json';
 
-// Define default map center for ECB Chattar, Dhaka Cantonment, Dhaka, Bangladesh
-// const defaultCenter = {
-//     lat: 23.822092060593015, // Replace with verified latitude
-//     lng: 90.39310646674065, // Replace with verified longitude
-// };
+const defaultCenter = {
+    lat: 23.822092060593015,
+    lng: 90.39310646674065,
+};
 
 export default function ContactUs() {
-    // const { isLoaded } = useJsApiLoader({
-    //     googleMapsApiKey: 'AIzaSyAzWgXd4omMlX_3qDhV-AISkfNCQDmGKBk', // Ensure the key is correct
-    // });
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        // This will run only on the client side
+        setIsClient(true);
+    }, []);
+
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: 'AIzaSyAzWgXd4omMlX_3qDhV-AISkfNCQDmGKBk'
+    });
 
     const [formData, setFormData] = useState({
         name: '',
@@ -32,8 +38,7 @@ export default function ContactUs() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Form submitted:', formData);
-        // Add logic to send form data to your backend or email service
-        setFormData({ name: '', email: '', message: '' }); // Reset form
+        setFormData({ name: '', email: '', message: '' });
     };
 
     return (
@@ -45,7 +50,7 @@ export default function ContactUs() {
                         Contact Us
                     </h1>
 
-                    {/* Four Columns for Email, Address, Contact Number, and Follow Us */}
+                    {/* Contact Info */}
                     <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto container lg:w-8/12 p-4">
                         <div className="text-justify p-3 bg-white rounded shadow-md">
                             <h3 className="font-semibold text-[#0054a5]">Email</h3>
@@ -75,10 +80,10 @@ export default function ContactUs() {
                         </div>
                     </div>
 
-                    {/* <div className="mt-10 container mx-auto flex justify-center mb-10">
-                       
-                        <div className="w-full sm:w-3/4 md:w-1/2 lg:w-3/5" style={{ height: '500px' }}>
-                            {isLoaded && (
+                    {/* Google Map */}
+                    <div className="mt-10 container mx-auto flex justify-center mb-10">
+                        {isClient && isLoaded && (
+                            <div className="w-full sm:w-3/4 md:w-1/2 lg:w-3/5" style={{ height: '500px' }}>
                                 <GoogleMap
                                     mapContainerStyle={{ width: '100%', height: '100%' }}
                                     center={defaultCenter}
@@ -87,9 +92,10 @@ export default function ContactUs() {
                                 >
                                     <Marker position={defaultCenter} />
                                 </GoogleMap>
-                            )}
-                        </div>
-                    </div> */}
+                            </div>
+                        )}
+                    </div>
+
                     {/* Contact Form and Lottie Animation */}
                     <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between w-full sm:w-3/4 md:w-1/2 lg:w-3/5 p-6 bg-white rounded shadow-md my-24 gap-10 ">
                         <div className="w-full lg:w-2/3">
@@ -120,26 +126,7 @@ export default function ContactUs() {
                                         required
                                     />
                                 </div>
-                                {/* Subject Dropdown */}
-                                <div className="mb-4 text-left">
-                                    <label className="block text-sm font-medium text-gray-700" htmlFor="subject">Subject</label>
-                                    <select
-                                        id="subject"
-                                        name="subject"
-                                        value={formData.subject}
-                                        onChange={handleChange}
-                                        className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
-                                        required
-                                    >
-                                        <option value="">Select a Subject</option>
-                                        <option value="admission">Admission</option>
-                                        <option value="B2B">B2B</option>
-                                        <option value="branch-opening">Branch Opening</option>
-                                        <option value="request-internship">Request for Internship</option>
-                                        <option value="request-certification">Request for Certification</option>
-                                        <option value="request-employment">Request for Employment</option>
-                                    </select>
-                                </div>
+
                                 <div className="mb-4 text-left">
                                     <label className="block text-sm font-medium text-gray-700" htmlFor="message">Message</label>
                                     <textarea
@@ -152,8 +139,6 @@ export default function ContactUs() {
                                         required
                                     ></textarea>
                                 </div>
-
-
 
                                 <button
                                     type="submit"
