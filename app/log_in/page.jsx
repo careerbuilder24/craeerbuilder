@@ -13,7 +13,6 @@ import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import { UserAuth } from "../context/AuthContext";
 import Loader from '../(with-navbar)/componenets/Loader/Loader';
 import Image from 'next/image';
-// Import the loader component
 
 export default function Login() {
   const { googleSignIn, signInUser } = UserAuth();
@@ -23,10 +22,10 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [show, setShow] = useState(false);
   const [captchaValue, setCaptchaValue] = useState(null);
-  const [loading, setLoading] = useState(false);  // Track loading state
+  const [loading, setLoading] = useState(false);
 
   const handleGoogleSignIn = async () => {
-    setLoading(true); // Start loading when Google SignIn begins
+    setLoading(true);
     try {
       await googleSignIn();
       toast.success("Successfully logged in!");
@@ -34,22 +33,22 @@ export default function Login() {
       console.log(error);
       toast.error("Login failed. Please check your credentials.");
     } finally {
-      setLoading(false); // Stop loading when sign-in is complete
+      setLoading(false);
     }
   };
 
   const handleManualSignIn = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loading when manual sign-in begins
+    setLoading(true);
     try {
       await signInUser(email, password);
       toast.success("Successfully logged in!");
-      router.push('/'); // Redirect to home
+      router.push('/');
     } catch (error) {
       console.error(error);
       toast.error("Login failed. Please check your credentials.");
     } finally {
-      setLoading(false); // Stop loading when sign-in is complete
+      setLoading(false);
     }
   };
 
@@ -77,32 +76,50 @@ export default function Login() {
                 required
               />
             </div>
-            <div className='flex flex-col items-center w-full mb-4'>
+            <div className=' w-full mb-4'>
               <input
                 type={show ? 'text' : 'password'}
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className='w-full p-2 border border-gray-300 rounded'
+                className='w-full p-2 border border-gray-300 rounded '
                 required
               />
-              <label className='flex items-center cursor-pointer mt-2 lg:mr-64 '>
+              <label className='cursor-pointer mt-2  '>
                 <input
                   type='checkbox'
                   checked={show}
                   onChange={() => setShow(!show)}
-                  className='mr-2 cursor-pointer'
+                  className='mr-2 cursor-pointer mt-5'
                 />
                 <small className='text-black'>{show ? 'Hide Password' : 'Show Password'}</small>
               </label>
             </div>
-            <div className="form-control mb-4 w-full lg:ml-20">
+
+
+            {/* Terms and Conditions Scrollable Area */}
+            <div className="mt-4 text-sm text-gray-600">
+              <div className="mt-2 p-4 border border-gray-300 rounded-md max-h-16 overflow-y-auto text-xs text-gray-600">
+                <p><strong className='text-blue-600'>Terms and Conditions</strong></p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum varius, urna eu consequat tincidunt, odio enim dapibus ligula, et luctus orci mi non urna. Sed at nisi nec odio accumsan efficitur. Etiam interdum, purus ut fermentum volutpat, justo urna condimentum turpis, nec tristique erat ipsum non urna. Donec sed ligula ex. Vivamus aliquet sapien eu erat dapibus suscipit. Donec vestibulum fringilla sapien. Integer at fringilla lorem. Etiam posuere egestas interdum.</p>
+                <p>...</p> {/* You can continue with the rest of the terms here */}
+              </div>
+
+              <label htmlFor="terms" className="flex items-center mt-5">
+                <input type="checkbox" id="terms" className="mr-2" />
+                I agree to the
+                <Link href="/terms-and-conditions" className="text-blue-600 hover:underline ml-1">Terms and Conditions</Link>
+              </label>
+            </div>
+
+            <div className="form-control mb-4 w-full ">
               <ReCAPTCHA
                 sitekey="6LftpWwqAAAAAP64cCjeY0hQ927AQu0OgA0LJxSo"
                 onChange={onChange}
                 className='w-full max-w-xs'
               />
             </div>
+
             <button
               type="submit"
               className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300 ${!captchaValue ? 'opacity-50 cursor-not-allowed' : ''}`}
@@ -110,17 +127,18 @@ export default function Login() {
             >
               Login
             </button>
+
             <p className='text-sm text-black text-center mt-4'>
               If you don't have an account, please register <Link className='text-blue-700 hover:underline font-bold' href={'/re_gister'}>here</Link>.
             </p>
+
             <div
               onClick={handleGoogleSignIn}
-              className="cursor-pointer"
+              className="cursor-pointer mt-4"
             >
               <div
                 className="mt-2 flex flex-row justify-center items-center gap-4 px-5 py-1 shadow-md rounded-md hover:shadow-xl transition-shadow duration-300 bg-white"
               >
-                {/* Gmail Image */}
                 <Image
                   width={100}
                   height={100}
@@ -128,8 +146,6 @@ export default function Login() {
                   alt="Gmail Icon"
                   className="w-12 h-12 rounded-full "
                 />
-
-                {/* Gmail Write Image */}
                 <Image
                   width={100}
                   height={100}
@@ -145,7 +161,7 @@ export default function Login() {
       </div>
       <Footer />
       <ToastContainer />
-      {loading && <Loader />} {/* Show loader when loading is true */}
+      {loading && <Loader />}
     </main>
   );
 }
