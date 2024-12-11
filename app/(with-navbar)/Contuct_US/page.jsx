@@ -8,15 +8,15 @@ import Footer from '../componenets/Footer/Footer';
 import loti from '../../../public/animationData/lottie/contact.json';
 
 // Define default map center for ECB Chattar, Dhaka Cantonment, Dhaka, Bangladesh
-const defaultCenter = {
-    lat: 23.822092060593015, // Replace with verified latitude
-    lng: 90.39310646674065, // Replace with verified longitude
-};
+// const defaultCenter = {
+//     lat: 23.822092060593015, // Replace with verified latitude
+//     lng: 90.39310646674065, // Replace with verified longitude
+// };
 
 export default function ContactUs() {
-    const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: 'AIzaSyAzWgXd4omMlX_3qDhV-AISkfNCQDmGKBk', // Ensure the key is correct
-    });
+    // const { isLoaded } = useJsApiLoader({
+    //     googleMapsApiKey: 'AIzaSyAzWgXd4omMlX_3qDhV-AISkfNCQDmGKBk', // Ensure the key is correct
+    // });
 
     const [formData, setFormData] = useState({
         name: '',
@@ -75,8 +75,8 @@ export default function ContactUs() {
                         </div>
                     </div>
 
-                    <div className="mt-10 container mx-auto flex justify-center mb-10">
-                        {/* Google Map */}
+                    {/* <div className="mt-10 container mx-auto flex justify-center mb-10">
+                       
                         <div className="w-full sm:w-3/4 md:w-1/2 lg:w-3/5" style={{ height: '500px' }}>
                             {isLoaded && (
                                 <GoogleMap
@@ -89,92 +89,92 @@ export default function ContactUs() {
                                 </GoogleMap>
                             )}
                         </div>
+                    </div> */}
+                    {/* Contact Form and Lottie Animation */}
+                    <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between w-full sm:w-3/4 md:w-1/2 lg:w-3/5 p-6 bg-white rounded shadow-md my-24 gap-10 ">
+                        <div className="w-full lg:w-2/3">
+                            <h2 className="text-2xl font-bold text-[#0054a5] mb-4 text-left">Send us a Message</h2>
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-4 text-left">
+                                    <label className="block text-sm font-medium text-gray-700" htmlFor="name">Name</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="mb-4 text-left">
+                                    <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
+                                        required
+                                    />
+                                </div>
+                                {/* Subject Dropdown */}
+                                <div className="mb-4 text-left">
+                                    <label className="block text-sm font-medium text-gray-700" htmlFor="subject">Subject</label>
+                                    <select
+                                        id="subject"
+                                        name="subject"
+                                        value={formData.subject}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
+                                        required
+                                    >
+                                        <option value="">Select a Subject</option>
+                                        <option value="admission">Admission</option>
+                                        <option value="B2B">B2B</option>
+                                        <option value="branch-opening">Branch Opening</option>
+                                        <option value="request-internship">Request for Internship</option>
+                                        <option value="request-certification">Request for Certification</option>
+                                        <option value="request-employment">Request for Employment</option>
+                                    </select>
+                                </div>
+                                <div className="mb-4 text-left">
+                                    <label className="block text-sm font-medium text-gray-700" htmlFor="message">Message</label>
+                                    <textarea
+                                        id="message"
+                                        name="message"
+                                        value={formData.message}
+                                        onChange={handleChange}
+                                        className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
+                                        rows="4"
+                                        required
+                                    ></textarea>
+                                </div>
+
+
+
+                                <button
+                                    type="submit"
+                                    className="w-full bg-[#0054a5] text-white py-2 px-4 rounded shadow hover:bg-[#003b78] transition duration-200"
+                                >
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+
+                        <div className="w-full lg:w-1/3 mt-8 lg:mt-0 flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ">
+                            <h3 className="text-lg font-serif text-[#0054a5] mb-4">Stay Connected</h3>
+                            <Player
+                                autoplay
+                                loop
+                                src={loti}
+                                style={{ height: '100%', maxHeight: '350px', width: '100%', maxWidth: '350px' }}
+                                speed={1.2}
+                            />
+                        </div>
                     </div>
-{/* Contact Form and Lottie Animation */}
-<div className="container mx-auto flex flex-col lg:flex-row items-center justify-between w-full sm:w-3/4 md:w-1/2 lg:w-3/5 p-6 bg-white rounded shadow-md my-24 gap-10 ">
-    <div className="w-full lg:w-2/3">
-        <h2 className="text-2xl font-bold text-[#0054a5] mb-4 text-left">Send us a Message</h2>
-        <form onSubmit={handleSubmit}>
-            <div className="mb-4 text-left">
-                <label className="block text-sm font-medium text-gray-700" htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
-                    required
-                />
-            </div>
-
-            <div className="mb-4 text-left">
-                <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
-                    required
-                />
-            </div>
-  {/* Subject Dropdown */}
-  <div className="mb-4 text-left">
-                <label className="block text-sm font-medium text-gray-700" htmlFor="subject">Subject</label>
-                <select
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
-                    required
-                >
-                    <option value="">Select a Subject</option>
-                    <option value="admission">Admission</option>
-                    <option value="B2B">B2B</option>
-                    <option value="branch-opening">Branch Opening</option>
-                    <option value="request-internship">Request for Internship</option>
-                    <option value="request-certification">Request for Certification</option>
-                    <option value="request-employment">Request for Employment</option>
-                </select>
-            </div>
-            <div className="mb-4 text-left">
-                <label className="block text-sm font-medium text-gray-700" htmlFor="message">Message</label>
-                <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="mt-1 block w-full p-2 border rounded shadow-sm focus:ring focus:ring-blue-300"
-                    rows="4"
-                    required
-                ></textarea>
-            </div>
-
-          
-
-            <button
-                type="submit"
-                className="w-full bg-[#0054a5] text-white py-2 px-4 rounded shadow hover:bg-[#003b78] transition duration-200"
-            >
-                Submit
-            </button>
-        </form>
-    </div>
-
-    <div className="w-full lg:w-1/3 mt-8 lg:mt-0 flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ">
-        <h3 className="text-lg font-serif text-[#0054a5] mb-4">Stay Connected</h3>
-        <Player
-            autoplay
-            loop
-            src={loti}
-            style={{ height: '100%', maxHeight: '350px', width: '100%', maxWidth: '350px' }}
-            speed={1.2}
-        />
-    </div>
-</div>
 
                 </div>
             </main>
