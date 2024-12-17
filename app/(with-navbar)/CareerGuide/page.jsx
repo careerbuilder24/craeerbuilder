@@ -111,7 +111,7 @@ export default function Page() {
                                 </div>
 
                                 {/* Third Section - Sticky */}
-                                <div className="bg-white rounded-lg shadow-lg w-full lg:w-4/12 h-[500px] p-6 sticky top-0">
+                                <div className="bg-white rounded-lg shadow-lg w-full lg:w-4/12 h-[500px] p-6 sticky top-48">
                                     <h3 className="text-blue-600 text-center text-2xl font-bold">Recent Top Blogs</h3>
 
                                    
