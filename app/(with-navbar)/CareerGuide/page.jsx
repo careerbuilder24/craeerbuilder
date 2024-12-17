@@ -13,24 +13,8 @@ import { BiSolidDislike } from "react-icons/bi";
 export default function Page() {
     const [CareerGuide] = useCareerGuide();
     const [searchTerm, setSearchTerm] = useState(''); // State for search term
-    const [liked, setLiked] = useState(false); // State for like button
-    const [disliked, setDisliked] = useState(false); // State for dislike button
-
-    // Handle Like Button click
-    const handleLikeClick = () => {
-        setLiked(!liked);  // Toggle like button
-        if (!liked) {
-            setDisliked(false);  // If liked, remove dislike
-        }
-    };
-
-    // Handle Dislike Button click
-    const handleDislikeClick = () => {
-        setDisliked(!disliked);  // Toggle dislike button
-        if (!disliked) {
-            setLiked(false);  // If disliked, remove like
-        }
-    };
+   
+ console.log(CareerGuide)
 
     // Filter the CareerGuide based on the search term
     const filteredCareerGuide = CareerGuide.filter((career) => {
@@ -127,6 +111,10 @@ export default function Page() {
                                             </p>
                                         </div>
                                     ))}
+                                    
+
+
+
                                 </div>
 
                             </div>

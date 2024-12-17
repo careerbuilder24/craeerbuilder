@@ -113,8 +113,8 @@ export default function Navbar() {
                     style={{ borderBottom: '1px solid white' }}
                     className={`fixed z-30 w-full transition-all duration-300 bg-white ${isScrolled ? 'top-0' : 'lg:top-10 top-0'}`}
                 >
-                    <div className="flex justify-center">
-                        <div className="w-9/12 lg:w-4/12 cursor-pointer mx-2 lg:ml-64">
+                    <div className="flex justify-center ">
+                        <div className="w-9/12 lg:w-4/12 cursor-pointer mx-2 lg:ml-64 container ">
                             <Image
                                 src={logo}
                                 className="w-8/12 lg:w-8/12 rounded-md ml-14 lg:ml-0"
@@ -223,6 +223,7 @@ export default function Navbar() {
                                         {user ? (
                                             <ul>
                                                 <li className="block py-2 text-gray-800 hover:bg-blue-400 rounded">Profile</li>
+                                                <Link className="block py-2 text-gray-800 hover:bg-blue-400 rounded" href={'/DashBoard/Supper_Ad_Min'}>Dashboard</Link>
                                                 <li className="block py-2 text-gray-800 hover:bg-blue-400 rounded" onClick={handleSignOut}>
                                                     LogOut
                                                 </li>
