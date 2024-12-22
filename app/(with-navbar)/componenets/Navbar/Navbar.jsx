@@ -223,7 +223,7 @@ export default function Navbar() {
                                         {user ? (
                                             <ul>
                                                 <li className="block py-2 text-gray-800 hover:bg-blue-400 rounded">Profile</li>
-                                                <Link className="block py-2 text-gray-800 hover:bg-blue-400 rounded" href={'/DashBoard/Supper_Ad_Min'}>Dashboard</Link>
+                                                <Link className="block py-2 text-gray-800 hover:bg-blue-400 rounded" href={'/DashBoard/Student'}>Dashboard</Link>
                                                 <li className="block py-2 text-gray-800 hover:bg-blue-400 rounded" onClick={handleSignOut}>
                                                     LogOut
                                                 </li>
