@@ -1,17 +1,21 @@
 'use client';
+
 import Navbar from '../componenets/Navbar/Navbar';
 import img1 from '../../../assets/details.PNG';
 import { useState, useEffect } from 'react';
 import { FaArrowDown } from 'react-icons/fa';
 import useBrackCourseList from '@/hooks/useBrackCourseList';
 import Footer from '../componenets/Footer/Footer';
-import Lottie from 'lottie-react'; // If Lottie is a default export
-import animationData from '../../../assets/AnimationLotie.json'; // Lottie JSON animation file (ensure the correct path)
+import dynamic from 'next/dynamic'; // For dynamic imports
+
+// Dynamically import Lottie to disable SSR
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+// import animationData from '../../../assets/AnimationLotie.json'; 
 
 export default function Page() {
   const BrackList = useBrackCourseList();
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [filteredBrackList, setFilteredBrackList] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -22,11 +26,12 @@ export default function Page() {
 
   useEffect(() => {
     if (BrackList && BrackList.length > 0) {
-      const result = searchQuery === ""
-        ? BrackList
-        : BrackList.filter(item =>
-          item.versity_name?.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+      const result =
+        searchQuery === ''
+          ? BrackList
+          : BrackList.filter((item) =>
+              item.versity_name?.toLowerCase().includes(searchQuery.toLowerCase())
+            );
 
       setFilteredBrackList(result);
     }
@@ -42,10 +47,8 @@ export default function Page() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can add logic here to send the form data to an API or email service
     console.log('Form Data Submitted:', formData);
     alert('Thank you for contacting us! We will get back to you shortly.');
-    // Optionally reset the form
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -94,57 +97,28 @@ export default function Page() {
                         <th className="border border-gray-200 p-2 text-center min-w-[200px]">University Link</th>
                       </tr>
                     </thead>
-
                     <tbody>
-                      {filteredBrackList?.map((BrackLists, index) => (
+                      {filteredBrackList.map((BrackLists, index) => (
                         <tr
                           key={BrackLists.id}
                           className={index % 2 === 0 ? 'bg-white' : 'bg-[#F2F2F2]'}
                         >
                           <td className="border text-center p-2">
                             <div className="flex flex-col items-center justify-center text-xs">
-                              <img src={BrackLists.image} alt={BrackLists.course_name} className="w-16 h-16 mx-auto" />
+                              <img
+                                src={BrackLists.image}
+                                alt={BrackLists.course_name}
+                                className="w-16 h-16 mx-auto"
+                              />
                               <div className="text-xs mt-2 text-center">
                                 {BrackLists.versity_name}
                               </div>
                             </div>
                           </td>
-
                           <td className="border text-left p-2 text-xs whitespace-nowrap">
                             <div>{BrackLists.course_name_First}</div>
                             <div>{BrackLists.course_name_Second}</div>
-                            <div>{BrackLists.course_name_Third}</div>
-                            <div>{BrackLists.course_name_Fourth}</div>
-                            <div>{BrackLists.course_name_Fifth}</div>
-                            <div>{BrackLists.course_name_Sixth}</div>
-                            <div>{BrackLists.course_name_Seventh}</div>
-                            <div>{BrackLists.course_name_Eighth}</div>
                           </td>
-
-                          <td className="border text-left p-2 text-xs whitespace-nowrap">
-                            <div>{BrackLists.course_name_First}</div>
-                            <div>{BrackLists.course_name_Second}</div>
-                            <div>{BrackLists.course_name_Third}</div>
-                            <div>{BrackLists.course_name_Fourth}</div>
-                            <div>{BrackLists.course_name_Fifth}</div>
-                            <div>{BrackLists.course_name_Sixth}</div>
-                            <div>{BrackLists.course_name_Seventh}</div>
-                            <div>{BrackLists.course_name_Eighth}</div>
-                          </td>
-
-                          <td className="border text-left p-2 text-xs whitespace-nowrap">
-                            <div>{BrackLists.course_name_First}</div>
-                            <div>{BrackLists.course_name_Second}</div>
-                            <div>{BrackLists.course_name_Third}</div>
-                            <div>{BrackLists.course_name_Fourth}</div>
-                            <div>{BrackLists.course_name_Fifth}</div>
-                            <div>{BrackLists.course_name_Sixth}</div>
-                            <div>{BrackLists.course_name_Seventh}</div>
-                            <div>{BrackLists.course_name_Eighth}</div>
-                          </td>
-
-                          <td className="border text-center p-2 whitespace-nowrap">{BrackLists.credits}</td>
-
                           <td className="border text-center p-2 whitespace-nowrap">
                             <a href={BrackLists.apply_link} target="_blank" rel="noopener noreferrer">
                               Apply Here
@@ -156,16 +130,11 @@ export default function Page() {
                   </table>
                 </div>
               </div>
-
-              {/* Scroll Icon at the bottom with animation */}
-              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <FaArrowDown className="text-2xl text-[#17549A]" />
-              </div>
             </div>
           </div>
 
-          {/* Two Column Section with Contact Form */}
-          {/* <div className="container mx-auto my-20 flex justify-between items-center w-8/12">
+          {/* Contact Form with Lottie Animation */}
+          <div className="container mx-auto my-20 flex justify-between items-center w-8/12">
             <div className="w-6/12">
               <h2 className="text-2xl font-semibold mb-4 text-[#6AD0F7]">Contact Us</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -184,7 +153,6 @@ export default function Page() {
                     required
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium mb-2" htmlFor="email">
                     Email
@@ -200,7 +168,6 @@ export default function Page() {
                     required
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-medium mb-2" htmlFor="message">
                     Message
@@ -216,7 +183,6 @@ export default function Page() {
                     required
                   />
                 </div>
-
                 <div className="text-center">
                   <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
                     Submit
@@ -224,12 +190,10 @@ export default function Page() {
                 </div>
               </form>
             </div>
-
-            <div className="w-1/2">
-              
+            {/* <div className="w-1/2">
               <Lottie animationData={animationData} loop={true} />
-            </div>
-          </div> */}
+            </div> */}
+          </div>
         </div>
 
         <Footer />

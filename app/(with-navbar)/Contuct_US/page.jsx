@@ -7,7 +7,7 @@ import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
 import Navbar from '../componenets/Navbar/Navbar';
 import Footer from '../componenets/Footer/Footer';
-import loti from '../../../public/animationData/lottie/contact.json';
+// import loti from '../../../public/animationData/lottie/contact.json';
 
 // Dynamically load the Leaflet map component
 const Map = dynamic(() => import('../componenets/Map/Map'), { ssr: false });
@@ -161,7 +161,7 @@ export default function Page() {
                             </form>
                         </div>
 
-                        {isClient && (
+                        {/* {isClient && (
                             <div className="w-full lg:w-1/3 mt-8 lg:mt-0 flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
                                 <h3 className="text-lg font-serif text-[#0054a5] mb-4">Stay Connected</h3>
                                 <Player
@@ -177,7 +177,7 @@ export default function Page() {
                                     speed={1.2}
                                 />
                             </div>
-                        )}
+                        )} */}
                     </div>
                 </div>
             </main>
