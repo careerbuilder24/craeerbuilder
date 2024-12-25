@@ -3,28 +3,32 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Player } from '@lottiefiles/react-lottie-player';
-
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 
-import loti from '../../../public/animationData/lottie/contact.json';
 import Navbar from '../componenets/Navbar/Navbar';
 import Footer from '../componenets/Footer/Footer';
+import loti from '../../../public/animationData/lottie/contact.json';
 
 // Dynamically load the Leaflet map component
 const Map = dynamic(() => import('../componenets/Map/Map'), { ssr: false });
-
 
 const defaultCenter = {
     lat: 23.822092060593015,
     lng: 90.39310646674065,
 };
 
-export default function page() {
+export default function Page() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: '',
     });
+
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true); // Ensures this runs only on the client
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -157,21 +161,23 @@ export default function page() {
                             </form>
                         </div>
 
-                        <div className="w-full lg:w-1/3 mt-8 lg:mt-0 flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                            <h3 className="text-lg font-serif text-[#0054a5] mb-4">Stay Connected</h3>
-                            <Player
-                                autoplay
-                                loop
-                                src={loti}
-                                style={{
-                                    height: '100%',
-                                    maxHeight: '350px',
-                                    width: '100%',
-                                    maxWidth: '350px',
-                                }}
-                                speed={1.2}
-                            />
-                        </div>
+                        {isClient && (
+                            <div className="w-full lg:w-1/3 mt-8 lg:mt-0 flex flex-col items-center bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                                <h3 className="text-lg font-serif text-[#0054a5] mb-4">Stay Connected</h3>
+                                <Player
+                                    autoplay
+                                    loop
+                                    src={loti}
+                                    style={{
+                                        height: '100%',
+                                        maxHeight: '350px',
+                                        width: '100%',
+                                        maxWidth: '350px',
+                                    }}
+                                    speed={1.2}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </main>
