@@ -255,7 +255,7 @@ export default function Page() {
 
                         <div className=' shadow-xl rounded py-10'>
                             <div className='font-bold'>
-                                <Image src={gif1} onDragStart={(e) => e.preventDefault()}></Image>
+                                <Image alt='gif file' src={gif1} onDragStart={(e) => e.preventDefault()}></Image>
                                 <p className='text-[#0054a5]  mt-3 text-center '>Build Career in Web</p>
                             </div>
 
