@@ -16,6 +16,7 @@ import SettingsEdits from '../Students_Dashboards_Components/SettingsEdit/Settin
 import Image from 'next/image';
 import Certificate from '../Students_Dashboards_Components/certificate/Certificate';
 import Head from 'next/head';  // Import next/head for SEO
+import Welcome_Page from '../Welcome_Page/Welcome_Page';
 
 const PageContent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -154,7 +155,7 @@ const PageContent = () => {
               {activeSection === 'settings' && <SettingsEdits navbarColor={navbarColor} sidebarColor={sidebarColor} />}
             </>
           ) : (
-            <div className="blank-page">This is a blank page</div> // Blank page content
+            <Welcome_Page /> // Blank page content
           )}
         </div>
       </main>
