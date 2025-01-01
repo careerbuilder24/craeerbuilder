@@ -1,12 +1,14 @@
 'use client';
 import { useState } from 'react';
 import Navbar from '../componenets/Navbar/Navbar';
-import Lottie from 'react-lottie'; // Import Lottie
+import dynamic from 'next/dynamic'; // Import dynamic for SSR handling
 import animationData from '../../../public/animationData/lottie/FaqSearch.json'; 
 import Footer from '../componenets/Footer/Footer';
 import ToggleBar2 from '@/app/ToggleBar/ToggleBar2';
 import Chatbot from '../componenets/chatBot/Chatbot';
 
+// Dynamically import Lottie component with SSR disabled
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
 export default function Page() {
   const [visibleDropdowns, setVisibleDropdowns] = useState({}); // Object to track visibility per section
@@ -21,7 +23,6 @@ export default function Page() {
     },
   };
 
-  // Three separate JSON datasets with consistent title formatting
   const sectionData = [
     {
       id: 'section-1',
@@ -65,20 +66,14 @@ export default function Page() {
   return (
     <>
       <Navbar />
-
       <main className="lg:mt-60 md:mt-60 container mx-auto px-4 lg:my-72 my-20 ">
         <div className="container mx-auto ">
-
-            {/* Lottie animation display */}
-            <div className="w-full lg:w-1/3 bg-white p-4 container mx-auto  mt-6">
-              <Lottie options={lottieOptions} height={215} width={200} />
-            </div>
-
-            <h1 className='text-center text-[#0054a5] font-semibold text-2xl lg:text-4xl my-16'>FAQ (Frequently Asked Question)</h1>
+          {/* Lottie animation display */}
+          <div className="w-full lg:w-1/3 bg-white p-4 container mx-auto mt-6">
+            <Lottie options={lottieOptions} height={215} width={200} />
+          </div>
+          <h1 className='text-center text-[#0054a5] font-semibold text-2xl lg:text-4xl my-16'>FAQ (Frequently Asked Question)</h1>
           <div className="flex flex-col lg:flex-row lg:px-44">
-
-           
-
             {/* Section rendering */}
             {sectionData.map((section) => (
               <div key={section.id} className="w-full lg:w-6/12 px-4 container mx-auto  ">
@@ -98,12 +93,9 @@ export default function Page() {
               </div>
             ))}
           </div>
-
-         
-     
         </div>
       </main>
-      <Footer></Footer>
+      <Footer />
       <Chatbot />
     </>
   );
