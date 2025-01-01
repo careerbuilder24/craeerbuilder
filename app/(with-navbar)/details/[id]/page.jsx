@@ -233,6 +233,7 @@ export default function Page() {
                                 <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
                                 <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
                                     <Image
+                                    alt='instructor image'
                                         src={instrastor}
                                         className='w-full h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
                                     />
@@ -247,6 +248,7 @@ export default function Page() {
 
                         <div className='w-12/12 shadow-xl rounded p-4  mt-5'>
                             <Image
+                            alt='company image'
                                 onDragStart={(e) => e.preventDefault()}
                                 src={img2}
                                 className='w-full  h-full object-cover '
@@ -291,7 +293,7 @@ export default function Page() {
                                 <p className='text-[#0054a5] font-semibold mt-3'>TRAINING VENUE</p>
                                 <hr className='w-10 h-1 bg-[#0054a6]' />
 
-                                <Image src={logo} className='relative right-3'></Image>
+                                <Image alt='company image' src={logo} className='relative right-3'></Image>
                                 <p className='mt-4 text-base'>Moitry chattar ECB mor Dhaka-1205</p>
                                 <StarRatings
                                     rating={cr?.rating}

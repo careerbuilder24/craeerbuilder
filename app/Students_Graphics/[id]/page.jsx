@@ -282,12 +282,10 @@ export default function page() {
                                     <Image
                                         src={graphic?.image}
                                         onDragStart={(e) => e.preventDefault()}
-                                        alt={graphic?.title}
+                                        alt='students picture of group'
                                         className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8"
                                         width={100}
                                         height={100}
-
-
                                         style={{ border: '4px solid #ffffff' }} // Custom border radius
                                         onError={(e) => { e.target.src = 'fallback-image-url.jpg'; }} // Fallback image in case of error
                                     />

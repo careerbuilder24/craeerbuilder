@@ -95,7 +95,7 @@ export default function CuriculamVite() {
                                 <Image
                                     src={graphic?.image}
                                     onDragStart={(e) => e.preventDefault()}
-                                    alt={graphic?.title}
+                                    alt='cv picture'
                                     className="mt-4 shadow-lg w-10/12 mx-auto mb-8  "
                                     width={100}
                                     height={100}
