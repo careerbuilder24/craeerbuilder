@@ -2,16 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { Player } from '@lottiefiles/react-lottie-player';
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
-
 import Navbar from '../componenets/Navbar/Navbar';
 import Footer from '../componenets/Footer/Footer';
-import loti from '../../../public/animationData/lottie/contact.json';
 import Chatbot from '../componenets/chatBot/Chatbot';
 
-// Dynamically load the Leaflet map component
+// Dynamically load the Lottie animation and Map component without SSR
+const Player = dynamic(() => import('@lottiefiles/react-lottie-player').then(mod => mod.Player), { ssr: false });
 const Map = dynamic(() => import('../componenets/Map/Map'), { ssr: false });
+
+import loti from '../../../public/animationData/lottie/contact.json';
 
 const defaultCenter = {
     lat: 23.822092060593015,
