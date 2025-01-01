@@ -15,6 +15,7 @@ import Image from 'next/image';
 import Head from 'next/head';
 
 import './Course.css'
+import Chatbot from '../(with-navbar)/componenets/chatBot/Chatbot';
 export default function Courses() {
   const courses = useCourses();
   const [searchTerm, setSearchTerm] = useState(''); // State for search input
@@ -61,6 +62,7 @@ export default function Courses() {
 
   return (
     <>
+    
       <Head>
         <link rel='preload' href={img1} as='image' />
         <link rel='preload' href={courses?.image} as='image' />
@@ -269,6 +271,7 @@ export default function Courses() {
 
 
       <Footer />
+      <Chatbot />
     </>
   );
 }

@@ -10,7 +10,8 @@ import dynamic from 'next/dynamic'; // For dynamic imports
 
 // Dynamically import Lottie to disable SSR
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-// import animationData from '../../../assets/AnimationLotie.json'; 
+import animationData from '../../../assets/AnimationLotie.json'; 
+import Chatbot from '../componenets/chatBot/Chatbot';
 
 export default function Page() {
   const BrackList = useBrackCourseList();
@@ -190,14 +191,15 @@ export default function Page() {
                 </div>
               </form>
             </div>
-            {/* <div className="w-1/2">
+            <div className="w-1/2">
               <Lottie animationData={animationData} loop={true} />
-            </div> */}
+            </div>
           </div>
         </div>
 
         <Footer />
       </main>
+      <Chatbot />
     </>
   );
 }

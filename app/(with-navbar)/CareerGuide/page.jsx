@@ -9,6 +9,7 @@ import Footer from '../componenets/Footer/Footer';
 import Link from 'next/link';
 import { PiHandsClappingFill } from "react-icons/pi";
 import { BiSolidDislike } from "react-icons/bi";
+import Chatbot from '../componenets/chatBot/Chatbot';
 
 export default function Page() {
     const [CareerGuide] = useCareerGuide();
@@ -124,6 +125,7 @@ export default function Page() {
             </main>
 
             <Footer />
+            <Chatbot />
         </>
     );
 }

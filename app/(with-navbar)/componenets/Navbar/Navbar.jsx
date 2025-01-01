@@ -116,6 +116,7 @@ export default function Navbar() {
                     <div className="flex justify-center ">
                         <div className="w-9/12 lg:w-4/12 cursor-pointer mx-2 lg:ml-64 container ">
                             <Image
+                            alt='nav logo image'
                                 src={logo}
                                 className="w-8/12 lg:w-8/12 rounded-md ml-14 lg:ml-0"
                                 onDragStart={(e) => e.preventDefault()}
@@ -153,24 +154,37 @@ export default function Navbar() {
 
 
                                 <div className="relative group">
+                                    {/* Parent Trigger for Dropdown */}
                                     <div className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">
                                         <Link href="/Students" className="flex items-center justify-center h-full font-bold">
                                             Students
+                                            <span className="ml-2 text-sm transition-transform duration-300 transform group-hover:rotate-180">&#x25BC;</span> {/* Dropdown arrow */}
                                         </Link>
                                     </div>
 
-                                    <div className="dropdown-content z-[1] menu py-3 px-4 shadow  w-52 font-bold bg-white absolute left-0 top-4 mt-2 hidden group-hover:block transition-all">
-                                        <Link href="/RunningStudents" className="block py-2 text-gray-800 hover:bg-blue-400 rounded">
-                                            Running Students
+                                    {/* Dropdown Content */}
+                                    <div className="dropdown-content z-10 menu py-3 px-4 shadow-lg rounded-t-lg w-56 font-semibold bg-white text-gray-800 absolute left-0 top-full mt-0 hidden group-hover:block transition-all duration-300">
+                                        <Link href="/RunningStudents" className="block py-2 px-4 hover:bg-blue-100 hover:scale-105 transition-all rounded-lg">
+                                            <span className="flex items-center">
+                                                <span className="mr-2">&#x1F393;</span> {/* Graduation cap icon */}
+                                                Running Students
+                                            </span>
                                         </Link>
-                                        <Link href="/RunningIntern" className="block py-2 text-gray-800 hover:bg-blue-400 rounded">
-                                            Running Interns
+                                        <Link href="/RunningIntern" className="block py-2 px-4 hover:bg-blue-100 hover:scale-105 transition-all rounded-lg">
+                                            <span className="flex items-center">
+                                                <span className="mr-2">&#x1F4BC;</span> {/* Briefcase icon */}
+                                                Running Interns
+                                            </span>
                                         </Link>
-                                        <Link href="/RunningEmployee" className="block py-2 text-gray-800 hover:bg-blue-400 rounded">
-                                            Running Employees
+                                        <Link href="/RunningEmployee" className="block py-2 px-4 hover:bg-blue-100 hover:scale-105 transition-all rounded-lg">
+                                            <span className="flex items-center">
+                                                <span className="mr-2">&#x1F464;</span> {/* Employee icon */}
+                                                Running Employees
+                                            </span>
                                         </Link>
                                     </div>
                                 </div>
+
 
                                 {/* Other Links */}
                                 <Link href="/Gallery" className="text-center text-white hover:text-blue-400 duration-300 transition-all font-bold cursor-pointer whitespace-nowrap">

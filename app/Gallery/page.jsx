@@ -38,6 +38,7 @@ import Image from 'next/image'
 import Head from 'next/head';
 import ButtonTopMaker from '../buttonTopMaker/ButtonTopMaker';
 import HelmetHead from '../HelmetHead/HelmetHead';
+import Chatbot from '../(with-navbar)/componenets/chatBot/Chatbot';
 // import TextReveal from '../TextReveal/TextReveal'
 
 
@@ -601,6 +602,7 @@ export default function page() {
 
 
             <Footer></Footer>
+            <Chatbot />
         </>
     )
 }

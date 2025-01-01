@@ -13,6 +13,7 @@ import './AboutUs.css'
 import Footer from '../componenets/Footer/Footer';
 import ToggleBar3 from '@/app/ToggleBar/ToggleBar3';
 import useTeam from '@/hooks/useTeam';
+import Chatbot from '../componenets/chatBot/Chatbot';
 
 export default function Page() {
   const [visibleDropdowns2, setVisibleDropdowns2] = useState({});
@@ -318,6 +319,7 @@ export default function Page() {
         </div>
         <Footer />
       </main>
+      <Chatbot />
     </>
   );
 }

@@ -18,6 +18,7 @@ import { IoReturnDownForwardOutline } from "react-icons/io5"
 import { FaComment, FaCommentDots } from 'react-icons/fa';
 import { PiChatCircleTextBold } from "react-icons/pi";
 import { FaRegEyeSlash } from "react-icons/fa"; // Another icon for hidden state
+import Chatbot from '../../componenets/chatBot/Chatbot';
 
 export default function Page() {
     const [liked, setLiked] = useState(false);
@@ -1034,6 +1035,7 @@ export default function Page() {
             </main>
 
             <Footer />
+            <Chatbot />
         </>
     );
 }

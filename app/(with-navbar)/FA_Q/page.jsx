@@ -2,23 +2,24 @@
 import { useState } from 'react';
 import Navbar from '../componenets/Navbar/Navbar';
 import Lottie from 'react-lottie'; // Import Lottie
-// import animationData from '../../../public/animationData/lottie/FaqSearch.json'; 
+import animationData from '../../../public/animationData/lottie/FaqSearch.json'; 
 import Footer from '../componenets/Footer/Footer';
 import ToggleBar2 from '@/app/ToggleBar/ToggleBar2';
+import Chatbot from '../componenets/chatBot/Chatbot';
 
 
 export default function Page() {
   const [visibleDropdowns, setVisibleDropdowns] = useState({}); // Object to track visibility per section
 
   // Lottie options
-  // const lottieOptions = {
-  //   loop: true, 
-  //   autoplay: true, 
-  //   animationData: animationData, 
-  //   rendererSettings: {
-  //     preserveAspectRatio: 'xMidYMid slice',
-  //   },
-  // };
+  const lottieOptions = {
+    loop: true, 
+    autoplay: true, 
+    animationData: animationData, 
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
 
   // Three separate JSON datasets with consistent title formatting
   const sectionData = [
@@ -69,9 +70,9 @@ export default function Page() {
         <div className="container mx-auto ">
 
             {/* Lottie animation display */}
-            {/* <div className="w-full lg:w-1/3 bg-white p-4 container mx-auto  mt-6">
+            <div className="w-full lg:w-1/3 bg-white p-4 container mx-auto  mt-6">
               <Lottie options={lottieOptions} height={215} width={200} />
-            </div> */}
+            </div>
 
             <h1 className='text-center text-[#0054a5] font-semibold text-2xl lg:text-4xl my-16'>FAQ (Frequently Asked Question)</h1>
           <div className="flex flex-col lg:flex-row lg:px-44">
@@ -103,6 +104,7 @@ export default function Page() {
         </div>
       </main>
       <Footer></Footer>
+      <Chatbot />
     </>
   );
 }
