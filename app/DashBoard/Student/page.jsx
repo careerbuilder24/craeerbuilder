@@ -17,6 +17,7 @@ import Image from 'next/image';
 import Certificate from '../Students_Dashboards_Components/certificate/Certificate';
 import Head from 'next/head';  // Import next/head for SEO
 import Welcome_Page from '../Welcome_Page/Welcome_Page';
+import AllBlogs from '../Students_Dashboards_Components/AllBlog/AllBlogs';
 
 const PageContent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -101,7 +102,8 @@ const PageContent = () => {
             <li onClick={() => handleSectionClick('Pictures')}>Pictures</li>
             <li onClick={() => handleSectionClick('Videos')}>Videos</li>
             <li onClick={() => handleSectionClick('Blog')}>Blog</li>
-            <li onClick={() => handleSectionClick('settings')}>Settings</li>
+            <li onClick={() => handleSectionClick('AllBlogs')}>All Blogs</li>
+            {/* <li onClick={() => handleSectionClick('settings')}>Settings</li> */}
           </ul>
         );
     }
@@ -152,7 +154,8 @@ const PageContent = () => {
               {activeSection === 'Pictures' && <PicturesEdits />}
               {activeSection === 'Videos' && <VideosEdits />}
               {activeSection === 'Blog' && <BlogsEditsStudents />}
-              {activeSection === 'settings' && <SettingsEdits navbarColor={navbarColor} sidebarColor={sidebarColor} />}
+              {activeSection === 'AllBlogs' && <AllBlogs />}
+              {/* {activeSection === 'settings' && <SettingsEdits navbarColor={navbarColor} sidebarColor={sidebarColor} />} */}
             </>
           ) : (
             <Welcome_Page /> // Blank page content

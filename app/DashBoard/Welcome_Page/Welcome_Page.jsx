@@ -35,8 +35,7 @@ export default function Welcome_Page() {
         if (metaOgUrl) {
             metaOgUrl.setAttribute("content", "https://www.career-builder.com");
         }
-
-    }, []); // Empty dependency array ensures it runs only once on mount
+    }, []);
 
     return (
         <>
@@ -61,6 +60,7 @@ export default function Welcome_Page() {
                     height: 100vh;
                     background: linear-gradient(135deg, #0054a5, #00c4cc);
                     overflow: hidden;
+                    padding: 10px;
                 }
 
                 .welcome-text {
@@ -101,6 +101,18 @@ export default function Welcome_Page() {
                     }
                     50% {
                         transform: translateY(-10px);
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .line {
+                        font-size: 5rem;
+                    }
+                }
+
+                @media (max-width: 480px) {
+                    .line {
+                        font-size: 3rem;
                     }
                 }
             `}</style>

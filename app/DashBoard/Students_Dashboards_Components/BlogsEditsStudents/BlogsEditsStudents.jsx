@@ -72,6 +72,8 @@ export default function Page() {
                         type="text"
                         placeholder="Enter title"
                         style={{ width: '100%', padding: '8px', margin: '8px 0', borderRadius: '5px' }}
+                        className='border'
+
                     />
                 </div>
                 <div>
