@@ -283,10 +283,10 @@ export default function Page() {
                 {/* Image */}
                 <Image
                   width={300}
-                  height={100} // Significantly reduced height
-                  src={member.image}
+                  height={100}
+                  src={member.image.trim()} // Fixed potential space issue
                   alt={member.name}
-                  className="w-full h-[500px] object-cover rounded-md" // Force height to 100px
+                  className="w-full h-[500px] object-cover rounded-md"
                 />
 
                 {/* Hover Overlay */}
