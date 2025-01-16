@@ -27,13 +27,14 @@ import AboutUsAdded from '../Students_Dashboards_Components/Admin/About_Us_Added
 import ContactUsAdded from '../Students_Dashboards_Components/Admin/Contact_Us_Added/ContactUsAdded';
 import ManageUsers from '../Students_Dashboards_Components/Admin/Manage_Users/ManageUsers';
 import AdminWelcomePage from '../Students_Dashboards_Components/Admin_Welcome_Page/AdminWelcomePage';
+import GalleryAdded from '../Students_Dashboards_Components/Admin/Gallery_Added/GalleryAdded';
 
 const PageContent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [navbarColor, setNavbarColor] = useState('#17549A');
   const [sidebarColor, setSidebarColor] = useState('#222');
-  const [userRole, setUserRole] = useState('user'); // Example role
+  const [userRole, setUserRole] = useState('admin'); // Example role
   const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
 
   const router = useRouter();
@@ -69,6 +70,9 @@ const PageContent = () => {
     router.push(`/DashBoard/Student?section=${section}`);
   };
 
+
+  //click active sidebar content
+  
   const renderSidebarForRole = () => {
     switch (userRole) {
       case 'admin':
@@ -77,6 +81,7 @@ const PageContent = () => {
             <Link href="/">Home</Link>
             <li onClick={() => handleSectionClick('Course_Added')}>Course Added</li>
             <li onClick={() => handleSectionClick('Students_Added')}>Students Added</li>
+            <li onClick={() => handleSectionClick('Gallery_Added')}>Gallery Added</li>
             <li onClick={() => handleSectionClick('University_BioData_Added')}>University BioData Added</li>
             <li onClick={() => handleSectionClick('Career_Guide_Blog_Added')}>Career Guide Blog Added</li>
             <li onClick={() => handleSectionClick('FAQ_Added')}>FAQ Added</li>
@@ -112,6 +117,7 @@ const PageContent = () => {
   };
 
   const renderActiveSection = () => {
+    
     if (userRole === 'admin') {
       // Sections for admin
       switch (activeSection) { 
@@ -119,6 +125,8 @@ const PageContent = () => {
           return <CourseAdded />;  // Admin course section
         case 'Students_Added':
           return <StudentsAdded />;  // Admin students section
+        case 'Gallery_Added':
+          return <GalleryAdded />;  // Admin university section
         case 'University_BioData_Added':
           return <UniversityBioDataAdded />;  // Admin university section
         case 'Career_Guide_Blog_Added':
