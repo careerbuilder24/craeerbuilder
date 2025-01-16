@@ -7,7 +7,7 @@ const CareerGuideBlogAdded = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://careers-builder2.vercel.app/api/Dashboard_User');
+        const response = await fetch(process.env.NEXT_PUBLIC_API_URL);
         if (!response.ok) throw new Error('Failed to fetch data');
 
         const result = await response.json();
