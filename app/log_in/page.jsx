@@ -123,18 +123,20 @@ export default function Login() {
 
 
 
-            <div className="form-control mb-4 w-full ">
+            {/* <div className="form-control mb-4 w-full ">
               <ReCAPTCHA
                 sitekey="6LftpWwqAAAAAP64cCjeY0hQ927AQu0OgA0LJxSo"
                 onChange={onChange}
                 className='w-full max-w-xs'
               />
-            </div>
+            </div> */}
 
             <button
               type="submit"
-              className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300 ${!captchaValue ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300`}
               disabled={!captchaValue}
+              // className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300 ${!captchaValue ? 'opacity-50 cursor-not-allowed' : ''}`}
+              // disabled={!captchaValue}
             >
               Login
             </button>
