@@ -50,24 +50,29 @@ export default function Login() {
 
   // onsubmit funtions
   const onSubmit = async (data) => {
-    const { email, password, name } = data;
-
+    setLoading(true);
     try {
-      const result = await createUser(email, password);
-      const loggedUser = result.user;
+        const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
 
+        const result = await response.json();
 
-      await updateUserProfile(loggedUser, name);
-
-      if (loggedUser.email) {
-        toast.success("Successfully Signed Up");
-        setTimeout(() => router.replace('/'), 2000);
-      }
+        if (result.success) {
+            toast.success("Successfully Registered!");
+            setTimeout(() => router.replace('/'), 2000);
+        } else {
+            toast.error(result.message || "Sign up failed.");
+        }
     } catch (err) {
-      console.error(err);
-      toast.error("Sign up failed. Please try again.");
+        console.error(err);
+        toast.error("An error occurred. Please try again.");
+    } finally {
+        setLoading(false);
     }
-  };
+};
 // yeah why 
 
   return (

@@ -3,7 +3,7 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 const nextConfig = {
   // Specify the custom output directory for build artifacts
   // distDir: 'dist',  
-
+// output: "export",
   images: {
     domains: [
        "i.ibb.co", "ibb.co", "img.freepik.com", "lh3.googleusercontent.com", "i.postimg.cc"

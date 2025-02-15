@@ -15,7 +15,7 @@ import Loader from '../(with-navbar)/componenets/Loader/Loader';
 import Image from 'next/image';
 
 export default function Login() {
-  const { googleSignIn, signInUser } = UserAuth();
+  const { googleSignIn, signInUser, loginUserManual } = UserAuth();
   const router = useRouter();
 
   const [email, setEmail] = useState('');
@@ -40,17 +40,42 @@ export default function Login() {
   const handleManualSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      await signInUser(email, password);
-      toast.success("Successfully logged in!");
-      router.push('/');
+        // ✅ Step 1: Authenticate user (Login API)
+        const response = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        });
+
+        if (!response.ok) {
+            throw new Error("Login failed. Please check your credentials.");
+        }
+
+        const result = await response.json();
+        console.log("Backend Response:", result);
+
+        if (!result.success) {
+            toast.error(result.message || "Login failed.");
+            return;
+        }
+
+        toast.success(result.message);
+
+        // ✅ Step 2: Update AuthContext with manual user data
+        loginUserManual(result.user); // Call loginUserManual with the user data
+
+        // ✅ Step 3: Redirect to home
+        router.push("/");
     } catch (error) {
-      console.error(error);
-      toast.error("Login failed. Please check your credentials.");
+        console.error("Error during login:", error);
+        toast.error(error.message || "Login failed. Please try again.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+  
 
   const onChange = (value) => {
     setCaptchaValue(value);
@@ -141,7 +166,6 @@ export default function Login() {
                 />
               </div>
             </div>
-
           </form>
         </div>
       </div>

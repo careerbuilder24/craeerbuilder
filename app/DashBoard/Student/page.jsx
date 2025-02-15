@@ -28,14 +28,36 @@ import ContactUsAdded from '../Students_Dashboards_Components/Admin/Contact_Us_A
 import ManageUsers from '../Students_Dashboards_Components/Admin/Manage_Users/ManageUsers';
 import AdminWelcomePage from '../Students_Dashboards_Components/Admin_Welcome_Page/AdminWelcomePage';
 import GalleryAdded from '../Students_Dashboards_Components/Admin/Gallery_Added/GalleryAdded';
+import { UserAuth } from '@/app/context/AuthContext';
+import usersAdmin from '@/hooks/useAdminUser';
 
 const PageContent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [navbarColor, setNavbarColor] = useState('#17549A');
   const [sidebarColor, setSidebarColor] = useState('#222');
-  const [userRole, setUserRole] = useState('admin'); // Example role
+  const [userRole, setUserRole] = useState('Admin'); // Example role
   const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
+
+  // users 
+  const { ManualUser } = UserAuth();
+  const { userAdmin } = usersAdmin();
+  useEffect(() => {
+    if (ManualUser && userAdmin) {
+      const isAdmin = userAdmin.some(admin =>
+        admin.email === ManualUser.email && admin.role === 'Admin'
+      );
+
+      setUserRole(isAdmin ? 'Admin' : 'user');
+    }
+  }, [ManualUser, userAdmin]);
+
+  console.log('Current User:', ManualUser);
+  console.log('Admin List:', userAdmin);
+  console.log('User Role:', userRole);
+
+
+
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -72,10 +94,10 @@ const PageContent = () => {
 
 
   //click active sidebar content
-  
+
   const renderSidebarForRole = () => {
     switch (userRole) {
-      case 'admin':
+      case 'Admin':
         return (
           <ul className="mt-3">
             <Link href="/">Home</Link>
@@ -117,10 +139,10 @@ const PageContent = () => {
   };
 
   const renderActiveSection = () => {
-    
-    if (userRole === 'admin') {
+
+    if (userRole === 'Admin') {
       // Sections for admin
-      switch (activeSection) { 
+      switch (activeSection) {
         case 'Course_Added':
           return <CourseAdded />;  // Admin course section
         case 'Students_Added':
@@ -137,8 +159,8 @@ const PageContent = () => {
           return <AboutUsAdded />;  // Admin About Us section
         case 'Contact_Us_Added':
           return <ContactUsAdded />;  // Admin Contact Us section
-          case 'Manage_Users':
-            return <ManageUsers />;  // Mock user management
+        case 'Manage_Users':
+          return <ManageUsers />;  // Mock user management
         default:
           return <AdminWelcomePage />;
       }
@@ -183,7 +205,8 @@ const PageContent = () => {
           {isSidebarOpen ? '✖' : '☰'}
         </button>
         <h1 className="text-3xl font-bold text-white">{animatedText}</h1>
-        <div className="user-logo">
+        {/* user login image and name */}
+        <div className="user-logo gap-3  ">
           <Image
             width={200}
             height={200}
@@ -191,6 +214,7 @@ const PageContent = () => {
             alt="Student Profile Dashboard"
             className="user-image"
           />
+          <p>{ManualUser.name}</p>
         </div>
       </section>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} style={{ backgroundColor: sidebarColor }}>

@@ -111,7 +111,7 @@ export default function Page() {
                                         </div>
 
                                         <div className='flex items-center '>
-                                            <p className='ml-4'>Number: 01810187044.</p>
+                                            <p className='ml-4'>Number: +8801810187044.</p>
                                             <FaArrowUpRightFromSquare className='ml-2 cursor-pointer text-blue-500' />
                                         </div>
                                     </div>
