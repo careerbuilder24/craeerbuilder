@@ -2,11 +2,21 @@
 import mysql from 'mysql2';
 import bcrypt from 'bcryptjs';
 
+// const pool = mysql.createPool({
+//   host: 'localhost',
+//   user: 'root',
+//   password: 'Galib1234$',
+//   database: 'users_login',
+// });
+
 const pool = mysql.createPool({
-  host: 'https://careers-builder2.vercel.app',
-  user: 'root',
-  password: 'Galib1234$',
-  database: 'users_login',
+  host: process.env.DB_HOST,  // ✅ Use your actual MySQL host, NOT a website URL
+  user: process.env.DB_USER,  // ✅ Set up environment variables in Vercel
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
 const promisePool = pool.promise();
