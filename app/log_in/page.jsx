@@ -134,7 +134,7 @@ export default function Login() {
             <button
               type="submit"
               className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300`}
-              disabled={!captchaValue}
+              // disabled={!captchaValue}
               // className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300 ${!captchaValue ? 'opacity-50 cursor-not-allowed' : ''}`}
               // disabled={!captchaValue}
             >
