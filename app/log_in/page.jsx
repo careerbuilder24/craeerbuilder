@@ -43,12 +43,13 @@ export default function Login() {
 
     try {
         // ✅ Step 1: Authenticate user (Login API)
-        const response = await fetch("https://careers-builder2.vercel.app/api/login", {
+        const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
+
+        const response = await fetch(`${API_BASE_URL}/api/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
         });
-
         if (!response.ok) {
             throw new Error("Login failed. Please check your credentials.");
         }

@@ -3,7 +3,7 @@ import mysql from 'mysql2';
 import bcrypt from 'bcryptjs';
 
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: 'https://careers-builder2.vercel.app',
   user: 'root',
   password: 'Galib1234$',
   database: 'users_login',
