@@ -70,7 +70,7 @@ export default function Courses() {
 
       <Navbar />
 
-      <div className="lg:py-14 lg:px-24 mt-8 lg:mt-48   relative lg:container lg:mx-auto lg:w-8/12 left-1">
+      <div className="lg:py-14    relative lg:container lg:mx-auto lg:w-8/12 left-1">
         {/* Upper gradient of Banner image applied as background */}
         <div className="flex flex-col items-center relative z-0">
           {/* Image section (with gradient as background) */}

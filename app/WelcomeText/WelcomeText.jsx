@@ -11,7 +11,7 @@ export default function WelcomeText() {
 
   return (
     <>
-      <div className='mt-28 container mx-auto text-center'>
+      <div className=' container mx-auto text-center'>
         <center>
           <div className='bg-[#17549A] w-11/12 lg:w-7/12 h-20 rounded-xl flex justify-center items-center'>
             <h1 className='lg:text-6xl text-xl font-bold text-white'>Welcome To Career Builder</h1>

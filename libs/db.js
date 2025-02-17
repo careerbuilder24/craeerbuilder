@@ -10,8 +10,8 @@ import bcrypt from 'bcryptjs';
 // });
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,  // ✅ Use your actual MySQL host, NOT a website URL
-  user: process.env.DB_USER,  // ✅ Set up environment variables in Vercel
+  host: process.env.DB_HOST,  // Use your actual MySQL host, NOT a website URL
+  user: process.env.DB_USER,  // Set up environment variables in Vercel
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   waitForConnections: true,

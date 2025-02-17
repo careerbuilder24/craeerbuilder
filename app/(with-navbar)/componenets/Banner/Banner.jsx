@@ -26,7 +26,7 @@ export default function Banner() {
             <Head>
                 <link rel="preload" href={img} as="image" />
             </Head>
-            <div className="mt-28 lg:mt-40 relative w-full "> {/* Adjusted top margin */}
+            <div className=" relative w-full lg:mt-0 mt-6"> {/* Adjusted top margin */}
                 <Carousel
                     autoPlay={autoPlay}            // Auto play based on state
                     interval={2500}                // Set the interval time for autoplay
@@ -41,7 +41,7 @@ export default function Banner() {
                     {[img, img2, img4, img5].map((src, index) => (
                         <div
                             key={index}
-                            className="flex justify-center items-center w-full h-[29vh] md:h-[50vh] lg:h-[70vh] mt-24" // Centers content
+                            className="flex justify-center items-center w-full h-[29vh] md:h-[50vh] lg:h-[100vh]  " // Centers content
                         >
                             <Image
                                 src={src}

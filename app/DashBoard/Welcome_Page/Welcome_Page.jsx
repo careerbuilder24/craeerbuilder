@@ -1,5 +1,7 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import React, { useEffect } from 'react';
+import logo from '../../../assets/rokib-ml.gif'
 
 export default function Welcome_Page() {
     useEffect(() => {
@@ -43,14 +45,8 @@ export default function Welcome_Page() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Head>
             <div className="welcome-page">
-                <div className="welcome-text">
-                    <div className="line">Welcome</div>
-                </div>
+                <Image src={logo} alt="Welcome GIF" className="welcome-gif" />
             </div>
-
-            <style jsx global>{`
-                @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Pacifico&display=swap');
-            `}</style>
 
             <style jsx>{`
                 .welcome-page {
@@ -63,57 +59,9 @@ export default function Welcome_Page() {
                     padding: 10px;
                 }
 
-                .welcome-text {
-                    text-align: center;
-                    color: #ffffff;
-                }
-
-                .line {
-                    font-size: 8rem;
-                    font-weight: bold;
-                    font-family: 'Pacifico', cursive;
-                    font-style: italic;
-                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
-                                 0 0 20px rgba(255, 255, 255, 0.6),
-                                 0 0 30px rgba(0, 180, 255, 0.4), 
-                                 0 0 40px rgba(0, 180, 255, 0.2);
-                    animation: textGlow 3s infinite alternate, float 4s ease-in-out infinite;
-                }
-
-                @keyframes textGlow {
-                    0% {
-                        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
-                                     0 0 20px rgba(255, 255, 255, 0.6),
-                                     0 0 30px rgba(0, 180, 255, 0.4), 
-                                     0 0 40px rgba(0, 180, 255, 0.2);
-                    }
-                    100% {
-                        text-shadow: 0 0 20px rgba(255, 255, 255, 1), 
-                                     0 0 30px rgba(255, 255, 255, 0.8),
-                                     0 0 40px rgba(0, 220, 255, 0.6), 
-                                     0 0 50px rgba(0, 220, 255, 0.4);
-                    }
-                }
-
-                @keyframes float {
-                    0%, 100% {
-                        transform: translateY(0);
-                    }
-                    50% {
-                        transform: translateY(-10px);
-                    }
-                }
-
-                @media (max-width: 768px) {
-                    .line {
-                        font-size: 5rem;
-                    }
-                }
-
-                @media (max-width: 480px) {
-                    .line {
-                        font-size: 3rem;
-                    }
+                .welcome-gif {
+                    max-width: 100%;
+                    height: auto;
                 }
             `}</style>
         </>
