@@ -46,7 +46,7 @@ export default function Page() {
         <>
             <Navbar />
             <main>
-                <div className="lg:mt-52 md:mt-52 mt-52 text-center mx-auto container px-4">
+                <div className="lg:mt-36 md:mt-52 mt-52 text-center mx-auto container px-4">
                     <h1 className="text-center text-[#0054a5] text-3xl mb-4 font-extrabold mt-10">
                         Contact Us
                     </h1>

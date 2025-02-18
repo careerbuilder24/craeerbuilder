@@ -61,7 +61,7 @@ export default function Page() {
     <>
       <main>
         <Navbar />
-        <div className="lg:mt-48 container mx-auto">
+        <div className="lg:mt-32 container mx-auto">
           <div className="w-9/12 container mx-auto">
             <div
               className="w-full h-72 lg:h-[400px] md:h-[400px] bg-cover bg-center relative flex items-center justify-center"

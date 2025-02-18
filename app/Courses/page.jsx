@@ -72,7 +72,7 @@ export default function Courses() {
 
       <div className="lg:py-14    relative lg:container lg:mx-auto lg:w-8/12 left-1">
         {/* Upper gradient of Banner image applied as background */}
-        <div className="flex flex-col items-center relative z-0">
+        <div className="flex flex-col items-center relative z-0 mt-16">
           {/* Image section (with gradient as background) */}
           <div
             className="w-full h-72 lg:h-[400px] md:h-[400px] bg-cover bg-center bg-[#77b1eb] opacity-80 relative"

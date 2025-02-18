@@ -66,7 +66,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <main className="lg:mt-60 md:mt-60 container mx-auto px-4 lg:my-72 my-20 ">
+      <main className="lg:mt-32 md:mt-60 container mx-auto px-4 lg:my-72 my-20 ">
         <div className="container mx-auto ">
           {/* Lottie animation display */}
           <div className="w-full lg:w-1/3 bg-white p-4 container mx-auto mt-6">

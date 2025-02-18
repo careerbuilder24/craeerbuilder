@@ -32,7 +32,7 @@ export default function Page() {
         <>
             <Navbar />
             <main>
-                <div className='lg:mt-48 mt-20'>
+                <div className='lg:mt-24 mt-20'>
                     <section className="mb-12 bg-[#F1F2F4] py-10">
                         <div className="container mx-auto text-center">
                             {/* Sticky Search Input */}

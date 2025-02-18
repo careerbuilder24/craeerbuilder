@@ -53,7 +53,7 @@ export default function Page() {
       <main>
         <Navbar />
 
-        <div className="lg:mt-auto xl:mt-52 mt-52 container mx-auto px-4 bg-gray-50 rounded-lg shadow-lg py-10">
+        <div className="lg:mt-auto xl:mt-24 mt-52 container mx-auto px-4 bg-gray-50 rounded-lg shadow-lg py-10">
 
 
 

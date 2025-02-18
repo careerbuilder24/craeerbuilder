@@ -173,7 +173,7 @@ export default function page() {
 
 
             <main>
-                <div className='lg:mt-56'>
+                <div className='lg:mt-32'>
 
 
                     <div className='container mx-auto my-9 lg:w-9/12 w-10/12 h-auto'>

@@ -217,14 +217,14 @@ export default function Page() {
         <>
             <Navbar />
             <main>
-                <div className='lg:mt-48 mt-20'>
+                <div className='lg:mt-24  mt-20'>
                     <section className="mb-12 bg-[#F1F2F4] py-10">
                         <div className="container mx-auto text-center">
                             <div className="flex flex-col md:flex-col lg:flex-row justify-between gap-5 ">
 
 
                                 {/* Left Section - Category */}
-                                <div className={`bg-white p-6 rounded-lg shadow-md w-full md:w-3/12 transition-all duration-300 h-[400px] sticky top-52 hidden lg:block`}>
+                                <div className={`bg-white p-6 rounded-lg shadow-md w-full md:w-3/12 transition-all duration-300 h-[400px] sticky top-32 hidden lg:block`}>
                                     <div className='bg-[#17549A] p-2'>
                                         <h1 className="text-xl font-medium text-white">Blog Category</h1>
                                         <input

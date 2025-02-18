@@ -55,7 +55,7 @@ export default function Page() {
         <main>
             <Navbar />
             {/* First Section */}
-            <div className='lg:mt-52 flex justify-center items-center'>
+            <div className='lg:mt-28 flex justify-center items-center'>
                 <div className=' flex-col  bg-[#17549A] lg:w-9/12 rounded-md lg:mb-5 py-7 container'>
                     <div className='mt-36 lg:mr-80 lg:mt-0 lg:p-4 md:p-6'>
                         {cr ? (
