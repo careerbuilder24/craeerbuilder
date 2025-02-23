@@ -1,52 +1,35 @@
-import React from 'react';
-import logo2 from '../../assets/new.gif';
-import { BsArrowUpRightCircle } from "react-icons/bs";
-import Image from 'next/image';
-
-import abs from './Welcome.css';
-import CountingPage from '../CountingPage/CountingPage';
-// import useCourses from '@/hooks/useCourse';
+import CountingPage from "../CountingPage/CountingPage";
 
 export default function WelcomeText() {
-
   return (
-    <>
-      <div className=' container mx-auto text-center'>
-        <center>
-          <div className='bg-[#17549A] w-11/12 lg:w-7/12 h-20 rounded-xl flex justify-center items-center'>
-            <h1 className='lg:text-6xl text-xl font-bold text-white'>Welcome To Career Builder</h1>
-          </div>
-          <CountingPage />
-        </center>
-
-        {/* Responsive iframe container */}
-        <center>
-          <div className='mt-10 flex flex-col lg:flex-row justify-center items-center gap-10 my-10 px-2 w-full lg:max-w-[1120px]'>
-            <div className='w-full lg:w-1/2'>
-              <div className='relative w-full' style={{ paddingBottom: '56.25%' }}>
-                <iframe
-                  className='absolute top-0 left-0 w-full h-full'
-                  src="https://www.youtube.com/embed/d4dLKSnumkU"
-                  title="YouTube Video Player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-            <div className='w-full lg:w-1/2'>
-              <div className='relative w-full' style={{ paddingBottom: '56.25%' }}>
-                <iframe
-                  className='absolute top-0 left-0 w-full h-full'
-                  src="https://www.youtube.com/embed/6wIuE_kdw7E"
-                  title="YouTube Video Player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </center>
+    <div className="container mx-auto text-center">
+      {/* Welcome Text Container */}
+      <div className="bg-[#17549A] w-11/12 md:w-11/12 lg:w-10/12 xl:w-[75%] 2xl:w-7/12 min-h-20 rounded-xl flex justify-center items-center mx-auto py-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.8rem] xl:text-[3.1rem] 2xl:text-6xl font-bold text-white whitespace-nowrap px-4">
+          Welcome To Career Builder
+        </h1>
       </div>
-    </>
+      <CountingPage />
+
+      {/* Video Section */}
+      <div className="mt-10 flex flex-col lg:flex-row justify-center items-center gap-8 my-10 px-4 w-full max-w-screen-xl mx-auto">
+        <div className="w-full lg:w-1/2 aspect-video rounded-xl overflow-hidden">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/d4dLKSnumkU"
+            title="YouTube Video Player"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="w-full lg:w-1/2 aspect-video rounded-xl overflow-hidden">
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/6wIuE_kdw7E"
+            title="YouTube Video Player"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
+    </div>
   );
 }

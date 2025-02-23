@@ -276,7 +276,7 @@ export default function page() {
                                     <Image
                                         src={motion?.image}
                                         onDragStart={(e) => e.preventDefault()}
-                                        alt={motion?.title}
+                                        alt={motion?.title || 'user profile pic'}
                                         className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8"
                                         width={100}
                                         height={100}
