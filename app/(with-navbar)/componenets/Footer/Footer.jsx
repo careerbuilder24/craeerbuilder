@@ -5,7 +5,8 @@ import './Footer.css';
 export default function Footer() {
     return (
         <>
-            <div className='bg-[#2BAAE3] lg:bg-[#17549A] text-white w-full h-full py-20'> {/* Added responsive background color */}
+        <div className='footer-container'>
+        <div className='bg-[#2BAAE3] lg:bg-[#17549A] text-white w-full h-full py-20'> {/* Added responsive background color */}
                 {/* First Section */}
                 <div style={{ lineHeight: '25px', fontWeight: '300' }} className='flex text-[15px] flex-col text-[#dddddd] md:flex-row justify-center lg:gap-32 gap-12 text-center md:text-left ml-9'>
                     {["Apps and Software", "Graphic Design & Printing", "Writing Services", "Website Development Services"].map((category, index) => (
@@ -87,6 +88,7 @@ export default function Footer() {
                 </div>
 
             </div>
+        </div>
 
             <div className='bg-[#232256] text-center text-xs py-3 text-white'>
                 <h1>Copyright © 2024 All Rights Reserved By Career Builder</h1>

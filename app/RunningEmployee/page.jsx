@@ -138,24 +138,22 @@ export default function Page() {
   return (
     <main>
       <Navbar />
-      <div className='lg:mt-52 bg-gray-100 h-full w-10/12 lg:w-7/12 container mx-auto mb-10'>
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-between mt-10 md:mt-44 md:px-5 custom-flex-layout">
-          <div className="text-center lg:text-left lg:ml-96">
-            <h1 className="text-4xl font-bold mb-6 text-[#2CAAE1] mt-5 whitespace-nowrap">
-            Running Employee
+      <div className='mt-28 bg-gray-100 h-full w-10/12 lg:w-7/12 container mx-auto mb-10'>
+
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-4">
+          <div className="flex-shrink-0">
+            <h1 className="text-2xl text-[#2CAAE1] whitespace-nowrap">
+              Running Employee
             </h1>
           </div>
-
-          {/* <!-- Search Input --> */}
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search Here.."
-            className="px-4 py-2 w-full search-bar h-10 sm:w-1/3 border-4 rounded-md focus:outline-none focus:border-blue-300 mt-5 lg:mt-0"
+            className="px-4 py-2 w-full lg:w-64 xl:w-96 h-10 border-4 rounded-md focus:outline-none focus:border-blue-300"
           />
         </div>
-
 
         {/* Mobile Sidebar Toggle Button */}
         <div className="block lg:hidden fixed top-64 right-1 z-40">
