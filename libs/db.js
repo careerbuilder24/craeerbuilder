@@ -14,6 +14,7 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,  // Set up environment variables in Vercel
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
+  database: process.env.DB_PORT,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
