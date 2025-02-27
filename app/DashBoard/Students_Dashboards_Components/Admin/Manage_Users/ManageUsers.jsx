@@ -80,7 +80,7 @@ const handleDelete = async (userEmail) => {
   }).then(async (result) => {
     if (result.isConfirmed) {
       try {
-        const response = await fetch("/api/makeAdmin", {
+        const response = await fetch("https://careers-builder2.vercel.app/api/makeAdmin", {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: userEmail }),
