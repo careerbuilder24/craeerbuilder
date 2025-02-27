@@ -10,7 +10,7 @@ dotenv.config(); // Load environment variables
 //   user: 'root',
 //   password: 'Galib1234$',
 //   database: 'users_login',
-// });
+// });  jk
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,  // Use your actual MySQL host, NOT a website URL
