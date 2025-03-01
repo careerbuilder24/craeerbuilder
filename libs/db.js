@@ -1,23 +1,15 @@
-// db.js
 import dotenv from 'dotenv';
 import mysql from 'mysql2';
 import bcrypt from 'bcryptjs';
 
 dotenv.config(); // Load environment variables
 
-// const pool = mysql.createPool({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'Galib1234$',
-//   database: 'users_login',
-// });  jk
-
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,  // Use your actual MySQL host, NOT a website URL
-  user: process.env.DB_USER,  // Set up environment variables in Vercel
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  database: process.env.DB_PORT,
+  port: process.env.DB_PORT,  // ✅ Fixed incorrect key
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -37,4 +29,4 @@ export async function getUserByEmail(email) {
   }
 }
 
-export default promisePool;
+export default promisePool;  // ✅ Ensure correct default export
