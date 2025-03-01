@@ -25,7 +25,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (user && user.email) {
-      axios.get(`/api/user/profile?email=${user.email}`)
+      axios.get(`https://careers-builder2.vercel.app/api/user/profile?email=${user.email}`)
         .then(response => {
           if (response.data.success) setUserProfile(response.data.data);
         })
