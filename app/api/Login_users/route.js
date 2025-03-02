@@ -1,4 +1,4 @@
-import { db } from "../../../libs/db"; // Import database connection
+import  db  from "../../../libs/db"; // Import database connection
 
 export default async function handler(req, res) {
     if (req.method === "GET") {
