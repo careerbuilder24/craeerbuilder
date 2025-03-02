@@ -12,8 +12,8 @@ export default function WelcomeText() {
       <CountingPage />
 
       {/* Video Section */}
-      <div className="mt-10 flex flex-col lg:flex-row justify-center items-center gap-8 my-10 px-4 w-full max-w-screen-xl mx-auto">
-        <div className="w-full lg:w-1/2 aspect-video rounded-xl overflow-hidden">
+      <div className="mt-10  flex flex-col lg:flex-row justify-center items-center gap-8 my-10 px-4 w-full max-w-screen-xl mx-auto">
+        <div className="w-full lg:w-2/5 aspect-[16/9] rounded-xl overflow-hidden">
           <iframe
             className="w-full h-full"
             src="https://www.youtube.com/embed/d4dLKSnumkU"
@@ -21,7 +21,7 @@ export default function WelcomeText() {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="w-full lg:w-1/2 aspect-video rounded-xl overflow-hidden">
+        <div className="w-full lg:w-2/5 aspect-[16/9] rounded-xl overflow-hidden">
           <iframe
             className="w-full h-full"
             src="https://www.youtube.com/embed/6wIuE_kdw7E"
@@ -30,6 +30,7 @@ export default function WelcomeText() {
           ></iframe>
         </div>
       </div>
+
     </div>
   );
 }

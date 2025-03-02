@@ -88,11 +88,16 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/">
-          <Image src={logo} alt="Logo" className="w-32 md:w-36 lg:w-40 h-auto" />
+          <Image
+            src={logo}
+            alt="Logo"
+            className="w-32 md:w-36 lg:w-40 h-auto min-w-[128px] flex-shrink-0"
+          />
         </Link>
 
+
         {/* Navbar Links */}
-        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-white font-medium">
+        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-white font-medium mr-28">
           <Link href="/" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Home</Link>
           <Link href="/Courses" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Courses</Link>
 
