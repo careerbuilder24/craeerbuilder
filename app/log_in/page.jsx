@@ -41,32 +41,25 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
 
+    console.log("Login Attempt:", { email, password });
+
     try {
-        // ✅ Step 1: Authenticate user (Login API)
         const response = await fetch("/api/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
         });
 
-        if (!response.ok) {
-            throw new Error("Login failed. Please check your credentials.");
-        }
-
+        console.log("Response Status:", response.status);  // Log HTTP status
         const result = await response.json();
-        console.log("Backend Response:", result);
+        console.log("Backend Response:", result);  // Log backend response
 
-        if (!result.success) {
-            toast.error(result.message || "Login failed.");
-            return;
+        if (!response.ok) {
+            throw new Error(result.message || "Login failed. Please check your credentials.");
         }
 
         toast.success(result.message);
-
-        // ✅ Step 2: Update AuthContext with manual user data
-        loginUserManual(result.user); // Call loginUserManual with the user data
-
-        // ✅ Step 3: Redirect to home
+        loginUserManual(result.user);
         router.push("/");
     } catch (error) {
         console.error("Error during login:", error);
@@ -75,6 +68,7 @@ export default function Login() {
         setLoading(false);
     }
 };
+
   
 
   const onChange = (value) => {
