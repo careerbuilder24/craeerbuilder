@@ -52,7 +52,7 @@ export default function Login() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-        const response = await fetch('https://careers-builder2.vercel.app/api/register', {
+        const response = await fetch('/api/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
