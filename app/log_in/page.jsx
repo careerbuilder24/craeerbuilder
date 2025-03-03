@@ -54,9 +54,15 @@ export default function Login() {
         const result = await response.json();
         console.log("Backend Response:", result);  // Log backend response
 
+        // if (!response.ok) {
+        //     throw new Error(result.message || "Login failed. Please check your credentials.");
+        // }
         if (!response.ok) {
-            throw new Error(result.message || "Login failed. Please check your credentials.");
-        }
+          console.error("Login error:", result);
+          toast.error(result?.message || "Login failed. Try again.");
+          return;
+      }
+      
 
         toast.success(result.message);
         loginUserManual(result.user);
