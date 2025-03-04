@@ -96,13 +96,29 @@ export default function Page() {
                             </div>
                         </div>
                     </div>
-
                     {/* Leaflet Map */}
-                    <div className="mt-10 container mx-auto flex justify-center mb-10 ">
+                    {/* <div className="mt-10 container mx-auto flex justify-center mb-10 ">
                         <div className="w-full sm:w-3/4 md:w-1/2 lg:w-3/5" style={{ height: '500px', overflow: 'hidden', zIndex: '0' }}>
                             <Map center={defaultCenter} zoom={18} />
                         </div>
+                    </div> */}
+
+
+                    {/* google map added  */}
+                    <div className="mt-10 container mx-auto flex justify-center mb-10 ">
+                        <div className="w-full sm:w-3/4 md:w-3/4 flex justify-center items-center lg:w-3/4" style={{ height: '500px', overflow: 'hidden', zIndex: '0' }}>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1824.9538849433723!2d90.3925184!3d23.8218785!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c781c50b9989%3A0x110082b1578e0943!2sCareer%20Builder%20Institute!5e0!3m2!1sen!2sbd!4v1740987843623!5m2!1sen!2sbd"
+                                width="1000"
+                                height="500"
+                                style={{ border: 0 }}
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </div>
+
 
                     {/* Contact Form and Lottie Animation */}
                     <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between w-full sm:w-3/4 md:w-1/2 lg:w-3/5 p-6 bg-white rounded shadow-md my-24 gap-10">

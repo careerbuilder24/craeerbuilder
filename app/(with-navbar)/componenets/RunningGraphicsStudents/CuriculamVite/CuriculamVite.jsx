@@ -153,33 +153,39 @@ export default function CuriculamVite() {
 
 
 
+                            {/* social platform */}
+                            <div className="flex justify-center items-center h-full my-16">
+                                <div className="flex space-x-6 cursor-pointer">
+                                    {/* Instagram */}
+                                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-purple-500 hover:bg-purple-700 transition duration-300">
+                                            <FaInstagram className="text-white text-xl" />
+                                        </div>
+                                    </a>
 
-                            {/* Social Media Icons and Text */}
-                            <div className="space-y-6 cursor-pointer">
-                                {/* Instagram */}
-                                <div className="flex items-center space-x-4">
-                                    <FaInstagram className="text-3xl text-purple-500 hover:text-purple-700 transition duration-300" />
-                                    <span className="text-lg text-gray-700">Instagram</span>
-                                </div>
+                                    {/* LinkedIn */}
+                                    <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-700 hover:bg-blue-900 transition duration-300">
+                                            <FaLinkedin className="text-white text-xl" />
+                                        </div>
+                                    </a>
 
-                                {/* LinkedIn */}
-                                <div className="flex items-center space-x-4">
-                                    <FaLinkedin className="text-3xl text-blue-700 hover:text-blue-900 transition duration-300" />
-                                    <span className="text-lg text-gray-700">LinkedIn</span>
-                                </div>
+                                    {/* Facebook */}
+                                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 hover:bg-blue-800 transition duration-300">
+                                            <FaFacebookF className="text-white text-xl" />
+                                        </div>
+                                    </a>
 
-                                {/* Facebook */}
-                                <div className="flex items-center space-x-4">
-                                    <FaFacebookF className="text-3xl text-blue-600 hover:text-blue-800 transition duration-300" />
-                                    <span className="text-lg text-gray-700">Facebook</span>
-                                </div>
-
-                                {/* YouTube */}
-                                <div className="flex items-center space-x-4">
-                                    <FaYoutube className="text-3xl text-red-600 hover:text-red-800 transition duration-300" />
-                                    <span className="text-lg text-gray-700">YouTube</span>
+                                    {/* YouTube */}
+                                    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+                                        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-800 transition duration-300">
+                                            <FaYoutube className="text-white text-xl" />
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
+
 
 
                         </div>

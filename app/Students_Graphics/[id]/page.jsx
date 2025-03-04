@@ -98,7 +98,7 @@ export default function Page() {
   // Tab categories
   const tabCategories = [
     "Profile (CV)",
-    "Achievements", 
+    "Achievements",
     "Courses",
     "Portfolio",
     "Certificate",
@@ -118,9 +118,9 @@ export default function Page() {
 
       <Navbar />
 
-      <main className='lg:mt-40 mt-24 mb-10 overflow-hidden'>
-        <div className='w-full flex flex-col justify-center items-center'>
-          <div className='relative lg:w-7/12 overflow-hidden rounded-lg mt-5'>
+      <main className='lg:mt-16 mt-24 mb-10 overflow-hidden'>
+        <div className='w-full flex flex-col justify-center items-center '>
+          <div className='relative md:w-full lg:w-7/12 overflow-hidden rounded-lg mt-5'>
             {graphic && (
               <div className='absolute bottom-5 right-6'>
                 <a
@@ -134,7 +134,7 @@ export default function Page() {
             )}
             <Image
               src={img1}
-              className='mt-4 w-full transition-transform duration-300 ease-in-out hidden md:block lg:block'
+              className="mt-4 w-full large-only"
               alt="Cover Image"
             />
           </div>
@@ -153,9 +153,8 @@ export default function Page() {
 
           {/* Mobile Sidebar */}
           <div
-            className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${
-              isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-            }`}
+            className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+              }`}
           >
             <div ref={sidebarRef} className="w-44 bg-[#17549A] text-white h-full">
               {graphic && (
@@ -184,9 +183,8 @@ export default function Page() {
                       setActiveTabIndex(index);
                       setIsSidebarOpen(false);
                     }}
-                    className={`hover:bg-blue-200 text-[#34E5EB] w-full h-10 cursor-pointer border-b border-[#DDDDDD] text-center pt-2 ${
-                      activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
-                    }`}
+                    className={`hover:bg-blue-200 text-[#34E5EB] w-full h-10 cursor-pointer border-b border-[#DDDDDD] text-center pt-2 ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
+                      }`}
                   >
                     {category}
                   </li>
@@ -273,9 +271,8 @@ export default function Page() {
               {tabCategories.map((category, index) => (
                 <Tab
                   key={index}
-                  className={`p-2 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 cursor-pointer ${
-                    activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
-                  }`}
+                  className={`p-2 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 cursor-pointer ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
+                    }`}
                   style={{ borderBottom: '1px solid #8dbff7' }}
                 >
                   {category}
@@ -297,7 +294,7 @@ export default function Page() {
           </Tabs>
         </div>
       </main>
-      
+
       <Footer />
     </>
   )
