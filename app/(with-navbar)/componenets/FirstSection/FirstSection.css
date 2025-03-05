@@ -1,4 +1,5 @@
 /* Mobile - 1 column or 2 columns */
+
 @media (max-width: 640px) {
     .course-card {
         margin: 10px;

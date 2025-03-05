@@ -32,19 +32,20 @@ export default function FirstSection() {
             <div className='container mx-auto w-10/12 md:w-10/12 lg:w-7/12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:mt-10 custom-grid-layout'>
                 {
                     course?.map(courses => (
-                        <div key={courses.id} className="relative cursor-pointer shadow-lg mb-3 overflow-hidden rounded-xl border hover:border-black border-[#DDDD] transition-all duration-300 group">
+                        <div key={courses.id} className="relative cursor-pointer shadow-lg mb-3 overflow-hidden rounded-xl border  border-[#DDDD] group hover:border-[#56D3FD] transition-all duration-300 group">
 
                             {/* Image Section */}
                             <div className="relative">
                                 <Image
-                                    style={{ height: '160px' }}
-                                    height={500}
-                                    width={500}
                                     src={courses.image}
-                                    alt='Banner Image'
-                                    className={`rounded-t-xl mb-4 object-cover w-full transition-transform duration-300 hover:scale-110`}
+                                    alt="Card Image"
+                                    className="rounded-t-xl mb-4 object-cover w-full transition-transform duration-300 hover:scale-110"
                                     onDragStart={(e) => e.preventDefault()}
+                                    layout="intrinsic" // or "responsive" depending on how you want the image's sizing to behave
+                                    width={500}
+                                    height={300} // Adjust this to match the aspect ratio you want
                                 />
+
 
                                 {/* Heart Icon */}
                                 <div className="absolute top-3 right-3 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
