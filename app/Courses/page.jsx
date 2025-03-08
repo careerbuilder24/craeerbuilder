@@ -10,7 +10,7 @@ import StarRatings from 'react-star-ratings';
 import Link from 'next/link';
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
-import img1 from '../../assets/details.jpg';
+import img1 from '../../assets/details.PNG';
 import Image from 'next/image';
 import Head from 'next/head';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import Navbar from '../componenets/Navbar/Navbar';
-import img1 from '../../../assets/details.jpg';
+import img1 from '../../../assets/details.PNG';
 import { useState, useEffect } from 'react';
 import { FaArrowDown } from 'react-icons/fa';
 import useBrackCourseList from '@/hooks/useBrackCourseList';
