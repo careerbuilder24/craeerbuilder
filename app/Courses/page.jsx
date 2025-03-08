@@ -10,7 +10,7 @@ import StarRatings from 'react-star-ratings';
 import Link from 'next/link';
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
-import img1 from '../../assets/details.PNG';
+import img1 from '../../assets/details.jpg';
 import Image from 'next/image';
 import Head from 'next/head';
 
@@ -75,71 +75,14 @@ export default function Courses() {
         <div className="flex flex-col items-center relative z-0 mt-16">
           {/* Image section (with gradient as background) */}
           <div
-            className="w-full h-72 lg:h-[400px] md:h-[400px] bg-cover bg-center bg-[#77b1eb] opacity-80 relative"
+            className="w-full h-72 lg:h-[300px] md:h-[300px] bg-cover bg-center bg-[#77b1eb] opacity-80 relative"
             style={{ backgroundImage: `url(${img1.src})` }} // Ensure img1.src contains the image URL
           >
             {/* The gradient is applied over the image */}
             {/* <div className="absolute inset-0 bg-gradient-to-t from-[#2CAAE1] to-transparent opacity-45"></div> */}
           </div>
 
-          {/* Search bar */}
-          <div className="hidden md:block">
-            <div className="flex top-32 right-24 lg:left-40 overflow-hidden bg-[#2CAAE1] w-9/12 shadow-lg absolute px-10 rounded-full lg:mt-5 items-center md:mt-16">
-              {/* Dropdown for course titles */}
-              <div className="w-full md:w-6/12">
-                <select
-                  value={selectedTitle}
-                  onChange={handleTitleChange}
-                  style={{ padding: '10px 8px', borderRadius: '4px' }}
-                  className="bg-[#17549A] text-white cursor-pointer w-full"
-                >
-                  <option className="font-bold" value="">
-                    All Courses
-                  </option>
-                  {courseTitles.map((title, index) => (
-                    <option key={index} value={title}>
-                      {title}
-                    </option>
-                  ))}
-                </select>
-              </div> {/* End of the first form */}
 
-              <div className="w-full mb-10 mt-10">
-                <div className="relative flex flex-row w-full">
-                  <input
-                    type="text"
-                    className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border rounded-sm focus:outline-none focus:ring focus:ring-blue-300"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                  />
-                  <button
-                    type="submit"
-                    className="inset-y-0 flex items-center px-4 text-white bg-[#17549A] rounded hover:bg-blue-600 ease-in-out duration-300 cursor-pointer"
-                  >
-                    Search
-                  </button>
-                  {/* Suggestions Box */}
-                  {searchTerm && filteredSuggestions.length > 0 && (
-                    <div
-                      style={{ width: '400px' }}
-                      className="absolute left-0 right-0 top-9 mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto z-10"
-                    >
-                      {filteredSuggestions.map((suggestion, index) => (
-                        <div
-                          key={index}
-                          className="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                          onClick={() => setSearchTerm(suggestion)}
-                        >
-                          {suggestion}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
 
 
           {/* Mobile Search Button (visible only on small screens) */}
@@ -178,6 +121,45 @@ export default function Courses() {
             </div>
 
           </div>
+        </div>
+      </div>
+
+
+      {/* Centered Search Bar */}
+      <div className="container mx-auto flex justify-center items-center  hidden md:flex">
+        <div className="flex bg-[#2CAAE1] w-9/12 md:w-9/12 lg:w-9/12 shadow-lg p-5  items-center mb-10">
+
+          {/* Dropdown for course titles */}
+          <div className="w-4/12">
+            <select
+              value={selectedTitle}
+              onChange={handleTitleChange}
+              className="bg-[#17549A] text-white cursor-pointer w-full py-3 px-4 rounded-l-md"
+            >
+              <option className="font-bold" value="">All Courses</option>
+              {courseTitles.map((title, index) => (
+                <option key={index} value={title}>{title}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Search Input */}
+          <div className="w-8/12 flex">
+            <input
+              type="text"
+              className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 border-none rounded-r-md focus:outline-none focus:ring focus:ring-blue-300"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+            <button
+              type="submit"
+              className="ml-2 px-6 py-2 text-white bg-[#17549A] rounded-md hover:bg-blue-600 transition duration-300 cursor-pointer"
+            >
+              Search...
+            </button>
+          </div>
+
         </div>
       </div>
 
