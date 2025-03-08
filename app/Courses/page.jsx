@@ -79,7 +79,7 @@ export default function Courses() {
             style={{ backgroundImage: `url(${img1.src})` }} // Ensure img1.src contains the image URL
           >
             {/* The gradient is applied over the image */}
-            {/* <div className="absolute inset-0 bg-gradient-to-t from-[#2CAAE1] to-transparent opacity-45"></div> gjhk*/}
+            {/* <div className="absolute inset-0 bg-gradient-to-t from-[#2CAAE1] to-transparent opacity-45"></div> */}
           </div>
 
 
