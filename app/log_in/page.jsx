@@ -24,18 +24,18 @@ export default function Login() {
   const [captchaValue, setCaptchaValue] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleGoogleSignIn = async () => {
-    setLoading(true);
-    try {
-      await googleSignIn();
-      toast.success("Successfully logged in!");
-    } catch (error) {
-      console.log(error);
-      toast.error("Login failed. Please check your credentials.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleGoogleSignIn = async () => {
+  //   setLoading(true);
+  //   try {
+  //     await googleSignIn();
+  //     toast.success("Successfully logged in!");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Login failed. Please check your credentials.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleManualSignIn = async (e) => {
     e.preventDefault();
@@ -117,13 +117,13 @@ export default function Login() {
 
 
 
-            {/* <div className="form-control mb-4 w-full ">
+            <div className="form-control mb-4 w-full ">
               <ReCAPTCHA
                 sitekey="6LftpWwqAAAAAP64cCjeY0hQ927AQu0OgA0LJxSo"
                 onChange={onChange}
                 className='w-full max-w-xs'
               />
-            </div> */}
+            </div>
 
             <button
               type="submit"
@@ -139,7 +139,7 @@ export default function Login() {
               If you don't have an account, please register <Link className='text-blue-700 hover:underline font-bold' href={'/re_gister'}>here</Link>.
             </p>
 
-            <div
+            {/* <div
               onClick={handleGoogleSignIn}
               className="cursor-pointer mt-4"
             >
@@ -161,7 +161,7 @@ export default function Login() {
                   className="w-28 h-12 "
                 />
               </div>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>

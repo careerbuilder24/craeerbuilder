@@ -27,19 +27,19 @@ export default function Login() {
   const router = useRouter();
 
 
-  
-  const handleGoogleSignIn = async () => {
-    setLoading(true); // Start loading when Google SignIn begins
-    try {
-      await googleSignIn();
-      toast.success("Successfully logged in!");
-    } catch (error) {
-      console.log(error);
-      toast.error("Login failed. Please check your credentials.");
-    } finally {
-      setLoading(false); // Stop loading when sign-in is complete
-    }
-  };
+
+  // const handleGoogleSignIn = async () => {
+  //   setLoading(true); // Start loading when Google SignIn begins
+  //   try {
+  //     await googleSignIn();
+  //     toast.success("Successfully logged in!");
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Login failed. Please check your credentials.");
+  //   } finally {
+  //     setLoading(false); // Stop loading when sign-in is complete
+  //   }
+  // };
 
   const {
     register,
@@ -52,28 +52,28 @@ export default function Login() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-        const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        });
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-        const result = await response.json();
+      const result = await response.json();
 
-        if (result.success) {
-            toast.success("Successfully Registered!");
-            setTimeout(() => router.replace('/'), 2000);
-        } else {
-            toast.error(result.message || "Sign up failed.");
-        }
+      if (result.success) {
+        toast.success("Successfully Registered!");
+        setTimeout(() => router.replace('/'), 2000);
+      } else {
+        toast.error(result.message || "Sign up failed.");
+      }
     } catch (err) {
-        console.error(err);
-        toast.error("An error occurred. Please try again.");
+      console.error(err);
+      toast.error("An error occurred. Please try again.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
-// yeah why 
+  };
+  // yeah why 
 
   return (
     <main>
@@ -158,7 +158,7 @@ export default function Login() {
               </div>
             </div>
 
-            
+
             {/* Terms and Conditions Scrollable Area */}
             <div className=" text-sm text-gray-600 ">
               <div className=" p-2 border border-gray-300 rounded-md max-h-16 overflow-y-auto text-xs text-gray-600 text-justify">
@@ -181,14 +181,14 @@ export default function Login() {
               <Link href={'/log_in'} className='text-blue-700 font-bold'>Login</Link>
             </div>
 
-            <div
+            {/* <div
               onClick={handleGoogleSignIn}
               className="cursor-pointer"
             >
               <div
                 className="mt-2 flex flex-row justify-center items-center gap-4 px-5 py-1 shadow-md rounded-md hover:shadow-xl transition-shadow duration-300 bg-white"
               >
-                {/* Gmail Image */}
+             
                 <Image
                   width={100}
                   height={100}
@@ -197,7 +197,6 @@ export default function Login() {
                   className="w-12 h-12 rounded-full "
                 />
 
-                {/* Gmail Write Image */}
                 <Image
                   width={100}
                   height={100}
@@ -206,14 +205,16 @@ export default function Login() {
                   className="w-28 h-12 "
                 />
               </div>
-            </div>
+            </div> */}
+
+
           </form>
         </div>
       </div>
       <Footer />
-    
+
       <ToastContainer />
-      {loading && <Loader />} 
+      {loading && <Loader />}
     </main>
   );
 }
