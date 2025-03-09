@@ -120,6 +120,7 @@ export default function Login() {
             <div className="form-control mb-4 w-full ">
               <ReCAPTCHA
                 sitekey="6LftpWwqAAAAAP64cCjeY0hQ927AQu0OgA0LJxSo"
+                // fix
                 onChange={onChange}
                 className='w-full max-w-xs'
               />
