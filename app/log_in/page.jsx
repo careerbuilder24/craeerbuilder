@@ -44,32 +44,33 @@ export default function Login() {
     console.log("Login Attempt:", { email, password });
 
     try {
-        const response = await fetch("https://careers-builder2.vercel.app/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
+      const response = await fetch("https://careers-builder2.vercel.app/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-        console.log("Response Status:", response.status);  // Log HTTP status
-        const result = await response.json();
-        console.log("Backend Response:", result);  // Log backend response
+      console.log("Response Status:", response.status);  // Log HTTP status
+      const result = await response.json();
+      console.log("Backend Response:", result);  // Log backend response
 
-        if (!response.ok) {
-            throw new Error(result.message || "Login failed. Please check your credentials.");
-        }
+      if (!response.ok) {
+        throw new Error(result.message || "Login failed. Please check your credentials.");
+      }
 
-        toast.success(result.message);
-        loginUserManual(result.user);
-        router.push("/");
+      toast.success(result.message);
+      loginUserManual(result.user);
+      router.push("/");
     } catch (error) {
-        console.error("Error during login:", error);
-        toast.error(error.message || "Login failed. Please try again.");
+      console.error("Error during login:", error);
+      toast.error(error.message || "Login failed. Please try again.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
-  
+  // console.log("RECAPTCHA SITE KEY:", process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY);
+
 
   const onChange = (value) => {
     setCaptchaValue(value);
@@ -119,19 +120,21 @@ export default function Login() {
 
             <div className="form-control mb-4 w-full ">
               <ReCAPTCHA
-                sitekey="6LftpWwqAAAAAP64cCjeY0hQ927AQu0OgA0LJxSo"
+               
+                sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}
                 // fix
                 onChange={onChange}
                 className='w-full max-w-xs'
               />
             </div>
+            
 
             <button
               type="submit"
               className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300`}
-              // disabled={!captchaValue}
-              // className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300 ${!captchaValue ? 'opacity-50 cursor-not-allowed' : ''}`}
-              // disabled={!captchaValue}
+            // disabled={!captchaValue}
+            // className={`bg-[#17549A] w-full h-10 rounded-md text-white hover:bg-[#17549A] ease-in-out duration-300 ${!captchaValue ? 'opacity-50 cursor-not-allowed' : ''}`}
+            // disabled={!captchaValue}
             >
               Login
             </button>
