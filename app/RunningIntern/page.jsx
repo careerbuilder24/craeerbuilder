@@ -206,7 +206,8 @@ export default function Page() {
 
           {/* Tab List */}
           <TabList style={{ width: 300 }} className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer mt-4 hidden  lg:flex sticky top-0 z-10   rounded-md  '>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 mt-5 border-b border-[#DDDDDD]'>Graphic Design</Tab>
+            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 mt-5 border-b border-[#DDDDDD]'>All Interns</Tab>
+            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Graphic Design</Tab>
             <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Motion Graphics</Tab>
             <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Affiliate Marketing</Tab>
             <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Video Editing</Tab>
