@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
-import logo from '../../../assets/user-welcome.mp4'
+import logo from '../../../assets/admin.gif'
 
 export default function Welcome_Page() {
     useEffect(() => {
