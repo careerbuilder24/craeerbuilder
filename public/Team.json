@@ -1,75 +1,75 @@
 [
-    {
-      "id": 1,
-      "image": "  https://i.postimg.cc/c4ng6pKf/gilbert.png",
-      "name": "MD Nazmul Hasan Rokib",
-      "designation": "Software Engineer"
-    },
-    {
-      "id": 2,
-      "image": " https://i.postimg.cc/wxPRqqB6/roks.png",
-      "name": "Abu Yeahia",
-      "designation": "Product Manager"
-    },
-    {
-      "id": 3,
-      "image": " https://i.postimg.cc/PJs0dytj/himel.jpg",
-      "name": "Carla Brown",
-      "designation": "UX Designer"
-    },
-    {
-      "id": 4,
-      "image": " https://i.postimg.cc/DycRK1H9/moshi.png",
-      "name": "David Wilson",
-      "designation": "Data Scientist"
-    },
-    {
-      "id": 5,
-      "image": "https://i.postimg.cc/pL6G2CZ6/afnan.png",
-      "name": "Evelyn Garcia",
-      "designation": "Business Analyst"
-    },
-    {
-      "id": 6,
-      "image": "https://i.postimg.cc/C1yc8K9C/bangla.png",
-      "name": "Frank Taylor",
-      "designation": "DevOps Engineer"
-    },
-    {
-      "id": 7,
-      "image": "https://i.postimg.cc/cHs8Py3y/admin.png",
-      "name": "Grace Lee",
-      "designation": "Marketing Specialist"
-    },
-    {
-      "id": 8,
-      "image": "https://i.postimg.cc/25gKxGLZ/popy.png ",
-      "name": "Hank Martinez",
-      "designation": "Frontend Developer"
-    },
-    {
-      "id": 9,
-      "image": "https://i.postimg.cc/c4ng6pKf/gilbert.png",
-      "name": "Ivy Clark",
-      "designation": "Quality Assurance Engineer"
-    },
-    {
-      "id": 10,
-      "image": "https://i.postimg.cc/wxPRqqB6/roks.png",
-      "name": "Jack Harris",
-      "designation": "Full Stack Developer"
-    },
-    {
-      "id": 11,
-      "image": "https://i.postimg.cc/wxPRqqB6/roks.png",
-      "name": "Katherine Moore",
-      "designation": "Content Strategist"
-    },
-    {
-      "id": 12,
-      "image": "https://i.postimg.cc/wxPRqqB6/roks.png",
-      "name": "Liam Wright",
-      "designation": "Project Manager"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "image": "https://i.postimg.cc/pTHrzRmJ/gilbertssss.png",
+    "name": "Abu Yeahia",
+    "designation": "Software Engineer"
+  },
+  {
+    "id": 2,
+    "image": " https://i.postimg.cc/wxPRqqB6/roks.png",
+    "name": "MD.Nazmul Hasan",
+    "designation": "Creative Director Multimedia"
+  },
+  {
+    "id": 3,
+    "image": "https://i.postimg.cc/zv3rRcFk/rafiq-sir.png",
+    "name": "Rafiqul Islam",
+    "designation": "Accounts & Administration"
+  },
+  {
+    "id": 4,
+    "image": "https://i.postimg.cc/jS0ps5mc/himel.png",
+    "name": "Iqbal Kabir Khan ",
+    "designation": "SEO Executive"
+  },
+  {
+    "id": 5,
+    "image": "https://i.postimg.cc/QM6Pv9kN/han.jpg",
+    "name": "Sohag Chakma",
+    "designation": "Graphic Designer"
+  },
+
+  {
+    "id": 6,
+    "image": "https://i.postimg.cc/BnfndJg9/midul-2.png",
+    "name": "Easin Arafat Midul",
+    "designation": "Social Media Manager"
+  },
+  {
+    "id": 7,
+    "image": "https://i.postimg.cc/YSh6yPmT/afnan-1.png",
+    "name": "Afnan Chowdhury",
+    "designation": "Content Writer (Marketing)"
+  },
+  {
+    "id": 8,
+    "image": "https://i.postimg.cc/PxPf062V/baijids.png",
+    "name": "Baeazid Hossain",
+    "designation": "Office Assistance"
+  },
+  {
+    "id": 9,
+    "image": "https://i.postimg.cc/c4ng6pKf/gilbert.png",
+    "name": "Ivy Clark",
+    "designation": "Quality Assurance Engineer"
+  },
+  {
+    "id": 10,
+    "image": "https://i.postimg.cc/wxPRqqB6/roks.png",
+    "name": "Jack Harris",
+    "designation": "Full Stack Developer"
+  },
+  {
+    "id": 11,
+    "image": "https://i.postimg.cc/wxPRqqB6/roks.png",
+    "name": "Katherine Moore",
+    "designation": "Content Strategist"
+  },
+  {
+    "id": 12,
+    "image": "https://i.postimg.cc/wxPRqqB6/roks.png",
+    "name": "Liam Wright",
+    "designation": "Project Manager"
+  }
+]

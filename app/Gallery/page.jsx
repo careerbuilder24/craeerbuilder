@@ -218,14 +218,18 @@ export default function page() {
                                                     <Image
                                                         width={600}
                                                         height={600}
-                                                        onDragStart={(e) => e.preventDefault()} // Prevent drag
-                                                        src={image.image}
+                                                        src={image.image.trim()} // Add .trim() here
                                                         className="w-full h-auto rounded-md"
                                                         alt={`Slide ${index + 1}`}
                                                         loading='lazy'
                                                     />
                                                     <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
-                                                        <time dateTime={image.date} className="text-white text-sm">{image.date}</time>
+                                                        {/* Line 228 - Change Gallerys to image */}
+                                                        <time dateTime={new Date(image.date).toISOString()} className="text-white text-sm">
+                                                            {image.date}
+                                                        </time>
+
+                                                        {/* <time dateTime={image.date} className="text-white text-sm">{image.date}</time> */}
                                                         <h3 className="text-white text-base">{image.description}</h3>
                                                     </div>
                                                 </SwiperSlide>
@@ -274,7 +278,7 @@ export default function page() {
                                 <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col  lg:flex-row md:flex-row  md:mt-40 lg:mt-5 gap-5 h-auto  '>
                                     {/* Tab List */}
                                     <TabList className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer   hidden  lg:flex sticky top-0 z-10   rounded-md '>
-                                        <Tab className='p-4 text-left  focus:outline-none hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600'>All Events</Tab>
+                                        <Tab className='p-4 text-left  focus:outline-none hover:bg-blue-200 mt-5 text-[#8dbff7] hover:text-blue-600'>All Events</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Orientation</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Certification</Tab>
                                         <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 '>Awards Giving</Tab>
@@ -298,14 +302,25 @@ export default function page() {
                                                                 <Image
                                                                     width={600}
                                                                     height={400}
-                                                                    src={Gallerys.image}
+                                                                    src={Gallerys.image.trim()}
+
                                                                     onClick={() => handleOpen(index)}
+                                                                    alt='gallery image'
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+                                                                    {/* <time dateTime="2008-02-14T20:00:00Z" className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time> */}
+
+
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -328,13 +343,23 @@ export default function page() {
                                                                     width={600}
                                                                     height={400}
                                                                     src={Gallerys.image}
+                                                                    alt='gallery image 2'
                                                                     onClick={() => handleOpen(index)}
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+
+                                                                    {/* <time dateTime="2008-02-14T20:00:00Z" className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time> */}
+
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -356,14 +381,24 @@ export default function page() {
                                                                 <Image
                                                                     width={600}
                                                                     height={400}
-                                                                    src={Gallerys.image}
+                                                                    src={Gallerys.image.trim()}
+
+                                                                    alt='gallery image 2'
                                                                     onClick={() => handleOpen(index)}
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+                                                                    {/* <time dateTime="2008-02-14T20:00:00Z" className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time> */}
+
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -384,14 +419,24 @@ export default function page() {
                                                                 <Image
                                                                     width={600}
                                                                     height={400}
-                                                                    src={Gallerys.image}
+                                                                    src={Gallerys.image.trim()}
+
+                                                                    alt='Gallery Image 4'
                                                                     onClick={() => handleOpen(index)}
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+                                                                    {/* <time dateTime="2008-02-14T20:00:00Z" className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time> */}
+
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -414,14 +459,24 @@ export default function page() {
                                                                 <Image
                                                                     width={600}
                                                                     height={400}
-                                                                    src={Gallerys.image}
+                                                                    src={Gallerys.image.trim()}
+
+                                                                    alt='Gallery Image 5'
                                                                     onClick={() => handleOpen(index)}
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+                                                                    {/* <time dateTime="2008-02-14T20:00:00Z" className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time> */}
+
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -443,14 +498,21 @@ export default function page() {
                                                                 <Image
                                                                     width={600}
                                                                     height={400}
-                                                                    src={Gallerys.image}
+                                                                    src={Gallerys.image.trim()}
+
+                                                                    alt='Gallery Image 6'
                                                                     onClick={() => handleOpen(index)}
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -472,14 +534,20 @@ export default function page() {
                                                                 <Image
                                                                     width={600}
                                                                     height={400}
-                                                                    src={Gallerys.image}
+                                                                    src={Gallerys.image.trim()}
+
+                                                                    alt='Gallery Image 7'
                                                                     onClick={() => handleOpen(index)}
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -501,14 +569,22 @@ export default function page() {
                                                                 <Image
                                                                     width={600}
                                                                     height={400}
-                                                                    src={Gallerys.image}
+                                                                    src={Gallerys.image.trim()}
+                                                                    alt='Gallery Image 8'
                                                                     onClick={() => handleOpen(index)}
                                                                     className='w-full h-full rounded-md'
                                                                 />
                                                             </div>
                                                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                                                 <div className='ml-3'>
-                                                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time>
+                                                                    <time dateTime={new Date(Gallerys.date).toISOString()} className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time>
+                                                                    {/* <time dateTime="2008-02-14T20:00:00Z" className="text-white text-sm">
+                                                                        {Gallerys.date}
+                                                                    </time> */}
+
+                                                                    {/* <time datetime="2008-02-14 20:00" className='text-white text-sm'>{Gallerys.date}</time> */}
                                                                     <h3 className='text-white text-base'>{Gallerys.description}</h3>
                                                                 </div>
                                                             </div>
@@ -529,8 +605,8 @@ export default function page() {
                                 <div className=' shadow-xl rounded  mt-5 '>
                                     <div className='ml-4'>
                                         <h3 className='text-[#0054a5] font-semibold mt-3'>Graphics Orientation Class</h3>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Time: 06:00 PM </time></p>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Date:17 Novembmer 2024 </time></p>
+                                        <p> <time dateTime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Time: 06:00 PM </time></p>
+                                        <p> <time dateTime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Date:17 Novembmer 2024 </time></p>
                                         <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
 
                                         <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
@@ -538,6 +614,7 @@ export default function page() {
                                                 width={400}
                                                 height={400}
                                                 src={img1}
+                                                alt='Gallery Image second part'
                                                 className='w-full lg:w-11/12 h-full object-cover '
                                             />
 
@@ -555,8 +632,8 @@ export default function page() {
                                 <div className=' shadow-xl rounded  mt-5 '>
                                     <div className='ml-4'>
                                         <h3 className='text-[#0054a5] font-semibold mt-3'>Motion Graphics Orientation Class</h3>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Time: 06:00 PM </time></p>
-                                        <p> <time datetime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Date:17 Novembmer 2024 </time></p>
+                                        <p> <time dateTime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Time: 06:00 PM </time></p>
+                                        <p> <time dateTime="2008-02-14 20:00" className='text-[#0054a5] text-sm'>Date:17 Novembmer 2024 </time></p>
                                         <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
 
                                         <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
@@ -564,6 +641,7 @@ export default function page() {
                                                 width={400}
                                                 height={400}
                                                 src={img1}
+                                                alt='Gallery Image third part'
                                                 className='w-full lg:w-11/12 h-full object-cover '
                                             />
 
@@ -585,6 +663,7 @@ export default function page() {
                                             width={400}
                                             height={400}
                                             src={img2}
+                                            alt='Gallery Image fourth part'
                                             className='w-full  h-full object-cover '
                                         />
 
