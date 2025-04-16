@@ -62,7 +62,7 @@ export default function Navbar() {
       {/* Top Contact/Social Bar */}
       <div className={`bg-[#122549] flex justify-center items-center gap-10 px-4 lg:px-16 py-2 border-b border-white/20 transition-transform duration-300 ${isTopBarVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="flex items-center gap-4 text-sm text-white">
-          <span>+8801842842320</span>
+          <span>+8809644222111</span>
           <span className="h-4 w-px bg-white/50"></span>
         </div>
 
