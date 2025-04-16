@@ -49,11 +49,74 @@ const UniversityBioDataAdded = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log('Submitted Data:', formData);
+  //   // Here you can implement the submission to your backend API
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitted Data:', formData);
-    // Here you can implement the submission to your backend API
+  
+    try {
+      let logoUrl = "";
+      if (formData.universityLogo) {
+        // Upload logo to ImgBB
+        const logoForm = new FormData();
+        logoForm.append("image", formData.universityLogo);
+  
+        const imgbbRes = await fetch("https://api.imgbb.com/1/upload?key=3d64b0e9dee39ca593b9da32467663ee", {
+          method: "POST",
+          body: logoForm,
+        });
+  
+        const imgbbData = await imgbbRes.json();
+        if (imgbbData?.data?.url) {
+          logoUrl = imgbbData.data.url;
+        } else {
+          console.error("ImgBB upload failed", imgbbData);
+          return;  // Exit early if ImgBB upload fails
+        }
+      }
+  
+      const payload = {
+        university_name: formData.universityName,
+        university_logo: logoUrl,  // Send URL instead of file
+        undergraduate_course: formData.undergraduateCourse,
+        undergraduate_credits: formData.undergraduateCredits,
+        postgraduate_course: formData.postgraduateCourse,
+        postgraduate_credits: formData.postgraduateCredits,
+        university_cost: formData.universityCost,
+        diploma_course_name: formData.diplomaCourseName,
+        diploma_course_cost: formData.diplomaCourseCost,
+        university_link: formData.universityLink,
+        created_at: new Date().toISOString(),
+      };
+  
+      console.log("Payload:", payload); // Log the payload to check if it's populated
+  
+      const response = await fetch('/api/adminUniveristyBio', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload), // Ensure it's a string
+      });
+  
+      const result = await response.json(); // Await and get the result from API
+  
+      if (result.success) {
+        alert("University Bio Added Successfully!");
+      } else {
+        alert("Failed: " + result.message);
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      alert("Something went wrong!");
+    }
   };
+  
+  
 
   return (
     <div>

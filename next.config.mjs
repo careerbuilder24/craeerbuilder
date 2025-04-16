@@ -6,7 +6,7 @@ const nextConfig = {
 // output: "export",
   images: {
     domains: [
-       "i.ibb.co", "ibb.co", "img.freepik.com", "lh3.googleusercontent.com", "i.postimg.cc"
+       "i.ibb.co", "i.ibb.co.com", "ibb.co", "img.freepik.com", "lh3.googleusercontent.com", "i.postimg.cc", "postimg.cc"
     ],
   },
 

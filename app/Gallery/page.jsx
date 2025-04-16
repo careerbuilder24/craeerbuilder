@@ -181,63 +181,89 @@ export default function page() {
                         <div className='container mx-auto my-5 lg:w-9/12 w-10/12'>
 
 
-                            {/* Modal Part */}
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-title"
-                                aria-describedby="modal-description"
-                            >
-                                <Box sx={style}>
-                                    {selectedImage && (
-                                        <Swiper
-                                            className="mySwiper"
-                                            initialSlide={activeIndex}
-                                            spaceBetween={30}
-                                            pagination={{ clickable: true }}
-                                            navigation={true}
-                                            modules={[Navigation]}
-                                            onSlideChange={(swiper) => setSelectedImage(filteredGallery[swiper.activeIndex])}
-                                            breakpoints={{
-                                                640: {
-                                                    slidesPerView: 1,
-                                                    spaceBetween: 20,
-                                                },
-                                                768: {
-                                                    slidesPerView: 1,
-                                                    spaceBetween: 30,
-                                                },
-                                                1024: {
-                                                    slidesPerView: 1,
-                                                    spaceBetween: 30,
-                                                },
-                                            }}
-                                        >
-                                            {filteredGallery.map((image, index) => (
-                                                <SwiperSlide key={index}>
-                                                    <Image
-                                                        width={600}
-                                                        height={600}
-                                                        src={image.image.trim()} // Add .trim() here
-                                                        className="w-full h-auto rounded-md"
-                                                        alt={`Slide ${index + 1}`}
-                                                        loading='lazy'
-                                                    />
-                                                    <div className="relative bottom-11 rounded-md flex-col bg-black opacity-75 p-3">
-                                                        {/* Line 228 - Change Gallerys to image */}
-                                                        <time dateTime={new Date(image.date).toISOString()} className="text-white text-sm">
-                                                            {image.date}
-                                                        </time>
+                        <Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+>
+  <Box
+    sx={{
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: '90%',
+      maxWidth: 700,
+      bgcolor: 'background.paper',
+      boxShadow: 24,
+      borderRadius: 2,
+      p: 2,
+      maxHeight: '50vh',
+      overflowY: 'auto',
+    }}
+  >
+    {selectedImage && (
+      <Swiper
+        className="mySwiper"
+        initialSlide={activeIndex}
+        spaceBetween={30}
+        pagination={{ clickable: true }}
+        navigation={true}
+        modules={[Navigation]}
+        onSlideChange={(swiper) =>
+          setSelectedImage(filteredGallery[swiper.activeIndex])
+        }
+        breakpoints={{
+          640: { slidesPerView: 1, spaceBetween: 20 },
+          768: { slidesPerView: 1, spaceBetween: 30 },
+          1024: { slidesPerView: 1, spaceBetween: 30 },
+        }}
+      >
+        {filteredGallery.map((image, index) => (
+          <SwiperSlide key={index}>
+            <Image
+              width={600}
+              height={400} // adjusted to make it less tall
+              src={image.image.trim()}
+              style={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: '8px',
+              }}
+              alt={`Slide ${index + 1}`}
+              loading="lazy"
+            />
+            <Box
+              sx={{
+                position: 'relative',
+                bottom: 44,
+                bgcolor: 'rgba(0, 0, 0, 0.75)',
+                borderRadius: 1,
+                p: 1.5,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 1,
+              }}
+            >
+              <Box
+                component="time"
+                dateTime={new Date(image.date).toISOString()}
+                sx={{ color: 'white', fontSize: '0.875rem' }}
+              >
+                {image.date}
+              </Box>
+              <Box sx={{ color: 'white', fontSize: '1rem' }}>
+                {image.description}
+              </Box>
+            </Box>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    )}
+  </Box>
+</Modal>
 
-                                                        {/* <time dateTime={image.date} className="text-white text-sm">{image.date}</time> */}
-                                                        <h3 className="text-white text-base">{image.description}</h3>
-                                                    </div>
-                                                </SwiperSlide>
-                                            ))}
-                                        </Swiper>
-                                    )}
-                                </Box>
-                            </Modal>
 
 
                         </div>

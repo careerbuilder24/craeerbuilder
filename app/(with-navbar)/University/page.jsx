@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic'; // For dynamic imports
 
 // Dynamically import Lottie to disable SSR
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
-import animationData from '../../../assets/AnimationLotie.json'; 
+import animationData from '../../../assets/AnimationLotie.json';
 import Chatbot from '../componenets/chatBot/Chatbot';
 
 export default function Page() {
@@ -31,8 +31,8 @@ export default function Page() {
         searchQuery === ''
           ? BrackList
           : BrackList.filter((item) =>
-              item.versity_name?.toLowerCase().includes(searchQuery.toLowerCase())
-            );
+            item.versity_name?.toLowerCase().includes(searchQuery.toLowerCase())
+          );
 
       setFilteredBrackList(result);
     }
@@ -63,16 +63,29 @@ export default function Page() {
         <Navbar />
         <div className="lg:mt-32 container mx-auto">
           <div className="w-9/12 container mx-auto">
-            <div
-              className="w-full h-72 lg:h-[400px] md:h-[400px] bg-cover bg-center relative flex items-center justify-center"
-              style={{ backgroundImage: `url(${img1.src})` }}
-            >
-              <div className="bg-[#17549A] w-9/12 h-36 container mx-auto rounded-xl flex items-center justify-center">
-                <h1 className="text-5xl lg:text-6xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-white to-[#0ec7e7] shadow-lg py-10">
-                  All University List
-                </h1>
+            <div className="w-full">
+              {/* Full-Width Image Container */}
+              <div className="w-full mt-6 sm:mt-10"> {/* Margin top added */}
+                <div className="w-full h-64 sm:h-96 md:h-[500px] bg-contain bg-no-repeat bg-center">
+                  <img
+                    src={img1.src}
+                    alt="University List"
+                    className="w-full h-full object-contain object-center"
+                  />
+                </div>
               </div>
+
+              {/* Text Container - BELOW the image */}
+              <div className="w-full max-w-4xl mx-auto mt-3 sm:mt-5">
+                <div className="bg-[#17549A] rounded-xl flex items-center justify-center px-4 py-3 sm:px-6 sm:py-6 shadow-xl">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-white to-[#0ec7e7]">
+                    All University List
+                  </h1>
+                </div>
+              </div>
+
             </div>
+
 
             <div className="container mx-auto my-10">
               <div className="mb-4 flex justify-end">

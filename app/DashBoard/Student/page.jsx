@@ -51,10 +51,16 @@ const PageContent = () => {
       setUserRole(isAdmin ? 'Admin' : 'user');
     }
   }, [ManualUser, userAdmin]);
+  // useEffect(() => {
+  //   if (userRole !== 'Admin' && activeSection.startsWith('Admin')) {
+  //     router.push('/DashBoard/Student');
+  //   }
+  // }, [userRole, activeSection]);
+  
 
-  console.log('Current User:', ManualUser);
-  console.log('Admin List:', userAdmin);
-  console.log('User Role:', userRole);
+  // console.log('Current User:', ManualUser);
+  // console.log('Admin List:', userAdmin);
+  // console.log('User Role:', userRole);
 
 
 
@@ -214,7 +220,7 @@ const PageContent = () => {
             alt="Student Profile Dashboard"
             className="user-image"
           />
-          <p>{ManualUser.name}</p>
+          {/* <p>{ManualUser.name}</p> */}
         </div>
       </section>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} style={{ backgroundColor: sidebarColor }}>
@@ -237,3 +243,155 @@ export default function Page() {
     </Suspense>
   );
 }
+
+
+
+
+// for user purpose development
+// 'use client';
+
+// import React, { Suspense, useEffect, useState } from 'react';
+// import { useRouter, useSearchParams } from 'next/navigation';
+// import './student.css';
+// import Link from 'next/link';
+// import CvUpload from '../Students_Dashboards_Components/CvUpload/CvUpload';
+// import Profile from '../Students_Dashboards_Components/Profile/Profile';
+// import Achivements from '../Students_Dashboards_Components/Achivements/Achivements';
+// import StudentsCourses from '../Students_Dashboards_Components/StudentsCourses/StudentsCourses';
+// import StudentsPortfolioEdit from '../Students_Dashboards_Components/StudentsPortfolioEdit/StudentsPortfolioEdit';
+// import PicturesEdits from '../Students_Dashboards_Components/PicturesEdits/PicturesEdits';
+// import VideosEdits from '../Students_Dashboards_Components/videosEdit/videosEdits';
+// import BlogsEditsStudents from '../Students_Dashboards_Components/BlogsEditsStudents/BlogsEditsStudents';
+// import Certificate from '../Students_Dashboards_Components/certificate/Certificate';
+// import Welcome_Page from '../Welcome_Page/Welcome_Page';
+// import AllBlogs from '../Students_Dashboards_Components/AllBlog/AllBlogs';
+// import { UserAuth } from '@/app/context/AuthContext';
+// import Image from 'next/image';
+
+// const PageContent = () => {
+//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+//   const [activeSection, setActiveSection] = useState('');
+//   const [navbarColor, setNavbarColor] = useState('#17549A');
+//   const [sidebarColor, setSidebarColor] = useState('#222');
+//   const [userRole, setUserRole] = useState('User'); // Only User role now
+//   const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
+
+//   const { ManualUser } = UserAuth();
+
+//   const router = useRouter();
+//   const searchParams = useSearchParams();
+
+//   // Animated text effect
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       const phrases = ["Welcome", "to", "Career", "Builder"];
+//       setAnimatedText((prev) => {
+//         const currentIndex = phrases.indexOf(prev);
+//         const nextIndex = (currentIndex + 1) % phrases.length;
+//         return phrases[nextIndex];
+//       });
+//     }, 1000);
+
+//     return () => clearInterval(interval);
+//   }, []);
+
+//   // Get active section from query parameters
+//   useEffect(() => {
+//     const section = searchParams.get('section');
+//     if (section) setActiveSection(section);
+//   }, [searchParams]);
+
+//   const toggleSidebar = () => {
+//     setIsSidebarOpen(!isSidebarOpen);
+//   };
+
+//   const handleSectionClick = (section) => {
+//     setActiveSection(section);
+//     router.push(`/DashBoard/Student?section=${section}`);
+//   };
+
+//   // Render Sidebar for User role only
+//   const renderSidebarForRole = () => {
+//     return (
+//       <ul className="mt-3">
+//         <Link href="/">Home</Link>
+//         <li onClick={() => handleSectionClick('Profile')}>Profile Edit</li>
+//         <li onClick={() => handleSectionClick('CvUpdate')}>CV Update</li>
+//         <li onClick={() => handleSectionClick('Achivements')}>Achievements</li>
+//         <li onClick={() => handleSectionClick('courses')}>Courses</li>
+//         <li onClick={() => handleSectionClick('Portfolio')}>Portfolio</li>
+//         <li onClick={() => handleSectionClick('Certificate')}>Certificate</li>
+//         <li onClick={() => handleSectionClick('Pictures')}>Pictures</li>
+//         <li onClick={() => handleSectionClick('Videos')}>Videos</li>
+//         <li onClick={() => handleSectionClick('Blog')}>Blog</li>
+//         <li onClick={() => handleSectionClick('AllBlogs')}>All Blogs</li>
+//       </ul>
+//     );
+//   };
+
+//   // Render active section for User role only
+//   const renderActiveSection = () => {
+//     switch (activeSection) {
+//       case 'Profile':
+//         return <Profile />;
+//       case 'CvUpdate':
+//         return <CvUpload />;
+//       case 'Achivements':
+//         return <Achivements />;
+//       case 'Portfolio':
+//         return <StudentsPortfolioEdit />;
+//       case 'courses':
+//         return <StudentsCourses />;
+//       case 'Certificate':
+//         return <Certificate />;
+//       case 'Pictures':
+//         return <PicturesEdits />;
+//       case 'Videos':
+//         return <VideosEdits />;
+//       case 'Blog':
+//         return <BlogsEditsStudents />;
+//       case 'AllBlogs':
+//         return <AllBlogs />;
+//       default:
+//         return <Welcome_Page />;
+//     }
+//   };
+
+//   return (
+//     <>
+//       <section className="navbar" style={{ backgroundColor: navbarColor }}>
+//         <button className="sidebar-toggle" onClick={toggleSidebar} aria-label="Toggle sidebar">
+//           {isSidebarOpen ? '✖' : '☰'}
+//         </button>
+//         <h1 className="text-3xl font-bold text-white">{animatedText}</h1>
+//         <div className="user-logo gap-3">
+//           <Image
+//             width={200}
+//             height={200}
+//             src="https://i.postimg.cc/s2RQWVG5/gilbert.png"
+//             alt="Student Profile Dashboard"
+//             className="user-image"
+//           />
+//         </div>
+//       </section>
+//       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} style={{ backgroundColor: sidebarColor }}>
+//         <button className="close-sidebar" onClick={toggleSidebar} aria-label="Close sidebar">
+//           ✖ Close
+//         </button>
+//         {renderSidebarForRole()}
+//       </div>
+//       <main className="main-content-area">
+//         {renderActiveSection()}
+//       </main>
+//     </>
+//   );
+// };
+
+// export default function Page() {
+//   return (
+//     <Suspense fallback={<div>Loading...</div>}>
+//       <PageContent />
+//     </Suspense>
+//   );
+// }
+
