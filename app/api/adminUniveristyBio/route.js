@@ -1,55 +1,58 @@
+
+
 import { NextResponse } from 'next/server';
-import db from '../../../libs/db'; // Ensure correct export
+import db from '../../../libs/db';
 
-export async function POST(req) {
+export const POST = async (req) => {
   try {
-    const text = await req.text();
-    const body = text ? JSON.parse(text) : null;
-
-    const { university_name, university_logo, undergraduate_course, undergraduate_credits, postgraduate_course, postgraduate_credits, university_cost, diploma_course_name, diploma_course_cost, university_link } = body;
-
-    if (!university_logo || !university_name || !undergraduate_course || !undergraduate_credits || !postgraduate_course || !postgraduate_credits || !university_cost || !diploma_course_name || !university_link || diploma_course_cost) {
-      return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
-    }
-    
-
+    const body = await req.json();
     const {
-      universityName,
-      UniversityLogo,
-      undergraduateCourse,
-      undergraduateCredits,
-      postgraduateCourse,
-      postgraduateCredits,
-      universityCost,
-      diplomaCourseName,
-      diplomaCourseCost, // This was missing from SQL (if needed, add it below)
-      universityLink,
+      university_logo,
+      university_name,
+      undergraduate_course,
+      undergraduate_credits,
+      postgraduate_course,
+      postgraduate_credits,
+      university_cost,
+      diploma_course_name,
+      diploma_course_cost,
+      university_link,
+      created_at
     } = body;
 
-    const sql = `INSERT INTO universities (
-      university_name, university_logo, undergraduate_course, undergraduate_credits,
-      postgraduate_course, postgraduate_credits, university_cost,
-      diploma_course_name, diploma_course_cost, university_link, created_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`; // 11 values now
+    // ✅ Fixed validation: now correctly checks for missing fields
+    if (
+      !university_logo || !university_name || !undergraduate_course || !undergraduate_credits ||
+      !postgraduate_course || !postgraduate_credits || !university_cost || !diploma_course_name ||
+      !university_link || !diploma_course_cost || !created_at
+    ) {
+      return NextResponse.json({ message: 'Missing required fields' }, { status: 400 });
+    }
 
-    const [result] = await db.execute(sql, [
-      universityName || null,
-      UniversityLogo || null,
-      undergraduateCourse || null,
-      undergraduateCredits || null,
-      postgraduateCourse || null,
-      postgraduateCredits || null,
-      universityCost || null,
-      diplomaCourseName || null,
-      diplomaCourseCost || null,
-      universityLink || null,
-      diploma_course_cost || null,
-      new Date() // Server-side timestamp
-    ]);
+    const result = await db.query(
+      `INSERT INTO users_login.university_data (
+        university_logo, university_name, undergraduate_course, undergraduate_credits,
+        postgraduate_course, postgraduate_credits, university_cost, diploma_course_name,
+        diploma_course_cost, university_link, created_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        university_logo,
+        university_name,
+        undergraduate_course,
+        undergraduate_credits,
+        postgraduate_course,
+        postgraduate_credits,
+        university_cost,
+        diploma_course_name,
+        diploma_course_cost,
+        university_link,
+        new Date(),
+      ]
+    );
 
-    return NextResponse.json({ message: 'University data inserted successfully', result }, { status: 200 });
+    return NextResponse.json({ message: 'University bio added successfully', result });
   } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json({ message: 'Failed to insert university data', error: error.message }, { status: 500 });
+    console.error('Error inserting university bio:', error);
+    return NextResponse.json({ message: 'Something went wrong', error }, { status: 500 });
   }
-}
+};

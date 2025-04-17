@@ -9,6 +9,7 @@ import FirstSection from "./(with-navbar)/componenets/FirstSection/FirstSection"
 import ButtonTopMaker from "./buttonTopMaker/ButtonTopMaker";
 import HelmetHead from "./HelmetHead/HelmetHead";
 import Chatbot from "./(with-navbar)/componenets/chatBot/Chatbot";
+import Review from "./(with-navbar)/componenets/review/Review";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <Banner />
       <WelcomeText />
       <FirstSection />
+      <Review />
       <Footer />
       <Chatbot />
     </>
