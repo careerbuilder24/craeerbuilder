@@ -19,7 +19,7 @@
     "rating": 2,
     "Date" : "1st July 2024",
     "total_hours": 45,
-    "image": " https://i.postimg.cc/sgRffSx6/motion.jpg"
+    "image": "https://i.postimg.cc/sgRffSx6/motion.jpg"
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "Duration": "3 Months",
     "Date" : "1st July 2024",
     "total_hours": 40,
-    "image": " https://i.postimg.cc/5tsfmR3T/video.jpg"
+    "image": "https://i.postimg.cc/5tsfmR3T/video.jpg"
   },
   {
     "id": 4,
