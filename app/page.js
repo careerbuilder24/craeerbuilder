@@ -10,7 +10,7 @@ import ButtonTopMaker from "./buttonTopMaker/ButtonTopMaker";
 import HelmetHead from "./HelmetHead/HelmetHead";
 import Chatbot from "./(with-navbar)/componenets/chatBot/Chatbot";
 import Review from "./(with-navbar)/componenets/review/Review";
-
+import ConnectorsCompany from "./(with-navbar)/componenets/Connectors-Company/ConnectorsCompany";
 export default function Home() {
   return (
     <>
@@ -25,6 +25,7 @@ export default function Home() {
       <Banner />
       <WelcomeText />
       <FirstSection />
+      <ConnectorsCompany />
       <Review />
       <Footer />
       <Chatbot />

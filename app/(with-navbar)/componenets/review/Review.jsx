@@ -43,9 +43,7 @@ export default function Review() {
   return (
     <section className="py-12 my-10 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-          Our Student and Intern Reviews
-        </h2>
+      
 
         <Carousel
           infiniteLoop
@@ -78,6 +76,10 @@ export default function Review() {
             </div>
           ))}
         </Carousel>
+
+        <h2 className="text-3xl text-[#17549A] md:text-4xl font-serif text-center mb-10">
+          Our Student and Intern Reviews
+        </h2>
       </div>
     </section>
   );
