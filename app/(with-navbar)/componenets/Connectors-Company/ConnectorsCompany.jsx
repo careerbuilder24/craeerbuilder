@@ -5,7 +5,7 @@ import './ConnectorsCompany.css'
 export default function ConnectorsCompany() {
   return (
     <>
-      <p className='text-[#17549A] text-3xl md:text-4xl font-bold text-center mt-10'>Connected by these Companies</p>
+      <p className='text-[#17549A] text-3xl md:text-4xl font-bold text-center mt-16'>Connected by these Companies</p>
       <div className="relative w-full h-52 flex items-center justify-center overflow-hidden bg-white">
         <div className="absolute animate-scroll flex gap-10 items-center">
           <Image

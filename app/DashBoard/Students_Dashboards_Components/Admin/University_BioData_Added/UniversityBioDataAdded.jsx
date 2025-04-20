@@ -1,5 +1,7 @@
+import useAdminUniversityBio from '@/hooks/useUniversityBioAdded';
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import Swal from 'sweetalert2';
 
 const UniversityBioDataAdded = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ const UniversityBioDataAdded = () => {
     universityLink: '',
     universityLogo: null,  // New field for logo upload
   });
+
+  const {data, loading, error} = useAdminUniversityBio();
 
   useEffect(() => {
     // Ensuring formData is always initialized with the proper structure
@@ -57,31 +61,42 @@ const UniversityBioDataAdded = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    const confirmResult = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to submit this university data?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, submit it!',
+      cancelButtonText: 'Cancel',
+    });
+
+    if (!confirmResult.isConfirmed) return;
+
     try {
       let logoUrl = "";
       if (formData.universityLogo) {
-        // Upload logo to ImgBB
         const logoForm = new FormData();
         logoForm.append("image", formData.universityLogo);
-  
+
         const imgbbRes = await fetch("https://api.imgbb.com/1/upload?key=3d64b0e9dee39ca593b9da32467663ee", {
           method: "POST",
           body: logoForm,
         });
-  
+
         const imgbbData = await imgbbRes.json();
         if (imgbbData?.data?.url) {
           logoUrl = imgbbData.data.url;
         } else {
           console.error("ImgBB upload failed", imgbbData);
-          return;  // Exit early if ImgBB upload fails
+          Swal.fire("Error", "Failed to upload image!", "error");
+          return;
         }
       }
-  
+
       const payload = {
         university_name: formData.universityName,
-        university_logo: logoUrl,  // Send URL instead of file
+        university_logo: logoUrl,
         undergraduate_course: formData.undergraduateCourse,
         undergraduate_credits: formData.undergraduateCredits,
         postgraduate_course: formData.postgraduateCourse,
@@ -92,31 +107,39 @@ const UniversityBioDataAdded = () => {
         university_link: formData.universityLink,
         created_at: new Date().toISOString(),
       };
-  
-      console.log("Payload:", payload); // Log the payload to check if it's populated
-  
-      const response = await fetch('/api/adminUniveristyBio', {
+
+      const response = await fetch('/api/adminUniversityBio', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload), // Ensure it's a string
+        body: JSON.stringify(payload),
       });
-  
-      const result = await response.json(); // Await and get the result from API
-  
-      if (result.success) {
-        alert("University Bio Added Successfully!");
+
+      const result = await response.json();
+
+      if (response.ok) {
+        await Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: result.message || 'University Bio Added Successfully!',
+          confirmButtonColor: '#3085d6'
+        });
       } else {
-        alert("Failed: " + result.message);
+        await Swal.fire({
+          icon: 'error',
+          title: 'Submission Failed',
+          text: result.message || 'Unknown error occurred',
+        });
       }
     } catch (error) {
       console.error("Submission Error:", error);
-      alert("Something went wrong!");
+      Swal.fire("Error", "Something went wrong!", "error");
     }
   };
-  
-  
+
+
+
 
   return (
     <div>
@@ -288,6 +311,39 @@ const UniversityBioDataAdded = () => {
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="max-w-6xl mx-auto mt-10">
+        <h2 className="text-2xl font-bold mb-6 text-center">Added University Bios</h2>
+
+        {loading && <p className="text-center text-gray-500">Loading data...</p>}
+        {error && <p className="text-center text-red-500">Failed to load data</p>}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data?.data?.map((uni) => (
+            <div key={uni.id} className="bg-white shadow-lg rounded-xl p-4 border hover:shadow-2xl transition-all">
+              <img
+                src={uni.University_logo}
+                alt={`${uni.university_name} logo`}
+                className="w-full h-40 object-contain mb-4"
+              />
+              <h3 className="text-xl font-bold mb-1">{uni.university_name}</h3>
+              <a
+                href={uni.university_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline text-sm mb-2 inline-block"
+              >
+                Visit Website
+              </a>
+              <p><strong>UG Course:</strong> {uni.undergraduate_course} ({uni.undergraduate_credits} credits)</p>
+              <p><strong>PG Course:</strong> {uni.postgraduate_course} ({uni.postgraduate_credits} credits)</p>
+              <p><strong>Diploma:</strong> {uni.diploma_course_name} – ৳{uni.diploma_course_cost}</p>
+              <p><strong>Total Cost:</strong> ৳{uni.university_cost}</p>
+              <p className="text-xs text-gray-500 mt-2">Added: {new Date(uni.created_at).toLocaleDateString()}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

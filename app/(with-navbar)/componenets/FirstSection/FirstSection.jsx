@@ -99,7 +99,7 @@ export default function FirstSection() {
 
                 {/* View More Button */}
                 {!showAll && course.length > 6 && (
-                    <div className="flex justify-center mt-6">
+                    <div className="flex justify-center mt-2">
                         <button
                             className="bg-[#56d3fd] my-10 hover:bg-[#32c4f0] text-white font-bold py-2 px-6 rounded transition duration-300"
                             onClick={() => setShowAll(true)}

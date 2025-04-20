@@ -11,6 +11,7 @@ import HelmetHead from "./HelmetHead/HelmetHead";
 import Chatbot from "./(with-navbar)/componenets/chatBot/Chatbot";
 import Review from "./(with-navbar)/componenets/review/Review";
 import ConnectorsCompany from "./(with-navbar)/componenets/Connectors-Company/ConnectorsCompany";
+import BlogPost from "./(with-navbar)/componenets/BlogPost/BlogPost";
 export default function Home() {
   return (
     <>
@@ -25,6 +26,7 @@ export default function Home() {
       <Banner />
       <WelcomeText />
       <FirstSection />
+      <BlogPost />
       <ConnectorsCompany />
       <Review />
       <Footer />

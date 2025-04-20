@@ -56,3 +56,26 @@ export const POST = async (req) => {
     return NextResponse.json({ message: 'Something went wrong', error }, { status: 500 });
   }
 };
+
+
+
+// GET function
+
+export async function GET() {
+  try {
+    const query = `SELECT * FROM users_login.university_data`;
+
+    const [rows] = await db.execute(query);
+    return NextResponse.json({
+      success: true,
+      data: rows
+    }, { status: 200 })
+  } catch (error) {
+    console.error('Error Fetching University data: ', error);
+    return NextResponse.json({
+      success: false,
+      message: "error Fetching Data",
+      error: error.message
+    })
+  }
+}

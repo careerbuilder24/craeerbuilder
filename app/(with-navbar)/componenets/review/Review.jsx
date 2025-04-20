@@ -77,7 +77,7 @@ export default function Review() {
           ))}
         </Carousel>
 
-        <h2 className="text-3xl text-[#17549A] md:text-4xl font-serif text-center mb-10">
+        <h2 className="text-3xl text-[#17549A] md:text-4xl font-bold  text-center mb-10">
           Our Student and Intern Reviews
         </h2>
       </div>

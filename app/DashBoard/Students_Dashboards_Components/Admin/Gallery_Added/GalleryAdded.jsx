@@ -203,7 +203,7 @@ const GalleryAdded = () => {
 
                 if (response.data.success) {
                     Swal.fire('updated!', 'caption updated successfully', 'success');
-                    window.location.reload();
+                    // window.location.reload();
                 } else {
                     Swal.fire('Error', 'update failed', 'error');
 
