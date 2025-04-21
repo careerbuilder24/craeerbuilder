@@ -29,7 +29,7 @@ export default function BlogPost() {
     return (
 
         <>
-            <p className='text-[#17549A] text-3xl md:text-4xl font-bold text-center mt-16'>Our Blog Post</p>
+            <p className='text-[#17549A] text-3xl md:text-4xl font-bold text-center mt-16'>Blog Post</p>
             <div className="flex flex-wrap justify-center gap-6 p-6 mt-16">
                 {blogPosts.map((post) => (
                     <div

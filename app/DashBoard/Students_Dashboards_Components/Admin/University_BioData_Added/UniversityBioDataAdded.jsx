@@ -1,4 +1,5 @@
 import useAdminUniversityBio from '@/hooks/useUniversityBioAdded';
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import Swal from 'sweetalert2';
@@ -18,7 +19,10 @@ const UniversityBioDataAdded = () => {
     universityLogo: null,  // New field for logo upload
   });
 
-  const {data, loading, error} = useAdminUniversityBio();
+
+
+ 
+  const { data, loading, error } = useAdminUniversityBio();
 
   useEffect(() => {
     // Ensuring formData is always initialized with the proper structure
@@ -53,11 +57,6 @@ const UniversityBioDataAdded = () => {
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log('Submitted Data:', formData);
-  //   // Here you can implement the submission to your backend API
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,6 +139,39 @@ const UniversityBioDataAdded = () => {
 
 
 
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are You Sure!",
+      text: 'This image will be deleted permanently deleted',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'yes, delete it!',
+      cancelButtonText: 'Cancel',
+    });
+
+
+    if (result.isConfirmed) {
+      try {
+        const response = await axios.delete('/api/adminUniversityBio', {
+          data: { id },
+        });
+        if (response.data.success) {
+          Swal.fire('Deleted', 'Image has been deleted', 'success');
+          // window.location.reload();
+        } else {
+          Swal.fire('Error', 'Failed to deleted image.', 'error');
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire('Error', 'Something went wrong!', 'error');
+      }
+    }
+  }
+
+
+
+ 
 
   return (
     <div>
@@ -338,11 +370,23 @@ const UniversityBioDataAdded = () => {
               </a>
               <p><strong>UG Course:</strong> {uni.undergraduate_course} ({uni.undergraduate_credits} credits)</p>
               <p><strong>PG Course:</strong> {uni.postgraduate_course} ({uni.postgraduate_credits} credits)</p>
-              <p><strong>Diploma:</strong> {uni.diploma_course_name} – ৳{uni.diploma_course_cost}</p>
-              <p><strong>Total Cost:</strong> ৳{uni.university_cost}</p>
+              <p><strong>Diploma:</strong> {uni.diploma_course_name} – {uni.diploma_course_cost}৳</p>
+              <p><strong>Total Cost:</strong>{uni.university_cost}৳</p>
               <p className="text-xs text-gray-500 mt-2">Added: {new Date(uni.created_at).toLocaleDateString()}</p>
+              <div className="flex justify-end mt-4 gap-2">
+              
+                <button
+                  onClick={() => handleDelete(uni.id)}
+                  className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
+
+
+    
         </div>
       </div>
     </div>
