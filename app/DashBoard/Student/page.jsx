@@ -107,7 +107,7 @@ const PageContent = () => {
         return (
           <ul className="mt-3">
             <Link href="/">Home</Link>
-            <li onClick={() => handleSectionClick('Students_Added')}>Statistics Managements</li>
+            <li onClick={() => handleSectionClick('Students_Added')}>Statistics Management </li>
             <li onClick={() => handleSectionClick('Course_Added')}>Course Added</li>
             <li onClick={() => handleSectionClick('Gallery_Added')}>Gallery Added</li>
             <li onClick={() => handleSectionClick('University_BioData_Added')}>University BioData Added</li>

@@ -13,7 +13,7 @@ const pieData = [
   { name: '100,000 - 1,000,000', value: 200 },
 ];
 
-const COLORS = ['#c2d1ff', '#a3baff', '#7b9bff', '#a26cff'];
+const COLORS = ['#c2d1ff', '#a3baff', '#7b9bff', '#BBF0C6'];
 
 const lineData = [
   { name: 'Jan', users: 400 },
@@ -21,7 +21,13 @@ const lineData = [
   { name: 'Mar', users: 1200 },
   { name: 'Apr', users: 1000 },
   { name: 'May', users: 1500 },
-  { name: 'Jun', users: 1800 },
+  { name: 'Jun', users: 2500 },
+  { name: 'July', users: 1000 },
+  { name: 'August', users: 3000 },
+  { name: 'September', users: 2400 },
+  { name: 'October', users: 2000 },
+  { name: 'November', users: 1100 },
+  { name: 'December', users: 500 },
 ];
 
 
@@ -58,7 +64,7 @@ export default function UserLoginsPieChart() {
 
         {/* Line Chart */}
         <div className="w-full max-w-sm p-4 shadow-md rounded-xl bg-white text-center">
-          <h2 className="text-lg font-semibold mb-4">Monthly user registrations</h2>
+          <h2 className="text-lg font-semibold mb-4">Total User Registered</h2>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={lineData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" />

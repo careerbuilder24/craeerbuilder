@@ -165,7 +165,7 @@ export default function PendingTable() {
                 <td className="p-2">{movie.owner}</td>
                 <td className="p-2">{movie.premiere}</td>
                 <td className="p-2">
-                  <button className="text-sm px-4 py-1 border rounded-full hover:bg-gray-200 transition">
+                  <button className="text-sm px-4 py-1 border rounded-full hover:bg-[#17549A] transition-all duration-300 hover:text-white">
                     View
                   </button>
                 </td>
@@ -176,7 +176,7 @@ export default function PendingTable() {
       </div>
 
       <div className="mt-4 text-right">
-        <button className="text-sm border px-4 py-2 rounded-full hover:bg-gray-100">
+        <button className="text-sm border px-4 py-2 rounded-full hover:bg-[#17549A]  hover:text-white transition-all duration-300">
           View all upcoming premiers
         </button>
       </div>
