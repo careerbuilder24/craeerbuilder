@@ -3,6 +3,7 @@ import HelmetHead from "@/app/HelmetHead/HelmetHead";
 import useUsers from "../../../../../hooks/useEmailsData"; 
 import Swal from "sweetalert2"; 
 import "./managerUsers.css";
+import AdminFooter from "@/app/(with-navbar)/componenets/Admin Footer/AdminFooter";
 
 const UserRow = React.memo(({ user, index, handleDelete, handleMakeAdmin, makingAdmin }) => (
   <tr key={user.email} className={index % 2 === 0 ? "even-row" : "odd-row"}>
@@ -202,6 +203,7 @@ const handleDelete = async (userEmail) => {
           </table>
         </div>
       </div>
+      <AdminFooter />
     </>
   );
 };

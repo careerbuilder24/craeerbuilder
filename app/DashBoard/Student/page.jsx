@@ -30,6 +30,7 @@ import AdminWelcomePage from '../Students_Dashboards_Components/Admin_Welcome_Pa
 import GalleryAdded from '../Students_Dashboards_Components/Admin/Gallery_Added/GalleryAdded';
 import { UserAuth } from '@/app/context/AuthContext';
 import usersAdmin from '@/hooks/useAdminUser';
+import { ThemeToggle } from '@/app/(with-navbar)/componenets/ThemeToggle/ThemeToggle';
 
 const PageContent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -106,6 +107,7 @@ const PageContent = () => {
       case 'Admin':
         return (
           <ul className="mt-3">
+         
             <Link href="/">Home</Link>
             <li onClick={() => handleSectionClick('Students_Added')}>Statistics Management </li>
             <li onClick={() => handleSectionClick('Course_Added')}>Course Added</li>
@@ -128,6 +130,7 @@ const PageContent = () => {
       default:
         return (
           <ul className="mt-3">
+         
             <Link href="/">Home</Link>
             <li onClick={() => handleSectionClick('Profile')}>Profile Edit</li>
             <li onClick={() => handleSectionClick('CvUpdate')}>CV Update</li>
@@ -213,6 +216,7 @@ const PageContent = () => {
         <h1 className="text-3xl font-bold text-white">{animatedText}</h1>
         {/* user login image and name */}
         <div className="user-logo gap-3  ">
+        <ThemeToggle />
           <Image
             width={200}
             height={200}

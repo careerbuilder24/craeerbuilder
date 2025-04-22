@@ -1,3 +1,4 @@
+import AdminFooter from '@/app/(with-navbar)/componenets/Admin Footer/AdminFooter';
 import React, { useState } from 'react';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
@@ -57,7 +58,8 @@ const ContactUsAdded = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 bg-gray-50 rounded shadow-md">
+  <>
+      <div className="container mx-auto p-6 bg-gray-50 rounded shadow-md">
       <h1 className="text-2xl font-bold text-center mb-6">Contact Us - Admin Panel</h1>
 
       {submittedData.data.length > 0 && !editing ? (
@@ -165,6 +167,9 @@ const ContactUsAdded = () => {
         </form>
       )}
     </div>
+    <AdminFooter />
+    
+  </>
   );
 };
 

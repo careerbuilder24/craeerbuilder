@@ -1,3 +1,4 @@
+import AdminFooter from '@/app/(with-navbar)/componenets/Admin Footer/AdminFooter';
 import React, { useState } from 'react';
 
 const AboutUsAdded = () => {
@@ -115,7 +116,8 @@ const AboutUsAdded = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 bg-gray-50 rounded shadow-md">
+  <>
+      <div className="container mx-auto p-6 bg-gray-50 rounded shadow-md">
       <h1 className="text-2xl font-bold text-center mb-6">About Us - Admin Panel</h1>
 
 
@@ -374,6 +376,8 @@ const AboutUsAdded = () => {
 )}
 
     </div>
+    <AdminFooter />
+  </>
   );
 };
 

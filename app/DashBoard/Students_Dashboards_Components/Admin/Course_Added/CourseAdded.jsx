@@ -1,5 +1,6 @@
 'use client';
 
+import AdminFooter from '@/app/(with-navbar)/componenets/Admin Footer/AdminFooter';
 import Image from 'next/image';
 // import UseAdminCourseAdded from '@/hooks/UseAdminCourseAdded';
 import React, { useEffect, useState } from 'react';
@@ -595,6 +596,8 @@ const CourseAdded = () => {
           ))
         }
       </div>
+
+      <AdminFooter />
     </>
   );
 };
