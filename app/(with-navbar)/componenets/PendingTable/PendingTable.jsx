@@ -4,7 +4,6 @@ export default function PendingTable() {
   const upcomingMovies = [
     {
       name: 'Avengers Black Widow',
-      category: ['Action', 'Thriller'],
       watchlists: '389,234',
       owner: 'Sony Entertainment',
       premiere: '21th May, 2022',
@@ -12,7 +11,6 @@ export default function PendingTable() {
     },
     {
       name: 'Moonlight',
-      category: ['True Story', '+2 more'],
       watchlists: '5,893',
       owner: 'A24 and Plan B Entertainment',
       premiere: '15th August, 2022',
@@ -20,7 +18,6 @@ export default function PendingTable() {
     },
     {
       name: 'Grimsby',
-      category: ['Comedy', 'Crime'],
       watchlists: '200,901',
       owner: 'Sony Entertainment',
       premiere: '5th October, 2022',
@@ -28,24 +25,14 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
       avatar: 'https://i.postimg.cc/hPrcKRrQ/Whats-App-Image-2025-03-10-at-04-49-40-0e023afe.jpg',
     },
-   
+
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
-      watchlists: '509,262',
-      owner: 'Sony Entertainment',
-      premiere: '25th December, 2022',
-      avatar: 'https://i.postimg.cc/hPrcKRrQ/Whats-App-Image-2025-03-10-at-04-49-40-0e023afe.jpg',
-    },
-    {
-      name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -53,7 +40,6 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -61,7 +47,6 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -69,7 +54,6 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -77,7 +61,6 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -85,7 +68,6 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -93,7 +75,6 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -101,7 +82,13 @@ export default function PendingTable() {
     },
     {
       name: 'Spider Man - No way home',
-      category: ['Action', 'Thriller'],
+      watchlists: '509,262',
+      owner: 'Sony Entertainment',
+      premiere: '25th December, 2022',
+      avatar: 'https://i.postimg.cc/hPrcKRrQ/Whats-App-Image-2025-03-10-at-04-49-40-0e023afe.jpg',
+    },
+    {
+      name: 'Spider Man - No way home',
       watchlists: '509,262',
       owner: 'Sony Entertainment',
       premiere: '25th December, 2022',
@@ -132,7 +119,7 @@ export default function PendingTable() {
               <th className="p-2">Pending Category</th>
               <th className="p-2">Students Email</th>
               <th className="p-2">Register Date</th>
-              <th className="p-2">View Report</th>
+              <th className="p-2"></th>
             </tr>
           </thead>
           <tbody>
@@ -150,23 +137,30 @@ export default function PendingTable() {
                   <span>{movie.name}</span>
                 </td>
                 <td className="p-2">
-                  <div className="flex flex-wrap gap-1">
-                    {movie.category.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="text-xs px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <div className="flex gap-2">
+                    <button
+                      className="bg-green-500 text-white px-3 py-1 rounded-full text-xs hover:bg-green-600 transition"
+                      onClick={() => alert(`Accepted: ${movie.name}`)}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs hover:bg-red-600 hover:text-white  transition duration-300"
+                      onClick={() => alert(`Denied: ${movie.name}`)}
+                    >
+                      Deny
+                    </button>
                   </div>
                 </td>
+
+
+                {/* bg-indigo-100 text-indigo-700 */}
                 <td className="p-2">{movie.watchlists}</td>
                 <td className="p-2">{movie.owner}</td>
                 <td className="p-2">{movie.premiere}</td>
                 <td className="p-2">
-                  <button className="text-sm px-4 py-1 border rounded-full hover:bg-[#17549A] transition-all duration-300 hover:text-white">
-                    View
+                  <button className="text-sm px-4 py-1 border rounded-full bg-[#3f7bfa] hover:bg-[red] transition-all duration-300 text-white hover:text-white">
+                    Delete
                   </button>
                 </td>
               </tr>

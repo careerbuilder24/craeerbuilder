@@ -3,7 +3,8 @@
 import PendingTable from '@/app/(with-navbar)/componenets/PendingTable/PendingTable';
 import {
   PieChart, Pie, Cell, Tooltip as PieTooltip, ResponsiveContainer,
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as LineTooltip
+  LineChart, Line, XAxis,  Area, YAxis, Tooltip as AreaTooltip, CartesianGrid, Tooltip as LineTooltip,
+  AreaChart
 } from 'recharts';
 
 const pieData = [
@@ -30,9 +31,20 @@ const lineData = [
   { name: 'December', users: 500 },
 ];
 
-
-
-// 
+const requestData = [
+  { name: 'Jan', requests: 200 },
+  { name: 'Feb', requests: 450 },
+  { name: 'Mar', requests: 600 },
+  { name: 'Apr', requests: 800 },
+  { name: 'May', requests: 1200 },
+  { name: 'Jun', requests: 1500 },
+  { name: 'July', requests: 1800 },
+  { name: 'August', requests: 2000 },
+  { name: 'September', requests: 1700 },
+  { name: 'October', requests: 1400 },
+  { name: 'November', requests: 900 },
+  { name: 'December', requests: 400 },
+];
 
 export default function UserLoginsPieChart() {
   return (
@@ -59,10 +71,10 @@ export default function UserLoginsPieChart() {
               <PieTooltip />
             </PieChart>
           </ResponsiveContainer>
-          <button className="mt-4 px-4 py-2 text-white bg-[#A26CFF] hover:bg-[#17549A] transition-all duration-300 rounded-lg">View full report</button>
+          {/* <button className="mt-4 px-4 py-2 text-white bg-[#A26CFF] hover:bg-[#17549A] transition-all duration-300 rounded-lg">View full report</button> */}
         </div>
 
-        {/* Line Chart */}
+        {/* User Registration Line Chart */}
         <div className="w-full max-w-sm p-4 shadow-md rounded-xl bg-white text-center">
           <h2 className="text-lg font-semibold mb-4">Total User Registered</h2>
           <ResponsiveContainer width="100%" height={250}>
@@ -74,11 +86,37 @@ export default function UserLoginsPieChart() {
               <Line type="monotone" dataKey="users" stroke="#7b9bff" strokeWidth={3} />
             </LineChart>
           </ResponsiveContainer>
-          <button className="mt-4 px-4 py-2 text-white bg-[#A26CFF] hover:bg-[#17549A] transition-all duration-300 rounded-lg">View full report</button>
+          {/* <button className="mt-4 px-4 py-2 text-white bg-[#A26CFF] hover:bg-[#17549A] transition-all duration-300 rounded-lg">View full report</button> */}
+        </div>
+
+        {/* Student Requests Area Chart */}
+        <div className="w-full max-w-sm p-4 shadow-md rounded-xl bg-white text-center">
+          <h2 className="text-lg font-semibold mb-4">Student Requests Per Month</h2>
+          <ResponsiveContainer width="100%" height={250}>
+            <AreaChart data={requestData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorRequests" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#17549A" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#17549A" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <AreaTooltip />
+              <Area
+                type="monotone"
+                dataKey="requests"
+                stroke="#17549A"
+                fillOpacity={1}
+                fill="url(#colorRequests)"
+                strokeWidth={3}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+          {/* <button className="mt-4 px-4 py-2 text-white bg-[#A26CFF] hover:bg-[#17549A] transition-all duration-300 rounded-lg">View full report</button> */}
         </div>
       </div>
-
-
 
       <PendingTable />
     </div>
