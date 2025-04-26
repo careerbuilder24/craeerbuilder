@@ -1,13 +1,28 @@
 import AdminFooter from '@/app/(with-navbar)/componenets/Admin Footer/AdminFooter';
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
+import Swal from 'sweetalert2';
+
+import userFaqAdd from '@/hooks/useFaqAdded'
+import Faq from '@/hooks/useFaqAdded';
 
 const FAQAdded = () => {
+
+  // modal statements 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentFaq, setCurrentFaq] = useState({
+    id: null,
+    title: '',
+    sub_title: '',
+    description: '',
+  });
+
+
   const [faqData, setFaqData] = useState({
     sections: [
       {
-        mainTitle: '',
-        subTitle: '',
+        title: '',
+        sub_title: '',
         description: '',
       },
     ],
@@ -38,28 +53,158 @@ const FAQAdded = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitted FAQ Data:', faqData);
-    // Submit the data to your backend or database
+
+  // modal open 
+  const openEditModal = (faq) => {
+    setCurrentFaq({
+      id: faq.id,
+      title: faq.title,
+      sub_title: faq.sub_title,
+      description: faq.description,
+    });
+    setIsModalOpen(true);
   };
 
-  // Generate dynamic meta description and keywords
-  const metaDescription = faqData.sections
-    .map((section) => `${section.mainTitle}: ${section.subTitle}`)
-    .join(' | ');
 
-  const metaKeywords = faqData.sections
-    .map((section) => section.mainTitle)
-    .join(', ');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to post these FAQ sections?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, post it!',
+      cancelButtonText: 'Cancel',
+    });
+
+    if (!result.isConfirmed) {
+      return; // User cancelled
+    }
+
+    try {
+      const responses = await Promise.all(
+        faqData.sections.map(async (section) => {
+          const res = await fetch("/api/FAQ_Added", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              title: section.mainTitle,
+              sub_title: section.sub_title,
+              description: section.description,
+            }),
+          });
+          return res.json();
+        })
+      );
+
+      const hasError = responses.find((res) => !res.success);
+
+      if (hasError) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Some sections failed to submit.',
+        });
+      } else {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'All FAQ sections submitted successfully!',
+        });
+
+        setFaqData({
+          sections: [{ mainTitle: "", subTitle: "", description: "" }],
+        });
+      }
+    } catch (err) {
+      console.error("Submit Error:", err);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong while submitting!',
+      });
+    }
+  };
+
+  const [userFaqAdd] = Faq();
+
+  // console.log(userFaqAdd)
+
+
+  // delete function
+  const handleDeleteFaq = async (id) => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'This FAQ will be permanently deleted.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      const res = await fetch(`/api/FAQ_Added?id=${id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        Swal.fire('Deleted!', 'FAQ has been deleted.', 'success');
+
+      } else {
+        Swal.fire('Error!', data.message || 'Failed to delete FAQ.', 'error');
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      Swal.fire('Error!', 'Something went wrong.', 'error');
+    }
+  };
+
+
+  // edit function
+  const handleUpdateFaq = async () => {
+    try {
+      const res = await fetch("/api/FAQ_Added", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: currentFaq.id,
+          title: currentFaq.title,
+          sub_title: currentFaq.sub_title,
+          description: currentFaq.description,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        Swal.fire('Updated!', 'FAQ updated successfully.', 'success');
+        setIsModalOpen(false);
+      } else {
+        Swal.fire('Error!', data.message || 'Failed to update FAQ.', 'error');
+      }
+    } catch (error) {
+      console.error('Update error:', error);
+      Swal.fire('Error!', 'Something went wrong.', 'error');
+    }
+  };
+
+
+
 
   return (
     <>
       <div className="max-w-7xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
         <Helmet>
           <title>Add FAQ Sections</title>
-          <meta name="description" content={metaDescription || 'Add FAQs to your website for better user understanding.'} />
-          <meta name="keywords" content={metaKeywords || 'FAQ, questions, answers, help'} />
+          <meta name="description" content={'Add FAQs to your website for better user understanding.'} />
+          <meta name="keywords" content={'FAQ, questions, answers, help'} />
           <meta name="author" content="Your Name or Organization" />
         </Helmet>
 
@@ -141,7 +286,87 @@ const FAQAdded = () => {
           </div>
         </form>
       </div>
+
+
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h2 className="text-xl font-bold mb-4">Edit FAQ</h2>
+
+            <input
+              type="text"
+              className="w-full border p-2 mb-3 rounded"
+              placeholder="Title"
+              value={currentFaq.title}
+              onChange={(e) => setCurrentFaq({ ...currentFaq, title: e.target.value })}
+            />
+            <input
+              type="text"
+              className="w-full border p-2 mb-3 rounded"
+              placeholder="SubTitle"
+              value={currentFaq.sub_title}
+              onChange={(e) => setCurrentFaq({ ...currentFaq, sub_title: e.target.value })}
+            />
+            <textarea
+              className="w-full border p-2 mb-3 rounded"
+              placeholder="Description"
+              value={currentFaq.description}
+              onChange={(e) => setCurrentFaq({ ...currentFaq, description: e.target.value })}
+            />
+
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="px-4 py-2 bg-gray-400 text-white rounded"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleUpdateFaq}
+                className="px-4 py-2 bg-blue-500 text-white rounded"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      {/* Render Existing FAQ Cards */}
+      <div className="max-w-7xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md my-10">
+        <h2 className="text-xl font-bold mb-6 text-center">Submitted FAQ Sections</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {userFaqAdd?.map((faq, index) => (
+            <div key={index} className="border rounded-lg p-4 shadow-sm bg-gray-100 hover:shadow-md transition">
+              <h3 className="text-lg font-semibold text-blue-600 mb-2">{faq.title}</h3>
+              <h4 className="text-md font-medium text-gray-700 mb-1">{faq.sub_title}</h4>
+              <p className="text-sm text-gray-600">{faq.description}</p>
+
+              <div className="mt-4 flex justify-between">
+                <button
+                  onClick={() => openEditModal(faq)}
+                  className="text-yellow-600 hover:underline"
+                >
+                  Edit
+                </button>
+
+                <button
+                  onClick={() => handleDeleteFaq(faq.id)}
+                  className="text-red-600 hover:underline"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+
+        </div>
+      </div>
       <AdminFooter />
+
+
     </>
   );
 };

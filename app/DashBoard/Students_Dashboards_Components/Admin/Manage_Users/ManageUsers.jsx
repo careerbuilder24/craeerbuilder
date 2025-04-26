@@ -1,7 +1,7 @@
 import React, { Suspense, useMemo, useState, useEffect } from "react";
-import HelmetHead from "@/app/HelmetHead/HelmetHead"; 
-import useUsers from "../../../../../hooks/useEmailsData"; 
-import Swal from "sweetalert2"; 
+import HelmetHead from "@/app/HelmetHead/HelmetHead";
+import useUsers from "../../../../../hooks/useEmailsData";
+import Swal from "sweetalert2";
 import "./managerUsers.css";
 import AdminFooter from "@/app/(with-navbar)/componenets/Admin Footer/AdminFooter";
 
@@ -14,8 +14,8 @@ const UserRow = React.memo(({ user, index, handleDelete, handleMakeAdmin, making
       {user.power === "Admin" ? (
         <span className="admin-badge">Admin</span>
       ) : (
-        <button 
-          className="make-admin-btn" 
+        <button
+          className="make-admin-btn"
           onClick={() => handleMakeAdmin(user.email)}
           disabled={makingAdmin[user.email]} // Disable if clicked
         >
@@ -42,7 +42,7 @@ const ManageUsers = () => {
     // Check sessionStorage for users that should be marked as admin
     const adminUsers = JSON.parse(sessionStorage.getItem("adminUsers")) || [];
     setUsers(prevUsers =>
-      prevUsers.map(user => 
+      prevUsers.map(user =>
         adminUsers.includes(user.email) ? { ...user, power: "Admin" } : user
       )
     );
@@ -68,45 +68,45 @@ const ManageUsers = () => {
 
 
   // Update ManageUsers.jsx to handle delete request
-const handleDelete = async (userEmail) => {
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Delete",
-    cancelButtonText: "Cancel",
-    confirmButtonColor: "#d33",
-    cancelButtonColor: "#3085d6",
-  }).then(async (result) => {
-    if (result.isConfirmed) {
-      try {
-        const response = await fetch("https://careers-builder2.vercel.app/api/makeAdmin", {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: userEmail }),
-        });
+  const handleDelete = async (userEmail) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch("https://careers-builder2.vercel.app/api/makeAdmin", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: userEmail }),
+          });
 
-        const data = await response.json();
+          const data = await response.json();
 
-        if (response.ok) {
-          setUsers((prevUsers) => prevUsers.filter((user) => user.email !== userEmail));
-          
-          const adminUsers = JSON.parse(sessionStorage.getItem("adminUsers")) || [];
-          const updatedAdmins = adminUsers.filter(email => email !== userEmail);
-          sessionStorage.setItem("adminUsers", JSON.stringify(updatedAdmins));
+          if (response.ok) {
+            setUsers((prevUsers) => prevUsers.filter((user) => user.email !== userEmail));
 
-          Swal.fire("Deleted!", "The user has been deleted.", "success");
-        } else {
-          Swal.fire("Error!", data.message, "error");
+            const adminUsers = JSON.parse(sessionStorage.getItem("adminUsers")) || [];
+            const updatedAdmins = adminUsers.filter(email => email !== userEmail);
+            sessionStorage.setItem("adminUsers", JSON.stringify(updatedAdmins));
+
+            Swal.fire("Deleted!", "The user has been deleted.", "success");
+          } else {
+            Swal.fire("Error!", data.message, "error");
+          }
+        } catch (error) {
+          console.error("Error deleting user:", error);
+          Swal.fire("Error!", "Something went wrong.", "error");
         }
-      } catch (error) {
-        console.error("Error deleting user:", error);
-        Swal.fire("Error!", "Something went wrong.", "error");
       }
-    }
-  });
-};
+    });
+  };
 
 
 
@@ -164,11 +164,11 @@ const handleDelete = async (userEmail) => {
 
   const userRows = useMemo(
     () => users.map((user, index) => (
-      <UserRow 
-        key={user.email} 
-        user={user} 
-        index={index} 
-        handleDelete={handleDelete} 
+      <UserRow
+        key={user.email}
+        user={user}
+        index={index}
+        handleDelete={handleDelete}
         handleMakeAdmin={handleMakeAdmin}
         makingAdmin={makingAdmin} // Pass button state
       />
@@ -188,7 +188,7 @@ const handleDelete = async (userEmail) => {
 
       <div className="manage-users-container">
         <h1 className="title">Total Users: {users.length}</h1>
-        <div className="table-responsive">
+        <div className="table-responsive max-w-7xl container mx-auto">
           <table className="user-table">
             <thead>
               <tr>

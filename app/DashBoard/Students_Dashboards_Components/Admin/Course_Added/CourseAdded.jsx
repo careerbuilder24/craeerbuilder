@@ -204,9 +204,40 @@ const CourseAdded = () => {
     }
   };
 
+  const handleDeleteCourseCard = async (id) => {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "This action cannot be undone!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    });
 
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch('/api/courses', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id }),
+        });
 
-  console.log(courses)
+        if (response.ok) {
+          Swal.fire('Deleted!', 'The post has been deleted.', 'success');
+          // setPosts(prevPosts => prevPosts.filter(post => post.id !== id));
+        } else {
+          Swal.fire('Error!', 'Failed to delete the course.', 'error');
+        }
+      } catch (error) {
+        Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+      }
+    }
+  };
+
+  // console.log(courses)
   // const encodedImageUrl = encodeURIComponent(courses.instructor_image);
   return (
     <>
@@ -592,6 +623,13 @@ const CourseAdded = () => {
                   </button>
                 </Link>
               </div> */}
+
+              <button
+                onClick={() => handleDeleteCourseCard(course.id)}
+                className="bg-red-500 text-white px-3 py-3  rounded text-xs hover:bg-red-600"
+              >
+                Delete
+              </button>
             </div>
           ))
         }

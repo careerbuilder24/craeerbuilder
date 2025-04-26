@@ -217,13 +217,13 @@ const GalleryAdded = () => {
     }
 
     return (
-        <div className="p-6 space-y-6">
-            <header className="text-center py-6 bg-gray-100 shadow-md">
+        <div className="p-6 space-y-6 ">
+            <header className="text-center py-6">
                 <h1 className="text-2xl font-bold">Gallery Upload Page</h1>
                 <p className="text-sm text-gray-600">Organize and upload images for different purposes</p>
             </header>
             {sections.map((section) => (
-                <div key={section} className="border rounded-lg p-4 bg-gray-50 shadow-md">
+                <div key={section} className="border rounded-lg p-4 max-w-3xl container mx-auto bg-gray-50 shadow-md">
                     <h3 className="text-lg font-semibold mb-4">{section}</h3>
                     <div className="mb-4">
                         <label

@@ -31,6 +31,7 @@ import GalleryAdded from '../Students_Dashboards_Components/Admin/Gallery_Added/
 import { UserAuth } from '@/app/context/AuthContext';
 import usersAdmin from '@/hooks/useAdminUser';
 import { ThemeToggle } from '@/app/(with-navbar)/componenets/ThemeToggle/ThemeToggle';
+import PublishedPost from '@/app/(with-navbar)/componenets/PublishedPost/PublishedPost';
 
 const PageContent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -57,7 +58,7 @@ const PageContent = () => {
   //     router.push('/DashBoard/Student');
   //   }
   // }, [userRole, activeSection]);
-  
+
 
   // console.log('Current User:', ManualUser);
   // console.log('Admin List:', userAdmin);
@@ -107,17 +108,20 @@ const PageContent = () => {
       case 'Admin':
         return (
           <ul className="mt-3">
-         
+
             <Link href="/">Home</Link>
             <li onClick={() => handleSectionClick('Students_Added')}>Statistics Management </li>
+            <li onClick={() => handleSectionClick('Manage_Users')}>User Management</li>
             <li onClick={() => handleSectionClick('Course_Added')}>Course Added</li>
             <li onClick={() => handleSectionClick('Gallery_Added')}>Gallery Added</li>
             <li onClick={() => handleSectionClick('University_BioData_Added')}>University BioData Added</li>
             <li onClick={() => handleSectionClick('Career_Guide_Blog_Added')}>Career Guide Blog Added</li>
+            <li onClick={() => handleSectionClick('Published_Post')}>Published Post</li>
             <li onClick={() => handleSectionClick('FAQ_Added')}>FAQ Added</li>
             <li onClick={() => handleSectionClick('About_Us_Added')}>About Us Added</li>
             <li onClick={() => handleSectionClick('Contact_Us_Added')}>Contact Us Added</li>
-            <li onClick={() => handleSectionClick('Manage_Users')}>User Management</li>
+
+
           </ul>
         );
       case 'middle user':
@@ -130,7 +134,7 @@ const PageContent = () => {
       default:
         return (
           <ul className="mt-3">
-         
+
             <Link href="/">Home</Link>
             <li onClick={() => handleSectionClick('Profile')}>Profile Edit</li>
             <li onClick={() => handleSectionClick('CvUpdate')}>CV Update</li>
@@ -153,23 +157,25 @@ const PageContent = () => {
       // Sections for admin
       switch (activeSection) {
         case 'Course_Added':
-          return <CourseAdded />;  // Admin course section
+          return <CourseAdded />;
         case 'Students_Added':
-          return <StudentsAdded />;  // Admin students section
+          return <StudentsAdded />;
         case 'Gallery_Added':
-          return <GalleryAdded />;  // Admin university section
+          return <GalleryAdded />;
         case 'University_BioData_Added':
-          return <UniversityBioDataAdded />;  // Admin university section
+          return <UniversityBioDataAdded />;
         case 'Career_Guide_Blog_Added':
-          return <CareerGuideBlogAdded />;  // Admin career blog section
+          return <CareerGuideBlogAdded />;
+        case 'Published_Post':
+          return <PublishedPost />
         case 'FAQ_Added':
-          return <FAQAdded />;  // Admin FAQ section
+          return <FAQAdded />;
         case 'About_Us_Added':
-          return <AboutUsAdded />;  // Admin About Us section
+          return <AboutUsAdded />;
         case 'Contact_Us_Added':
-          return <ContactUsAdded />;  // Admin Contact Us section
+          return <ContactUsAdded />;
         case 'Manage_Users':
-          return <ManageUsers />;  // Mock user management
+          return <ManageUsers />;
         default:
           return <AdminWelcomePage />;
       }
@@ -216,7 +222,7 @@ const PageContent = () => {
         <h1 className="text-3xl font-bold text-white">{animatedText}</h1>
         {/* user login image and name */}
         <div className="user-logo gap-3  ">
-        <ThemeToggle />
+          <ThemeToggle />
           <Image
             width={200}
             height={200}
