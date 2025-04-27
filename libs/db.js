@@ -1,9 +1,9 @@
 // // db.js
-import dotenv from 'dotenv';
-import mysql from 'mysql2';
-import bcrypt from 'bcryptjs';
+// import dotenv from 'dotenv';
+// import mysql from 'mysql2';
+// import bcrypt from 'bcryptjs';
 
-dotenv.config(); // Load environment variables
+// dotenv.config(); // Load environment variables
 
 // const pool = mysql.createPool({
 //   host: 'localhost',
