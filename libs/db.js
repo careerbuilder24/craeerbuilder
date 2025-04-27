@@ -45,7 +45,7 @@
 // db.js
 import dotenv from 'dotenv';
 import mysql from 'mysql2';
-import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs';
 
 dotenv.config(); // Load environment variables
 
