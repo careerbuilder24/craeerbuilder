@@ -81,7 +81,7 @@ const ManageUsers = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch("https://careers-builder2.vercel.app/api/makeAdmin", {
+          const response = await fetch("/api/makeAdmin", {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: userEmail }),

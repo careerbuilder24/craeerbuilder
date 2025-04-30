@@ -44,7 +44,7 @@ export default function Login() {
     console.log("Login Attempt:", { email, password });
 
     try {
-      const response = await fetch("https://careers-builder.vercel.app/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
