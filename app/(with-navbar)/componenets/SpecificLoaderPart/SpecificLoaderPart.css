@@ -1,0 +1,36 @@
+/* components/Loader.module.css */
+
+/* Specific part loader */
+.loaderWrapper {
+    position: relative; /* Relative positioning to allow absolute positioning of the spinner */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Make it fill the height of the parent */
+  }
+  
+  .loader {
+    position: absolute; /* Positioned inside the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .spinner {
+    border: 8px solid #f3f3f3; /* Light gray color */
+    border-top: 8px solid #020a0f; /* Blue spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -1,0 +1,11 @@
+.perspective-300 {
+    perspective: 300px;
+}
+
+.rotateX-10 {
+    transform: rotateX(10deg);
+}
+
+.rotateY-10 {
+    transform: rotateY(10deg);
+}

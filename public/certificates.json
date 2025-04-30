@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "certificateName": "Certificate HTML",
+    "certificateTitle": "University",
+    "image": "https://i.postimg.cc/T3t6mVyk/certificate.jpg"
+  },
+  {
+    "id": 2,
+    "certificateName": "Employee of the Month",
+    "certificateTitle": "Professional",
+    "image": "https://i.postimg.cc/RFH5j2g8/certificate1.jpg"
+  },
+  {
+    "id": 3,
+    "certificateName": "Leadership Award",
+    "certificateTitle": "Diploma",
+    "image": "https://i.postimg.cc/8cgQDw3C/certificate2.jpg"
+  },
+  {
+    "id": 4,
+    "certificateName": "Certificate html",
+    "certificateTitle": "University",
+    "image": "https://i.postimg.cc/j26VjP04/certificate3.jpg"
+  },
+  {
+    "id": 5,
+    "certificateName": "Employee of the Month",
+    "certificateTitle": "Professional",
+    "image": "https://i.postimg.cc/WbjLHWgW/certificate4.jpg"
+  },
+  {
+    "id": 6,
+    "certificateName": "Leadership Award",
+    "certificateTitle": "Diploma",
+    "image": "https://i.postimg.cc/9MgG6NN6/certificate5.jpg"
+  }
+]

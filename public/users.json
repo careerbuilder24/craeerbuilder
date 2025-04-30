@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "name": "Abdur Rahman Rahat",
+    "email": "abdurrahmanrahat47@gmail.com",
+    "power": "Admin"
+  },
+  {
+    "id": 2,
+    "name": "Abu Yeahia",
+    "email": "abuyeahia24@gmail.com",
+    "power": "Admin"
+  },
+  {
+    "id": 3,
+    "name": "Shakil Hossain",
+    "email": "shakilahmedshuvo612@gmail.com",
+    "power": "Admin"
+  },
+  {
+    "id": 4,
+    "name": "Gun Powder",
+    "email": "gunpowder612@gmail.com",
+    "power": "User"
+  },
+  { "id": 5, "name": "mamun", "email": "mamun240@gmail.com", "power": "User" },
+  { "id": 6, "name": "sani1", "email": "sani1@gmail.com", "power": "Admin" },
+  { "id": 7, "name": "HR User", "email": "hruser@gmail.com", "power": "User" },
+  {
+    "id": 8,
+    "name": "Abu Yeahia Al Galib",
+    "email": "djgalib24@gmail.com",
+    "power": "User"
+  },
+  {
+    "id": 9,
+    "name": "Md.Asaduzzaman Likhon",
+    "email": "likhonadnan55@gmail.com",
+    "power": "Admin"
+  }
+]

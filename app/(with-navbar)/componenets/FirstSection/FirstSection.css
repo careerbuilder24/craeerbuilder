@@ -1,0 +1,90 @@
+/* Mobile - 1 column or 2 columns */
+
+@media (max-width: 640px) {
+    .course-card {
+        margin: 10px;
+        padding: 10px;
+    }
+    .course-title {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+    .course-image {
+        height: 120px; /* Smaller image for mobile */
+    }
+
+    /* 1 column for mobile */
+    .custom-grid-layout {
+        grid-template-columns: 1fr; /* 1 column for mobile */
+    }
+}
+
+/* Tablet and Small Desktop - 2 columns between 641px and 1024px */
+@media (min-width: 641px) and (max-width: 1024px) {
+    .course-card {
+        margin: 15px;
+        padding: 15px;
+    }
+    .course-title {
+        font-size: 1.2rem; /* Adjust font size for tablets */
+    }
+    .course-image {
+        height: 150px; /* Larger image for tablets */
+    }
+
+    /* 2 columns between 641px and 1024px */
+    .custom-grid-layout {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+}
+
+/* Large Tablet/Small Desktop - 2 columns between 1024px and 1400px */
+@media (min-width: 1024px) and (max-width: 1400px) {
+    .course-card {
+        margin: 20px;
+        padding: 20px;
+    }
+    .course-title {
+        font-size: 1.4rem; /* Larger font for larger screens */
+    }
+    .course-image {
+        height: 180px; /* Larger image for larger screens */
+    }
+
+    /* 2 columns between 1024px and 1400px */
+    .custom-grid-layout {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+}
+
+/* Large Desktop - 3 columns for screens wider than 1400px */
+@media (min-width: 1401px) and (max-width: 1613px) {
+    .course-card {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    /* 3 columns for larger screens between 1400px and 1613px */
+    .custom-grid-layout {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    }
+}
+
+/* Very large desktop - 4 columns for screens wider than 1613px */
+@media (min-width: 1613px) {
+    .course-card {
+        margin: 25px;
+        padding: 25px;
+    }
+
+    /* 4 columns for very large screens */
+    .custom-grid-layout {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    }
+}
+
+/* Prevent Text Overflow in Course Name and Title */
+.custom-grid-layout .overflow-hidden {
+    text-overflow: ellipsis; /* Adds ... to overflowed text */
+    white-space: nowrap; /* Prevents text from breaking onto new lines */
+    overflow: hidden; /* Hides overflowing text */
+}

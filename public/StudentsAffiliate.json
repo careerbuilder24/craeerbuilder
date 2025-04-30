@@ -1,0 +1,123 @@
+[
+    {
+      "id": 1,
+      "name": "Sushmita Shen",
+      "batch": "01",
+      "courseId": "0082629",
+      "courseName": "Graphic Design",
+      "duration": "6 Months",
+      "internship": "2 Months",
+      "image": "https://i.postimg.cc/PrNJwnsg/insta10.avif "
+    },
+    {
+      "id": 2,
+      "name": "John Doe",
+      "batch": "02",
+      "courseId": "0082630",
+      "courseName": "Motion Graphics",
+      "duration": "4 Months",
+      "internship": "1 Month",
+      "image": "   https://i.postimg.cc/MK4T03zv/insta11.avif"
+    },
+    {
+      "id": 3,
+      "name": "Jane Smith",
+      "batch": "03",
+      "courseId": "0082631",
+      "courseName": "Affiliate Marketing",
+      "duration": "5 Months",
+      "internship": "3 Months",
+      "image": " https://i.postimg.cc/vZJ4yqKp/insta8.avif "
+    },
+    {
+      "id": 4,
+      "name": "Michael Johnson",
+      "batch": "04",
+      "courseId": "0082632",
+      "courseName": "Video Editing",
+      "duration": "3 Months",
+      "internship": "1 Month",
+      "image": "     https://i.postimg.cc/V6RvjYN8/insta9.avif"
+    },
+    {
+      "id": 5,
+      "name": "Emily Davis",
+      "batch": "05",
+      "courseId": "0082633",
+      "courseName": "Business Development",
+      "duration": "8 Months",
+      "internship": "4 Months",
+      "image": "https://i.postimg.cc/vZJ4yqKp/insta8.avif "
+    },
+    {
+      "id": 6,
+      "name": "David Brown",
+      "batch": "06",
+      "courseId": "0082634",
+      "courseName": "Web Development (Front-end)",
+      "duration": "6 Months",
+      "internship": "2 Months",
+      "image": "     https://i.postimg.cc/V6RvjYN8/insta9.avif"
+    },
+    {
+      "id": 7,
+      "name": "Linda Wilson",
+      "batch": "07",
+      "courseId": "0082635",
+      "courseName": "Web Development (Back-end)",
+      "duration": "7 Months",
+      "internship": "3 Months",
+      "image": "https://i.postimg.cc/2y1qmszN/insta13.avif"
+    },
+    {
+      "id": 8,
+      "name": "James Taylor",
+      "batch": "08",
+      "courseId": "0082636",
+      "courseName": "Digital Marketing",
+      "duration": "5 Months",
+      "internship": "2 Months",
+      "image": " https://i.postimg.cc/3JLGsZYT/insta1.avif"
+    },
+    {
+      "id": 9,
+      "name": "Patricia Garcia",
+      "batch": "09",
+      "courseId": "0082637",
+      "courseName": "UI/UX Design",
+      "duration": "4 Months",
+      "internship": "1 Month",
+      "image": "https://i.postimg.cc/P5x7HKDz/insta12.avif"
+    },
+    {
+      "id": 10,
+      "name": "Robert Martinez",
+      "batch": "10",
+      "courseId": "0082638",
+      "courseName": "SEO Specialist",
+      "duration": "6 Months",
+      "internship": "2 Months",
+      "image": "  https://i.postimg.cc/2y1qmszN/insta13.avif"
+    },
+    {
+      "id": 11,
+      "name": "Jennifer Rodriguez",
+      "batch": "11",
+      "courseId": "0082639",
+      "courseName": "Content Writing",
+      "duration": "3 Months",
+      "internship": "1 Month",
+      "image": "https://i.postimg.cc/Z5CN4y5y/insta3.avif"
+    },
+    {
+      "id": 12,
+      "name": "Charles Hernandez",
+      "batch": "12",
+      "courseId": "0082640",
+      "courseName": "Data Science",
+      "duration": "9 Months",
+      "internship": "5 Months",
+      "image": " https://i.postimg.cc/P5x7HKDz/insta12.avif"
+    }
+  ]
+  
