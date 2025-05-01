@@ -2,11 +2,10 @@
   "name": "career-builder",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev & npx next-video sync -w",
+   "scripts": {
+    "dev": "next dev",
     "build": "next build",
-    "export": "next build && next export",
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production PORT=3005 node server.js",
     "lint": "next lint"
   },
   "dependencies": {
