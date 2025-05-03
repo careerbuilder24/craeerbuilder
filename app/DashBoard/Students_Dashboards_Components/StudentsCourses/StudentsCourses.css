@@ -1,0 +1,38 @@
+
+
+.hidden-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    overflow: hidden;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    table thead tr {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    table thead th {
+        transform: rotate(-90deg); /* Rotate header cells */
+        white-space: nowrap;
+        padding: 8px 12px;
+    }
+
+    table tbody tr {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    table tbody td {
+        flex: 1;
+        padding: 8px 12px;
+    }
+}
