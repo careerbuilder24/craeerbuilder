@@ -43,7 +43,7 @@ const CourseAdded = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/courses');
+        const response = await fetch('/api/courses');
         const result = await response.json();
 
         // console.log('Fetched data:', result);
