@@ -7,7 +7,7 @@ const useAdminGalleryAdded = () => {
 
   const fetchUsersDataGallery = useCallback(async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/Admin_Gallery");
+      const response = await fetch("/api/Admin_Gallery");
       if (!response.ok) throw new Error("Failed to fetch users");
 
       const data = await response.json();
