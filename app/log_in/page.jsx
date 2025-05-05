@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import { UserAuth } from "../context/AuthContext";
 import Loader from '../(with-navbar)/componenets/Loader/Loader';
@@ -117,17 +117,17 @@ export default function Login() {
             </div>
 
 
-
-            <div className="form-control mb-4 w-full ">
+            {/* recaptcha */}
+            {/* <div className="form-control mb-4 w-full ">
               <ReCAPTCHA
-               
+
                 sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}
                 // fix
                 onChange={onChange}
                 className='w-full max-w-xs'
               />
-            </div>
-            
+            </div> */}
+
 
             <button
               type="submit"
