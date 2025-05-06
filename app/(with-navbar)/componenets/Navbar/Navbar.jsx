@@ -24,8 +24,6 @@ export default function Navbar() {
   const [isStudentsDropdownOpen, setIsStudentsDropdownOpen] = useState(false);
 
   //  https://careers-builder.vercel.app
-  //  https://careers-builder.vercel.app
-  //  https://careers-builder.vercel.app
 
 
   useEffect(() => {

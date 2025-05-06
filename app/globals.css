@@ -43,4 +43,9 @@ body {
   color: #333;
 }
 
+[data-nextjs-dev-overlay]{
+  display: none !important;
+}
+
+
 
