@@ -44,6 +44,7 @@ const PageContent = () => {
   // users 
   const { ManualUser } = UserAuth();
   const { userAdmin } = usersAdmin();
+
   useEffect(() => {
     if (ManualUser && userAdmin) {
       const isAdmin = userAdmin.some(admin =>
@@ -53,6 +54,7 @@ const PageContent = () => {
       setUserRole(isAdmin ? 'Admin' : 'user');
     }
   }, [ManualUser, userAdmin]);
+
   // useEffect(() => {
   //   if (userRole !== 'Admin' && activeSection.startsWith('Admin')) {
   //     router.push('/DashBoard/Student');

@@ -50,10 +50,24 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  // const handleSignOut = async () => {
+  //   try {
+  //     await logOut();
+  //     setUserProfile(null);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  
   const handleSignOut = async () => {
     try {
-      await logOut();
-      setUserProfile(null);
+      await logOut(); // assuming this clears your auth context
+      sessionStorage.removeItem('manualUser'); // remove from session storage
+      setUserProfile(null); // clear user profile
+
+      // Force full reload to login page
+      window.location.replace('/log_in');
     } catch (error) {
       console.log(error);
     }
@@ -141,6 +155,10 @@ export default function Navbar() {
             </svg>
             Dashboard
           </Link> */}
+
+
+
+
           {ManualUser ? (
             <div className="relative group">
               <div className='flex justify-center items-center text-white gap-2 cursor-pointer'>
@@ -177,7 +195,7 @@ export default function Navbar() {
                 </Link>
 
                 <button
-                  // onClick={handleLogout}
+                  onClick={handleSignOut}
                   className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
