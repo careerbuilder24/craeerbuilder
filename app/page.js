@@ -13,6 +13,7 @@ import Review from "./(with-navbar)/componenets/review/Review";
 import ConnectorsCompany from "./(with-navbar)/componenets/Connectors-Company/ConnectorsCompany";
 import BlogPost from "./(with-navbar)/componenets/BlogPost/BlogPost";
 export default function Home() {
+
   
   return (
     <>
