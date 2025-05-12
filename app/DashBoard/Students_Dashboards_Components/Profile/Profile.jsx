@@ -226,6 +226,7 @@ import Head from 'next/head';
 import UpdatedProfile from '../updatedProfile/UpdatedProfile';
 import useRegistered from '@/hooks/useRegistered';
 import useStudentEditProfile from '@/hooks/useStudentEditProfile';
+import axios from 'axios';
 
 export default function Page() {
   const [image, setImage] = useState(null);
@@ -278,17 +279,33 @@ export default function Page() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const uploadImageToImgBB = async (file) => {
-    const formData = new FormData();
-    formData.append('image', file);
-    const response = await fetch('https://api.imgbb.com/1/upload?key=3d64b0e9dee39ca593b9da32467663ee', {
-      method: 'POST',
-      body: formData
-    });
-    const data = await response.json();
-    if (data.success) return data.data.url;
-    else throw new Error('Image upload failed');
-  };
+
+const uploadImageToImgBB = async (file) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  try {
+    const response = await axios.post(
+      'https://api.imgbb.com/1/upload?key=3d64b0e9dee39ca593b9da32467663ee',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    if (response.data.success) {
+      return response.data.data.url;
+    } else {
+      throw new Error('Image upload failed');
+    }
+  } catch (error) {
+    console.error('Upload error:', error.response?.data || error.message);
+    throw new Error('Image upload failed');
+  }
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -324,7 +341,7 @@ export default function Page() {
       const data = await response.json();
       if (data.success) {
         setSubmitted(true);
-        setNewlySubmittedStudent(payload); // ✅ Show updated data instantly
+        setNewlySubmittedStudent(payload); 
       } else {
         alert(data.message);
       }
