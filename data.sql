@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `users_login` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `users_login`;
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: localhost    Database: users_login
@@ -34,7 +32,7 @@ CREATE TABLE `blog_added` (
   `socialLinks` json DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +68,7 @@ CREATE TABLE `courses` (
   `Course_Benifits` varchar(255) DEFAULT NULL,
   `Course_Projects` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +80,6 @@ LOCK TABLES `courses` WRITE;
 INSERT INTO `courses` VALUES (6,'shofik','124','124214','2025-04-06T08:16','4','1234124','sdfvef','aefgerg','C:\\fakepath\\WhatsApp Video 2025-01-30 at 09.22.14_45d08fdc.mp4','https://i.ibb.co.com/1Y2DkF9w/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','C:\\fakepath\\8i75.gif','[\"werg\"]','[\"erger\"]'),(14,'mal3','345243428798','23456232357656','2025-05-02T01:36','3','','tdhndftdndfbefr','dfhnjfghdgsbrgb','C:\\fakepath\\WhatsApp Video 2025-01-30 at 09.22.14_45d08fdc.mp4','https://i.ibb.co.com/1Y2DkF9w/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','C:\\fakepath\\8i75.gif','[\"gfhntghmdfgbbg\"]','[\"rdetgdfggb\"]'),(15,'mal3','345243428798','23456232357656','2025-05-02T01:36','3','','tdhndftdndfbefr','dfhnjfghdgsbrgb','C:\\fakepath\\WhatsApp Video 2025-01-30 at 09.22.14_45d08fdc.mp4','https://i.ibb.co.com/1Y2DkF9w/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','C:\\fakepath\\8i75.gif','[\"gfhntghmdfgbbg\"]','[\"rdetgdfggb\"]'),(16,'mal3','345243428798','23456232357656','2025-05-02T01:36','3','','tdhndftdndfbefr','dfhnjfghdgsbrgb','C:\\fakepath\\WhatsApp Video 2025-01-30 at 09.22.14_45d08fdc.mp4','https://i.ibb.co.com/1Y2DkF9w/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','C:\\fakepath\\8i75.gif','[\"gfhntghmdfgbbg\"]','[\"rdetgdfggb\"]'),(17,'mal3','345243428798','23456232357656','2025-05-02T01:36','3','','tdhndftdndfbefr','dfhnjfghdgsbrgb','C:\\fakepath\\WhatsApp Video 2025-01-30 at 09.22.14_45d08fdc.mp4','https://i.ibb.co.com/1Y2DkF9w/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','C:\\fakepath\\8i75.gif','[\"gfhntghmdfgbbg\"]','[\"rdetgdfggb\"]'),(20,'mal5','345243428798','23456232357656','2025-05-02T01:36','3','','tdhndftdndfbefr','dfhnjfghdgsbrgb','C:\\fakepath\\WhatsApp Video 2025-01-30 at 09.22.14_45d08fdc.mp4','https://i.ibb.co.com/1Y2DkF9w/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','C:\\fakepath\\8i75.gif','[\"gfhntghmdfgbbg\"]','[\"rdetgdfggb\"]'),(21,'mal5','345243428798','23456232357656','2025-05-02T01:36','3','','tdhndftdndfbefr','dfhnjfghdgsbrgb','C:\\fakepath\\WhatsApp Video 2025-01-30 at 09.22.14_45d08fdc.mp4','https://i.ibb.co.com/1Y2DkF9w/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','C:\\fakepath\\8i75.gif','[\"gfhntghmdfgbbg\"]','[\"rdetgdfggb\"]'),(31,'dfghgd','235','235','2025-04-12T18:34','5','25','sefgh','srgh','','https://i.ibb.co/xq7MPfLG/8i75.gif','https://i.ibb.co/xq7MPfLG/8i75.gif','[\"dgh\"]','[\"dgh\"]'),(37,'Web Developments','01','20','2025-04-01T01:46','5','12000','Web why need to learn!','Welcome to WebTech-Best Website Design & Development Company in Bangladesh with a team of 50+ dedicated experts! We are providing top-notch solutions, from domain registration and hosting to custom websites, eCommerce, and software development. We empower businesses with comprehensive digital marketing, graphic design, and advanced SEO/SEM services that give you a distinct competitive edge online. Let WebTech be your partner in building a solid and successful digital footprint. Know more about us.','C:\\fakepath\\Sticker (1).mp4','https://i.ibb.co/Ldf7zhkW/ju.png','','[\"1) shall learn own skill\",\"2) shall learn web developments\",\"3) shall develop job placements\"]','[\"https://abu-yeahia-portfolio.netlify.app/\",\"https://abu-yeahia-portfolio.netlify.app/\"]'),(38,'Graphics Design ','02','123','2025-04-09T02:01','5','12004','1) well done to do this','1) well done to do this','C:\\fakepath\\video1258205884.mp4','https://i.ibb.co/N6D7rWt2/1-J5c0z-QPCQn-Xqwdu1-6-Ztw.gif','https://i.ibb.co/N6D7rWt2/1-J5c0z-QPCQn-Xqwdu1-6-Ztw.gif','[\"1) well done to do this\",\"2) well done to do this\",\"3) well done to do this\"]','[\"https://abu-yeahia-portfolio.netlify.app/\",\"https://abu-yeahia-portfolio.netlify.app/\",\"https://abu-yeahia-portfolio.netlify.app/\"]'),(39,'Digital Marketing','12','26','2025-04-24T05:26','5','134','1) this is best','1) this is best','C:\\fakepath\\Sticker (1).mp4','https://i.ibb.co/Nd4V1sXW/1745654165612.gif','https://i.ibb.co/Nd4V1sXW/1745654165612.gif','[\"1) this is best\",\"2) this is best\",\"3) this is best\"]','[\"1) this is best\",\"2) this is best\",\"3) this is best\"]'),(40,'dfv','13','1234','2025-05-10T04:17','5','23532','ertgerg','eherh','C:\\fakepath\\Sticker (1).mp4','https://i.ibb.co/KzLWSrCq/rg.webp','https://i.ibb.co/S4XDRBZ2/1-J5c0z-QPCQn-Xqwdu1-6-Ztw.gif','[\"1) am  2) efui 3) ein\"]','[\"1) am \"]');
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
-
 
 --
 -- Table structure for table `edit_profile`
@@ -118,13 +115,9 @@ INSERT INTO `edit_profile` VALUES (41,'sohag','married','sohag234@gmail.com','01
 /*!40000 ALTER TABLE `edit_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
-
-
 --
 -- Table structure for table `event_gallery`
 --
-
 
 DROP TABLE IF EXISTS `event_gallery`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -135,7 +128,7 @@ CREATE TABLE `event_gallery` (
   `event_text` text NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +137,7 @@ CREATE TABLE `event_gallery` (
 
 LOCK TABLES `event_gallery` WRITE;
 /*!40000 ALTER TABLE `event_gallery` DISABLE KEYS */;
-INSERT INTO `event_gallery` VALUES (4,'https://i.ibb.co/LDb5xrtc/enployee-functions.png','','2025-04-10 04:14:34'),(5,'https://i.ibb.co/ZzhSKc83/Whats-App-Image-2025-02-28-at-12-16-54-a5e1d94b.jpg','','2025-04-10 04:14:36'),(6,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','','2025-04-12 00:21:23'),(7,'https://i.ibb.co/pvZjdPD9/Whats-App-Image-2025-01-01-at-17-20-37-cb29c41c.jpg','','2025-04-12 01:58:39'),(8,'https://i.ibb.co/dJ4mt9XC/wallpaperflare-com-wallpaper-1.jpg','','2025-04-12 02:07:02'),(9,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','best moment','2025-04-12 03:07:40'),(10,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','best moment yap','2025-04-12 03:10:21'),(11,'https://i.ibb.co/TqdSWn8v/normal-day-collieague.png','best moment again','2025-04-12 03:10:24'),(12,'https://i.ibb.co/6qDqhHc/welcome-to-careerbuilder-2.jpg','great','2025-04-12 04:32:13'),(13,'https://i.ibb.co/RwM0Ybg/osbg.png','madness yes it is','2025-04-12 04:36:49'),(15,'https://i.ibb.co/Z6QM0H6b/funtions-2.png','poppy apu','2025-04-12 05:16:22'),(16,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','fgn ','2025-04-12 05:20:11'),(17,'https://i.ibb.co/ks27VZCg/gen-z-t-shirt-brand-new-design-premium-t-shirt-for-generation-z-code-gz02-2024-08-12-03-34-08-3603.png','','2025-04-12 05:24:57'),(20,'https://i.ibb.co/spf60vgR/bokchoe.png','vai bondhu','2025-04-12 05:26:38'),(21,'https://i.ibb.co/Y7GrBbXM/wallpaperflare-com-wallpaper.jpg','it was best moments and i am glad to see you','2025-04-12 05:30:37'),(22,'https://i.ibb.co/zT633qp4/clotex-beautiful-designed-cotton-canvas-tote-bag-with-zipper-c-t-05-2024-09-02-06-09-31-5710.jpg','bagss vai','2025-04-12 05:30:39'),(23,'https://i.ibb.co/N2FfGmMn/funtions.png','tagg team!','2025-04-12 05:50:32'),(24,'https://i.ibb.co/dJ4mt9XC/wallpaperflare-com-wallpaper-1.jpg','nice','2025-04-12 06:08:04'),(27,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','','2025-04-12 06:17:26'),(32,'https://i.ibb.co/MxNMnsN9/programming-hero.png','my certificate abu yeahia','2025-04-13 01:53:45'),(33,'https://i.ibb.co/KjdqTSTS/1-J5c0z-QPCQn-Xqwdu1-6-Ztw.gif','','2025-04-26 05:26:32'),(34,'https://i.ibb.co/rGTVVSGJ/sdfgikh.png','','2025-04-26 05:26:33'),(35,'https://i.ibb.co/fY3q57Tv/download.png','','2025-04-26 05:26:34'),(36,'https://i.ibb.co/RTcm6Z8f/sourcesss.png','','2025-04-26 05:26:35');
+INSERT INTO `event_gallery` VALUES (4,'https://i.ibb.co/LDb5xrtc/enployee-functions.png','','2025-04-10 04:14:34'),(5,'https://i.ibb.co/ZzhSKc83/Whats-App-Image-2025-02-28-at-12-16-54-a5e1d94b.jpg','','2025-04-10 04:14:36'),(6,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','','2025-04-12 00:21:23'),(7,'https://i.ibb.co/pvZjdPD9/Whats-App-Image-2025-01-01-at-17-20-37-cb29c41c.jpg','','2025-04-12 01:58:39'),(8,'https://i.ibb.co/dJ4mt9XC/wallpaperflare-com-wallpaper-1.jpg','','2025-04-12 02:07:02'),(9,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','best moment','2025-04-12 03:07:40'),(10,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','best moment yap','2025-04-12 03:10:21'),(11,'https://i.ibb.co/TqdSWn8v/normal-day-collieague.png','best moment again','2025-04-12 03:10:24'),(12,'https://i.ibb.co/6qDqhHc/welcome-to-careerbuilder-2.jpg','great','2025-04-12 04:32:13'),(13,'https://i.ibb.co/RwM0Ybg/osbg.png','madness yes it is','2025-04-12 04:36:49'),(15,'https://i.ibb.co/Z6QM0H6b/funtions-2.png','nice','2025-04-12 05:16:22'),(16,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','fgn ','2025-04-12 05:20:11'),(17,'https://i.ibb.co/ks27VZCg/gen-z-t-shirt-brand-new-design-premium-t-shirt-for-generation-z-code-gz02-2024-08-12-03-34-08-3603.png','','2025-04-12 05:24:57'),(20,'https://i.ibb.co/spf60vgR/bokchoe.png','vai bondhu','2025-04-12 05:26:38'),(21,'https://i.ibb.co/Y7GrBbXM/wallpaperflare-com-wallpaper.jpg','it was best moments and i am glad to see you','2025-04-12 05:30:37'),(22,'https://i.ibb.co/zT633qp4/clotex-beautiful-designed-cotton-canvas-tote-bag-with-zipper-c-t-05-2024-09-02-06-09-31-5710.jpg','bagss vai','2025-04-12 05:30:39'),(23,'https://i.ibb.co/N2FfGmMn/funtions.png','tagg team!','2025-04-12 05:50:32'),(24,'https://i.ibb.co/dJ4mt9XC/wallpaperflare-com-wallpaper-1.jpg','nice','2025-04-12 06:08:04'),(27,'https://i.ibb.co/qLpqCHv8/Whats-App-Image-2025-04-07-at-14-22-59-e557ea7b.jpg','','2025-04-12 06:17:26'),(32,'https://i.ibb.co/MxNMnsN9/programming-hero.png','my certificate abu yeahia','2025-04-13 01:53:45'),(33,'https://i.ibb.co/KjdqTSTS/1-J5c0z-QPCQn-Xqwdu1-6-Ztw.gif','hi','2025-04-26 05:26:32'),(34,'https://i.ibb.co/rGTVVSGJ/sdfgikh.png','','2025-04-26 05:26:33'),(35,'https://i.ibb.co/fY3q57Tv/download.png','','2025-04-26 05:26:34'),(36,'https://i.ibb.co/RTcm6Z8f/sourcesss.png','','2025-04-26 05:26:35');
 /*!40000 ALTER TABLE `event_gallery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +154,7 @@ CREATE TABLE `faq_add_data` (
   `sub_title` varchar(255) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +188,7 @@ CREATE TABLE `university_data` (
   `university_link` varchar(500) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +218,7 @@ CREATE TABLE `user_managements` (
   `role` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,9 +227,13 @@ CREATE TABLE `user_managements` (
 
 LOCK TABLES `user_managements` WRITE;
 /*!40000 ALTER TABLE `user_managements` DISABLE KEYS */;
-INSERT INTO `user_managements` VALUES (4,'galib','galib123@gmail.com','$2b$10$P87pWa.D2dmYXo6y.1MWweD42kHm.k2Y9ksoCc5.k5SMuHO3XBOua','2025-01-21 07:51:33','https://i.postimg.cc/NMRDFQsg/baijid.png','Admin'),(5,'Abu Yeahia','abu24@gmail.com','$2b$10$9OxQVJyQZge/aX9tfJbYJeokxFWcvIUUWPuCIjuBVQtLoOEAOLnJS','2025-01-21 08:33:06','https://i.postimg.cc/c4ng6pKf/gilbert.png',''),(9,'Abdul Alim','alim24@gmail.com','$2b$10$wCuaIqojdvokZvMhK7pukuRKzpIIDTo9F80Yy85UiBJu4C8v8Pe9G','2025-01-25 12:05:42','https://i.postimg.cc/wxPRqqB6/roks.png',''),(11,'masuma','masuma24@gmail.com','$2b$10$KL6mAuM8FX27/YXevU4ZfO5q3ouEKSViqdvLpe1i7SmgQq0Yk8YG2','2025-02-05 13:10:25','https://i.postimg.cc/c4ng6pKf/gilbert.png','Admin'),(13,'Galib','abugalib23@gmail.com','$2b$10$4zCSaY6p/kJ7DrA8FatMhOkKXyQ05Z7PBBgzlKab1dEEI9vwPoWZm','2025-02-06 06:15:43','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(15,'rokibul islam rokib','rokib1234@gmail.com','$2b$10$gcBNWn8b6MpPBlWvURBAt.3Q9311d/jRcjKOIYPElE3hrzrXUHJNi','2025-02-09 13:20:12','https://i.postimg.cc/NjW3kbWJ/mri.png',''),(16,'shohag','shohag24@gmail.com','$2b$10$L.lE7owyO1L7UtljU7wFkO/Ts2KLuttOhfu4kpz91VEIJPJzAXah2','2025-02-10 06:14:48','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(17,'Afnan','afnan24@gmail.com','$2b$10$f81E9HsuO5pf1k3XtCad../Wt5sLqTh5O4KPtSmLG05aT1GfVCVte','2025-02-12 07:45:22','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(18,'Himel Uddin','himel@gmail.com','$2b$10$YV08WkjOxriJ6PJc22GZJezwfcSlftd2QAWPjLud6fB3OVvd2udi6','2025-02-12 08:22:14',NULL,NULL),(19,'mehdi','mehdi23@gmail.com','$2b$10$5OiZZO2S/sTMSte0FW3VBOZOLXxZnH9jhS.uSKzwAoEvdFSi.Zsg2','2025-02-12 12:06:07','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(20,'Rfique','rafique23@gmail.com','$2b$10$3LX8pgIqu1bcdll0/7Uhxe0t.Cxi47wxjgl0aA6wJ5lS9kNhoq2zy','2025-02-15 05:26:20',NULL,NULL),(21,'madam','md24@gmail.com','$2b$10$QJESlE5mPSwUFbwoLddPn.I0vJIT7y7QylMkN5fu8FqTql7g0cpZi','2025-04-06 08:58:40',NULL,NULL),(22,'serg','galib2455@gmail.com','$2b$10$88TQZj4fuwJNvxsGyX0NJe3fS2GJqcG5ovQ4iUlVTPNrXsDFNUAT2','2025-04-20 04:31:28',NULL,NULL),(23,'malabus','malabus@gmail.com','$2b$10$NtlJw.HrQCk6gohOAs.YTumlSMJynRGg.th.NJuQIjDusmA4YcC2G','2025-04-22 09:00:57',NULL,NULL),(24,'careerbuilderwrfrf','galib2467@gmail.com','$2b$10$P/1vl6aCebTOKpLP8M9DYeMfokZqgX5k5.gqG9SlnD1bAVD3YHukm','2025-04-27 05:16:50',NULL,NULL);
+INSERT INTO `user_managements` VALUES (4,'galib','galib123@gmail.com','$2b$10$P87pWa.D2dmYXo6y.1MWweD42kHm.k2Y9ksoCc5.k5SMuHO3XBOua','2025-01-21 07:51:33','https://i.postimg.cc/NMRDFQsg/baijid.png','Admin'),(5,'Abu Yeahia','abu24@gmail.com','$2b$10$9OxQVJyQZge/aX9tfJbYJeokxFWcvIUUWPuCIjuBVQtLoOEAOLnJS','2025-01-21 08:33:06','https://i.postimg.cc/c4ng6pKf/gilbert.png',''),(9,'Abdul Alim','alim24@gmail.com','$2b$10$wCuaIqojdvokZvMhK7pukuRKzpIIDTo9F80Yy85UiBJu4C8v8Pe9G','2025-01-25 12:05:42','https://i.postimg.cc/wxPRqqB6/roks.png',''),(11,'masuma','masuma24@gmail.com','$2b$10$KL6mAuM8FX27/YXevU4ZfO5q3ouEKSViqdvLpe1i7SmgQq0Yk8YG2','2025-02-05 13:10:25','https://i.postimg.cc/c4ng6pKf/gilbert.png','Admin'),(13,'Galib','abugalib23@gmail.com','$2b$10$4zCSaY6p/kJ7DrA8FatMhOkKXyQ05Z7PBBgzlKab1dEEI9vwPoWZm','2025-02-06 06:15:43','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(15,'rokibul islam rokib','rokib1234@gmail.com','$2b$10$gcBNWn8b6MpPBlWvURBAt.3Q9311d/jRcjKOIYPElE3hrzrXUHJNi','2025-02-09 13:20:12','https://i.postimg.cc/NjW3kbWJ/mri.png',''),(16,'shohag','shohag24@gmail.com','$2b$10$L.lE7owyO1L7UtljU7wFkO/Ts2KLuttOhfu4kpz91VEIJPJzAXah2','2025-02-10 06:14:48','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(17,'Afnan','afnan24@gmail.com','$2b$10$f81E9HsuO5pf1k3XtCad../Wt5sLqTh5O4KPtSmLG05aT1GfVCVte','2025-02-12 07:45:22','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(18,'Himel Uddin','himel@gmail.com','$2b$10$YV08WkjOxriJ6PJc22GZJezwfcSlftd2QAWPjLud6fB3OVvd2udi6','2025-02-12 08:22:14',NULL,NULL),(19,'mehdi','mehdi23@gmail.com','$2b$10$5OiZZO2S/sTMSte0FW3VBOZOLXxZnH9jhS.uSKzwAoEvdFSi.Zsg2','2025-02-12 12:06:07','https://i.postimg.cc/NjW3kbWJ/mri.png','Admin'),(20,'Rfique','rafique23@gmail.com','$2b$10$3LX8pgIqu1bcdll0/7Uhxe0t.Cxi47wxjgl0aA6wJ5lS9kNhoq2zy','2025-02-15 05:26:20',NULL,NULL),(21,'madam','md24@gmail.com','$2b$10$QJESlE5mPSwUFbwoLddPn.I0vJIT7y7QylMkN5fu8FqTql7g0cpZi','2025-04-06 08:58:40',NULL,NULL),(22,'serg','galib2455@gmail.com','$2b$10$88TQZj4fuwJNvxsGyX0NJe3fS2GJqcG5ovQ4iUlVTPNrXsDFNUAT2','2025-04-20 04:31:28',NULL,NULL),(23,'malabus','malabus@gmail.com','$2b$10$NtlJw.HrQCk6gohOAs.YTumlSMJynRGg.th.NJuQIjDusmA4YcC2G','2025-04-22 09:00:57',NULL,NULL),(24,'careerbuilderwrfrf','galib2467@gmail.com','$2b$10$P/1vl6aCebTOKpLP8M9DYeMfokZqgX5k5.gqG9SlnD1bAVD3YHukm','2025-04-27 05:16:50',NULL,NULL),(25,'yusuf','yusuf234@gmail.com','$2b$10$p0zs6g.wu8J6LyiELxh2E.i.fv9jnlxEMfIPD1Q5htGMhc5WbfNjC','2025-05-07 07:13:26',NULL,NULL),(26,'Mokbul Alom','mokbul123@gmail.com','$2b$10$n8xIrGarH/X5s8qzoSUdi.nYJZJZCS7JqTrvddFrjrV39a2zxosnO','2025-05-08 12:43:25',NULL,NULL),(27,'Rahim','rahim123@gmail.com','$2b$10$cqNJmdvFvTU98Lza/TeH1e/G8mg5IMWbOsadYceS16GLYuPpb6IHG','2025-05-10 06:13:58',NULL,NULL),(28,'ASHMIN','ashmin123@gmail.com','$2b$10$zOMkSZU/qMU.WhbVVeNTweDl.81Y/EmL5s9TaXdYxRl.13CH8VNeW','2025-05-10 06:57:52',NULL,NULL),(29,'Alamin','alamin123@gmail.com','$2b$10$HbhDwDF8mlNfbc/n4KFZ6uhhdOKMSXWC/dvZJ5cVl6i8HHGl64Kr6','2025-05-10 07:32:17',NULL,NULL),(30,'baliush','baliush12@gmail.com','$2b$10$7qvGWOt8FB3K.NkQT4jTK.7yePyEeImPFS3UdsgKVgZeJ0kI1o5RC','2025-05-10 07:44:33',NULL,NULL),(31,'madness','mades123@gmail.com','$2b$10$cNMIyXiYGjDhBpqKt6OCb.5mnzRkHb8gF49thLmBmM77I/RnGyUCi','2025-05-10 07:59:20',NULL,NULL),(32,'mother','mohal123@gmail.com','$2b$10$lAEvDaQMvVw80N0N86roluiMgPDBEJEuguKPLqvxNDsd2dl892jJi','2025-05-10 12:11:58',NULL,NULL),(33,'Karim','karim123@gmail.com','$2b$10$5siM3ehQhNFweYT1zdYzuebUOx0eOvzToLzy8s7OvsmZdEZqWZPpa','2025-05-10 12:20:35',NULL,NULL),(34,'matari','matari123@gmail.com','$2b$10$XDybocTJj5w2P8HMUjs91un0PJCLsGNsjEkLRv3OtoFaglyvlIYsO','2025-05-10 13:28:25',NULL,NULL),(35,'sohag','sohag234@gmail.com','$2b$10$XI.BK3WNXQTDoTP9kaQbA.5YaHmN9YP0z4xZxrvMQiqFBbeAz.rpG','2025-05-12 05:02:40',NULL,NULL),(36,'Midul Islam','midul123@gmail.com','$2b$10$DDowL./duKlCbV6wVCH2Pec5o4mwZtxLV0hnmbVJ4.wDsiOEVjtVi','2025-05-12 06:39:31',NULL,NULL),(37,'Siam','siam123@gmail.com','$2b$10$WpGNh5ZZuFMJ1BMDCa2Qh.SRDEG5lA9DqLOV36tviyJyS0463qjyW','2025-05-12 07:00:54',NULL,NULL),(38,'Muhib','Muhib123@gmail.com','$2b$10$XclNPDHeCNesqS4L.UFQNe8EBUMdFjmQUaKY2dZaJmsteUX/AWEzW','2025-05-12 07:15:12',NULL,NULL),(39,'Rafik','rafiq1231@gmail.com','$2b$10$49c84zYNm3sRo426FUt.W.1EskTNG/TBg9boKTsbTHdoXyFTQsYCa','2025-05-12 07:44:54',NULL,NULL);
 /*!40000 ALTER TABLE `user_managements` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'users_login'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -247,4 +244,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-03 17:43:12
+-- Dump completed on 2025-05-12 15:03:05
