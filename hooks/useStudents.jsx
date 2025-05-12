@@ -11,8 +11,8 @@ export default function useStudents() {
             const res = await fetch('/Students.json');
             const data = await res.json();
             setStudents(data);
-           } catch (erro) {
-            console.log(erro)
+           } catch (error) {
+            console.log(error)
            }
            finally{
             setLoading(false)

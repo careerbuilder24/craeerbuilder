@@ -1,11 +1,46 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Head from 'next/head';
+import UpdatedProfile from '../updatedProfile/UpdatedProfile';
+import useRegistered from '@/hooks/useRegistered';
+import useStudentEditProfile from '@/hooks/useStudentEditProfile';
 
 export default function Page() {
   const [image, setImage] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    maritalStatus: '',
+    email: '',
+    phone: '',
+    address: '',
+    permanentAddress: '',
+    facebook: '',
+    linkedin: '',
+    aboutMyself: '',
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef(null);
+  const [register] = useRegistered();
+  const [studentEditProfile] = useStudentEditProfile();
+  const [newlySubmittedStudent, setNewlySubmittedStudent] = useState(null);
 
-  // Handle image upload
+
+  const fields = [
+    { name: 'name', label: 'Name', type: 'text', placeholder: 'Enter Name' },
+    { name: 'maritalStatus', label: 'Marital Status', type: 'text', placeholder: 'Enter Marital Status' },
+    { name: 'email', label: 'Email', type: 'email', placeholder: 'Enter Email' },
+    { name: 'phone', label: 'Phone', type: 'text', placeholder: 'Enter Phone Number' },
+    { name: 'address', label: 'Address', type: 'text', placeholder: 'Enter Address' },
+    { name: 'permanentAddress', label: 'Permanent Address', type: 'text', placeholder: 'Enter Permanent Address' },
+    { name: 'facebook', label: 'Facebook', type: 'text', placeholder: 'Enter Facebook URL' },
+    { name: 'linkedin', label: 'LinkedIn', type: 'text', placeholder: 'Enter LinkedIn URL' }
+  ];
+
+  const textAreas = [
+    { name: 'aboutMyself', label: 'About Myself', placeholder: 'Type Here' }
+  ];
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -13,48 +48,109 @@ export default function Page() {
     }
   };
 
-  // Handle form submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Form submitted!");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const uploadImageToImgBB = async (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    const response = await fetch('https://api.imgbb.com/1/upload?key=3d64b0e9dee39ca593b9da32467663ee', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await response.json();
+    if (data.success) return data.data.url;
+    else throw new Error('Image upload failed');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Frontend validation
+    for (let key in formData) {
+      if (!formData[key].trim()) {
+        alert(`Field ${key} is required`);
+        setLoading(false);
+        return;
+      }
+    }
+
+    try {
+      let imageUrl = '';
+      if (fileInputRef.current?.files?.[0]) {
+        imageUrl = await uploadImageToImgBB(fileInputRef.current.files[0]);
+      } else {
+        alert('Please upload an image');
+        setLoading(false);
+        return;
+      }
+
+      const payload = { ...formData, uploadedImage: imageUrl };
+      console.log('Payload:', payload);
+
+      const response = await fetch('/api/students_Edit_Profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        // setNewlySubmittedStudent(payload);
+        setSubmitted(true);
+      }
+      else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('Form submission failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  // const matchedStudent = studentEditProfile?.data?.find((reg) =>
+  //   register?.data?.some((edit) => edit.email === reg.email)
+  // );
+
+  // // console.log(register)
+  // // console.log(studentEditProfile)
+  // console.log(matchedStudent)
+
+  // Get the latest registered user (or the one you want to target specifically)
+  const latestRegisteredUser = register?.data?.[register?.data?.length - 1]; // or use any logic to pick specific user
+
+  // Check if this user has already edited their profile
+  const matchedStudent = studentEditProfile?.data?.find(
+    (profile) => profile.email === latestRegisteredUser?.email
+  );
+
+
 
   return (
     <>
       <Head>
-        <title>Profile Edit Page - Customize Your Profile</title>
-        <meta
-          name="description"
-          content="Edit and update your profile details, including name, contact information, skills, work experience, and more. Upload a profile picture and keep your profile up to date. Manage personal and professional details with ease."
-        />
+        <meta name="description" content="Edit and update your profile." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="author" content="Your Website Name" />
-        <meta property="og:title" content="Profile Edit Page - Customize Your Profile" />
-        <meta
-          property="og:description"
-          content="Manage your student profile, update CV, track achievements, edit portfolio, and more on the Career Builder dashboard. Stay organized and enhance your career prospects with easy access to your courses, certificates, and personal settings."
-        />
-        <meta property="og:image" content={image || '/default-profile.png'} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourwebsite.com/profile-edit" />
-        <meta name="robots" content="index, follow" />
-        <meta name="keywords" content="profile, edit, student profile, career builder, CV update, portfolio" />
       </Head>
-      <main className="p-6">
-        <section className="max-w-4xl mx-auto" role="main" aria-labelledby="profile-edit-title">
-          {/* Profile Edit Header */}
-          <header className="flex justify-between items-center mb-6 flex-col sm:flex-row">
-            <h2 id="profile-edit-title" className="text-2xl font-semibold mb-4 sm:mb-0">Profile Edit</h2>
 
-            {/* Image upload clickable area */}
-            <label htmlFor="image-upload" className="cursor-pointer mb-4" aria-label="Upload Profile Picture">
+      <main className="p-6">
+        <section className="max-w-4xl mx-auto">
+          <header className="flex justify-between items-center mb-6 flex-col sm:flex-row">
+            <h2 className="text-2xl font-semibold mb-4 sm:mb-0">Profile Edit</h2>
+            <label htmlFor="image-upload" className="cursor-pointer mb-4">
               {image ? (
                 <Image
                   src={image}
-                  alt="Uploaded Profile Picture"
+                  alt="Uploaded Profile"
                   width={200}
                   height={200}
-                  className="w-24 h-24 object-cover mx-auto rounded-full"
+                  className="w-24 h-24 object-cover"
                 />
               ) : (
                 <div className="w-24 h-24 bg-gray-300 flex items-center justify-center text-white rounded-full">
@@ -66,68 +162,103 @@ export default function Page() {
               id="image-upload"
               type="file"
               accept="image/*"
+              ref={fileInputRef}
               onChange={handleImageUpload}
               className="hidden"
             />
           </header>
 
-          {/* Profile Form */}
-          <form onSubmit={handleSubmit} aria-label="Profile Form">
-            <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Form Fields */}
-              {[ 
-                { label: "Name", type: "text", placeholder: "Enter Name" },
-                { label: "Marital Status", type: "text", placeholder: "Enter Marital Status" },
-                { label: "Email", type: "email", placeholder: "Enter Email" },
-                { label: "Phone", type: "text", placeholder: "Enter Phone Number" },
-                { label: "Address", type: "text", placeholder: "Enter Address" },
-                { label: "Permanent Address", type: "text", placeholder: "Enter Permanent Address" },
-                { label: "Facebook", type: "text", placeholder: "Enter Facebook URL" },
-                { label: "LinkedIn", type: "text", placeholder: "Enter LinkedIn URL" }
-              ].map((field, index) => (
-                <label key={index} className="flex flex-col">
-                  {field.label}
-                  <input 
-                    type={field.type} 
-                    placeholder={field.placeholder} 
-                    className="mt-2 p-2 border rounded" 
-                    aria-label={field.label}
-                  />
-                </label>
-              ))}
+          {/* {matchedStudent ? (
+            <UpdatedProfile image={image} formData={formData} matchedStudent={matchedStudent} />
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {fields.map((field, idx) => (
+                  <label key={idx} className="flex flex-col">
+                    {field.label}
+                    <input
+                      name={field.name}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      className="mt-2 p-2 border rounded"
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                    />
+                  </label>
+                ))}
+                {textAreas.map((field, idx) => (
+                  <label key={idx} className="flex flex-col sm:col-span-2">
+                    {field.label}
+                    <textarea
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      className="mt-2 p-2 border rounded"
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                    />
+                  </label>
+                ))}
+              </section>
+              <div className="mt-6">
+                <button
+                  type="submit"
+                  className="w-full px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700"
+                  disabled={loading}
+                >
+                  {loading ? 'Submitting...' : 'Submit'}
+                </button>
+              </div>
+            </form>
+          )
+          } */}
 
-              {/* Textarea Fields */}
-              {[ 
-                { label: "Objective", placeholder: "Enter Objective" },
-                { label: "Education", placeholder: "Enter Education Details" },
-                { label: "Work Experience", placeholder: "Enter Work Experience" },
-                { label: "Core Skills", placeholder: "Enter Core Skills" },
-                { label: "Extra Curriculum", placeholder: "Enter Extra Curriculum Activities" },
-                { label: "Career Summary", placeholder: "Enter Career Summary" }
-              ].map((field, index) => (
-                <label key={index} className="flex flex-col">
-                  {field.label}
-                  <textarea 
-                    placeholder={field.placeholder} 
-                    className="mt-2 p-2 border rounded" 
-                    aria-label={field.label}
-                  />
-                </label>
-              ))}
-            </section>
+          {matchedStudent || newlySubmittedStudent ? (
+            <UpdatedProfile image={image} formData={formData} matchedStudent={matchedStudent} />
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <section className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {fields.map((field, idx) => (
+                  <label key={idx} className="flex flex-col">
+                    {field.label}
+                    <input
+                      name={field.name}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      className="mt-2 p-2 border rounded"
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                    />
+                  </label>
+                ))}
+                {textAreas.map((field, idx) => (
+                  <label key={idx} className="flex flex-col sm:col-span-2">
+                    {field.label}
+                    <textarea
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      className="mt-2 p-2 border rounded"
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                    />
+                  </label>
+                ))}
+              </section>
+              <div className="mt-6">
+                <button
+                  type="submit"
+                  className="w-full px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700"
+                  disabled={loading}
+                >
+                  {loading ? 'Submitting...' : 'Submit'}
+                </button>
+              </div>
+            </form>
+          )}
 
-            {/* Submit Button */}
-            <div className="mt-6">
-              <button 
-                type="submit" 
-                className="w-full px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
+
         </section>
       </main>
     </>
   );
 }
+

@@ -83,9 +83,48 @@ INSERT INTO `courses` VALUES (6,'shofik','124','124214','2025-04-06T08:16','4','
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `edit_profile`
+--
+
+DROP TABLE IF EXISTS `edit_profile`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `edit_profile` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `maritalStatus` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `address` text,
+  `permanentAddress` text,
+  `facebook` varchar(255) DEFAULT NULL,
+  `linkedin` varchar(255) DEFAULT NULL,
+  `aboutMyself` text,
+  `uploadedImage` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `edit_profile`
+--
+
+LOCK TABLES `edit_profile` WRITE;
+/*!40000 ALTER TABLE `edit_profile` DISABLE KEYS */;
+INSERT INTO `edit_profile` VALUES (41,'sohag','married','sohag234@gmail.com','01742540234','Hose no: 27/1, Vill: Goalkhali navy colony road GPO: 9000, Khalishpur Khulna','goalkhali','https://www.facebook.com/tinkuboy.galib/','https://www.linkedin.com/in/abu-yeahia-b290931b9/','erg','https://i.ibb.co/x8Sgj2Nv/baijid.webp'),(42,'Midul Islam','married','midul123@gmail.com','01742540234','Hose no: 27/1, Vill: Goalkhali navy colony road GPO: 9000, Khalishpur Khulna','goalkhali','https://www.facebook.com/tinkuboy.galib/','https://www.linkedin.com/in/abu-yeahia-b290931b9/','I hate ','https://i.ibb.co/vx8hS1vW/midul-2.png'),(43,'siam','unmarried','siam123@gmail.com','01742540234','Hose no: 27/1, Vill: Goalkhali navy colony road GPO: 9000, Khalishpur Khulna','goalkhali','https://www.facebook.com/tinkuboy.galib/','https://www.linkedin.com/in/abu-yeahia-b290931b9/','Welcome to WebTech-Best Website Design & Development Company in Bangladesh with a team of 50+ dedicated experts! We are providing top-notch solutions, from domain registration and hosting to custom websites, eCommerce, and software development. We empower businesses with comprehensive digital marketing, graphic design, and advanced SEO/SEM','https://i.ibb.co/Rpm1j6xs/siam-vai.jpg'),(44,'Muhib','married','Muhib123@gmail.com','01742540234','Hose no: 27/1, Vill: Goalkhali navy colony road GPO: 9000, Khalishpur Khulna','goalkhali','https://www.facebook.com/tinkuboy.galib/','https://www.linkedin.com/in/abu-yeahia-b290931b9/','we ','https://i.ibb.co/DH687vs0/intern-4.jpg'),(45,'Rafiq','married','rafiq1231@gmail.com','01742540234','Hose no: 27/1, Vill: Goalkhali navy colony road GPO: 9000, Khalishpur Khulna','goalkhali','https://www.facebook.com/tinkuboy.galib/','https://www.linkedin.com/in/abu-yeahia-b290931b9/','we are fab','https://i.ibb.co/x8Sgj2Nv/baijid.webp');
+/*!40000 ALTER TABLE `edit_profile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+
 --
 -- Table structure for table `event_gallery`
 --
+
 
 DROP TABLE IF EXISTS `event_gallery`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
