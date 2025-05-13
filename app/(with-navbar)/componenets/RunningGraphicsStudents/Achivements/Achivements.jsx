@@ -11,7 +11,7 @@ export default function Achivements() {
                     <div key={achivement.id}>
                         <div className='relative gap-4 overflow-hidden cursor-pointer'>
                             <div className='lg:w-full'>
-                                <Image
+                                <img
                                     width={600}
                                     height={400}
                                     src={achivement.image}
@@ -21,7 +21,7 @@ export default function Achivements() {
                             </div>
                             <div className='relative bottom-11 rounded-md flex-col bg-black opacity-75'>
                                 <div className='ml-3'>
-                                    <time datetime="2008-02-14 20:00" className='text-white text-sm'>{achivement.date}</time>
+                                    <time  className='text-white text-sm'>{achivement.date}</time>
                                     <h3 className='text-white text-base'>{achivement.description}</h3>
                                 </div>
                             </div>
