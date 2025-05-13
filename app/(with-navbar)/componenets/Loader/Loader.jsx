@@ -1,11 +1,8 @@
 // components/Loader.js
-
-import styles from './Loader.module.css'; // Assuming you will use CSS modules
-
-const Loader = () => (
-  <div className={styles.loaderContainer}>
-    <div className={styles.spinner}></div>
-  </div>
-);
-
-export default Loader;
+export default function Loader() {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-60 z-50">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid"></div>
+    </div>
+  );
+}
