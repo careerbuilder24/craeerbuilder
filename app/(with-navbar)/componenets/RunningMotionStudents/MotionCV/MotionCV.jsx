@@ -10,7 +10,7 @@ import Image from 'next/image';
 import useMotions from '@/hooks/useMotion';
 
 
-export default function CuriculamVite() {
+export default function MotionCV() {
     const { id } = useParams();
     // const [students, loading] = useStudents();
     const motions =  useMotions()
@@ -98,10 +98,11 @@ export default function CuriculamVite() {
                                 <Image
                                     src={motion?.image}
                                     onDragStart={(e) => e.preventDefault()}
-                                    alt={motion?.title}
+                                   alt='Motion Cv Image'
                                     className="mt-4 shadow-lg w-10/12 mx-auto mb-8  "
                                     width={100}
                                     height={100}
+                                    
 
                                     style={{ border: '4px solid #ffffff', }} // Custom border radius
                                     onError={(e) => { e.target.src = 'fallback-image-url.jpg'; }} // Fallback image in case of error

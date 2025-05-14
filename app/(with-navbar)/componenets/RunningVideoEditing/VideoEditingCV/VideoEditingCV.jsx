@@ -96,7 +96,7 @@ export default function CuriculamVite() {
                     {Videos ? (
                         <div className='flex flex-col   w-full h-full '>
                             <div className='w-ful mt-4 text-white'>
-                                <Image
+                                <img
                                     src={Videos?.image}
                                     onDragStart={(e) => e.preventDefault()}
                                     alt={Videos?.title}

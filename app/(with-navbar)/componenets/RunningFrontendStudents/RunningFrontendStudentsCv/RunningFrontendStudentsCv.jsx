@@ -99,7 +99,7 @@ export default function CuriculamVite() {
                     {FrontendDevelopment ? (
                         <div className='flex flex-col   w-full h-full '>
                             <div className='w-ful mt-4 text-white'>
-                                <Image
+                                <img
                                     src={FrontendDevelopment?.image}
                                     onDragStart={(e) => e.preventDefault()}
                                     alt={FrontendDevelopment?.title}

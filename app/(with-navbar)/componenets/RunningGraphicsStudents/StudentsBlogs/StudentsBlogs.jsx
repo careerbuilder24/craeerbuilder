@@ -168,12 +168,13 @@ export default function StudentsBlogs() {
                                     className="flex flex-row gap-4 cursor-pointer"
                                     onClick={() => handleRelatedContentClick(item)} // Update the selected content when clicked
                                 >
-                                    <img
+                                    <Image
                                         onDragStart={(e) => e.preventDefault()}
                                         src={item.img}
                                         width={100}
                                         height={100}
                                         className="w-full rounded-lg"
+                                        alt='blog sub Image'
                                     />
                                     <p className="text-sm mt-4">{item.text}</p>
                                 </div>

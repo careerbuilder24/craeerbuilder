@@ -97,14 +97,13 @@ export default function CuriculamVite() {
                     {Affiliates ? (
                         <div className='flex flex-col   w-full h-full '>
                             <div className='w-ful mt-4 text-white'>
-                                <Image
+                                <img
                                     src={Affiliates?.image}
                                     onDragStart={(e) => e.preventDefault()}
                                     alt={Affiliates?.title}
                                     className="mt-4 shadow-lg w-10/12 mx-auto mb-8  "
                                     width={100}
                                     height={100}
-
                                     style={{ border: '4px solid #ffffff', }} // Custom border radius
                                     onError={(e) => { e.target.src = 'fallback-image-url.jpg'; }} // Fallback image in case of error
                                 />

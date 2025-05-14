@@ -320,7 +320,6 @@ export default function page() {
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Portfolio</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Certificate</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Gallery</Tab>
-                            <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Certificate</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Videos</Tab>
                             <Tab style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>Blog</Tab>
                         </TabList>
@@ -329,43 +328,27 @@ export default function page() {
                         <div className=' w-full'>
                             <TabPanel>
 
-                                {/* tab panel 1 */}
-
-                                {/* Cv part */}
                                 <CuriculamVite></CuriculamVite>
 
                             </TabPanel>
 
-                            {/* tab panel 2  flex-1 h-[600px] overflow-auto*/}
                             <TabPanel>
-                                {/* Achivemnets part */}
+                             
                                 <Achivements></Achivements>
 
                             </TabPanel>
 
 
                             <TabPanel>
-
-                                {/* tab panel 3 */}
-
-                                {/*Course  */}
                                 <CourseDuration></CourseDuration>
                             </TabPanel>
 
                             <TabPanel>
-                                {/* tab panel 4 */}
-
-                                {/* Portfolio Part */}
                                 <PortFolio></PortFolio>
 
                             </TabPanel>
 
                             <TabPanel>
-
-                                {/* tab panel 5 */}
-
-
-                                {/* certifications */}
 
                                 <Certifactes></Certifactes>
 
@@ -373,29 +356,17 @@ export default function page() {
 
                             <TabPanel>
 
-                                {/* tab panel 6 */}
-                                {/* Gallery section */}
                                 <GraphicsStudentsGallery></GraphicsStudentsGallery>
 
                             </TabPanel>
 
                             <TabPanel>
-
-                                {/* tab panel 7 */}
-                                {/* video section */}
                                 <GraphicsVideos></GraphicsVideos>
                             </TabPanel>
+                            
                             <TabPanel>
-
-                                {/* tab panel 8 */}
-
-                                {/* Blog Sections */}
 
                                 <StudentsBlogs></StudentsBlogs>
-
-                            </TabPanel>
-
-                            <TabPanel>
 
                             </TabPanel>
                         </div>

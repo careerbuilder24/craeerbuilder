@@ -107,7 +107,8 @@ export default function Certifactes() {
                     </Box>
                 </Modal>
 
-                <Tabs selectedIndex2={activeTabIndex2} onSelect={index => setActiveTabIndex2(index)}>
+               <Tabs selectedIndex={activeTabIndex2} onSelect={index => setActiveTabIndex2(index)}>
+
                     <TabList className="flex flex-col md:flex-row lg:flex-row justify-center items-center lg:space-x-4 text-center">
                         <Tab className="cursor-pointer p-2 border-2 transition-all duration-200 hover:border-blue-500 focus:outline-blue-600 bg-[#11569C] text-white  hover:bg-[#2EA9E1] hover:text-white selected:bg-blue-200  mt-5 lg:w-28 w-full ">
                             All

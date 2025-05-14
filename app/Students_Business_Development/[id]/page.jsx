@@ -269,16 +269,15 @@ export default function page() {
 
 
 
-
                     <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col   md:flex-row  h-auto w-full'>
                         {/* Tab List */}
                         <TabList className=' flex flex-col border-r border-gray-300 cursor-pointer text-white  hidden  lg:flex bg-[#17549A] w-2/12 h-auto '>
                             {businesses ? (
                                 <div className='flex flex-col text-white  w-full '>
-                                    <Image
+                                    <img
                                         src={businesses?.image}
                                         onDragStart={(e) => e.preventDefault()}
-                                        alt={businesses?.title}
+                                        alt={businesses?.title || 'user profile pic'}
                                         className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8"
                                         width={100}
                                         height={100}
@@ -330,43 +329,27 @@ export default function page() {
                         <div className=' w-full'>
                             <TabPanel>
 
-                                {/* tab panel 1 */}
-
-                                {/* Cv part */}
                                 <CuriculamVite></CuriculamVite>
 
                             </TabPanel>
 
-                            {/* tab panel 2  flex-1 h-[600px] overflow-auto*/}
                             <TabPanel>
-                                {/* Achivemnets part */}
+
                                 <Achivements></Achivements>
 
                             </TabPanel>
 
 
                             <TabPanel>
-
-                                {/* tab panel 3 */}
-
-                                {/*Course  */}
                                 <CourseDuration></CourseDuration>
                             </TabPanel>
 
                             <TabPanel>
-                                {/* tab panel 4 */}
-
-                                {/* Portfolio Part */}
                                 <PortFolio></PortFolio>
 
                             </TabPanel>
 
                             <TabPanel>
-
-                                {/* tab panel 5 */}
-
-
-                                {/* certifications */}
 
                                 <Certifactes></Certifactes>
 
@@ -374,29 +357,17 @@ export default function page() {
 
                             <TabPanel>
 
-                                {/* tab panel 6 */}
-                                {/* Gallery section */}
                                 <GraphicsStudentsGallery></GraphicsStudentsGallery>
 
                             </TabPanel>
-                            <TabPanel>
 
-                                {/* tab panel 7 */}
-                                {/* video section */}
+                            <TabPanel>
                                 <GraphicsVideos></GraphicsVideos>
                             </TabPanel>
 
                             <TabPanel>
 
-                                {/* tab panel 8 */}
-
-                                {/* Blog Sections */}
-
                                 <StudentsBlogs></StudentsBlogs>
-
-                            </TabPanel>
-
-                            <TabPanel>
 
                             </TabPanel>
                         </div>
