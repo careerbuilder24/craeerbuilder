@@ -68,28 +68,28 @@ const promisePool = pool.promise();
 export async function getUserByEmail(email) {
   try {
     if (!email) {
-      console.error("❌ getUserByEmail: Email is undefined or empty");
+      console.error(" getUserByEmail: Email is undefined or empty");
       return null;
     }
 
     const trimmedEmail = email.trim().toLowerCase(); // Ensure case insensitivity
-    console.log("🔍 Searching user by email:", trimmedEmail);
+    console.log(" Searching user by email:", trimmedEmail);
 
     const [rows] = await promisePool.query(
       "SELECT * FROM users_login.user_managements WHERE LOWER(email) = ?",
       [trimmedEmail]
     );
 
-    console.log("📢 Database Query Result:", rows);
+    console.log(" Database Query Result:", rows);
 
     if (rows.length === 0) {
-      console.warn("⚠️ No user found for email:", trimmedEmail);
+      console.warn(" No user found for email:", trimmedEmail);
       return null;
     }
 
     return rows[0];
   } catch (error) {
-    console.error("❌ Database query error:", error);
+    console.error(" Database query error:", error);
     return null;
   }
 }

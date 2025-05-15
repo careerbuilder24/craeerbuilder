@@ -138,7 +138,7 @@ export default function Page() {
     (profile) => profile.email === latestRegisteredUser?.email
   );
 
-  // ✅ Final data to show (after live update)
+  //  Final data to show (after live update)
   const finalStudentData = newlySubmittedStudent || matchedStudent;
 
   return (

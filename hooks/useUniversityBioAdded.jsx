@@ -43,7 +43,7 @@ const useAdminUniversityBio = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        let isMounted = true; // ✅ Declare the variable
+        let isMounted = true; //  Declare the variable
 
         const fetchUniversityBio = async () => {
             try {
