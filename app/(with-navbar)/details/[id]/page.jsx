@@ -180,7 +180,24 @@ export default function Page() {
                                     <h3 className='text-[#0054a5] font-semibold text-2xl'>Course Overview</h3>
 
                                     <hr className='w-20 h-1 bg-[#0054a6] mb-10' />
-                                    <Video src="/videos/madlia.mp4" controls />
+                                    {/* <Video src="/videos/madlia.mp4" controls /> */}
+                                    <div className="w-full lg:w-full bg-gray-200 rounded-lg shadow-lg p-1 mt-12">
+                                        <video
+                                            controls
+                                            preload="metadata"
+                                            className="w-full h-auto max-h-[600px] rounded-lg"
+                                            muted={false} 
+                                        >
+                                            {/* <source src="/videos/madlia.mp4" type="video/mp4" /> */}
+                                            {/* <source src="https://vimeo.com/manage/videos/1085439282/f9b7795597s" type="video/mp4" /> */}
+                                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+
+
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+
+
 
                                     <h3 className='text-[#0054a5] font-semibold  mt-5 mb-2 text-2xl'>Course Benifits</h3>
                                     <hr className='w-20 h-1 bg-[#0054a6] ' />
@@ -233,7 +250,7 @@ export default function Page() {
                                 <hr className='w-10 h-1 bg-[#0054a6] mb-7' />
                                 <div className='w-full h-full relative overflow-hidden group cursor-pointer'>
                                     <Image
-                                    alt='instructor image'
+                                        alt='instructor image'
                                         src={instrastor}
                                         className='w-full h-full object-cover transition-all duration-300 group-hover:filter-none filter grayscale'
                                     />
@@ -248,7 +265,7 @@ export default function Page() {
 
                         <div className='w-12/12 shadow-xl rounded p-4  mt-5'>
                             <Image
-                            alt='company image'
+                                alt='company image'
                                 onDragStart={(e) => e.preventDefault()}
                                 src={img2}
                                 className='w-full  h-full object-cover '
@@ -262,13 +279,6 @@ export default function Page() {
                             </div>
 
                         </div>
-
-
-
-
-
-
-
 
 
 
