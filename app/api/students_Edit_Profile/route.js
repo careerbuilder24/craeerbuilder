@@ -63,10 +63,9 @@ export async function GET() {
 export async function PUT(req) {
     try {
         const body = await req.json();
-       const { id, name, email, phone, address, facebook, linkedin } = body;
+        const { id, name, email, phone, address, facebook, linkedin } = body;
 
-
-        if ( !name || !email || !phone || !address || !facebook || !linkedin) {
+        if (!id || !name || !email || !phone || !address || !facebook || !linkedin) {
             return NextResponse.json({
                 success: false,
                 message: "All fields are required (id, name, email, phone, address, facebook, linkedin)."
@@ -74,10 +73,11 @@ export async function PUT(req) {
         }
 
         const query = `
-      UPDATE users_login.edit_profile
-      SET name = ?, email = ?, phone = ?, address = ?, facebook = ?, linkedin = ?
-      WHERE id = ?
-    `;
+            UPDATE users_login.edit_profile
+            SET name = ?, email = ?, phone = ?, address = ?, facebook = ?, linkedin = ?
+            WHERE id = ?
+        `;
+
         const [result] = await db.execute(query, [
             name, email, phone, address, facebook, linkedin, id
         ]);
@@ -103,3 +103,4 @@ export async function PUT(req) {
         }, { status: 500 });
     }
 }
+
