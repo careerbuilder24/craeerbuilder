@@ -333,7 +333,7 @@ export default function Page() {
       addSection(section.title, section.content);
     });
 
-    doc.save("generated_cv.pdf");
+    doc.save("cv_of_Name.pdf");
   };
 
 
