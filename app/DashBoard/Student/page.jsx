@@ -290,6 +290,7 @@ import { UserAuth } from '@/app/context/AuthContext';
 import usersAdmin from '@/hooks/useAdminUser';
 import { ThemeToggle } from '@/app/(with-navbar)/componenets/ThemeToggle/ThemeToggle';
 import PublishedPost from '@/app/(with-navbar)/componenets/PublishedPost/PublishedPost';
+import UploadedAchievements from '../Students_Dashboards_Components/UploadedAchievements/UploadedAchievements';
 
 const PageContent = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -332,11 +333,14 @@ const PageContent = () => {
     if (section) {
       setActiveSection(section);
       if (!userRole || (userRole !== 'Admin' && adminSections.includes(section))) {
-        router.push('/DashBoard/Student'); // redirect to safe location
+        // router.push('/DashBoard/Student'); // redirect to safe location
+        router.push('/');
       }
     }
   }, [searchParams, userRole]);
 
+
+  // for txt repeat change
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimatedText((prev) => {
@@ -378,24 +382,116 @@ const PageContent = () => {
         );
       default:
         return (
-          <ul className="mt-3">
-            <Link href="/">Home</Link>
-            <li onClick={() => handleSectionClick('Profile')}>Profile Edit</li>
-            <li onClick={() => handleSectionClick('CvUpdate')}>CV Update</li>
-            <li onClick={() => handleSectionClick('Achivements')}>Achievements</li>
-            <li onClick={() => handleSectionClick('courses')}>Courses</li>
-            <li onClick={() => handleSectionClick('Portfolio')}>Portfolio</li>
-            <li onClick={() => handleSectionClick('Certificate')}>Certificate</li>
-            <li onClick={() => handleSectionClick('Pictures')}>Pictures</li>
-            <li onClick={() => handleSectionClick('Videos')}>Videos</li>
-            <li onClick={() => handleSectionClick('Blog')}>Blog</li>
-            <li onClick={() => handleSectionClick('AllBlogs')}>All Blogs</li>
+          // student side dashboard text
+          // <ul className="mt-3 ">
+          //   <Link href="/">Home</Link>
+          //   <li onClick={() => handleSectionClick('Profile')}>Profile Edit</li>
+          //   <li onClick={() => handleSectionClick('CvUpdate')}>CV Update</li>
+          //   {/* <li onClick={() => handleSectionClick('Achivements')}>Achievements</li> */}
+          //   {/* <li>
+          //     <details className="group">
+          //       <summary
+          //         className="cursor-pointer list-none"
+          //         style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}
+          //       >
+          //         <a onClick={() => handleSectionClick('Achivements')} className="cursor-pointer">
+          //           Achievements
+          //         </a>
+          //       </summary>
+          //       <ul className="ml-4 mt-1">
+          //         <li onClick={() => handleSectionClick('UploadedAchievements')} className="cursor-pointer hover:underline">
+          //           Uploaded Achievements
+          //         </li>
+          //       </ul>
+          //     </details>
+          //   </li> */}
+          //   <li className="text-left">
+          //     <details className="group">
+          //       <summary
+          //         className="cursor-pointer list-none text-left"
+          //         style={{ listStyle: 'none', display: 'block' }}
+          //       >
+          //         <div
+          //           onClick={() => handleSectionClick('Achivements')}
+          //           className="cursor-pointer text-left block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700"
+          //           style={{ textDecoration: 'none' }}
+          //           onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+          //           onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+          //         >
+          //           Achievements
+          //         </div>
+          //       </summary>
+          //       <ul className="ml-4 mt-1 text-left">
+          //         <li
+          //           onClick={() => handleSectionClick('UploadedAchievements')}
+          //           className="cursor-pointer px-2 py-1 rounded hover:bg-green-100 hover:text-green-700"
+          //           style={{ textDecoration: 'none' }}
+          //           onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+          //           onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+          //         >
+          //           Uploaded Achievements
+          //         </li>
+          //       </ul>
+          //     </details>
+          //   </li>
+          //   <li onClick={() => handleSectionClick('courses')}>Courses</li>
+          //   <li onClick={() => handleSectionClick('Portfolio')}>Portfolio</li>
+          //   <li onClick={() => handleSectionClick('Certificate')}>Certificate</li>
+          //   <li onClick={() => handleSectionClick('Pictures')}>Pictures</li>
+          //   <li onClick={() => handleSectionClick('Videos')}>Videos</li>
+          //   <li onClick={() => handleSectionClick('Blog')}>Blog</li>
+          //   <li onClick={() => handleSectionClick('AllBlogs')}>All Blogs</li>
+          // </ul>
+
+          <ul className="mt-3 text-left"> {/* <-- Ensures all children align left */}
+            <li>
+              <Link href="/" className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-700 rounded">Home</Link>
+            </li>
+            <li onClick={() => handleSectionClick('Profile')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Profile Edit</li>
+            <li onClick={() => handleSectionClick('CvUpdate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">CV Update</li>
+
+            <li>
+              <details className="group">
+                <summary className="list-none cursor-pointer">
+                  <div
+                    onClick={() => handleSectionClick('Achivements')}
+                    className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700"
+                    // style={{ textDecoration: 'none' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                    onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  >
+                    Achievements
+                  </div>
+                </summary>
+                <ul className="ml-4 mt-1 text-left">
+                  <li
+                    onClick={() => handleSectionClick('UploadedAchievements')}
+                    className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
+                    style={{ textDecoration: 'none' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                    onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  >
+                    Uploaded Achievements
+                  </li>
+                </ul>
+              </details>
+            </li>
+
+            <li onClick={() => handleSectionClick('courses')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Courses</li>
+            <li onClick={() => handleSectionClick('Portfolio')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Portfolio</li>
+            <li onClick={() => handleSectionClick('Certificate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Certificate</li>
+            <li onClick={() => handleSectionClick('Pictures')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Pictures</li>
+            <li onClick={() => handleSectionClick('Videos')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Videos</li>
+            <li onClick={() => handleSectionClick('Blog')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Blog</li>
+            <li onClick={() => handleSectionClick('AllBlogs')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">All Blogs</li>
           </ul>
+
         );
     }
   };
 
   const renderActiveSection = () => {
+    // admin side dashboard
     if (userRole === 'Admin') {
       switch (activeSection) {
         case 'Course_Added': return <CourseAdded />;
@@ -412,9 +508,12 @@ const PageContent = () => {
       }
     } else {
       switch (activeSection) {
+        // student side dashboard components
         case 'Profile': return <Profile />;
         case 'CvUpdate': return <CvUpload />;
         case 'Achivements': return <Achivements />;
+        case 'UploadedAchievements':
+          return <UploadedAchievements />;
         case 'Portfolio': return <StudentsPortfolioEdit />;
         case 'courses': return <StudentsCourses />;
         case 'Certificate': return <Certificate />;
