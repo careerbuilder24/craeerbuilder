@@ -60,47 +60,90 @@ export async function GET() {
 
 
 // PUT method to update student
+// export async function PUT(req) {
+//     try {
+//         const body = await req.json();
+//         const { id, name, email, phone, address, facebook, linkedin } = body;
+
+//         if (!id || !name || !email || !phone || !address || !facebook || !linkedin) {
+//             return NextResponse.json({
+//                 success: false,
+//                 message: "All fields are required (id, name, email, phone, address, facebook, linkedin)."
+//             }, { status: 400 });
+//         }
+
+//         const query = `
+//             UPDATE users_login.edit_profile
+//             SET name = ?, email = ?, phone = ?, address = ?, facebook = ?, linkedin = ?
+//             WHERE id = ?
+//         `;
+
+//         const [result] = await db.execute(query, [
+//             name, email, phone, address, facebook, linkedin, id
+//         ]);
+
+//         if (result.affectedRows === 0) {
+//             return NextResponse.json({
+//                 success: false,
+//                 message: "Student not found or no changes made."
+//             }, { status: 404 });
+//         }
+
+//         return NextResponse.json({
+//             success: true,
+//             message: "Student profile updated successfully."
+//         }, { status: 200 });
+
+//     } catch (error) {
+//         console.error("Update error:", error);
+//         return NextResponse.json({
+//             success: false,
+//             message: "Error updating student profile.",
+//             error: error.message,
+//         }, { status: 500 });
+//     }
+// }
+
 export async function PUT(req) {
-    try {
-        const body = await req.json();
-        const { id, name, email, phone, address, facebook, linkedin } = body;
+  try {
+    const body = await req.json();
+    const { id, name, email, phone, address, facebook, linkedin, uploadedImage } = body;
 
-        if (!id || !name || !email || !phone || !address || !facebook || !linkedin) {
-            return NextResponse.json({
-                success: false,
-                message: "All fields are required (id, name, email, phone, address, facebook, linkedin)."
-            }, { status: 400 });
-        }
-
-        const query = `
-            UPDATE users_login.edit_profile
-            SET name = ?, email = ?, phone = ?, address = ?, facebook = ?, linkedin = ?
-            WHERE id = ?
-        `;
-
-        const [result] = await db.execute(query, [
-            name, email, phone, address, facebook, linkedin, id
-        ]);
-
-        if (result.affectedRows === 0) {
-            return NextResponse.json({
-                success: false,
-                message: "Student not found or no changes made."
-            }, { status: 404 });
-        }
-
-        return NextResponse.json({
-            success: true,
-            message: "Student profile updated successfully."
-        }, { status: 200 });
-
-    } catch (error) {
-        console.error("Update error:", error);
-        return NextResponse.json({
-            success: false,
-            message: "Error updating student profile.",
-            error: error.message,
-        }, { status: 500 });
+    if (!id || !name || !email || !phone || !address || !facebook || !linkedin || !uploadedImage) {
+      return NextResponse.json({
+        success: false,
+        message: "All fields are required including uploadedImage.",
+      }, { status: 400 });
     }
-}
 
+    const query = `
+      UPDATE users_login.edit_profile
+      SET name = ?, email = ?, phone = ?, address = ?, facebook = ?, linkedin = ?, uploadedImage = ?
+      WHERE id = ?
+    `;
+
+    const [result] = await db.execute(query, [
+      name, email, phone, address, facebook, linkedin, uploadedImage, id
+    ]);
+
+    if (result.affectedRows === 0) {
+      return NextResponse.json({
+        success: false,
+        message: "Student not found or no changes made."
+      }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Student profile updated successfully."
+    }, { status: 200 });
+
+  } catch (error) {
+    console.error("Update error:", error);
+    return NextResponse.json({
+      success: false,
+      message: "Error updating student profile.",
+      error: error.message,
+    }, { status: 500 });
+  }
+}

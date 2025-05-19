@@ -186,13 +186,11 @@ export default function Page() {
                                             controls
                                             preload="metadata"
                                             className="w-full h-auto max-h-[600px] rounded-lg"
-                                            muted={false} 
+                                            muted={false}
                                         >
                                             {/* <source src="/videos/madlia.mp4" type="video/mp4" /> */}
                                             {/* <source src="https://vimeo.com/manage/videos/1085439282/f9b7795597s" type="video/mp4" /> */}
                                             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
-
-
                                             Your browser does not support the video tag.
                                         </video>
                                     </div>
