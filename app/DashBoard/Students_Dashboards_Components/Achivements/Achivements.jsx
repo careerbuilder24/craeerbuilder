@@ -4,13 +4,29 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import useRegistered from '@/hooks/useRegistered';
+import useStudentEditProfile from '@/hooks/useStudentEditProfile';
+import useUserMatching from '@/hooks/useUserMatching';
 
 export default function Achievements() {
     const [images, setImages] = useState([]);
     const [imageDetails, setImageDetails] = useState([]);
     const [submittedImages, setSubmittedImages] = useState([]);
+    const {  matchedStudent } = useUserMatching();
+
+
+    // email
+    // const emails = matchedAchievements?.map(item => item.email);
+    // console.log("All emails:", emails);
+
+
+    // console.log(Achievement); 
+    console.log(matchedStudent?.email); 
 
     const handleImageUpload = (e) => {
+
+
+
         const files = e.target.files;
         const newImages = Array.from(files).map((file) => {
             const id = Math.random().toString(36).substring(7);
@@ -37,6 +53,7 @@ export default function Achievements() {
         ]);
     };
 
+
     const handleInputChange = (e, id, type) => {
         const value = e.target.value;
         setImageDetails((prev) =>
@@ -44,124 +61,93 @@ export default function Achievements() {
         );
     };
 
-    // const handleSubmit = async () => {
-    //     const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee';
 
-    //     for (const img of images) {
-    //         const detail = imageDetails.find((d) => d.id === img.id);
-    //         const formData = new FormData();
-    //         formData.append('image', img.file);
 
-    //         try {
-    //             // Upload image to ImgBB
-    //             const imgbbRes = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
-    //                 method: 'POST',
-    //                 body: formData
-    //             });
-
-    //             const imgbbData = await imgbbRes.json();
-    //             const image_url = imgbbData?.data?.url;
-
-    //             // Send metadata to MySQL via API
-    //             await axios.post('/api/achievements', {
-    //                 image_url,
-    //                 text: detail.text,
-    //                 date: detail.date,
-    //                 time: detail.time
-    //             });
-
-    //         } catch (err) {
-    //             console.error('Upload failed:', err);
-    //         }
-    //     }
-
-    //     // Save submitted images to display
-    //     setSubmittedImages(images.map(img => ({
-    //         ...img,
-    //         ...imageDetails.find((d) => d.id === img.id)
-    //     })));
-
-    //     // Clear form
-    //     setImages([]);
-    //     setImageDetails([]);
-    //     alert('All images submitted successfully!');
-    // };
-// import Swal from 'sweetalert2';
-
-const handleSubmit = async () => {
-    // Show confirmation SweetAlert first
-    const result = await Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to submit all the data?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, submit it!',
-        cancelButtonText: 'Cancel'
-    });
-
-    // If user cancels, stop the process
-    if (!result.isConfirmed) {
-        return;
-    }
-
-    const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee';
-
-    try {
-        for (const img of images) {
-            const detail = imageDetails.find((d) => d.id === img.id);
-            const formData = new FormData();
-            formData.append('image', img.file);
-
-            // Upload to ImgBB
-            const imgbbRes = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
-                method: 'POST',
-                body: formData
+    const handleSubmit = async () => {
+        if (!matchedStudent?.email) {
+            Swal.fire({
+                title: 'Warning!',
+                text: 'Please Fill Up your profile Edit.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
             });
-
-            const imgbbData = await imgbbRes.json();
-            const image_url = imgbbData?.data?.url;
-
-            // Send data to API
-            await axios.post('/api/achievements', {
-                image_url,
-                text: detail.text,
-                date: detail.date,
-                time: detail.time
-            });
+            return;
         }
 
-        // Save and clear data
-        setSubmittedImages(images.map(img => ({
-            ...img,
-            ...imageDetails.find((d) => d.id === img.id)
-        })));
-        setImages([]);
-        setImageDetails([]);
-
-       
-        Swal.fire({
-            title: 'Success!',
-            text: 'All images submitted successfully!',
-            icon: 'success',
-            confirmButtonText: 'OK'
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to submit all the data?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, submit it!',
+            cancelButtonText: 'Cancel'
         });
 
-    } catch (err) {
-        console.error('Upload failed:', err);
+        if (!result.isConfirmed) {
+            return;
+        }
 
-       
-        Swal.fire({
-            title: 'Error!',
-            text: 'Something went wrong during upload.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    }
-};
+        const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee';
+
+        try {
+            for (const img of images) {
+                const detail = imageDetails.find((d) => d.id === img.id);
+                const formData = new FormData();
+                formData.append('image', img.file);
+
+                const imgbbRes = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const imgbbData = await imgbbRes.json();
+                const image_url = imgbbData?.data?.url;
+
+                await axios.post('/api/achievements', {
+                    image_url,
+                    text: detail.text,
+                    date: detail.date,
+                    time: detail.time,
+                    email: matchedStudent?.email
+                });
+            }
+
+            setSubmittedImages(images.map(img => ({
+                ...img,
+                ...imageDetails.find((d) => d.id === img.id)
+            })));
+            setImages([]);
+            setImageDetails([]);
+
+            Swal.fire({
+                title: 'Success!',
+                text: 'All images submitted successfully!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+
+        } catch (err) {
+            console.error('Upload failed:', err);
+            Swal.fire({
+                title: 'Error!',
+                text: 'Something went wrong during upload.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    };
+
 
     useEffect(() => {
         document.title = images.length > 0 ? `Upload Images - ${images.length}` : "Upload Your Achievements";
     }, [images.length]);
+
+
+
+
+
+
+
 
     return (
         <div className="p-6 max-w-4xl mx-auto">

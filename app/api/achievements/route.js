@@ -49,20 +49,20 @@ import db from '@/libs/db';
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { image_url, text, date, time } = body;
+        const { image_url, text, date, time, email } = body;
 
-        if (!image_url || !text || !date || !time) {
+        if (!image_url || !text || !date || !time || !email) {
             return NextResponse.json({
                 success: false,
-                message: 'All fields are required (imageUrl, text, date, time)'
+                message: 'All fields are required (imageUrl, text, date, time, email)'
             }, { status: 400 });
         }
 
         const created_at = new Date();
 
         const [result] = await db.execute(
-            `INSERT INTO achievements (image_url, text, date, time, created_at) VALUES (?, ?, ?, ?, ?)`,
-            [image_url, text, date, time, created_at]
+            `INSERT INTO  users_login.achievements (image_url, text, date, time, email, created_at) VALUES (?, ?, ?, ?, ?, ?)`,
+            [image_url, text, date, time, email, created_at]
         );
 
         return NextResponse.json({
@@ -79,3 +79,49 @@ export async function POST(req) {
         }, { status: 500 });
     }
 }
+
+// GET Method
+
+export async function GET() {
+    try {
+        const query = 'SELECT * FROM users_login.achievements'
+        const [rows] = await db.execute(query)
+        return NextResponse.json({
+            success: true,
+            data: rows,
+        }, { status: 200 });
+    } catch (error) {
+        console.error('the data getting error', error);
+        return NextResponse.json({
+            success: false,
+            message: 'Error fetching data',
+            error: error.message
+        }, { status: 500 })
+
+    }
+}
+
+// Delete Method
+
+export async function DELETE(req) {
+    try {
+        const { id } = await req.json();
+        if (!id) {
+            return NextResponse.json({ success: false, message: 'Missing ID' }, { status: 400 });
+        }
+
+        const query = 'DELETE FROM users_login.achievements WHERE id = ?';
+        await db.execute(query, [id]);
+
+        return NextResponse.json({ success: true, message: 'Deleted successfully' }, { status: 200 });
+
+    } catch (err) {
+        console.log('the delete error is:', err)
+        return NextResponse.json({
+            success: false,
+            message: 'Error deleting gallery item',
+            error: err.message
+        }, { status: 500 })
+    }
+}
+

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';  // Import the Head component for Next.js SEO
+import UploadedCourses from '../UploadedCourses/UploadedCourses';
 
 export default function Page() {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -178,56 +179,7 @@ export default function Page() {
                             </button>
                         </form>
                     ) : (
-                        <section aria-labelledby="submitted-data">
-                            <h2 id="submitted-data">Submitted Entries</h2>
-                            <div style={tableWrapperStyle}>
-                                <table style={tableStyle}>
-                                    <thead>
-                                        <tr>
-                                            <th style={tableCellStyle}>Start Date</th>
-                                            <th style={tableCellStyle}>End Date</th>
-                                            <th style={tableCellStyle}>Title</th>
-                                            <th style={tableCellStyle}>Duration</th>
-                                            <th style={tableCellStyle}>Details</th>
-                                            <th style={tableCellStyle}>Certificate</th>
-                                            <th style={tableCellStyle}>Function</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {entries.map((entry, index) => (
-                                            <tr key={index}>
-                                                <td style={tableCellStyle}>{entry.startDate}</td>
-                                                <td style={tableCellStyle}>{entry.endDate}</td>
-                                                <td style={tableCellStyle}>{entry.title}</td>
-                                                <td style={tableCellStyle}>{entry.duration}</td>
-                                                <td style={tableCellStyle} >{entry.details}</td>
-                                                <td style={tableCellStyle}>{entry.certificate}</td>
-                                                <td style={tableCellStyle}>
-                                                    <button
-                                                        style={buttonStyle}
-                                                        onMouseEnter={(e) => e.target.style.backgroundColor = '#90EE90'}
-                                                        onMouseLeave={(e) => e.target.style.backgroundColor = ' #32CD32'}
-                                                        onClick={() => handleEdit(index)}
-                                                    >
-                                                        Edit
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                                <button
-                                    style={buttonStyle}
-                                    onMouseEnter={(e) => e.target.style.backgroundColor = ''}
-                                    onMouseLeave={(e) => e.target.style.backgroundColor = ' #32CD32'}
-                                    onClick={() => setIsSubmitted(false)}
-                                >
-                                    Add Another Entry
-                                </button>
-                            </div>
-                        </section>
+                        <UploadedCourses />
                     )}
                 </section>
             </main>

@@ -291,14 +291,18 @@ import usersAdmin from '@/hooks/useAdminUser';
 import { ThemeToggle } from '@/app/(with-navbar)/componenets/ThemeToggle/ThemeToggle';
 import PublishedPost from '@/app/(with-navbar)/componenets/PublishedPost/PublishedPost';
 import UploadedAchievements from '../Students_Dashboards_Components/UploadedAchievements/UploadedAchievements';
+import UploadedCourses from '../Students_Dashboards_Components/UploadedCourses/UploadedCourses';
+import UploadedPortfolio from '../Students_Dashboards_Components/UploadedPortfolio/UploadedPortfolio';
 
 const PageContent = () => {
+  // state managements
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [navbarColor, setNavbarColor] = useState('#17549A');
   const [sidebarColor, setSidebarColor] = useState('#222');
   const [userRole, setUserRole] = useState('');
   const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
+
 
   const { ManualUser } = UserAuth();
   const { userAdmin } = usersAdmin();
@@ -443,19 +447,19 @@ const PageContent = () => {
           //   <li onClick={() => handleSectionClick('AllBlogs')}>All Blogs</li>
           // </ul>
 
-          <ul className="mt-3 text-left"> {/* <-- Ensures all children align left */}
+          <ul className="mt-3 text-left "> {/* <-- Ensures all children align left */}
             <li>
               <Link href="/" className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-700 rounded">Home</Link>
             </li>
             <li onClick={() => handleSectionClick('Profile')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Profile Edit</li>
             <li onClick={() => handleSectionClick('CvUpdate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">CV Update</li>
 
-            <li>
+            {/* <li>
               <details className="group">
                 <summary className="list-none cursor-pointer">
                   <div
                     onClick={() => handleSectionClick('Achivements')}
-                    className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700"
+                    className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
                     // style={{ textDecoration: 'none' }}
                     onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
                     onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
@@ -475,10 +479,81 @@ const PageContent = () => {
                   </li>
                 </ul>
               </details>
-            </li>
+            </li> */}
+            <details className="group my-2 p-2  rounded-lg">
+              <summary className="list-none cursor-pointer">
+                <div
+                  onClick={() => handleSectionClick('Achivements')}
+                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
+                  // style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Achievements
+                </div>
+              </summary>
+              <ul className="ml-4 mt-1 text-left">
+                <li
+                  onClick={() => handleSectionClick('UploadedAchievements')}
+                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
+                  style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Uploaded Courses
+                </li>
+              </ul>
+            </details>
+            <details className="group">
+              <summary className="list-none cursor-pointer">
+                <div
+                  onClick={() => handleSectionClick('courses')}
+                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
+                  // style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Courses
+                </div>
+              </summary>
+              <ul className="ml-4 mt-1 text-left">
+                <li
+                  onClick={() => handleSectionClick('UploadedCourses')}
+                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
+                  style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Uploaded Courses
+                </li>
+              </ul>
+            </details>
 
-            <li onClick={() => handleSectionClick('courses')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Courses</li>
-            <li onClick={() => handleSectionClick('Portfolio')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Portfolio</li>
+            <details className="group">
+              <summary className="list-none cursor-pointer">
+                <div
+                  onClick={() => handleSectionClick('Portfolio')}
+                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
+                  // style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Portfolio
+                </div>
+              </summary>
+              <ul className="ml-4 mt-1 text-left">
+                <li
+                  onClick={() => handleSectionClick('UploadedPortfolio')}
+                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
+                  style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Uploaded Portfolio
+                </li>
+              </ul>
+            </details>
+            {/* <li className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Portfolio</li> */}
             <li onClick={() => handleSectionClick('Certificate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Certificate</li>
             <li onClick={() => handleSectionClick('Pictures')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Pictures</li>
             <li onClick={() => handleSectionClick('Videos')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Videos</li>
@@ -494,16 +569,26 @@ const PageContent = () => {
     // admin side dashboard
     if (userRole === 'Admin') {
       switch (activeSection) {
-        case 'Course_Added': return <CourseAdded />;
-        case 'Students_Added': return <StudentsAdded />;
-        case 'Gallery_Added': return <GalleryAdded />;
-        case 'University_BioData_Added': return <UniversityBioDataAdded />;
-        case 'Career_Guide_Blog_Added': return <CareerGuideBlogAdded />;
-        case 'Published_Post': return <PublishedPost />;
-        case 'FAQ_Added': return <FAQAdded />;
-        case 'About_Us_Added': return <AboutUsAdded />;
-        case 'Contact_Us_Added': return <ContactUsAdded />;
-        case 'Manage_Users': return <ManageUsers />;
+        case 'Course_Added':
+          return <CourseAdded />;
+        case 'Students_Added':
+          return <StudentsAdded />;
+        case 'Gallery_Added':
+          return <GalleryAdded />;
+        case 'University_BioData_Added':
+          return <UniversityBioDataAdded />;
+        case 'Career_Guide_Blog_Added':
+          return <CareerGuideBlogAdded />;
+        case 'Published_Post':
+          return <PublishedPost />;
+        case 'FAQ_Added':
+          return <FAQAdded />;
+        case 'About_Us_Added':
+          return <AboutUsAdded />;
+        case 'Contact_Us_Added':
+          return <ContactUsAdded />;
+        case 'Manage_Users':
+          return <ManageUsers />;
         default: return <AdminWelcomePage />;
       }
     } else {
@@ -512,15 +597,25 @@ const PageContent = () => {
         case 'Profile': return <Profile />;
         case 'CvUpdate': return <CvUpload />;
         case 'Achivements': return <Achivements />;
+        case 'UploadedCourses': return <UploadedCourses />;
         case 'UploadedAchievements':
           return <UploadedAchievements />;
-        case 'Portfolio': return <StudentsPortfolioEdit />;
-        case 'courses': return <StudentsCourses />;
-        case 'Certificate': return <Certificate />;
-        case 'Pictures': return <PicturesEdits />;
-        case 'Videos': return <VideosEdits />;
-        case 'Blog': return <BlogsEditsStudents />;
-        case 'AllBlogs': return <AllBlogs />;
+        case 'Portfolio':
+          return <StudentsPortfolioEdit />;
+        case 'UploadedPortfolio':
+          return <UploadedPortfolio />;
+        case 'courses':
+          return <StudentsCourses />;
+        case 'Certificate':
+          return <Certificate />;
+        case 'Pictures':
+          return <PicturesEdits />;
+        case 'Videos':
+          return <VideosEdits />;
+        case 'Blog':
+          return <BlogsEditsStudents />;
+        case 'AllBlogs':
+          return <AllBlogs />;
         default: return <Welcome_Page />;
       }
     }
