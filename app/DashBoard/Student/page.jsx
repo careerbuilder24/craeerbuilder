@@ -495,12 +495,12 @@ const PageContent = () => {
               <ul className="ml-4 mt-1 text-left">
                 <li
                   onClick={() => handleSectionClick('UploadedAchievements')}
-                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
+                  className=" cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
                   style={{ textDecoration: 'none' }}
                   onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
                   onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
                 >
-                  Uploaded Courses
+                  Uploaded Achievements
                 </li>
               </ul>
             </details>
