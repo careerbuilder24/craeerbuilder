@@ -78,6 +78,16 @@ console.log(matchedStudent?.email)
 
 
     const handleSubmit = async () => {
+
+               if (!matchedStudent?.email) {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Please Fill Up your profile Edit.',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
     const created_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     // Upload image to ImgBB first
