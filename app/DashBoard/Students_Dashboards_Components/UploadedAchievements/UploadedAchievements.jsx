@@ -1,59 +1,4 @@
-// import useAchievements from "@/hooks/useAchievements";
-// import useRegistered from "@/hooks/useRegistered";
-// import useStudentEditProfile from "@/hooks/useStudentEditProfile";
-// import useUserMatching from "@/hooks/useUserMatching";
 
-// const UploadedAchievements = () => {
-//     // state managements
-  
-//     const {matchedAchievements} = useUserMatching();
- 
-//     console.log(matchedAchievements); 
-//     // console.log(matchedStudent.email); 
-
-
-
-
-//     return (
-//         <div className="p-6 max-w-4xl mx-auto">
-//             <h2 className="text-2xl font-bold mb-4">Uploaded Achievements</h2>
-//             {/* if (loading) return <p className="text-center">Loading...</p>;
-//             if (error) return <p className="text-center text-red-500">Error: {error}</p>; */}
-//             <div className="overflow-x-auto">
-//                 <table className="min-w-full table-auto border border-gray-300">
-//                     <thead className="bg-gray-100">
-//                         <tr>
-//                             <th className="border px-4 py-2">Image</th>
-//                             <th className="border px-4 py-2">Achievement Title</th>
-//                             <th className="border px-4 py-2">Time</th>
-//                             <th className="border px-4 py-2">Date</th>
-//                         </tr>
-//                     </thead>
-//                     <tbody>
-//                         {matchedAchievements?.map((achievement, index) => (
-//                             <tr key={index} className="text-center">
-//                                 <td className="border px-4 py-2">
-//                                     <img
-//                                         src={achievement.image_url}
-//                                         alt={achievement.text}
-//                                         className="w-20 h-20 object-cover mx-auto"
-//                                     />
-//                                 </td>
-//                                 <td className="border px-4 py-2">{achievement.text}</td>
-//                                 <td className="border px-4 py-2">{achievement.time}</td>
-//                                 <td className="border px-4 py-2">
-//                                     {new Date(achievement.date).toLocaleDateString()}
-//                                 </td>
-//                             </tr>
-//                         ))}
-//                     </tbody>
-//                 </table>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default UploadedAchievements;
 import Swal from "sweetalert2";
 import useUserMatching from "@/hooks/useUserMatching";
 import { useState } from "react";
@@ -111,7 +56,7 @@ const handleDeleteClick = (achievement) => {
     confirmButtonText: "Yes, delete it!",
   }).then(async (result) => {
     if (result.isConfirmed) {
-      // 👇 Optimistically remove the achievement from UI
+      //  Optimistically remove the achievement from UI
       setAchievements((prev) =>
         prev.filter((item) => item.id !== achievement.id)
       );

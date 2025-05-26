@@ -6,9 +6,9 @@ import { NextResponse } from 'next/server';
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { startDate, endDate, title, duration, details, certificate, imageUrl, created_time } = body;
+        const { startDate, endDate, title, duration, details, certificate, email, imageUrl, created_time } = body;
 
-        if (!startDate || !endDate || !title || !duration || !details || !certificate || !imageUrl || !created_time) {
+        if (!startDate || !endDate || !title || !duration || !details || !certificate || !email || !imageUrl || !created_time) {
             return NextResponse.json({
                 success: false,
                 message: 'All fields are required'
@@ -17,8 +17,8 @@ export async function POST(req) {
 
 
         const [result] = await db.execute(
-            `INSERT INTO users_login.studentcourses (startDate, endDate, title, duration, details, certificate,imageUrl, created_time ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [startDate, endDate, title, duration, details, certificate, imageUrl, created_time]
+            `INSERT INTO users_login.studentcourses (startDate, endDate, title, duration, details, certificate, email,imageUrl, created_time ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [startDate, endDate, title, duration, details, certificate, email, imageUrl, created_time]
         );
 
         return NextResponse.json({

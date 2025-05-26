@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';  // Import the Head component for Next.js SEO
 import UploadedCourses from '../UploadedCourses/UploadedCourses';
 import Swal from 'sweetalert2';
+import useUserMatching from '@/hooks/useUserMatching';
 
 export default function Page() {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -15,9 +16,9 @@ export default function Page() {
     const [editIndex, setEditIndex] = useState(null); // To track which entry is being edited
     const [image, setImage] = useState(null);
 
+const {  matchedStudent } = useUserMatching();
 
-
-
+console.log(matchedStudent?.email)
     const resetForm = () => {
         setStartDate('');
         setEndDate('');
@@ -75,86 +76,6 @@ export default function Page() {
 
 
 
-    // const handleSubmit = async () => {
-    //     const created_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    //     const newEntry = { startDate, endDate, title, duration, details, certificate, created_time };
-
-    //     Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "Do you want to submit this data?",
-    //         icon: 'question',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, submit it!',
-    //         cancelButtonText: 'Cancel'
-    //     }).then(async (result) => {
-    //         if (result.isConfirmed) {
-    //             if (editIndex !== null) {
-    //                 const updatedEntries = [...entries];
-    //                 updatedEntries[editIndex] = newEntry;
-    //                 setEntries(updatedEntries);
-    //                 setEditIndex(null);
-
-    //                 Swal.fire({
-    //                     icon: 'success',
-    //                     title: 'Updated!',
-    //                     text: 'Data has been updated successfully.',
-    //                     timer: 2000,
-    //                     showConfirmButton: false,
-    //                 });
-    //             } else {
-    //                 try {
-    //                     const response = await fetch('/api/SUbmittedCourses', {
-    //                         method: 'POST',
-    //                         headers: {
-    //                             'Content-Type': 'application/json',
-    //                         },
-    //                         body: JSON.stringify(newEntry),
-    //                     });
-
-    //                     const data = await response.json();
-
-    //                     if (response.ok) {
-    //                         setEntries([...entries, newEntry]);
-    //                         resetForm();
-    //                         setIsSubmitted(true);
-
-    //                         Swal.fire({
-    //                             icon: 'success',
-    //                             title: 'Submitted!',
-    //                             text: 'Your data has been submitted successfully.',
-    //                             timer: 2000,
-    //                             showConfirmButton: false,
-    //                         });
-    //                     } else {
-    //                         Swal.fire({
-    //                             icon: 'error',
-    //                             title: 'Submission Failed',
-    //                             text: data.message || 'Something went wrong!',
-    //                         });
-    //                     }
-    //                 } catch (error) {
-    //                     console.error('Error:', error);
-    //                     Swal.fire({
-    //                         icon: 'error',
-    //                         title: 'Error',
-    //                         text: 'Something went wrong while submitting the data.',
-    //                     });
-    //                 }
-    //             }
-    //         } else {
-    //             Swal.fire({
-    //                 icon: 'info',
-    //                 title: 'Cancelled',
-    //                 text: 'Your submission has been cancelled.',
-    //                 timer: 1500,
-    //                 showConfirmButton: false,
-    //             });
-    //         }
-    //     });
-    // };
-
 
     const handleSubmit = async () => {
     const created_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -192,7 +113,8 @@ export default function Page() {
         duration,
         details,
         certificate,
-        imageUrl,       // <- add image URL to payload
+        email: matchedStudent.email,
+        imageUrl,       
         created_time,
     };
 
