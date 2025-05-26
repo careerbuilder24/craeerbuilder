@@ -113,7 +113,7 @@ console.log(matchedStudent?.email)
         duration,
         details,
         certificate,
-        email: matchedStudent.email,
+        email: matchedStudent?.email,
         imageUrl,       
         created_time,
     };
