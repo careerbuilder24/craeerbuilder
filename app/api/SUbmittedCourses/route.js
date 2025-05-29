@@ -17,7 +17,7 @@ export async function POST(req) {
 
 
         const [result] = await db.execute(
-            `INSERT INTO users_login.studentcourses (startDate, endDate, title, duration, details, certificate, email,imageUrl, created_time ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO users_login.studentcourses (startDate, endDate, title, duration, details, certificate, email, imageUrl, created_time ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [startDate, endDate, title, duration, details, certificate, email, imageUrl, created_time]
         );
 

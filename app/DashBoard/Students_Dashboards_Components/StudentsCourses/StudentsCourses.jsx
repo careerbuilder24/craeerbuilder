@@ -3,6 +3,9 @@ import Head from 'next/head';  // Import the Head component for Next.js SEO
 import UploadedCourses from '../UploadedCourses/UploadedCourses';
 import Swal from 'sweetalert2';
 import useUserMatching from '@/hooks/useUserMatching';
+import useMatchingUploadedCourses from '@/hooks/useMatchingUploadedCourses';
+import useRegistered from '@/hooks/useRegistered';
+import useUploadedCourse from '@/hooks/useUploadedCourse';
 
 export default function Page() {
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,9 +19,18 @@ export default function Page() {
     const [editIndex, setEditIndex] = useState(null); // To track which entry is being edited
     const [image, setImage] = useState(null);
 
-const {  matchedStudent } = useUserMatching();
+ const {matchedStudentProfilesEmail} = useMatchingUploadedCourses();
 
-console.log(matchedStudent?.email)
+//  const [register] = useRegistered(); // Array of registered users
+     const { UploadedCourse } = useUploadedCourse();
+
+// console.log(matchedCourses?.email)
+// console.log(register)
+// console.log(UploadedCourse)
+console.log(matchedStudentProfilesEmail)
+
+// const { UploadedCourse } = useUploadedCourse();
+
     const resetForm = () => {
         setStartDate('');
         setEndDate('');
@@ -79,15 +91,15 @@ console.log(matchedStudent?.email)
 
     const handleSubmit = async () => {
 
-               if (!matchedStudent?.email) {
-                    Swal.fire({
-                        title: 'Warning!',
-                        text: 'Please Fill Up your profile Edit.',
-                        icon: 'warning',
-                        confirmButtonText: 'OK'
-                    });
-                    return;
-                }
+            //    if (!matchedUploadedCourses?.data?.email) {
+            //         Swal.fire({
+            //             title: 'Warning!',
+            //             text: 'Please Fill Up your profile Edit.',
+            //             icon: 'warning',
+            //             confirmButtonText: 'OK'
+            //         });
+            //         return;
+            //     }
     const created_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     // Upload image to ImgBB first
@@ -123,7 +135,7 @@ console.log(matchedStudent?.email)
         duration,
         details,
         certificate,
-        email: matchedStudent?.email,
+         email: matchedStudentProfilesEmail?.email,
         imageUrl,       
         created_time,
     };
