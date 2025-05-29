@@ -19,7 +19,7 @@ export default function Page() {
     const [editIndex, setEditIndex] = useState(null); // To track which entry is being edited
     const [image, setImage] = useState(null);
 
- const {matchedStudentProfilesEmail} = useMatchingUploadedCourses();
+ const {matchedStudentProfilesEmail,matchedStudentProfiles} = useMatchingUploadedCourses();
 
 //  const [register] = useRegistered(); // Array of registered users
      const { UploadedCourse } = useUploadedCourse();
@@ -27,7 +27,7 @@ export default function Page() {
 // console.log(matchedCourses?.email)
 // console.log(register)
 // console.log(UploadedCourse)
-console.log(matchedStudentProfilesEmail)
+console.log(matchedStudentProfilesEmail?.email)
 
 // const { UploadedCourse } = useUploadedCourse();
 
@@ -91,15 +91,15 @@ console.log(matchedStudentProfilesEmail)
 
     const handleSubmit = async () => {
 
-            //    if (!matchedUploadedCourses?.data?.email) {
-            //         Swal.fire({
-            //             title: 'Warning!',
-            //             text: 'Please Fill Up your profile Edit.',
-            //             icon: 'warning',
-            //             confirmButtonText: 'OK'
-            //         });
-            //         return;
-            //     }
+               if (!matchedStudentProfilesEmail?.email) {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Please Fill Up your profile Edit.',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
     const created_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
     // Upload image to ImgBB first

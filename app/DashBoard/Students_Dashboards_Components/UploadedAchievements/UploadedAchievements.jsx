@@ -1,4 +1,3 @@
-
 import Swal from "sweetalert2";
 import useUserMatching from "@/hooks/useUserMatching";
 import { useState } from "react";
@@ -7,44 +6,6 @@ const UploadedAchievements = () => {
   const { matchedAchievements } = useUserMatching();
   const [achievements, setAchievements] = useState([]);
 
-
-
-
-
-//   const handleDeleteClick = (achievement) => {
-//   Swal.fire({
-//     title: "Are you sure?",
-//     text: "Do you really want to delete this achievement?",
-//     icon: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#d33",
-//     cancelButtonColor: "#3085d6",
-//     confirmButtonText: "Yes, delete it!",
-//   }).then(async (result) => {
-//     if (result.isConfirmed) {
-//       try {
-//         const res = await fetch("/api/achievements", {
-//           method: "DELETE",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify({ id: achievement.id }),
-//         });
-
-//         const data = await res.json();
-
-//         if (data.success) {
-//           Swal.fire("Deleted!", "The achievement has been deleted.", "success");
-//           // OPTIONAL: Refetch or remove from local list
-//         } else {
-//           Swal.fire("Error!", data.message, "error");
-//         }
-//       } catch (error) {
-//         Swal.fire("Error!", "Something went wrong", "error");
-//       }
-//     }
-//   });
-// };
 const handleDeleteClick = (achievement) => {
   Swal.fire({
     title: "Are you sure?",
