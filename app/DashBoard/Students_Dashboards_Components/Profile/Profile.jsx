@@ -7,6 +7,7 @@ import useRegistered from '@/hooks/useRegistered';
 import useStudentEditProfile from '@/hooks/useStudentEditProfile';
 import axios from 'axios';
 import Loader from '@/app/(with-navbar)/componenets/Loader/Loader';
+import { UserAuth } from '@/app/context/AuthContext';
 
 export default function Page() {
   const [image, setImage] = useState(null);
@@ -28,6 +29,7 @@ export default function Page() {
   const [register] = useRegistered();
   const [studentEditProfile] = useStudentEditProfile();
   const [newlySubmittedStudent, setNewlySubmittedStudent] = useState(null);
+   const {  ManualUser } = UserAuth();
 
   const fields = [
     { name: 'name', label: 'Name', type: 'text', placeholder: 'Enter Name' },
@@ -134,12 +136,15 @@ export default function Page() {
   }, [register]);
 
   // profile matched section for show specific data
-  const latestRegisteredUser = register?.data?.[register?.data?.length - 1];
-  const matchedStudent = studentEditProfile?.data?.find(
-    (profile) => profile.email === latestRegisteredUser?.email
-  );
+  // const latestRegisteredUser = register?.data?.[register?.data?.length - 1];
+const matchedStudent = studentEditProfile?.data?.find(
+  (profile) => profile.email === ManualUser?.email
+);
 
-  const finalStudentData = newlySubmittedStudent || matchedStudent;
+
+  const finalStudentData =  matchedStudent  || newlySubmittedStudent;
+  console.log(ManualUser)
+  console.log(matchedStudent)
 
   return (
     <>

@@ -17,6 +17,7 @@
 
 //     return { latestRegisteredUser, matchedStudent };
 // }
+import { UserAuth } from '@/app/context/AuthContext';
 import useAchievements from './useAchievements';
 import useRegistered from './useRegistered';
 import useStudentEditProfile from './useStudentEditProfile';
@@ -25,17 +26,26 @@ export default function useUserMatching() {
     const { Achievement, loading, error } = useAchievements();
     const [register] = useRegistered();
     const [studentEditProfile] = useStudentEditProfile();
+     const {  ManualUser } = UserAuth();
 
     const latestRegisteredUser = register?.data?.[register?.data?.length - 1];
+    // const matchedStudent = studentEditProfile?.data?.find(
+    //     (profile) => profile.email === latestRegisteredUser?.email
+    // );
+
+
+
     const matchedStudent = studentEditProfile?.data?.find(
-        (profile) => profile.email === latestRegisteredUser?.email
-    );
+  (profile) => profile.email === ManualUser?.email
+);
 
     // Filter achievements by matching email
     const matchedAchievements = Achievement?.data?.filter(
-        (achievement) => achievement.email === latestRegisteredUser?.email
+        (achievement) => achievement.email === ManualUser?.email
     );
 
+
+    
     return {
         latestRegisteredUser,
         matchedStudent,

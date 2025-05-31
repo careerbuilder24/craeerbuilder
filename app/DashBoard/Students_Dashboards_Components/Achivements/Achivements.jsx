@@ -21,7 +21,7 @@ export default function Achievements() {
 
 
     // console.log(Achievement); 
-    console.log(matchedStudent?.email); 
+    console.log(matchedStudent?.email, '..........matchedStudent'); 
 
     const handleImageUpload = (e) => {
 

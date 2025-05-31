@@ -49,7 +49,7 @@ const handleDeleteClick = (achievement) => {
   });
 };
 
-
+console.log(matchedAchievements)
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Uploaded Achievements</h2>
