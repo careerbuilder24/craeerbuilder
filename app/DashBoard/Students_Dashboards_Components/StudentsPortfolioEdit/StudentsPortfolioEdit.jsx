@@ -15,34 +15,65 @@ export default function Page() {
         setFile(e.target.files[0]);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newPortfolio = {
-            portfolioTitle,
-            webPortfolioLink,
-            file,
-            category,
-            description,
-            date,
-        };
+        // 1. Upload to ImgBB
+        let imageUrl = '';
+        if (file) {
+            const formData = new FormData();
+            formData.append('image', file);
 
-        if (editIndex !== null) {
-            const updatedData = [...portfolioData];
-            updatedData[editIndex] = newPortfolio;
-            setPortfolioData(updatedData);
-            setEditIndex(null);
-        } else {
-            setPortfolioData([newPortfolio, ...portfolioData]);
+            const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee'; // Replace with your real key
+
+            try {
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await res.json();
+                imageUrl = data.data.url;
+            } catch (err) {
+                console.error('ImgBB Upload Error:', err);
+                return alert('Image upload failed!');
+            }
         }
 
-        setPortfolioTitle('');
-        setWebPortfolioLink('');
-        setFile(null);
-        setCategory('');
-        setDescription('');
-        setDate('');
+        // 2. Send to your backend API (Next.js API route)
+        try {
+            const response = await fetch('/api/SavePortfolioAdded', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    portfolioTitle,
+                    webPortfolioLink,
+                    imageUrl,
+                    category,
+                    description,
+                    date,
+                }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert('Portfolio added successfully!');
+                setPortfolioData([{ portfolioTitle, webPortfolioLink, file, category, description, date }, ...portfolioData]);
+                setPortfolioTitle('');
+                setWebPortfolioLink('');
+                setFile(null);
+                setCategory('');
+                setDescription('');
+                setDate('');
+            } else {
+                alert('Database save failed!');
+            }
+        } catch (err) {
+            console.error('API Error:', err);
+        }
     };
+
 
     const handleEdit = (index) => {
         const portfolio = portfolioData[index];
@@ -61,7 +92,9 @@ export default function Page() {
     }, [portfolioTitle]);
 
     useEffect(() => {
-        // Update the meta description based on the portfolio title or use a default description
+        // Update the meta description based on th
+        // 
+        // e portfolio title or use a default description
         const metaDescription = portfolioTitle ? `Portfolio of ${portfolioTitle}` : "Manage your portfolio with ease. Add, edit, and organize your work for better visibility and presentation.";
 
         // Find the meta tag with name="description" and update its content

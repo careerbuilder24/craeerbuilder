@@ -27,6 +27,7 @@
 //   // output: 'export', // Uncomment if you're exporting static pages with `next export`
 // };
 
+
 // export default withBundleAnalyzer({
 //   enabled: process.env.ANALYZE === 'true',
 // })(nextConfig);
