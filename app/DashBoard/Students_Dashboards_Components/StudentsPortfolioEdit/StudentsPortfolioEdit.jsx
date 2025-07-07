@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import useMatchingUploadedPortfolio from '@/hooks/useMatchingUploadedPortfolio';
+import Swal from 'sweetalert2';
 
 export default function Page() {
     const [portfolioTitle, setPortfolioTitle] = useState('');
@@ -11,12 +13,27 @@ export default function Page() {
     const [portfolioData, setPortfolioData] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
 
+    const {matchedStudentPortfolioEmail} = useMatchingUploadedPortfolio()
+    // const {matchedStudentProfilesEmail} = useMatchingUploadedCourses()
+
+    
+    console.log(matchedStudentPortfolioEmail?.email)
+
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+            // if (!matchedStudentProfilesEmail?.email) {
+            //                 Swal.fire({
+            //                     title: 'Warning!',
+            //                     text: 'Please Fill Up your profile Edit.',
+            //                     icon: 'warning',
+            //                     confirmButtonText: 'OK'
+            //                 });
+            //                 return;
+            //             }
 
         // 1. Upload to ImgBB
         let imageUrl = '';
@@ -52,6 +69,7 @@ export default function Page() {
                     imageUrl,
                     category,
                     description,
+                     email: matchedStudentPortfolioEmail?.email,
                     date,
                 }),
             });

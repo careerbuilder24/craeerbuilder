@@ -1,0 +1,75 @@
+{
+  "America": [
+{
+  "id": 1,
+  "name": "Harvard University",
+  "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png",
+  "imageOne": "https://i.postimg.cc/L4Tqc7Zn/1725872309phpp-OZBKV.jpg",
+  "imageTwo": "https://i.postimg.cc/Cxqn7X9C/5a85ce766885c-image.jpg",
+  "imageThree": "https://i.postimg.cc/XYsFp9Mm/sdfg.jpg",
+  "imageFour": "https://i.postimg.cc/mrBq6VYM/052324-COM-NS-0654b.webp",
+  "tuition": "$50,000/year",
+  "review": 4.8,
+  "undergraduateStudents": 7000,
+  "postgraduateStudents": 15000,
+  "subjects": 3700,
+  "creditsRequired": 128,
+  "tuitionBreakdown": {
+    "undergraduate": "$50,000/year",
+    "postgraduate": "$52,000/year",
+    "averageTotalCost": "$200,000"
+  },
+  "descriptionOne": "Harvard University, one of the world’s most prestigious and historic institutions, enrolls approximately 7,000 undergraduate and 15,000 postgraduate students across various disciplines. With over 3,700 subjects offered, Harvard provides an expansive academic environment tailored to a wide range of intellectual pursuits. To graduate, students are typically required to complete 128 credits, ensuring a comprehensive and in-depth education.",
+  "descriptionTwo": "Harvard’s faculty includes Nobel laureates, Pulitzer Prize winners, and global leaders in research and innovation. The university fosters an atmosphere of intellectual rigor, where students are encouraged to challenge ideas, think critically, and collaborate across disciplines through cutting-edge academic programs and research initiatives.",
+  "descriptionThree": "International students at Harvard benefit from a welcoming and inclusive environment. Support services include orientation programs, language support, visa advising, and dedicated international student counselors. Harvard also offers need-based financial aid, making a world-class education more accessible regardless of background.",
+  "descriptionFour": "Harvard’s campus is located in Cambridge, Massachusetts, and features a blend of historic architecture and modern facilities. Students have access to 70+ libraries, advanced laboratories, innovation centers, and fitness facilities. The surrounding city offers rich cultural and professional opportunities, enhancing student life beyond academics.",
+  "descriptionFive": "Harvard boasts a powerful global alumni network of over 400,000 individuals, many of whom hold influential roles in government, business, academia, and science. Through internships, career fairs, mentoring programs, and alumni connections, students gain unparalleled opportunities for career development and global impact."
+},
+
+
+
+    { "id": 2, "name": "MIT", "logo": "https://i.postimg.cc/Y9v2Z4rr/mit.png", "tuition": "$53,000/year", "review": 4.9 },
+    { "id": 3, "name": "Stanford University", "logo": "https://i.postimg.cc/t49qyvqm/stanford.png", "tuition": "$52,000/year", "review": 4.7 },
+    { "id": 4, "name": "Yale University", "logo": "https://i.postimg.cc/0NF16Vvv/yala.png", "tuition": "$51,000/year", "review": 4.6 },
+    { "id": 5, "name": "Princeton University", "logo": "https://i.postimg.cc/SQwLZCSK/princeston.png", "tuition": "$49,000/year", "review": 4.7 },
+    { "id": 6, "name": "Columbia University", "logo": "https://i.postimg.cc/Dzg4DHn9/inl.png", "tuition": "$50,500/year", "review": 4.6 },
+    { "id": 7, "name": "University of Chicago", "logo": "https://i.postimg.cc/g2MnHRsp/mld.png", "tuition": "$51,000/year", "review": 4.5 },
+    { "id": 8, "name": "Caltech", "logo": "https://i.postimg.cc/QNkNq1Nz/oeikrj.png", "tuition": "$52,500/year", "review": 4.8 },
+    { "id": 9, "name": "Duke University", "logo": "https://i.postimg.cc/hjnWJZmt/wekj.png", "tuition": "$48,000/year", "review": 4.6 },
+    { "id": 10, "name": "University of Pennsylvania", "logo": "https://i.postimg.cc/2S843Drs/sergoi.png", "tuition": "$49,500/year", "review": 4.5 },
+    { "id": 11, "name": "Cornell University", "logo": "https://i.postimg.cc/28jq77Mv/rtgoij.png", "tuition": "$47,000/year", "review": 4.4 },
+    { "id": 12, "name": "Johns Hopkins University", "logo": "https://i.postimg.cc/Kv4GYqC9/rtoij.png", "tuition": "$50,000/year", "review": 4.6 }
+  ],
+  "Nepal": [
+    { "id": 13, "name": "Tribhuvan University", "logo": "https://i.postimg.cc/3wbR9MMD/safh.png", "tuition": "$1,500/year", "review": 4.0 },
+    { "id": 14, "name": "Kathmandu University", "logo": "https://i.postimg.cc/6pM55sp1/sdghoh.png", "tuition": "$2,000/year", "review": 4.2 },
+    { "id": 15, "name": "Purbanchal University", "logo": "https://i.postimg.cc/tJG9mpB7/sdfgjhb.png", "tuition": "$1,200/year", "review": 3.9 },
+    { "id": 16, "name": "Pokhara University", "logo": "https://i.postimg.cc/LsW7LHbD/sddfh.png", "tuition": "$1,800/year", "review": 4.0 }
+  ],
+  "Canada": [
+    { "id": 17, "name": "University of Toronto", "logo": "https://i.postimg.cc/CM7p9r0k/wrhoi.png", "tuition": "$45,000/year", "review": 4.6 },
+    { "id": 18, "name": "McGill University", "logo": "https://i.postimg.cc/HL96jKBt/eroh.png", "tuition": "$38,000/year", "review": 4.5 },
+    { "id": 19, "name": "University of British Columbia", "logo": "https://i.postimg.cc/YSM3cRML/ADf.png", "tuition": "$42,000/year", "review": 4.4 },
+    { "id": 20, "name": "University of Alberta", "logo": "https://i.postimg.cc/gjV3rZVG/efrgju.png", "tuition": "$35,000/year", "review": 4.3 }
+  ],
+  "Thailand": [
+    { "id": 21, "name": "Chulalongkorn University", "logo": "https://i.postimg.cc/02mtSbNn/sdfgh.png", "tuition": "$3,000/year", "review": 4.4 },
+    { "id": 22, "name": "Mahidol University", "logo": "https://i.postimg.cc/28c548Xq/sdfhsdf.png", "tuition": "$3,200/year", "review": 4.3 }
+  ],
+  "Japan": [
+    { "id": 23, "name": "University of Tokyo", "logo": "https://i.postimg.cc/5tQQKRPX/asdhadf.png", "tuition": "$4,500/year", "review": 4.8 },
+    { "id": 24, "name": "Kyoto University", "logo": "https://i.postimg.cc/yxcwfsRL/asfha.png", "tuition": "$4,000/year", "review": 4.6 }
+  ],
+  "Mexico": [
+    { "id": 25, "name": "UNAM", "logo": "https://i.postimg.cc/rmmSGGBB/Escudo-UNAM-escalable.png", "tuition": "$1,000/year", "review": 4.5 },
+    { "id": 26, "name": "Monterrey Institute of Technology", "logo": "https://i.postimg.cc/Ss2GF7gW/dj.png", "tuition": "$8,000/year", "review": 4.4 }
+  ],
+  "London": [
+    { "id": 27, "name": "University College London", "logo": "https://i.postimg.cc/Twx53V08/sergjoger.png", "tuition": "$35,000/year", "review": 4.7 },
+    { "id": 28, "name": "King's College London", "logo": "https://i.postimg.cc/ZqD2Rq3M/dfgj.png", "tuition": "$34,000/year", "review": 4.6 }
+  ],
+  "Denmark": [
+    { "id": 29, "name": "University of Copenhagen", "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png", "tuition": "$15,000/year", "review": 4.5 },
+    { "id": 30, "name": "Aarhus University", "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png", "tuition": "$14,000/year", "review": 4.4 }
+  ]
+}

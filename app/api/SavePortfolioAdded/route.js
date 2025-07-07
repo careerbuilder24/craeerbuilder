@@ -11,6 +11,7 @@ export async function POST(req) {
       imageUrl,
       category,
       description,
+      email,
       date,
     } = body;
 
@@ -20,6 +21,7 @@ export async function POST(req) {
       !imageUrl ||
       !category ||
       !description ||
+      !email ||
       !date
     ) {
       return NextResponse.json(
@@ -30,9 +32,9 @@ export async function POST(req) {
 
     const [result] = await db.execute(
       `INSERT INTO users_login.studentportfolioadd 
-      (portfolioTitle, webPortfolioLink, file, category, description, date) 
-      VALUES (?, ?, ?, ?, ?, ?)`,
-      [portfolioTitle, webPortfolioLink, imageUrl, category, description, date]
+      (portfolioTitle, webPortfolioLink, file, category, description, email, date) 
+      VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [portfolioTitle, webPortfolioLink, imageUrl, category, description,email,date]
     );
 
     return NextResponse.json(
@@ -50,20 +52,20 @@ export async function POST(req) {
 
 // Get method 
 export async function GET() {
-    try {
-        const query = 'SELECT * FROM users_login.studentportfolioadd';
-        const [row] = await db.execute(query);
-        return NextResponse.json({
-            success: true,
-            data: row,
-        }, { status: 200 })
-    } catch (error) {
-        console.error('error of getting data', error);
-        return NextResponse.json({
-            success: false,
-            message: 'Error for Get Data',
-            error: error.message
-        }, { status: 500 })
-    }
+  try {
+    const query = 'SELECT * FROM users_login.studentportfolioadd';
+    const [row] = await db.execute(query);
+    return NextResponse.json({
+      success: true,
+      data: row,
+    }, { status: 200 })
+  } catch (error) {
+    console.error('error of getting data', error);
+    return NextResponse.json({
+      success: false,
+      message: 'Error for Get Data',
+      error: error.message
+    }, { status: 500 })
+  }
 }
 
