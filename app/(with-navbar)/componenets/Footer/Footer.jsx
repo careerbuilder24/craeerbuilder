@@ -91,7 +91,7 @@ export default function Footer() {
         </div>
 
             <div className='bg-[#232256] text-center text-xs py-3 text-white'>
-                <h1>Copyright © 2024 All Rights Reserved By Career Builder</h1>
+                <h1>Copyright © 2025 All Rights Reserved By Career Builder</h1>
             </div>
         </>
     );
