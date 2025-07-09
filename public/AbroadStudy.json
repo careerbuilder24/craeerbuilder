@@ -1,75 +1,527 @@
 {
   "America": [
-{
-  "id": 1,
-  "name": "Harvard University",
-  "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png",
-  "imageOne": "https://i.postimg.cc/L4Tqc7Zn/1725872309phpp-OZBKV.jpg",
-  "imageTwo": "https://i.postimg.cc/Cxqn7X9C/5a85ce766885c-image.jpg",
-  "imageThree": "https://i.postimg.cc/XYsFp9Mm/sdfg.jpg",
-  "imageFour": "https://i.postimg.cc/mrBq6VYM/052324-COM-NS-0654b.webp",
-  "tuition": "$50,000/year",
-  "review": 4.8,
-  "undergraduateStudents": 7000,
-  "postgraduateStudents": 15000,
-  "subjects": 3700,
-  "creditsRequired": 128,
-  "tuitionBreakdown": {
-    "undergraduate": "$50,000/year",
-    "postgraduate": "$52,000/year",
-    "averageTotalCost": "$200,000"
-  },
-  "descriptionOne": "Harvard University, one of the world’s most prestigious and historic institutions, enrolls approximately 7,000 undergraduate and 15,000 postgraduate students across various disciplines. With over 3,700 subjects offered, Harvard provides an expansive academic environment tailored to a wide range of intellectual pursuits. To graduate, students are typically required to complete 128 credits, ensuring a comprehensive and in-depth education.",
-  "descriptionTwo": "Harvard’s faculty includes Nobel laureates, Pulitzer Prize winners, and global leaders in research and innovation. The university fosters an atmosphere of intellectual rigor, where students are encouraged to challenge ideas, think critically, and collaborate across disciplines through cutting-edge academic programs and research initiatives.",
-  "descriptionThree": "International students at Harvard benefit from a welcoming and inclusive environment. Support services include orientation programs, language support, visa advising, and dedicated international student counselors. Harvard also offers need-based financial aid, making a world-class education more accessible regardless of background.",
-  "descriptionFour": "Harvard’s campus is located in Cambridge, Massachusetts, and features a blend of historic architecture and modern facilities. Students have access to 70+ libraries, advanced laboratories, innovation centers, and fitness facilities. The surrounding city offers rich cultural and professional opportunities, enhancing student life beyond academics.",
-  "descriptionFive": "Harvard boasts a powerful global alumni network of over 400,000 individuals, many of whom hold influential roles in government, business, academia, and science. Through internships, career fairs, mentoring programs, and alumni connections, students gain unparalleled opportunities for career development and global impact."
-},
+    {
+      "id": 1,
+      "name": "Harvard University",
+      "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png",
+      "imageOne": "https://i.postimg.cc/L4Tqc7Zn/1725872309phpp-OZBKV.jpg",
+      "imageTwo": "https://i.postimg.cc/Cxqn7X9C/5a85ce766885c-image.jpg",
+      "imageThree": "https://i.postimg.cc/XYsFp9Mm/sdfg.jpg",
+      "imageFour": "https://i.postimg.cc/mrBq6VYM/052324-COM-NS-0654b.webp",
+      "tuition": "$50,000/year",
+      "review": 4.8,
+      "undergraduateStudents": 7000,
+      "postgraduateStudents": 15000,
+      "subjects": 3700,
+      "creditsRequired": 128,
+      "tuitionBreakdown": {
+        "undergraduate": "$50,000/year",
+        "postgraduate": "$52,000/year",
+        "averageTotalCost": "$200,000"
+      },
+      "descriptionOne": "Harvard University, one of the world’s most prestigious and historic institutions, enrolls approximately 7,000 undergraduate and 15,000 postgraduate students across various disciplines. With over 3,700 subjects offered, Harvard provides an expansive academic environment tailored to a wide range of intellectual pursuits. To graduate, students are typically required to complete 128 credits, ensuring a comprehensive and in-depth education.",
+      "descriptionTwo": "Harvard’s faculty includes Nobel laureates, Pulitzer Prize winners, and global leaders in research and innovation. The university fosters an atmosphere of intellectual rigor, where students are encouraged to challenge ideas, think critically, and collaborate across disciplines through cutting-edge academic programs and research initiatives.",
+      "descriptionThree": "International students at Harvard benefit from a welcoming and inclusive environment. Support services include orientation programs, language support, visa advising, and dedicated international student counselors. Harvard also offers need-based financial aid, making a world-class education more accessible regardless of background.",
+      "descriptionFour": "Harvard’s campus is located in Cambridge, Massachusetts, and features a blend of historic architecture and modern facilities. Students have access to 70+ libraries, advanced laboratories, innovation centers, and fitness facilities. The surrounding city offers rich cultural and professional opportunities, enhancing student life beyond academics.",
+      "descriptionFive": "Harvard boasts a powerful global alumni network of over 400,000 individuals, many of whom hold influential roles in government, business, academia, and science. Through internships, career fairs, mentoring programs, and alumni connections, students gain unparalleled opportunities for career development and global impact."
+    },
 
+    {
+      "id": 2,
+      "name": "Massachusetts Institute of Technology (MIT)",
+      "logo": "https://i.postimg.cc/Y9v2Z4rr/mit.png",
+      "imageOne": "https://i.postimg.cc/sDkSS319/sfgjgr.png",
+      "imageTwo": "https://i.postimg.cc/HnJzY3Pp/dfgjert.jpg",
+      "imageThree": "https://i.postimg.cc/xdchLqnN/wej.jpg",
+      "imageFour": "https://i.postimg.cc/cCqpxZqg/8491946029-c24bd86dec-b-0.jpg",
+      "tuition": "$53,790/year",
+      "review": 4.9,
+      "undergraduateStudents": 4600,
+      "postgraduateStudents": 7000,
+      "subjects": 2300,
+      "creditsRequired": 180,
+      "tuitionBreakdown": {
+        "undergraduate": "$53,790/year",
+        "postgraduate": "$59,850/year",
+        "averageTotalCost": "$240,000"
+      },
+      "descriptionOne": "MIT is a world-renowned institution located in Cambridge, Massachusetts, specializing in science, technology, engineering, and mathematics. With around 4,600 undergraduates and 7,000 graduate students, MIT offers over 2,300 subjects and requires 180 credits to graduate from its rigorous undergraduate programs.",
+      "descriptionTwo": "The Institute is home to over 80 Nobel laureates and numerous leaders in innovation. MIT emphasizes hands-on learning and research, encouraging students to explore real-world challenges through project-based learning, entrepreneurship, and interdisciplinary collaboration.",
+      "descriptionThree": "MIT welcomes international students with robust support systems including visa services, English language resources, cultural adjustment programs, and global student networks. Its need-blind admissions policy ensures access regardless of financial background, with generous financial aid available.",
+      "descriptionFour": "MIT’s urban campus integrates modern facilities with historic buildings and cutting-edge laboratories like the MIT Media Lab and the Computer Science and Artificial Intelligence Laboratory (CSAIL). Cambridge and nearby Boston offer students diverse professional and cultural experiences.",
+      "descriptionFive": "With an alumni base that includes astronauts, tech CEOs, Nobel laureates, and government leaders, MIT offers unparalleled global networking. Career support, innovation hubs, startup accelerators, and research opportunities make MIT a launching pad for global impact."
+    },
 
+    {
+      "id": 3,
+      "name": "Stanford University",
+      "logo": "https://i.postimg.cc/t49qyvqm/stanford.png",
+      "imageOne": "https://i.postimg.cc/RVTV7ZxK/Universidade-de-Stanford.png",
+      "imageTwo": "https://i.postimg.cc/9Mp2dG2H/AP120617025339-2e16d0ba-fill-735x490.jpg",
+      "imageThree": "https://i.postimg.cc/T14Z00HF/qe.webp",
+      "imageFour": "https://i.postimg.cc/pTV4t4w3/asdhas.webp",
+      "tuition": "$52,857/year",
+      "review": 4.7,
+      "undergraduateStudents": 7200,
+      "postgraduateStudents": 9600,
+      "subjects": 2900,
+      "creditsRequired": 180,
+      "tuitionBreakdown": {
+        "undergraduate": "$52,857/year",
+        "postgraduate": "$57,210/year",
+        "averageTotalCost": "$220,000"
+      },
+      "descriptionOne": "Stanford University, located in Stanford, California, is one of the most prestigious research institutions globally. With a student body of over 7,000 undergraduates and nearly 10,000 postgraduates, Stanford offers a rigorous and diverse academic experience across 7 schools and more than 2,900 courses.",
+      "descriptionTwo": "Stanford is renowned for its faculty, which includes Nobel laureates, Fields Medalists, and MacArthur Fellows. The university emphasizes interdisciplinary collaboration, entrepreneurship, and innovation, particularly through centers like the Stanford d.school and Hoover Institution.",
+      "descriptionThree": "International students at Stanford are supported by the Bechtel International Center, which provides orientation, visa advising, and community events. Stanford also meets 100% of demonstrated financial need for all admitted students, including international applicants.",
+      "descriptionFour": "The 8,180-acre Stanford campus is among the largest in the U.S., featuring cutting-edge research labs, libraries, art museums, athletic facilities, and Silicon Valley proximity, which enhances professional networking and tech-driven learning opportunities.",
+      "descriptionFive": "Stanford’s alumni network includes influential leaders in technology, politics, academia, and business. Notable alumni include the founders of Google, Yahoo, and Hewlett-Packard. Career services and alumni mentorship programs provide extensive post-graduation pathways and global impact opportunities."
+    },
 
-    { "id": 2, "name": "MIT", "logo": "https://i.postimg.cc/Y9v2Z4rr/mit.png", "tuition": "$53,000/year", "review": 4.9 },
-    { "id": 3, "name": "Stanford University", "logo": "https://i.postimg.cc/t49qyvqm/stanford.png", "tuition": "$52,000/year", "review": 4.7 },
-    { "id": 4, "name": "Yale University", "logo": "https://i.postimg.cc/0NF16Vvv/yala.png", "tuition": "$51,000/year", "review": 4.6 },
-    { "id": 5, "name": "Princeton University", "logo": "https://i.postimg.cc/SQwLZCSK/princeston.png", "tuition": "$49,000/year", "review": 4.7 },
-    { "id": 6, "name": "Columbia University", "logo": "https://i.postimg.cc/Dzg4DHn9/inl.png", "tuition": "$50,500/year", "review": 4.6 },
-    { "id": 7, "name": "University of Chicago", "logo": "https://i.postimg.cc/g2MnHRsp/mld.png", "tuition": "$51,000/year", "review": 4.5 },
-    { "id": 8, "name": "Caltech", "logo": "https://i.postimg.cc/QNkNq1Nz/oeikrj.png", "tuition": "$52,500/year", "review": 4.8 },
-    { "id": 9, "name": "Duke University", "logo": "https://i.postimg.cc/hjnWJZmt/wekj.png", "tuition": "$48,000/year", "review": 4.6 },
-    { "id": 10, "name": "University of Pennsylvania", "logo": "https://i.postimg.cc/2S843Drs/sergoi.png", "tuition": "$49,500/year", "review": 4.5 },
-    { "id": 11, "name": "Cornell University", "logo": "https://i.postimg.cc/28jq77Mv/rtgoij.png", "tuition": "$47,000/year", "review": 4.4 },
-    { "id": 12, "name": "Johns Hopkins University", "logo": "https://i.postimg.cc/Kv4GYqC9/rtoij.png", "tuition": "$50,000/year", "review": 4.6 }
+    {
+      "id": 4,
+      "name": "Yale University",
+      "logo": "https://i.postimg.cc/0NF16Vvv/yala.png",
+      "imageOne": "https://i.postimg.cc/vTJpFydM/asdfhu.jpg",
+      "imageTwo": "https://i.postimg.cc/8kR3s2DF/swefhea.jpg",
+      "imageThree": "https://i.postimg.cc/66fjBCLn/asdkasd.avif",
+      "imageFour": "https://i.postimg.cc/7YC2Kk6h/asdjad.webp",
+      "tuition": "$59,950/year",
+      "review": 4.8,
+      "undergraduateStudents": 6300,
+      "postgraduateStudents": 7700,
+      "subjects": 2300,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$59,950/year",
+        "postgraduate": "$46,900/year",
+        "averageTotalCost": "$240,000"
+      },
+      "descriptionOne": "Yale University, located in New Haven, Connecticut, is one of the oldest and most prestigious Ivy League institutions in the United States. Yale offers a deeply immersive liberal arts education with over 2,300 courses across a wide array of disciplines.",
+      "descriptionTwo": "Yale’s faculty includes Pulitzer Prize winners, Nobel Laureates, and leading researchers. The university fosters a culture of academic excellence, critical thinking, and global leadership through its colleges, institutes, and renowned faculty mentorship.",
+      "descriptionThree": "International students at Yale benefit from the Office of International Students and Scholars (OISS), which offers visa support, cultural programs, and career guidance. Yale also provides generous need-based financial aid to admitted students from all backgrounds.",
+      "descriptionFour": "The Yale campus spans 373 acres and is rich in historic Gothic architecture, world-class libraries, art galleries, performance spaces, and research centers. Students enjoy a vibrant campus life with over 500 student organizations and cultural events.",
+      "descriptionFive": "Yale alumni include U.S. Presidents, Supreme Court Justices, Nobel laureates, and global leaders. The university's powerful alumni network, combined with dedicated career services, offers students unparalleled opportunities for internships, research, and employment worldwide."
+    },
+    {
+      "id": 5,
+      "name": "Princeton University",
+      "logo": "https://i.postimg.cc/SQwLZCSK/princeston.png",
+      "imageOne": "https://i.postimg.cc/nMfLh6tY/swdwfhwd.jpg",
+      "imageTwo": "https://i.postimg.cc/1t646prK/Incoming-Frosh-HRES-SITE-Aug-16.jpg",
+      "imageThree": "https://i.postimg.cc/zGBBpmkv/20220423-SK-Porch-Fest-042322-0135.jpg",
+      "imageFour": "https://i.postimg.cc/8PCNgRfn/Princeton-University-Halls-e1725907290805.jpg",
+      "tuition": "$49,000/year",
+      "review": 4.7,
+      "undergraduateStudents": 5400,
+      "postgraduateStudents": 3100,
+      "subjects": 2100,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$49,000/year",
+        "postgraduate": "$53,890/year",
+        "averageTotalCost": "$200,000"
+      },
+      "descriptionOne": "Princeton University, located in Princeton, New Jersey, is a member of the Ivy League and one of the oldest universities in the U.S. It is renowned for its commitment to undergraduate teaching, top-tier research, and distinguished faculty.",
+      "descriptionTwo": "The university boasts a strong academic tradition with small class sizes and a low student-to-faculty ratio. Faculty includes Nobel laureates, MacArthur Fellows, and prominent scholars across disciplines such as physics, public policy, economics, and literature.",
+      "descriptionThree": "International students at Princeton receive dedicated support through the Davis International Center, which provides visa guidance, cultural orientation, and academic assistance. Princeton offers generous financial aid and meets 100% of demonstrated financial need without loans.",
+      "descriptionFour": "The scenic 600-acre campus features Collegiate Gothic architecture, world-class libraries, and cutting-edge research facilities. The university’s residential college system creates a close-knit student community and fosters a rich campus life.",
+      "descriptionFive": "Princeton’s alumni network includes U.S. presidents, top scientists, authors, and global leaders. Its Center for Career Development and strong alumni connections help students secure internships, fellowships, and top-tier positions after graduation."
+    },
+    {
+      "id": 6,
+      "name": "Columbia University",
+      "logo": "https://i.postimg.cc/Dzg4DHn9/inl.png",
+      "imageOne": "https://i.postimg.cc/FHdBTc9Y/columbia-university-ny-200227120846001.jpg",
+      "imageTwo": "https://i.postimg.cc/05XnhQXD/ugf.avif",
+      "imageThree": "https://i.postimg.cc/vZFrd6rg/0x0.webp",
+      "imageFour": "https://i.postimg.cc/5ydSKYb4/fyuh.webp",
+      "tuition": "$50,500/year",
+      "review": 4.6,
+      "undergraduateStudents": 8900,
+      "postgraduateStudents": 21000,
+      "subjects": 3100,
+      "creditsRequired": 124,
+      "tuitionBreakdown": {
+        "undergraduate": "$50,500/year",
+        "postgraduate": "$63,600/year",
+        "averageTotalCost": "$240,000"
+      },
+      "descriptionOne": "Columbia University, located in New York City, is an Ivy League institution known for its academic rigor, research excellence, and vibrant urban campus. Established in 1754, it is the oldest university in New York State and a global leader in higher education.",
+      "descriptionTwo": "Columbia's faculty includes Pulitzer Prize winners, Nobel Laureates, and globally recognized experts. The university fosters innovation and scholarship across a wide spectrum of disciplines including journalism, business, law, medicine, and the arts.",
+      "descriptionThree": "International students are supported through Columbia’s International Students and Scholars Office (ISSO), offering visa services, cultural programs, and career workshops. Columbia is also committed to meeting full financial need for all admitted students.",
+      "descriptionFour": "The campus is located in the heart of Manhattan, offering students access to unparalleled professional, cultural, and social opportunities. Facilities include historic libraries, art centers, tech labs, and student residences integrated into city life.",
+      "descriptionFive": "Columbia alumni include U.S. presidents, Supreme Court justices, world leaders, and innovators in every field. With a powerful alumni network and global career services, Columbia graduates are highly sought after across industries worldwide."
+    },
+    {
+      "id": 7,
+      "name": "University of Chicago",
+      "logo": "https://i.postimg.cc/g2MnHRsp/mld.png",
+      "imageOne": "https://i.postimg.cc/D0v8zncQ/i8gy.jpg",
+      "imageTwo": "https://i.postimg.cc/hjrt6NqX/ugvfgu.jpg",
+      "imageThree": "https://i.postimg.cc/0QWqpvs0/ugyfyv.jpg",
+      "imageFour": "https://i.postimg.cc/sX0tMJYn/ugcfyg.jpg",
+      "tuition": "$51,744/year",
+      "review": 4.5,
+      "undergraduateStudents": 7000,
+      "postgraduateStudents": 10000,
+      "subjects": 2200,
+      "creditsRequired": 180,
+      "tuitionBreakdown": {
+        "undergraduate": "$51,744/year",
+        "postgraduate": "$61,548/year",
+        "averageTotalCost": "$210,000"
+      },
+      "descriptionOne": "The University of Chicago, located in the Hyde Park neighborhood of Chicago, Illinois, is a globally respected research university known for academic rigor and intellectual exploration. It enrolls about 7,000 undergraduate and 10,000 graduate students, offering over 2,200 courses across a wide range of disciplines.",
+      "descriptionTwo": "The university is renowned for its influential faculty, including numerous Nobel laureates and MacArthur Fellows. UChicago emphasizes critical thinking, interdisciplinary learning, and the Core Curriculum, which ensures a strong foundation in liberal arts and sciences.",
+      "descriptionThree": "International students are supported through the Office of International Affairs, offering visa assistance, academic support, and integration programs. UChicago is committed to need-based financial aid and offers generous scholarships, regardless of nationality.",
+      "descriptionFour": "UChicago’s gothic-style campus blends historic architecture with modern facilities like the Joe and Rika Mansueto Library. Located in Chicago, students benefit from a vibrant city with access to global firms, research opportunities, and cultural institutions.",
+      "descriptionFive": "The university boasts a strong alumni network of influential economists, scientists, and public leaders. Career advancement is supported through the Office of Career Advancement, internship grants, mentorship programs, and global alumni connections."
+    },
+
+    {
+      "id": 8,
+      "name": "California Institute of Technology (Caltech)",
+      "logo": "https://i.postimg.cc/QNkNq1Nz/oeikrj.png",
+      "imageOne": "https://i.postimg.cc/J4bM29cM/tfrdtfc.jpg",
+      "imageTwo": "https://i.postimg.cc/QtGr3D8J/dfgjsfg.webp",
+      "imageThree": "https://i.postimg.cc/bwW7xPtf/ygtv.webp",
+      "imageFour": "https://i.postimg.cc/7hZtvt2N/yvgyb.jpg",
+      "tuition": "$52,506/year",
+      "review": 4.8,
+      "undergraduateStudents": 987,
+      "postgraduateStudents": 1300,
+      "subjects": 950,
+      "creditsRequired": 486,
+      "tuitionBreakdown": {
+        "undergraduate": "$52,506/year",
+        "postgraduate": "$60,819/year",
+        "averageTotalCost": "$215,000"
+      },
+      "descriptionOne": "Caltech, located in Pasadena, California, is one of the world's leading science and engineering institutes. With fewer than 1,000 undergraduate students and approximately 1,300 graduate students, Caltech offers a highly focused and rigorous academic experience.",
+      "descriptionTwo": "The institute is home to 40 Nobel laureates and is renowned for groundbreaking research in physics, astronomy, engineering, and computer science. Students work closely with faculty in small classes and research labs, promoting intense academic mentorship and collaboration.",
+      "descriptionThree": "Caltech supports international students with services such as visa advising, cultural adjustment programs, and academic support. Despite its size, Caltech is committed to meeting 100% of demonstrated financial need for all admitted students, including international applicants.",
+      "descriptionFour": "The 124-acre campus features state-of-the-art facilities like the Jet Propulsion Laboratory (operated by NASA), Kavli Nanoscience Institute, and Seismological Laboratory. Its location in Southern California also provides access to tech hubs and aerospace industries.",
+      "descriptionFive": "Caltech alumni include astronauts, tech innovators, and Nobel Prize winners. Through strong ties with research institutions and industries, and a powerful alumni network, Caltech students find abundant opportunities in academia, space exploration, and high-tech sectors."
+    },
+
+    {
+      "id": 9,
+      "name": "Duke University",
+      "logo": "https://i.postimg.cc/hjnWJZmt/wekj.png",
+      "imageOne": "https://i.postimg.cc/TPQPHZxp/gyvgyvb.jpg",
+      "imageTwo": "https://i.postimg.cc/KYs18dHC/dkjdsgh.avif",
+      "imageThree": "https://i.postimg.cc/Gm3c9b1L/sdefgj.webp",
+      "imageFour": "https://i.postimg.cc/GhKCW6TZ/fsegij.jpg",
+      "tuition": "$48,176/year",
+      "review": 4.6,
+      "undergraduateStudents": 6700,
+      "postgraduateStudents": 9800,
+      "subjects": 2100,
+      "creditsRequired": 136,
+      "tuitionBreakdown": {
+        "undergraduate": "$48,176/year",
+        "postgraduate": "$60,000/year (varies by program)",
+        "averageTotalCost": "$200,000"
+      },
+      "descriptionOne": "Duke University, located in Durham, North Carolina, is a prestigious private research university known for academic excellence, vibrant campus life, and a strong focus on interdisciplinary education. It enrolls approximately 6,700 undergraduate and 9,800 graduate and professional students.",
+      "descriptionTwo": "Duke’s faculty includes globally recognized scholars and researchers across disciplines such as law, business, engineering, and medicine. Students benefit from small class sizes, top-tier facilities, and unique programs such as DukeEngage and Bass Connections that combine academics with real-world impact.",
+      "descriptionThree": "International students at Duke are supported by the Duke International Student Center, which offers orientation, visa support, English language resources, and intercultural events. Duke provides both merit- and need-based financial aid, including aid for international applicants.",
+      "descriptionFour": "The 8,600-acre campus features Gothic architecture, the Duke Forest, and top-tier research centers, including the Duke Medical Center and Pratt School of Engineering. Durham’s vibrant tech and startup scene complements academic life with real-world opportunities.",
+      "descriptionFive": "Duke has a robust alumni network with leaders in law, healthcare, tech, and public service. Through the Career Center, alumni mentorship, and global internships, students benefit from a highly connected professional pipeline across industries and continents."
+    },
+
+    {
+      "id": 10,
+      "name": "University of Pennsylvania (UPenn)",
+      "logo": "https://i.postimg.cc/2S843Drs/sergoi.png",
+      "imageOne": "https://i.postimg.cc/0jZB4RXn/sefghsdfg.png",
+      "imageTwo": "https://i.postimg.cc/D0YtZ3QZ/esgoe.jpg",
+      "imageThree": "https://i.postimg.cc/0NxH9Ngn/xfxgdnjfgh.jpg",
+      "imageFour": "https://i.postimg.cc/nzhRQwhQ/gjhs.jpg",
+      "tuition": "$49,500/year",
+      "review": 4.5,
+      "undergraduateStudents": 10400,
+      "postgraduateStudents": 13000,
+      "subjects": 3200,
+      "creditsRequired": 128,
+      "tuitionBreakdown": {
+        "undergraduate": "$49,500/year",
+        "postgraduate": "$58,000/year (varies by program)",
+        "averageTotalCost": "$210,000"
+      },
+      "descriptionOne": "The University of Pennsylvania, located in Philadelphia, is an Ivy League institution known for blending liberal arts and professional education. With about 10,400 undergraduate and 13,000 graduate students, UPenn offers over 3,200 courses across 12 schools including the Wharton School, one of the world’s top business schools. The University of Pennsylvania has over 10,400 undergraduates, 11,000 graduate/professional student, and over 2,500 standing faculty members.",
+      "descriptionTwo": "UPenn is home to award-winning faculty including Nobel laureates, MacArthur Fellows, and leaders in research and innovation. Its interdisciplinary approach encourages students to combine fields like business and technology, or law and healthcare, through flexible dual-degree programs.",
+      "descriptionThree": "The university supports international students through the Office of International Student and Scholar Services, providing visa assistance, orientation, and cultural integration. Financial aid is available to all admitted students, including need-blind admissions for U.S. citizens and generous packages for international applicants.",
+      "descriptionFour": "UPenn’s urban campus spans over 299 acres and features historic buildings, cutting-edge labs, world-class libraries, and medical and research centers. Located in the heart of Philadelphia, students have access to rich professional, cultural, and networking opportunities.",
+      "descriptionFive": "With over 300,000 alumni worldwide, UPenn’s global network includes leaders in finance, politics, healthcare, law, and tech. Resources like Penn Career Services, Wharton’s global internship programs, and alumni mentorships ensure strong career pathways after graduation."
+    },
+
+    {
+      "id": 11,
+      "name": "Cornell University",
+      "logo": "https://i.postimg.cc/28jq77Mv/rtgoij.png",
+      "imageOne": "https://i.postimg.cc/7Yzk6bcr/hhn.webp",
+      "imageTwo": "https://i.postimg.cc/vDFC9LjF/uihfhug.avif",
+      "imageThree": "https://i.postimg.cc/QC00Ng3J/yufg.jpg",
+      "imageFour": "https://i.postimg.cc/59h5cNFR/sergij.jpg",
+      "tuition": "$47,000/year",
+      "review": 4.4,
+      "undergraduateStudents": 16128,
+      "postgraduateStudents": 10665,
+      "subjects": 3100,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$47,000–$71,000/year (varies by college)",
+        "postgraduate": "$29,500–$58,000/year (varies by program)",
+        "averageTotalCost": "$95,000/year including housing & fees"
+      },
+      "descriptionOne": "Cornell University, located in Ithaca, New York, is a member of the Ivy League and known for its unique mix of private and public colleges. With approximately 16,128 undergraduate and 10,665 graduate students, Cornell offers over 3,100 subjects across 100+ academic departments. The university emphasizes both liberal arts and applied sciences with colleges like Arts & Sciences, Engineering, and the SC Johnson College of Business.",
+      "descriptionTwo": "Cornell is home to world-renowned faculty including Nobel Prize winners, MacArthur Fellows, and global research leaders. Students can engage in interdisciplinary learning, real-world projects, and hands-on research through centers like Cornell Tech in New York City and the Cornell Lab of Ornithology.",
+      "descriptionThree": "International students are supported by Cornell’s Office of Global Learning, which provides visa guidance, orientation, and integration programs. Cornell meets 100% of demonstrated financial need for all admitted students, and admission for U.S. students is need-blind.",
+      "descriptionFour": "Cornell’s main campus spans over 2,300 acres overlooking Cayuga Lake in upstate New York. It features state-of-the-art labs, historic buildings, botanical gardens, and natural areas. Students benefit from both a vibrant college town and access to cutting-edge academic resources.",
+      "descriptionFive": "With more than 250,000 alumni worldwide, Cornell’s network includes influential figures in science, business, government, and education. Through Cornell Career Services, alumni mentoring, and industry partnerships, students are well-positioned for success in global careers."
+    },
+
+    {
+      "id": 12,
+      "name": "Johns Hopkins University",
+      "logo": "https://i.postimg.cc/Kv4GYqC9/rtoij.png",
+      "imageOne": "https://i.postimg.cc/vTYsDd1F/sdfgouhsdf.webp",
+      "imageTwo": "https://i.postimg.cc/fyLr6WtL/efgoiwerg.jpg",
+      "imageThree": "https://i.postimg.cc/VvdKK7p0/fghirgh.jpg",
+      "imageFour": "https://i.postimg.cc/j2bz7MKr/ybg.jpg",
+      "tuition": "$60,480/year",
+      "review": 4.6,
+      "undergraduateStudents": 5700,
+      "postgraduateStudents": 20000,
+      "subjects": 2800,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$60,480/year",
+        "postgraduate": "$45,000–$68,000/year (varies by program)",
+        "averageTotalCost": "$85,000/year including room, board, and fees"
+      },
+      "descriptionOne": "Johns Hopkins University, located in Baltimore, Maryland, is a globally respected research university known for its emphasis on science, medicine, international studies, and public health. It has around 5,700 undergraduates and 20,000 graduate students across nine academic divisions, including the renowned School of Medicine and Bloomberg School of Public Health.",
+      "descriptionTwo": "JHU is home to Nobel laureates, National Medal of Science recipients, and pioneers in fields such as biomedical engineering, political science, and neuroscience. Undergraduate research is a hallmark of the Johns Hopkins experience, and students often engage in projects through centers like the Applied Physics Laboratory and JHU’s many medical and public health facilities.",
+      "descriptionThree": "International students are supported through the Office of International Services, which offers visa help, cultural programs, and academic support. Johns Hopkins meets 100% of demonstrated financial need for all admitted students and offers competitive merit scholarships.",
+      "descriptionFour": "The Homewood campus in Baltimore blends traditional red-brick buildings with cutting-edge laboratories and collaborative spaces. The university also has campuses and centers in Washington, D.C., Bologna (Italy), and Nanjing (China), offering global academic and research opportunities.",
+      "descriptionFive": "With a strong global alumni network including leaders in medicine, government, technology, and public policy, Johns Hopkins provides excellent career support through its Life Design Lab and alumni mentorship. Graduates often go on to top-tier graduate programs or impactful careers in research, healthcare, and international affairs."
+    }
   ],
   "Nepal": [
-    { "id": 13, "name": "Tribhuvan University", "logo": "https://i.postimg.cc/3wbR9MMD/safh.png", "tuition": "$1,500/year", "review": 4.0 },
-    { "id": 14, "name": "Kathmandu University", "logo": "https://i.postimg.cc/6pM55sp1/sdghoh.png", "tuition": "$2,000/year", "review": 4.2 },
-    { "id": 15, "name": "Purbanchal University", "logo": "https://i.postimg.cc/tJG9mpB7/sdfgjhb.png", "tuition": "$1,200/year", "review": 3.9 },
-    { "id": 16, "name": "Pokhara University", "logo": "https://i.postimg.cc/LsW7LHbD/sddfh.png", "tuition": "$1,800/year", "review": 4.0 }
+    {
+      "id": 13,
+      "name": "Tribhuvan University",
+      "logo": "https://i.postimg.cc/3wbR9MMD/safh.png",
+      "imageOne": "https://i.postimg.cc/kMQZS8QX/fu.jpg",
+      "imageTwo": "https://i.postimg.cc/zfhprZpX/iygui.jpg",
+      "imageThree": "https://i.postimg.cc/X7hw71rZ/juyfjy.jpg",
+      "imageFour": "https://i.postimg.cc/YCWQ4NFd/etgojnh.jpg",
+      "tuition": "$1,500/year",
+      "review": 4.0,
+      "undergraduateStudents": 300000,
+      "postgraduateStudents": 40000,
+      "subjects": 1000,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$1,000–$2,000/year (varies by faculty)",
+        "postgraduate": "$1,500–$3,000/year",
+        "averageTotalCost": "$3,000–$5,000/year (including living expenses)"
+      },
+      "descriptionOne": "Tribhuvan University (TU), established in 1959, is the oldest and largest university in Nepal. It is a public institution located in Kirtipur, Kathmandu, with hundreds of affiliated campuses and offers over 1,000 academic programs to its vast student population of over 340,000 students.",
+      "descriptionTwo": "TU has multiple faculties and institutes, including Humanities and Social Sciences, Science and Technology, Education, Management, Law, Engineering, and Medicine. The university emphasizes traditional academic learning and is expanding research capabilities through partnerships and funding initiatives.",
+      "descriptionThree": "International students are welcome at Tribhuvan University and may enroll in a variety of undergraduate and postgraduate programs. Although international services are limited compared to western universities, students benefit from affordable tuition and cultural immersion in Nepal’s academic and social life.",
+      "descriptionFour": "The central campus in Kirtipur includes libraries, hostels, sports facilities, and research centers. Despite infrastructural challenges, the university remains the academic backbone of Nepal with wide-reaching influence and an extensive network of constituent and affiliated campuses across the country.",
+      "descriptionFive": "TU alumni play leading roles in Nepal’s government, education, legal, and civil service sectors. The university’s large academic community and low-cost education make it a critical engine for national development and higher education access across Nepal."
+    },
+
+    {
+      "id": 14,
+      "name": "Kathmandu University",
+      "logo": "https://i.postimg.cc/6pM55sp1/sdghoh.png",
+      "imageOne": "https://i.postimg.cc/NfDDvv7q/iyhu.jpg",
+      "imageTwo": "https://i.postimg.cc/0y6wWTVC/yugtyu.jpg",
+      "imageThree": "https://i.postimg.cc/VNCX6xMN/uguyh.jpg",
+      "imageFour": "https://i.postimg.cc/wMf1F2JP/iyfgiyug.jpg",
+      "tuition": "$2,000/year",
+      "review": 4.2,
+      "undergraduateStudents": 5000,
+      "postgraduateStudents": 1200,
+      "subjects": 600,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$2,000–$3,000/year (varies by program)",
+        "postgraduate": "$2,500–$4,000/year",
+        "averageTotalCost": "$4,000–$6,000/year including living expenses"
+      },
+      "descriptionOne": "Kathmandu University (KU), established in 1991, is a leading autonomous, not-for-profit public university in Nepal. Located in Dhulikhel, Kavrepalanchok district, it focuses on quality education, research, and innovation. KU offers over 600 academic programs and maintains high academic standards compared to other South Asian institutions.",
+      "descriptionTwo": "The university houses six schools: Science, Engineering, Management, Arts, Education, and Medical Sciences. It is well-known for engineering, IT, biotechnology, and sustainable development studies, with increasing focus on research, innovation, and community-based programs.",
+      "descriptionThree": "International students are welcomed at KU and can benefit from English-medium instruction, affordable tuition, and a peaceful learning environment. While international support services are modest, the university maintains partnerships with institutions across Asia, Europe, and North America.",
+      "descriptionFour": "The KU campus in Dhulikhel is serene and environmentally friendly, offering modern laboratories, digital libraries, sports facilities, and clean dormitories. The university emphasizes discipline, innovation, and sustainability in its infrastructure and academic culture.",
+      "descriptionFive": "Graduates of Kathmandu University have gone on to excel in sectors like engineering, research, healthcare, and entrepreneurship. The university’s growing alumni network, career guidance services, and collaborations with global academic institutions provide meaningful post-graduation opportunities."
+    },
+
+    {
+      "id": 15,
+      "name": "Purbanchal University",
+      "logo": "https://i.postimg.cc/tJG9mpB7/sdfgjhb.png",
+      "imageOne": "https://i.postimg.cc/Z5tHPPND/gji.jpg",
+      "imageTwo": "https://i.postimg.cc/8zqPy545/edfhsf.jpg",
+      "imageThree": "https://i.postimg.cc/fRcGYRVm/yfdfy.jpg",
+      "imageFour": "https://i.postimg.cc/TwQxXYVn/sddfgig.jpg",
+      "tuition": "$1,200/year",
+      "review": 3.9,
+      "undergraduateStudents": 26000,
+      "postgraduateStudents": 3000,
+      "subjects": 400,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$1,000–$1,500/year (varies by program)",
+        "postgraduate": "$1,500–$2,500/year",
+        "averageTotalCost": "$2,500–$4,000/year including living expenses"
+      },
+      "descriptionOne": "Purbanchal University, founded in 1993, is one of Nepal’s key public universities, located in Gothgaun, Morang district. It was established to expand access to higher education in eastern Nepal and currently oversees over 260 affiliated campuses across the country.",
+      "descriptionTwo": "The university offers a broad range of programs across faculties including Science & Technology, Management, Arts, Medical & Allied Sciences, Education, Engineering, and Agriculture. Programs are structured to promote technical skills, research, and community relevance.",
+      "descriptionThree": "Purbanchal University welcomes international students in select undergraduate and graduate programs. Instruction is in English for most technical and management programs. While international student services are limited, tuition is very affordable by global standards.",
+      "descriptionFour": "The main campus sits on a large, peaceful site in eastern Nepal. It includes basic science labs, administrative blocks, hostels, and the university hospital. Many students attend through affiliated colleges located in major cities like Kathmandu, Biratnagar, and Pokhara.",
+      "descriptionFive": "Graduates of Purbanchal University contribute to fields such as public health, engineering, business, and education throughout Nepal. The university continues to expand its research output and partnerships with domestic and international academic institutions."
+    },
+
+    {
+      "id": 16,
+      "name": "Pokhara University",
+      "logo": "https://i.postimg.cc/LsW7LHbD/sddfh.png",
+      "imageOne": "https://i.postimg.cc/rpQPWSXD/sffgh.jpg",
+      "imageTwo": "https://i.postimg.cc/RF9RHw3x/fikghdfgh.jpg",
+      "imageThree": "https://i.postimg.cc/DZW3wCJv/sdfhibg.png",
+      "imageFour": "https://i.postimg.cc/nrv5XNHJ/sfgjihefg.jpg",
+      "tuition": "$1,800/year",
+      "review": 4.0,
+      "undergraduateStudents": 15000,
+      "postgraduateStudents": 2500,
+      "subjects": 450,
+      "creditsRequired": 120,
+      "tuitionBreakdown": {
+        "undergraduate": "$1,500–$2,000/year (varies by faculty)",
+        "postgraduate": "$2,000–$3,000/year",
+        "averageTotalCost": "$3,000–$5,000/year including housing and fees"
+      },
+      "descriptionOne": "Pokhara University (PU), established in 1997, is Nepal’s youngest public university, located in Lekhnath, near Pokhara city. It was created with the aim of promoting academic excellence in western Nepal and operates on a semester system in line with international academic structures.",
+      "descriptionTwo": "The university offers a range of programs across four faculties: Science and Technology, Health Sciences, Management, and Humanities and Social Sciences. PU emphasizes practical, project-based learning with special focus on business, engineering, health, and computer science disciplines.",
+      "descriptionThree": "International students can enroll in PU’s English-medium programs, particularly in business, computer science, and health sciences. Though support services are still growing, PU has exchange and academic partnerships with universities in Asia and Europe.",
+      "descriptionFour": "Pokhara University's central campus is nestled in a scenic, lakeside environment with modern classroom buildings, basic laboratories, and student housing. Students can also attend PU-affiliated colleges throughout Nepal, many of which are in Kathmandu and Pokhara.",
+      "descriptionFive": "Graduates of PU go on to work in Nepal's corporate, academic, and development sectors. The university is steadily improving its research capacity and reputation, with new graduate programs and professional training initiatives."
+    }
   ],
   "Canada": [
-    { "id": 17, "name": "University of Toronto", "logo": "https://i.postimg.cc/CM7p9r0k/wrhoi.png", "tuition": "$45,000/year", "review": 4.6 },
-    { "id": 18, "name": "McGill University", "logo": "https://i.postimg.cc/HL96jKBt/eroh.png", "tuition": "$38,000/year", "review": 4.5 },
-    { "id": 19, "name": "University of British Columbia", "logo": "https://i.postimg.cc/YSM3cRML/ADf.png", "tuition": "$42,000/year", "review": 4.4 },
-    { "id": 20, "name": "University of Alberta", "logo": "https://i.postimg.cc/gjV3rZVG/efrgju.png", "tuition": "$35,000/year", "review": 4.3 }
+    {
+      "id": 17,
+      "name": "University of Toronto",
+      "logo": "https://i.postimg.cc/CM7p9r0k/wrhoi.png",
+      "tuition": "$45,000/year",
+      "review": 4.6
+    },
+    {
+      "id": 18,
+      "name": "McGill University",
+      "logo": "https://i.postimg.cc/HL96jKBt/eroh.png",
+      "tuition": "$38,000/year",
+      "review": 4.5
+    },
+    {
+      "id": 19,
+      "name": "University of British Columbia",
+      "logo": "https://i.postimg.cc/YSM3cRML/ADf.png",
+      "tuition": "$42,000/year",
+      "review": 4.4
+    },
+    {
+      "id": 20,
+      "name": "University of Alberta",
+      "logo": "https://i.postimg.cc/gjV3rZVG/efrgju.png",
+      "tuition": "$35,000/year",
+      "review": 4.3
+    }
   ],
   "Thailand": [
-    { "id": 21, "name": "Chulalongkorn University", "logo": "https://i.postimg.cc/02mtSbNn/sdfgh.png", "tuition": "$3,000/year", "review": 4.4 },
-    { "id": 22, "name": "Mahidol University", "logo": "https://i.postimg.cc/28c548Xq/sdfhsdf.png", "tuition": "$3,200/year", "review": 4.3 }
+    {
+      "id": 21,
+      "name": "Chulalongkorn University",
+      "logo": "https://i.postimg.cc/02mtSbNn/sdfgh.png",
+      "tuition": "$3,000/year",
+      "review": 4.4
+    },
+    {
+      "id": 22,
+      "name": "Mahidol University",
+      "logo": "https://i.postimg.cc/28c548Xq/sdfhsdf.png",
+      "tuition": "$3,200/year",
+      "review": 4.3
+    }
   ],
   "Japan": [
-    { "id": 23, "name": "University of Tokyo", "logo": "https://i.postimg.cc/5tQQKRPX/asdhadf.png", "tuition": "$4,500/year", "review": 4.8 },
-    { "id": 24, "name": "Kyoto University", "logo": "https://i.postimg.cc/yxcwfsRL/asfha.png", "tuition": "$4,000/year", "review": 4.6 }
+    {
+      "id": 23,
+      "name": "University of Tokyo",
+      "logo": "https://i.postimg.cc/5tQQKRPX/asdhadf.png",
+      "tuition": "$4,500/year",
+      "review": 4.8
+    },
+    {
+      "id": 24,
+      "name": "Kyoto University",
+      "logo": "https://i.postimg.cc/yxcwfsRL/asfha.png",
+      "tuition": "$4,000/year",
+      "review": 4.6
+    }
   ],
   "Mexico": [
-    { "id": 25, "name": "UNAM", "logo": "https://i.postimg.cc/rmmSGGBB/Escudo-UNAM-escalable.png", "tuition": "$1,000/year", "review": 4.5 },
-    { "id": 26, "name": "Monterrey Institute of Technology", "logo": "https://i.postimg.cc/Ss2GF7gW/dj.png", "tuition": "$8,000/year", "review": 4.4 }
+    {
+      "id": 25,
+      "name": "UNAM",
+      "logo": "https://i.postimg.cc/rmmSGGBB/Escudo-UNAM-escalable.png",
+      "tuition": "$1,000/year",
+      "review": 4.5
+    },
+    {
+      "id": 26,
+      "name": "Monterrey Institute of Technology",
+      "logo": "https://i.postimg.cc/Ss2GF7gW/dj.png",
+      "tuition": "$8,000/year",
+      "review": 4.4
+    }
   ],
   "London": [
-    { "id": 27, "name": "University College London", "logo": "https://i.postimg.cc/Twx53V08/sergjoger.png", "tuition": "$35,000/year", "review": 4.7 },
-    { "id": 28, "name": "King's College London", "logo": "https://i.postimg.cc/ZqD2Rq3M/dfgj.png", "tuition": "$34,000/year", "review": 4.6 }
+    {
+      "id": 27,
+      "name": "University College London",
+      "logo": "https://i.postimg.cc/Twx53V08/sergjoger.png",
+      "tuition": "$35,000/year",
+      "review": 4.7
+    },
+    {
+      "id": 28,
+      "name": "King's College London",
+      "logo": "https://i.postimg.cc/ZqD2Rq3M/dfgj.png",
+      "tuition": "$34,000/year",
+      "review": 4.6
+    }
   ],
   "Denmark": [
-    { "id": 29, "name": "University of Copenhagen", "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png", "tuition": "$15,000/year", "review": 4.5 },
-    { "id": 30, "name": "Aarhus University", "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png", "tuition": "$14,000/year", "review": 4.4 }
+    {
+      "id": 29,
+      "name": "University of Copenhagen",
+      "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png",
+      "tuition": "$15,000/year",
+      "review": 4.5
+    },
+    {
+      "id": 30,
+      "name": "Aarhus University",
+      "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png",
+      "tuition": "$14,000/year",
+      "review": 4.4
+    }
   ]
 }
