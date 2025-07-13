@@ -415,13 +415,32 @@
     }
   ],
   "Canada": [
-    {
-      "id": 17,
-      "name": "University of Toronto",
-      "logo": "https://i.postimg.cc/CM7p9r0k/wrhoi.png",
-      "tuition": "$45,000/year",
-      "review": 4.6
-    },
+ {
+  "id": 17,
+  "name": "University of Toronto",
+  "logo": "https://i.postimg.cc/CM7p9r0k/wrhoi.png",
+  "imageOne": "https://i.postimg.cc/TwJQ2DJD/aswfjighwe.jpg",
+  "imageTwo": "https://i.postimg.cc/Kv3LY9Hd/uot-campus2.jpg",
+  "imageThree": "https://i.postimg.cc/6qwdMP4x/uot-library.jpg",
+  "imageFour": "https://i.postimg.cc/7h07gR2W/uot-lab.jpg",
+  "tuition": "$45,000/year",
+  "review": 4.6,
+  "undergraduateStudents": 73000,
+  "postgraduateStudents": 22000,
+  "subjects": 700,
+  "creditsRequired": 120,
+  "tuitionBreakdown": {
+    "undergraduate": "$45,000–$60,000/year (for international students, varies by faculty)",
+    "postgraduate": "$20,000–$50,000/year (depends on program)",
+    "averageTotalCost": "$60,000–$75,000/year including housing, health insurance, and fees"
+  },
+  "descriptionOne": "The University of Toronto (U of T), founded in 1827, is Canada's top-ranked research university and one of the most prestigious in the world. Located in Toronto, Ontario, U of T operates three campuses: St. George, Scarborough, and Mississauga. It is known for academic excellence, innovation, and diversity.",
+  "descriptionTwo": "The university offers more than 700 undergraduate and 300 graduate programs across disciplines such as engineering, computer science, business, medicine, law, social sciences, and humanities. It’s consistently ranked in the top 25 globally by QS and Times Higher Education.",
+  "descriptionThree": "U of T is a top destination for international students, who make up over 25% of its student body. The Centre for International Experience (CIE) offers visa support, housing help, orientation, workshops, and cultural exchange programs. Scholarships and financial aid are available for international applicants.",
+  "descriptionFour": "The St. George campus is located in downtown Toronto and features historic buildings, modern research facilities, libraries, sports centers, and green spaces. Students have access to one of the world’s largest academic libraries and a vibrant, multicultural city with endless opportunities.",
+  "descriptionFive": "U of T’s alumni network includes leaders in politics, science, tech, and academia—such as five Canadian Prime Ministers, 10 Nobel laureates, and key contributors to insulin and AI research. Its career centers, co-op programs, and global partnerships support graduates in launching impactful careers worldwide."
+},
+
     {
       "id": 18,
       "name": "McGill University",
@@ -442,18 +461,75 @@
       "logo": "https://i.postimg.cc/gjV3rZVG/efrgju.png",
       "tuition": "$35,000/year",
       "review": 4.3
-    }
-  ],
-  "Thailand": [
+    },
     {
       "id": 21,
+      "name": "University of Waterloo",
+      "logo": "https://i.postimg.cc/MpWkt3kR/usgwdfgh.png",
+      "tuition": "$33,000/year",
+      "review": 4.4
+    },
+    {
+      "id": 22,
+      "name": "Western University",
+      "logo": "https://i.postimg.cc/g2YJRKNt/sergiher.png",
+      "tuition": "$31,000/year",
+      "review": 4.2
+    },
+    {
+      "id": 23,
+      "name": "Queen's University",
+      "logo": "https://i.postimg.cc/jSgsfYWC/hefg.png",
+      "tuition": "$32,000/year",
+      "review": 4.3
+    },
+    {
+      "id": 24,
+      "name": "Simon Fraser University",
+      "logo": "https://i.postimg.cc/vBwCg0vc/wdfhf.png",
+      "tuition": "$28,000/year",
+      "review": 4.1
+    },
+    {
+      "id": 25,
+      "name": "McMaster University",
+      "logo": "https://i.postimg.cc/hv5rxjqp/egjr4.webp",
+      "tuition": "$34,000/year",
+      "review": 4.3
+    },
+    {
+      "id": 26,
+      "name": "University of Ottawa",
+      "logo": "https://i.postimg.cc/TwSLJWpL/degjhg.png",
+      "tuition": "$30,000/year",
+      "review": 4.0
+    },
+    {
+      "id": 27,
+      "name": "Dalhousie University",
+      "logo": "https://i.postimg.cc/LXhNN73y/efghg.png",
+      "tuition": "$27,000/year",
+      "review": 4.0
+    },
+    {
+      "id": 28,
+      "name": "York University",
+      "logo": "https://i.postimg.cc/dV42p61g/ergjuwrg.png",
+      "tuition": "$29,000/year",
+      "review": 3.9
+    }
+  ],
+
+  "Thailand": [
+    {
+      "id": 29,
       "name": "Chulalongkorn University",
       "logo": "https://i.postimg.cc/02mtSbNn/sdfgh.png",
       "tuition": "$3,000/year",
       "review": 4.4
     },
     {
-      "id": 22,
+      "id": 30,
       "name": "Mahidol University",
       "logo": "https://i.postimg.cc/28c548Xq/sdfhsdf.png",
       "tuition": "$3,200/year",
@@ -462,14 +538,14 @@
   ],
   "Japan": [
     {
-      "id": 23,
+      "id": 31,
       "name": "University of Tokyo",
       "logo": "https://i.postimg.cc/5tQQKRPX/asdhadf.png",
       "tuition": "$4,500/year",
       "review": 4.8
     },
     {
-      "id": 24,
+      "id": 32,
       "name": "Kyoto University",
       "logo": "https://i.postimg.cc/yxcwfsRL/asfha.png",
       "tuition": "$4,000/year",
@@ -478,14 +554,14 @@
   ],
   "Mexico": [
     {
-      "id": 25,
+      "id": 33,
       "name": "UNAM",
       "logo": "https://i.postimg.cc/rmmSGGBB/Escudo-UNAM-escalable.png",
       "tuition": "$1,000/year",
       "review": 4.5
     },
     {
-      "id": 26,
+      "id": 34,
       "name": "Monterrey Institute of Technology",
       "logo": "https://i.postimg.cc/Ss2GF7gW/dj.png",
       "tuition": "$8,000/year",
@@ -494,14 +570,14 @@
   ],
   "London": [
     {
-      "id": 27,
+      "id": 35,
       "name": "University College London",
       "logo": "https://i.postimg.cc/Twx53V08/sergjoger.png",
       "tuition": "$35,000/year",
       "review": 4.7
     },
     {
-      "id": 28,
+      "id": 36,
       "name": "King's College London",
       "logo": "https://i.postimg.cc/ZqD2Rq3M/dfgj.png",
       "tuition": "$34,000/year",
@@ -510,14 +586,14 @@
   ],
   "Denmark": [
     {
-      "id": 29,
+      "id": 37,
       "name": "University of Copenhagen",
       "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png",
       "tuition": "$15,000/year",
       "review": 4.5
     },
     {
-      "id": 30,
+      "id": 38,
       "name": "Aarhus University",
       "logo": "https://i.postimg.cc/9MwvPcfN/usaLogo.png",
       "tuition": "$14,000/year",

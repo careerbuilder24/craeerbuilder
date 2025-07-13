@@ -1,24 +1,32 @@
 'use client';
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Image from 'next/image';
-import Navbar from '../componenets/Navbar/Navbar';
-import Footer from '../componenets/Footer/Footer';
 import 'react-tabs/style/react-tabs.css';
-import Link from 'next/link';
 import useAbroadStudy from '@/hooks/useAbroadStudy';
+import Footer from '../componenets/Footer/Footer';
+import Navbar from '../componenets/Navbar/Navbar';
+import ButtonTopMaker from '@/app/buttonTopMaker/ButtonTopMaker';
 
 export default function UniversityPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [selectedUniversity, setSelectedUniversity] = useState(null);
+  const [expandedUniversityId, setExpandedUniversityId] = useState(null);
+
   const sidebarRef = useRef(null);
   const { data } = useAbroadStudy();
 
-  const countries = Object.keys(data || {});
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    education: '',
+    cgpa: '',
+  });
 
+  const countries = Object.keys(data || {});
   const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
 
   const handleClickOutside = (event) => {
@@ -44,6 +52,28 @@ export default function UniversityPage() {
   const closeModal = () => {
     setShowModal(false);
     setSelectedUniversity(null);
+    setForm({
+      name: '',
+      email: '',
+      phone: '',
+      education: '',
+      cgpa: '',
+    });
+  };
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Application Submitted:', form);
+    alert(`Application submitted for ${selectedUniversity.name}`);
+    closeModal();
+  };
+
+  const toggleDetails = (id) => {
+    setExpandedUniversityId(prev => (prev === id ? null : id));
   };
 
   if (!data || countries.length === 0) {
@@ -56,7 +86,7 @@ export default function UniversityPage() {
       <div className='mt-28 bg-gray-100 w-11/12 lg:w-8/12 container mx-auto mb-10'>
         <div className="text-center text-3xl font-bold text-blue-500 mb-6">Study Abroad</div>
 
-        {/* Sidebar toggle (Mobile only) */}
+        {/* Mobile Sidebar Toggle */}
         <div className="block lg:hidden fixed top-64 right-1 z-40">
           <button
             onClick={toggleSidebar}
@@ -88,7 +118,7 @@ export default function UniversityPage() {
           </div>
         )}
 
-        {/* Tabs UI */}
+        {/* Tabs */}
         <Tabs selectedIndex={activeTabIndex} onSelect={setActiveTabIndex} className='flex flex-col lg:flex-row'>
           <TabList className='hidden lg:flex flex-col bg-blue-700 text-white w-48 rounded-md mt-4'>
             {countries.map((country, index) => (
@@ -107,36 +137,68 @@ export default function UniversityPage() {
                 <h2 className='text-2xl font-semibold mb-4 text-blue-600'>{country} Universities</h2>
                 <div className='flex flex-col gap-4'>
                   {data[country]?.map((university) => (
-                    <Link
-                      href={`/DetailsAbroad/${university.id}`}
-                      passHref
+                    <div
                       key={university.id}
-                      className='bg-white rounded-lg shadow-md p-4 flex items-center justify-between hover:shadow-lg transition w-full'
+                      onClick={() => toggleDetails(university.id)}
+                      className='bg-white rounded-lg shadow-md p-4 flex flex-col gap-3 hover:shadow-lg transition w-full cursor-pointer'
                     >
-                      <div className='flex items-center gap-4'>
-                        <Image
-                          src={university.logo}
-                          alt={university.name}
-                          width={50}
-                          height={50}
-                          className='object-contain flex-shrink-0'
-                        />
-                        <div>
-                          <div className='font-semibold text-sm sm:text-base'>{university.name}</div>
-                          <div className='text-gray-500 text-xs sm:text-sm'>Tuition: {university.tuition}</div>
-                          <div className='text-yellow-500 text-xs sm:text-sm'>⭐ {university.review} / 5.0</div>
+                      <div className='flex items-center justify-between'>
+                        <div className='flex items-center gap-4'>
+                          <Image
+                            src={university.logo}
+                            alt={university.name}
+                            width={50}
+                            height={50}
+                            className='object-contain flex-shrink-0'
+                          />
+                          <div>
+                            <div className='font-semibold text-sm sm:text-base'>{university.name}</div>
+                            <div className='text-gray-500 text-xs sm:text-sm'>Tuition: {university.tuition}</div>
+                            <div className='text-yellow-500 text-xs sm:text-sm'>⭐ {university.review} / 5.0</div>
+                          </div>
                         </div>
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleApplyClick(university);
+                          }}
+                          className='bg-blue-600 text-white text-sm px-3 py-1 rounded hover:bg-blue-700'
+                        >
+                          Apply
+                        </button>
                       </div>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault(); // prevent link navigation
-                          handleApplyClick(university);
-                        }}
-                        className='bg-blue-600 text-white text-sm px-3 py-1 rounded hover:bg-blue-700'
-                      >
-                        Apply
-                      </button>
-                    </Link>
+
+                      {/* University Detail Section */}
+                      {expandedUniversityId === university.id && (
+                        <div className='mt-4 space-y-6'>
+                          <Image
+                            src={university.imageOne}
+                            width={800}
+                            height={400}
+                            className='w-full rounded shadow'
+                            alt='Main Image'
+                          />
+                          <p className='text-sm sm:text-base text-justify'>{university.descriptionOne}</p>
+
+                          <div className='flex flex-col lg:flex-row gap-6'>
+                            <div className='lg:w-1/2'>
+                              <p className='text-sm sm:text-base text-justify'>{university.descriptionTwo}</p>
+                              <Image src={university.imageTwo} width={600} height={400} className='rounded shadow mt-2' alt='Image 2' />
+                            </div>
+                            <div className='lg:w-1/2'>
+                              <Image src={university.imageThree} width={600} height={400} className='rounded shadow mb-2' alt='Image 3' />
+                              <p className='text-sm sm:text-base text-justify'>{university.descriptionThree}</p>
+                            </div>
+                          </div>
+
+                          <div className='flex flex-col-reverse lg:flex-row gap-6'>
+                            <p className='text-sm sm:text-base lg:w-1/2 text-justify'>{university.descriptionFour}</p>
+                            <Image src={university.imageFour} width={600} height={400} className='rounded shadow lg:w-1/2' alt='Image 4' />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </TabPanel>
@@ -150,13 +212,52 @@ export default function UniversityPage() {
         <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
           <div className='bg-white p-6 rounded-lg w-full max-w-md'>
             <h2 className='text-xl font-bold mb-4'>Apply to {selectedUniversity.name}</h2>
-            <form className='space-y-4'>
-              <input type='text' placeholder='Full Name' className='w-full p-2 border rounded' />
-              <input type='email' placeholder='Email' className='w-full p-2 border rounded' />
-              <input type='text' placeholder='Phone Number' className='w-full p-2 border rounded' />
-              <input type='text' placeholder='Address' className='w-full p-2 border rounded' />
-              <input type='text' placeholder='Education Qualification' className='w-full p-2 border rounded' />
-              <input type='text' placeholder='CGPA' className='w-full p-2 border rounded' />
+            <form className='space-y-4' onSubmit={handleSubmit}>
+              <input
+                type='text'
+                name='name'
+                placeholder='Full Name'
+                value={form.name}
+                onChange={handleChange}
+                className='w-full p-2 border rounded'
+                required
+              />
+              <input
+                type='email'
+                name='email'
+                placeholder='Email'
+                value={form.email}
+                onChange={handleChange}
+                className='w-full p-2 border rounded'
+                required
+              />
+              <input
+                type='text'
+                name='phone'
+                placeholder='Phone Number'
+                value={form.phone}
+                onChange={handleChange}
+                className='w-full p-2 border rounded'
+                required
+              />
+              <input
+                type='text'
+                name='education'
+                placeholder='Education Qualification'
+                value={form.education}
+                onChange={handleChange}
+                className='w-full p-2 border rounded'
+                required
+              />
+              <input
+                type='text'
+                name='cgpa'
+                placeholder='CGPA'
+                value={form.cgpa}
+                onChange={handleChange}
+                className='w-full p-2 border rounded'
+                required
+              />
               <div className='flex justify-end gap-2'>
                 <button
                   type='button'
@@ -176,7 +277,7 @@ export default function UniversityPage() {
           </div>
         </div>
       )}
-
+      <ButtonTopMaker />
       <Footer />
     </main>
   );
