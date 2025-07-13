@@ -12,10 +12,11 @@ import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
 import img1 from '../../assets/details.PNG';
 import Image from 'next/image';
-import Head from 'next/head';
+// import Head from 'next/head';
 
 import './Course.css'
 import Chatbot from '../(with-navbar)/componenets/chatBot/Chatbot';
+import HelmetHead from '../HelmetHead/HelmetHead';
 export default function Courses() {
   const courses = useCourses();
   const [searchTerm, setSearchTerm] = useState(''); // State for search input
@@ -63,10 +64,12 @@ export default function Courses() {
   return (
     <>
 
-      <Head>
-        <link rel='preload' href={img1} as='image' />
-        <link rel='preload' href={courses?.image} as='image' />
-      </Head>
+       <HelmetHead
+        title="Career Builder's Courses"
+        description="Browse and apply to top-rated international courses. Explore tuition, reviews, seat availability, and duration."
+        keywords="study abroad, online courses, international courses, career programs, course details"
+        author="Career Builder"
+      />
 
       <Navbar />
 
