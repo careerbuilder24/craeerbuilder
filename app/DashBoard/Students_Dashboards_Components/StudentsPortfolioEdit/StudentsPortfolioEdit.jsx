@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import useMatchingUploadedPortfolio from '@/hooks/useMatchingUploadedPortfolio';
+// import useMatchingUploadedPortfolio from '@/hooks/useMatchingUploadedPortfolio';
 import Swal from 'sweetalert2';
+import useUserMatching from '@/hooks/useUserMatching';
+// import useUserMatching from '@/hooks/useMatchingUploadedPortfolio';
 
 export default function Page() {
     const [portfolioTitle, setPortfolioTitle] = useState('');
@@ -13,11 +15,11 @@ export default function Page() {
     const [portfolioData, setPortfolioData] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
 
-    const {matchedStudentPortfolioEmail} = useMatchingUploadedPortfolio()
+    const {matchedStudent} = useUserMatching()
     // const {matchedStudentProfilesEmail} = useMatchingUploadedCourses()
 
     
-    console.log(matchedStudentPortfolioEmail?.email)
+    console.log(matchedStudent?.email)
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -69,7 +71,7 @@ export default function Page() {
                     imageUrl,
                     category,
                     description,
-                     email: matchedStudentPortfolioEmail?.email,
+                     email: matchedStudent?.email,
                     date,
                 }),
             });

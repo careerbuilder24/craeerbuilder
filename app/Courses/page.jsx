@@ -63,7 +63,6 @@ export default function Courses() {
 
   return (
     <>
-
        <HelmetHead
         title="Career Builder's Courses"
         description="Browse and apply to top-rated international courses. Explore tuition, reviews, seat availability, and duration."
