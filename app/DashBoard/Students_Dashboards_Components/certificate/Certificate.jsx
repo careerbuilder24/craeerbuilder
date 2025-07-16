@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import useUserMatching from '@/hooks/useUserMatching';
 
 export default function Page() {
   const [images, setImages] = useState([]);
   const [imageDetails, setImageDetails] = useState([]);
   const [submittedImages, setSubmittedImages] = useState([]);
   const [modalImage, setModalImage] = useState(null);
+  const {matchedStudent} = useUserMatching()
+    // const {matchedStudentProfilesEmail} = useMatchingUploadedCourses()
 
+    
+    console.log(matchedStudent?.email)
   // Handle image upload
   const handleImageUpload = (e) => {
     const files = e.target.files;
     const newImages = Array.from(files).map((file) => ({
       src: URL.createObjectURL(file),
+      file,  // Keep original file for upload
       id: Math.random().toString(36).substring(7),
       text: '',
       date: '',
@@ -27,7 +33,7 @@ export default function Page() {
     ]);
   };
 
-  // Handle text and date changes for image details
+  // Handle text and date changes
   const handleInputChange = (e, id, type) => {
     const value = e.target.value;
     setImageDetails((prevDetails) =>
@@ -37,43 +43,90 @@ export default function Page() {
     );
   };
 
-  // Handle submit: Move images and their details to submitted images state
-  const handleSubmit = () => {
-    const submitted = images.map((image) => {
+  // Submit and upload to ImgBB + MySQL
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee';  // Replace with your real API key
+    const uploadedImages = [];
+
+    for (const image of images) {
       const detail = imageDetails.find((detail) => detail.id === image.id);
-      return { ...image, text: detail.text, date: detail.date };
-    });
-    setSubmittedImages(submitted);
-    setImages([]); // Clear the current images after submission
-    setImageDetails([]); // Clear the details after submission
-    alert('Form Submitted!');
-  };
+      if (!detail) continue;
 
-  // Open the modal with the clicked image
-  const handleImageClick = (imageSrc) => {
-    setModalImage(imageSrc);
-  };
+      const formData = new FormData();
+      formData.append('image', image.file);
 
-  // Close the modal when clicking outside of the modal content
-  const handleModalClose = (e) => {
-    // Check if the click was outside the modal content
-    if (e.target === e.currentTarget) {
-      setModalImage(null);
+      let imageUrl = '';
+
+      try {
+        const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await res.json();
+        if (data.success) {
+          imageUrl = data.data.url;
+        } else {
+          console.error('ImgBB Upload Failed:', data);
+          continue;
+        }
+      } catch (err) {
+        console.error('ImgBB Upload Error:', err);
+        continue;
+      }
+
+      uploadedImages.push({
+        text: detail.text,
+        date: detail.date,
+         email: matchedStudent?.email,
+        imageUrl,
+      });
+    }
+
+    console.log('Uploaded Images:', uploadedImages);
+
+    if (uploadedImages.length === 0) {
+      alert('No images uploaded successfully.');
+      return;
+    }
+
+    // Save to MySQL via API
+    try {
+      const res = await fetch('/api/certificates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ images: uploadedImages }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert('Certificates uploaded and saved to database!');
+        setSubmittedImages(uploadedImages);
+        setImages([]);
+        setImageDetails([]);
+      } else {
+        alert('Database save failed!');
+      }
+    } catch (err) {
+      console.error('API Error:', err);
+      alert('Server error saving certificates.');
     }
   };
 
+  // Modal functions
+  const handleImageClick = (imageSrc) => setModalImage(imageSrc);
+  const handleModalClose = (e) => {
+    if (e.target === e.currentTarget) setModalImage(null);
+  };
+
   useEffect(() => {
-    // Add event listener for outside clicks to close modal
     const closeModalOnClickOutside = (e) => {
-      if (modalImage && e.target === e.currentTarget) {
-        setModalImage(null);
-      }
+      if (modalImage && e.target === e.currentTarget) setModalImage(null);
     };
-
-    // Attach event listener for closing the modal
     document.addEventListener('click', closeModalOnClickOutside);
-
-    // Clean up the event listener when the component unmounts
     return () => {
       document.removeEventListener('click', closeModalOnClickOutside);
     };
@@ -82,11 +135,9 @@ export default function Page() {
   return (
     <>
       <div className="p-6 max-w-4xl mx-auto">
-        <h1 className="text-center my-10 font-bold text-3xl">
-          Upload Your Certificates
-        </h1>
+        <h1 className="text-center my-10 font-bold text-3xl">Upload Your Certificates</h1>
 
-        {/* Image Upload Section */}
+        {/* Upload Input */}
         <label htmlFor="image-upload" className="cursor-pointer mb-4 block">
           <div className="w-full text-4xl border-4 border-red-300 rounded-lg h-48 bg-gray-300 flex items-center justify-center text-white font-semibold">
             Upload Certificates
@@ -124,7 +175,7 @@ export default function Page() {
                 <div className="absolute bottom-2 left-2 bg-white px-4 py-2 rounded-lg w-11/12">
                   <input
                     type="text"
-                    placeholder="Add details (e.g., certificate title)"
+                    placeholder="Certificate Title"
                     value={detail ? detail.text : ''}
                     onChange={(e) => handleInputChange(e, image.id, 'text')}
                     className="mb-2 w-full px-2 py-1 border rounded"
@@ -158,21 +209,17 @@ export default function Page() {
             <h2 className="text-xl font-semibold mb-4">Submitted Certificates</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {submittedImages.map((image) => (
-                <div key={image.id} className="relative flex flex-col justify-between">
+                <div key={image.imageUrl} className="relative flex flex-col justify-between">
                   <div
                     className="w-full h-64 relative cursor-pointer"
-                    onClick={() => handleImageClick(image.src)} // Open modal when clicked
+                    onClick={() => handleImageClick(image.imageUrl)}
                   >
-                    <Image
-                      src={image.src}
+                    <img
+                      src={image.imageUrl}
                       alt="Uploaded Certificate"
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-lg shadow-lg"
+                      className="w-full h-64 object-cover rounded-lg shadow-lg"
                     />
                   </div>
-
-                  {/* Display Details */}
                   <div className="absolute bottom-2 left-2 bg-white px-4 py-2 rounded-lg w-11/12">
                     <p>{image.text}</p>
                     <p>{image.date}</p>
@@ -184,11 +231,11 @@ export default function Page() {
         )}
       </div>
 
-      {/* Modal to display large image */}
+      {/* Modal */}
       {modalImage && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={handleModalClose} // Close modal on outside click
+          onClick={handleModalClose}
         >
           <div className="relative w-3/4 max-w-3xl bg-white p-4" onClick={(e) => e.stopPropagation()}>
             <button

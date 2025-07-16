@@ -271,7 +271,7 @@ import PicturesEdits from '../Students_Dashboards_Components/PicturesEdits/Pictu
 import VideosEdits from '../Students_Dashboards_Components/videosEdit/videosEdits';
 import BlogsEditsStudents from '../Students_Dashboards_Components/BlogsEditsStudents/BlogsEditsStudents';
 import SettingsEdits from '../Students_Dashboards_Components/SettingsEdit/SettingsEdit';
-import Certificate from '../Students_Dashboards_Components/certificate/Certificate';
+import Certificate from '../Students_Dashboards_Components/Certificate/Certificate';
 import Welcome_Page from '../Welcome_Page/Welcome_Page';
 import AllBlogs from '../Students_Dashboards_Components/AllBlog/AllBlogs';
 import Image from 'next/image';
@@ -293,6 +293,7 @@ import PublishedPost from '@/app/(with-navbar)/componenets/PublishedPost/Publish
 import UploadedAchievements from '../Students_Dashboards_Components/UploadedAchievements/UploadedAchievements';
 import UploadedCourses from '../Students_Dashboards_Components/UploadedCourses/UploadedCourses';
 import UploadedPortfolio from '../Students_Dashboards_Components/UploadedPortfolio/UploadedPortfolio';
+import UploadedCertificate from '../Students_Dashboards_Components/UploadedCertificate/UploadedCertificate';
 
 const PageContent = () => {
   // state managements
@@ -553,8 +554,32 @@ const PageContent = () => {
                 </li>
               </ul>
             </details>
-            {/* <li className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Portfolio</li> */}
-            <li onClick={() => handleSectionClick('Certificate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Certificate</li>
+            <details className="group">
+              <summary className="list-none cursor-pointer">
+                <div
+                  onClick={() => handleSectionClick('Certificate')}
+                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
+                  // style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Certificate
+                </div>
+              </summary>
+              <ul className="ml-4 mt-1 text-left">
+                <li
+                  onClick={() => handleSectionClick('UploadedCertificate')}
+                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
+                  style={{ textDecoration: 'none' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
+                >
+                  Uploaded Certificate
+                </li>
+              </ul>
+            </details>
+
+            {/* <li onClick={() => handleSectionClick('Certificate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Certificate</li> */}
             <li onClick={() => handleSectionClick('Pictures')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Pictures</li>
             <li onClick={() => handleSectionClick('Videos')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Videos</li>
             <li onClick={() => handleSectionClick('Blog')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Blog</li>
@@ -594,10 +619,14 @@ const PageContent = () => {
     } else {
       switch (activeSection) {
         // student side dashboard components
-        case 'Profile': return <Profile />;
-        case 'CvUpdate': return <CvUpload />;
-        case 'Achivements': return <Achivements />;
-        case 'UploadedCourses': return <UploadedCourses />;
+        case 'Profile':
+          return <Profile />;
+        case 'CvUpdate':
+          return <CvUpload />;
+        case 'Achivements':
+          return <Achivements />;
+        case 'UploadedCourses':
+          return <UploadedCourses />;
         case 'UploadedAchievements':
           return <UploadedAchievements />;
         case 'Portfolio':
@@ -608,6 +637,8 @@ const PageContent = () => {
           return <StudentsCourses />;
         case 'Certificate':
           return <Certificate />;
+        case 'UploadedCertificate':
+          return <UploadedCertificate/>;
         case 'Pictures':
           return <PicturesEdits />;
         case 'Videos':

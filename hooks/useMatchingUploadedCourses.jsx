@@ -4,7 +4,7 @@ import useUploadedCourse from './useUploadedCourse';
 import useStudentEditProfile from './useStudentEditProfile'
 import { UserAuth } from '@/app/context/AuthContext';
 
-export default function useUserMatching() {
+export default function useMatchingUploadedCourses() {
     const [register] = useRegistered();
     const { UploadedCourse } = useUploadedCourse(); // Assuming UploadedCourse is an object with a 'data' array
 
