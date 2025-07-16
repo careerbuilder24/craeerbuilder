@@ -1,10 +1,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import { FaArrowUp } from "react-icons/fa";
 
 export default function ButtonTopMaker() {
-  
+
     const [visible, setVisible] = useState(false);
-    // button make page upper part
+
     const handleScroll = () => {
         if (window.scrollY > 300) {
             setVisible(true);
@@ -26,7 +27,7 @@ export default function ButtonTopMaker() {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-    // css stle for button take upper page
+
     const styles = {
         button: {
             position: 'fixed',
@@ -36,8 +37,8 @@ export default function ButtonTopMaker() {
             color: '#fff',
             border: 'none',
             borderRadius: '50%',
-            width: '40px',
-            height: '40px',
+            width: '70px',
+            height: '70px',
             fontSize: '20px',
             cursor: 'pointer',
             boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
@@ -52,8 +53,9 @@ export default function ButtonTopMaker() {
                     onClick={scrollToTop}
                     style={styles.button}
                     aria-label="Scroll to top"
+                    className='flex justify-center items-center'
                 >
-                    ↑
+                    <FaArrowUp className='text-3xl animate-bounce' />
                 </button>
             )}
         </main>

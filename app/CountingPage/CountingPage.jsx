@@ -1,79 +1,57 @@
-import React, { useState, useEffect, useRef } from 'react'; 
+import React, { useState, useEffect, useRef } from 'react';
 import Counter from '../NumberCounter/Counter';
 import { PiStudentFill } from "react-icons/pi";
 import { IoIosPeople } from "react-icons/io";
 import { ImOffice } from "react-icons/im";
 
 export default function CountingPage() {
-    const [startCounting, setStartCounting] = useState(false); // State to control when counting should start
-    const sectionRef = useRef(null); // Ref to the section we want to observe
+    const [startCounting, setStartCounting] = useState(false);
+    const sectionRef = useRef(null);
 
     useEffect(() => {
-        // Create an IntersectionObserver to detect when the section comes into view
         const observer = new IntersectionObserver(
             ([entry]) => {
-                // Start counting when the section enters the viewport
                 if (entry.isIntersecting) {
-                    setStartCounting(true);  // Start the countdown
+                    setStartCounting(true);
                 }
             },
-            {
-                root: null, // Observe the viewport
-                threshold: 0.3, // 30% of the section must be visible to start counting
-            }
+            { root: null, threshold: 0.3 }
         );
 
-        // Start observing the section element
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        // Cleanup when the component unmounts
+        if (sectionRef.current) observer.observe(sectionRef.current);
         return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
-            }
+            if (sectionRef.current) observer.unobserve(sectionRef.current);
         };
-    }, []); // Empty array ensures it runs only once on mount
+    }, []);
 
     return (
         <main ref={sectionRef}>
-            <div className="container mx-auto flex flex-col lg:flex-row lg:w-8/12 w-8/12 text-center my-16 gap-3 text-white">
-                <div className="flex flex-col items-center w-full h-32 md:h-36 lg:h-40 bg-[#2CAAE1] rounded-md justify-center">
-                    <PiStudentFill className="text-2xl md:text-3xl lg:text-4xl mb-1" />
-                    <p className="text-lg md:text-xl font-bold">Running Students</p>
-                    <Counter target={200} start={startCounting} />
-                </div>
+            <div className="container mx-auto flex flex-col lg:flex-row flex-wrap justify-center items-center gap-6 text-white my-16 px-4">
 
-                <div className="flex flex-col items-center w-full h-32 md:h-36 lg:h-40 bg-[#2CAAE1] rounded-md justify-center">
-                    <IoIosPeople className="text-2xl md:text-3xl lg:text-4xl mb-1" />
-                    <p className="text-lg md:text-xl font-bold">Running Interns</p>
-                    <Counter target={150} start={startCounting} />
-                </div>
+                {[
+                    { icon: <PiStudentFill />, label: "Running Students", target: 200 },
+                    { icon: <IoIosPeople />, label: "Running Interns", target: 150 },
+                    { icon: <ImOffice />, label: "Running Employee", target: 100 },
+                    { icon: <ImOffice />, label: "Running Batch", target: 80 },
+                    { icon: <ImOffice />, label: "Upcoming Batch", target: 80 },
+                    { icon: <ImOffice />, label: "Upcoming Webinar", target: 80 }
+                ].map((item, index) => (
+                    <div
+                        key={index}
+                        className="flex flex-col items-center flex-shrink-0 w-52 md:w-56 h-40 bg-[#2CAAE1] rounded-md justify-center px-4"
+                    >
+                        <div className="text-3xl md:text-4xl lg:text-5xl mb-2">
+                            {item.icon}
+                        </div>
+                        <p className="text-base md:text-lg font-bold text-center mb-1">
+                            {item.label}
+                        </p>
+                        <div className="text-2xl md:text-3xl font-semibold">
+                            <Counter target={item.target} start={startCounting} />
+                        </div>
+                    </div>
+                ))}
 
-                <div className="flex flex-col items-center w-full h-32 md:h-36 lg:h-40 bg-[#2CAAE1] rounded-md justify-center">
-                    <ImOffice className="text-2xl md:text-3xl lg:text-4xl mb-1" />
-                    <p className="text-lg md:text-xl font-bold">Running Employee</p>
-                    <Counter target={100} start={startCounting} />
-                </div>
-
-                <div className="flex flex-col items-center w-full h-32 md:h-36 lg:h-40 bg-[#2CAAE1] rounded-md justify-center">
-                    <ImOffice className="text-2xl md:text-3xl lg:text-4xl mb-1" />
-                    <p className="text-lg md:text-xl font-bold">Running Batch</p>
-                    <Counter target={80} start={startCounting} />
-                </div>
-
-                <div className="flex flex-col items-center w-full h-32 md:h-36 lg:h-40 bg-[#2CAAE1] rounded-md justify-center">
-                    <ImOffice className="text-2xl md:text-3xl lg:text-4xl mb-1" />
-                    <p className="text-lg md:text-xl font-bold">Upcoming Batch</p>
-                    <Counter target={80} start={startCounting} />
-                </div>
-
-                <div className="flex flex-col items-center w-full h-32 md:h-36 lg:h-40 bg-[#2CAAE1] rounded-md justify-center">
-                    <ImOffice className="text-2xl md:text-3xl lg:text-4xl mb-1" />
-                    <p className="text-lg md:text-xl font-bold">Upcoming Webinar</p>
-                    <Counter target={80} start={startCounting} />
-                </div>
             </div>
         </main>
     );

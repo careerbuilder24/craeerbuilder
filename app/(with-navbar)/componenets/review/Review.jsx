@@ -4,28 +4,28 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const reviews = [
   {
-    name: "Suraia Haque",
+    name: "Promiti",
     role: "Frontend Developer",
     comment: "This platform has changed the way I learn. The content is excellent and well-structured!",
-    image: "https://randomuser.me/api/portraits/women/1.jpg"
+    image: "https://i.postimg.cc/TPnWy7RN/wefk.png"
   },
   {
-    name: "Rokibul Islam",
+    name: "Alma",
     role: "Software Engineer",
     comment: "Amazing experience! Highly recommended for developers at any level.",
-    image: "https://randomuser.me/api/portraits/men/2.jpg"
+    image: "https://i.postimg.cc/yN3yLy70/rtegk.png"
   },
   {
-    name: "Radhika Akter",
+    name: "Sadia",
     role: "UI/UX Designer",
     comment: "Beautiful design and very user-friendly interface. Loved it!",
-    image: "https://randomuser.me/api/portraits/women/3.jpg"
+    image: "https://i.postimg.cc/yYS6YJ6v/rthk.png"
   },
   {
     name: "Rifat Rahamn",
     role: "Fullstack Developer",
     comment: "Great service and reliable content. It helped me land my dream job!",
-    image: "https://randomuser.me/api/portraits/men/4.jpg"
+    image: "https://i.postimg.cc/fy9ZYKbD/intern-1.jpg"
   }
 ];
 

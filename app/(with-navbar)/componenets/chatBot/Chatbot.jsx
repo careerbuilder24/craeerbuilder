@@ -59,10 +59,10 @@ const Chatbot = () => {
     <div>
       {/* Floating button */}
       <div
-        className="fixed bottom-5 right-5 bg-[#2DA9E1] text-white p-3 rounded-full cursor-pointer shadow-lg"
+        className="fixed bottom-5 right-5 bg-[#2DA9E1] text-white p-4 rounded-full cursor-pointer shadow-lg"
         onClick={toggleChat}
       >
-        <RiWechatFill className="text-3xl" /> {/* WeChat Icon */}
+        <RiWechatFill className="text-4xl" /> {/* WeChat Icon */}
       </div>
 
       {/* Chat window */}

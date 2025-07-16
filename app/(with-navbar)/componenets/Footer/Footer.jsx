@@ -1,94 +1,105 @@
 import React from 'react';
 import { RiArrowRightSLine } from "react-icons/ri";
+import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import './Footer.css';
 
 export default function Footer() {
     return (
         <>
-        <div className='footer-container'>
-        <div className='bg-[#2BAAE3] lg:bg-[#17549A] text-white w-full h-full py-20'> {/* Added responsive background color */}
-                {/* First Section */}
-                <div style={{ lineHeight: '25px', fontWeight: '300' }} className='flex text-[15px] flex-col text-[#dddddd] md:flex-row justify-center lg:gap-32 gap-12 text-center md:text-left ml-9'>
-                    {["Apps and Software", "Graphic Design & Printing", "Writing Services", "Website Development Services"].map((category, index) => (
-                        <div className='flex flex-col' key={index}>
-                            <h1 className='font-bold mb-2 text-left cursor-pointer'>{category}</h1>
-                            {category === "Apps and Software" && ["Mobile Apps Development", "Custom Software Development", "School Management Software", "Restaurant Management Software"].map(item => (
-                                <div key={item} className='flex items-center'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
-                            {category === "Graphic Design & Printing" && ["Facebook Cover Design", "Custom Logo Design", "Business Cards Design", "Brochure Design Services", "Flyers Design Services", "Clipping Path Service"].map(item => (
-                                <div key={item} className='flex items-center'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
-                            {category === "Writing Services" && ["Academic Writing", "Blog Post Writing", "Copywriting", "Press Release Writing", "Product Description Writing", "Website Content Writing"].map(item => (
-                                <div key={item} className='flex items-center'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
-                            {category === "Website Development Services" && ["Business Website Design", "News Portal Website Design", "Personal Website Design", "eCommerce Website Design", "Educational Website Design", "Garments Buying House Website", "Hotel/Resort Booking Website", "Medical Website Development"].map(item => (
-                                <div key={item} className='flex items-center'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
+            <div className='footer-container'>
+                <div className='bg-[#2BAAE3] lg:bg-[#17549A] text-white w-full h-full py-20'>
 
-                <center>
-                    <hr className='lg:w-8/12 w-11/12 border-white my-10' />
-                </center>
+                    {/* Categories Section */}
+                    <div
+                        style={{ lineHeight: '25px', fontWeight: '300' }}
+                        className='flex flex-col text-[15px] text-[#dddddd] md:flex-row justify-center lg:gap-32 gap-12 text-center md:text-left px-4'
+                    >
+                        {["Important Links", "FAQ", "Terms and Condition"].map((category, index) => (
+                            <div className='flex flex-col min-w-[180px]' key={index}>
+                                <h1 className='font-bold mb-2 text-left cursor-pointer'>{category}</h1>
 
-                {/* Second Section */}
-                <div style={{ lineHeight: '25px', fontWeight: '300' }} className='flex flex-col md:flex-row justify-center text-[#dddddd] text-[15px] lg:gap-32 gap-12 text-center md:text-left ml-5'>
-                    {/* Important Links Column */}
-                    <div className='flex flex-col lg:mr-16 lg:ml-10 text-left ml-4'>
-                        <h1 className='font-bold mb-2 cursor-pointer'>{'Important Links'}</h1>
-                        {["Company Profile", "Privacy Policy", "Terms and Condition", "Career Opportunity", "B2B Partnership", "Press Release"].map(item => (
-                            <div key={item} className='flex items-center mb-1'>
-                                <RiArrowRightSLine />
-                                <h1 className='hover:underline cursor-pointer'>{item}</h1>
+                                {category === "Important Links" && [
+                                    "Mobile Apps Development",
+                                    "Custom Software Development",
+                                    "School Management Software",
+                                    "Restaurant Management Software"
+                                ].map(item => (
+                                    <div key={item} className='flex items-center'>
+                                        <RiArrowRightSLine />
+                                        <h1 className='hover:underline cursor-pointer whitespace-nowrap'>{item}</h1>
+                                    </div>
+                                ))}
+
+                                {category === "FAQ" && [
+                                    "Facebook Cover Design",
+                                    "Custom Logo Design",
+                                    "Business Cards Design",
+                                    "Brochure Design Services",
+                                    "Flyers Design Services",
+                                    "Clipping Path Service"
+                                ].map(item => (
+                                    <div key={item} className='flex items-center'>
+                                        <RiArrowRightSLine />
+                                        <h1 className='hover:underline cursor-pointer whitespace-nowrap'>{item}</h1>
+                                    </div>
+                                ))}
+
+                                {category === "Terms and Condition" && [
+                                    "Academic Writing",
+                                    "Blog Post Writing",
+                                    "Copywriting",
+                                    "Press Release Writing",
+                                    "Product Description Writing",
+                                    "Website Content Writing"
+                                ].map(item => (
+                                    <div key={item} className='flex items-center'>
+                                        <RiArrowRightSLine />
+                                        <h1 className='hover:underline cursor-pointer whitespace-nowrap'>{item}</h1>
+                                    </div>
+                                ))}
                             </div>
                         ))}
-                    </div>
 
-                    {/* Other Service Categories */}
-                    {["Blogger Outreach Services", "Domain & Hosting Services", "Freelancing and Outsourcing"].map((category, index) => (
-                        <div className='flex flex-col ml-5 text-left' key={index}>
-                            <h1 className='font-bold mb-2 cursor-pointer'>{category}</h1>
+                        {/* Contact Section */}
+                        <div className='flex flex-col min-w-[200px]'>
+                            <h1 className='font-bold mb-2 text-left'>Contact</h1>
 
-                            {category === "Blogger Outreach Services" && ["Search Engine Optimization", "Social Media Marketing", "Search Engine Marketing", "YouTube Video Ads Campaign", "Facebook Ads Campaign", "Content Marketing", "Video Marketing Services"].map(item => (
-                                <div key={item} className='flex items-center mb-1'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
+                            <p className='text-justify'><strong>Email:</strong> contact@careerbuilder.com <br />
+                                <strong>Address:</strong> ECB Chattar, Cantonment, Dhaka <br />
+                                <strong>Contact:</strong> +880 123 456 7890
+                            </p>
+                           
 
-                            {category === "Domain & Hosting Services" && ["Domain Registration", "Shared Hosting", "VPS Hosting", "Dedicated Hosting", "Cloud Hosting", "WordPress Hosting"].map(item => (
-                                <div key={item} className='flex items-center mb-1'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
+                            {/* Social Icons */}
+                            <h3 className="font-semibold text-[#0054a5] mt-4">Follow Us</h3>
+                            <div className="flex gap-4 justify-center sm:justify-start my-2">
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700">
+                                    <FaFacebook size={20} />
+                                </a>
+                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-400 text-white rounded-full hover:bg-blue-500">
+                                    <FaTwitter size={20} />
+                                </a>
+                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 bg-blue-700 text-white rounded-full hover:bg-blue-800">
+                                    <FaLinkedin size={20} />
+                                </a>
+                            </div>
 
-                            {category === "Freelancing and Outsourcing" && ["Affiliate Marketing Course", "Digital Marketing Course", "Graphic Design Course", "Search Engine Optimization Course", "Website Design Course", "Website Development Course"].map(item => (
-                                <div key={item} className='flex items-center mb-1'>
-                                    <RiArrowRightSLine />
-                                    <h1 className='hover:underline cursor-pointer'>{item}</h1>
-                                </div>
-                            ))}
+                            {/* Map */}
+                            <div className="w-full mt-4 flex justify-center items-center">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1824.9538849433723!2d90.3925184!3d23.8218785!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c781c50b9989%3A0x110082b1578e0943!2sCareer%20Builder%20Institute!5e0!3m2!1sen!2sbd!4v1740987843623!5m2!1sen!2sbd"
+                                    width="100%"
+                                    height="180"
+                                    style={{ border: 0 }}
+                                    allowFullScreen=""
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                ></iframe>
+                            </div>
                         </div>
-                    ))}
-
+                    </div>
                 </div>
-
             </div>
-        </div>
 
             <div className='bg-[#232256] text-center text-xs py-3 text-white'>
                 <h1>Copyright © 2025 All Rights Reserved By Career Builder</h1>
