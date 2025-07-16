@@ -53,8 +53,8 @@ export default function UploadedCertificate() {
                                         <p className='text-sm text-gray-500 mb-2 whitespace-nowrap'>
                                             {new Date(matchedStudentCertificates?.date).toLocaleDateString()}
                                         </p>
-                                        {certificate?.email && (
-                                            <p className='text-sm text-gray-700 truncate'>Uploaded By: {certificate.email}</p>
+                                        {matchedStudentCertificates?.email && (
+                                            <p className='text-sm text-gray-700 truncate'>Uploaded By: {matchedStudentCertificates.email}</p>
                                         )}
                                     </div>
                                 </div>

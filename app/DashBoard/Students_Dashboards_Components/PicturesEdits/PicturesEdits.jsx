@@ -1,51 +1,119 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import useUserMatching from '@/hooks/useUserMatching';
+import Swal from 'sweetalert2';
 
 export default function Page() {
     const [images, setImages] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const apiKey = '3d64b0e9dee39ca593b9da32467663ee'; // Replace with your actual ImgBB API key
+    const { matchedStudent } = useUserMatching()
 
-    // Handle image upload
-    const handleImageUpload = (e) => {
+    console.log(matchedStudent?.email)
+
+    // Handle image upload to ImgBB
+    const handleImageUpload = async (e) => {
         const files = e.target.files;
-        const newImages = Array.from(files).map((file) => ({
-            src: URL.createObjectURL(file),
-            id: Math.random().toString(36).substring(7),
-        }));
-        setImages((prevImages) => [...prevImages, ...newImages]);
+
+        for (let file of files) {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            try {
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    const hostedImageUrl = data.data.url;
+                    const newImage = {
+                        src: hostedImageUrl,
+                        id: Math.random().toString(36).substring(7),
+                    };
+                    setImages((prevImages) => [...prevImages, newImage]);
+                } else {
+                    console.error('ImgBB Upload Failed', data);
+                }
+            } catch (error) {
+                console.error('Upload Error:', error);
+            }
+        }
     };
 
-    // Open the modal with the selected image
     const openModal = (imageSrc) => {
         setSelectedImage(imageSrc);
         setIsModalOpen(true);
     };
 
-    // Close the modal
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedImage(null);
     };
 
-    // Trigger the file input click event
     const triggerFileInput = () => {
         document.getElementById('image-upload').click();
     };
 
-    // Handle the submit action
-    const handleSubmit = () => {
+    // Submit hosted URLs to backend
+    const handleSubmit = async () => {
+             if (!matchedStudent?.email) {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Please Fill Up your profile Edit.',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
         if (images.length === 0) {
-            alert('Please upload at least one image before submitting.');
+            Swal.fire('Please upload at least one image before submitting.');
+            return;
+        }
+
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to submit these images?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, submit!',
+            cancelButtonText: 'Cancel'
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const imageEntries = images.map(img => ({
+                    email: matchedStudent?.email || 'unknown',
+                    imageUrl: img.src
+                }));
+
+                const res = await fetch('/api/StudentImage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ images: imageEntries }),
+                });
+
+                if (res.ok) {
+                    Swal.fire('Success!', 'Images saved successfully to database!', 'success');
+                    setImages([]);
+                } else {
+                    Swal.fire('Failed!', 'Failed to save images.', 'error');
+                }
+            } catch (error) {
+                console.error('Error saving images:', error);
+                Swal.fire('Error!', 'An error occurred while saving images.', 'error');
+            }
         } else {
-            alert('Images submitted successfully!');
-            setImages([]); // Clear the images after submitting
+            Swal.fire('Cancelled', 'Image submission cancelled.', 'info');
         }
     };
 
-    // Close modal if clicked outside of the modal content
+
     const handleModalClick = (e) => {
-        // If the clicked target is the background overlay, close the modal
         if (e.target === e.currentTarget) {
             closeModal();
         }
@@ -56,7 +124,6 @@ export default function Page() {
             <div className="p-6 max-w-4xl mx-auto">
                 <h1 className='text-center my-10 font-bold text-3xl'>Upload Your Picture For Gallery</h1>
 
-                {/* Upload Picture Button */}
                 <button
                     onClick={triggerFileInput}
                     className="w-full text-4xl border-4 border-red-300 rounded-lg h-40 bg-gray-300 flex items-center justify-center text-white font-semibold mb-4"
@@ -64,7 +131,6 @@ export default function Page() {
                     Upload Picture
                 </button>
 
-                {/* Image Upload Section (hidden file input) */}
                 <input
                     id="image-upload"
                     type="file"
@@ -74,25 +140,22 @@ export default function Page() {
                     className="hidden"
                 />
 
-                {/* Display Uploaded Images */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
                     {images.map((image) => (
                         <div key={image.id} className="relative">
                             <div className="w-full h-48 relative cursor-pointer">
-                                <Image
+                                <img
                                     src={image.src}
                                     alt="Uploaded"
-                                    layout="fill"
                                     objectFit="cover"
                                     className="rounded-lg shadow-lg"
-                                    onClick={() => openModal(image.src)} // Open modal on image click
+                                    onClick={() => openModal(image.src)}
                                 />
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Submit Button */}
                 <div className="flex justify-center mt-6">
                     <button
                         onClick={handleSubmit}
@@ -103,11 +166,10 @@ export default function Page() {
                 </div>
             </div>
 
-            {/* Modal */}
             {isModalOpen && (
-                <div 
+                <div
                     className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center"
-                    onClick={handleModalClick} // Add click event listener to close on background click
+                    onClick={handleModalClick}
                 >
                     <div className="relative">
                         <button
