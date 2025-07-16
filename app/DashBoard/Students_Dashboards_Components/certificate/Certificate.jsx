@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import useUserMatching from '@/hooks/useUserMatching';
 
-export default function Page() {
+export default function Certificate() {
   const [images, setImages] = useState([]);
   const [imageDetails, setImageDetails] = useState([]);
   const [submittedImages, setSubmittedImages] = useState([]);
