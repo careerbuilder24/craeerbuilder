@@ -15,7 +15,7 @@ import PicturesEdits from '../Students_Dashboards_Components/PicturesEdits/Pictu
 import VideosEdits from '../Students_Dashboards_Components/videosEdit/videosEdits';
 import BlogsEditsStudents from '../Students_Dashboards_Components/BlogsEditsStudents/BlogsEditsStudents';
 import SettingsEdits from '../Students_Dashboards_Components/SettingsEdit/SettingsEdit';
-import Certificate from '../Students_Dashboards_Components/Certificate/Certificate';
+import Certificate from '../Students_Dashboards_Components/Certificates/Certificate';
 import Welcome_Page from '../Welcome_Page/Welcome_Page';
 import AllBlogs from '../Students_Dashboards_Components/AllBlog/AllBlogs';
 import Image from 'next/image';
