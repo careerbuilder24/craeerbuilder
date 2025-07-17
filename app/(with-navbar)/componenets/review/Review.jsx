@@ -1,32 +1,14 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const reviews = [
-  {
-    name: "Promiti",
-    role: "Frontend Developer",
-    comment: "This platform has changed the way I learn. The content is excellent and well-structured!",
-    image: "https://i.postimg.cc/TPnWy7RN/wefk.png"
-  },
-  {
-    name: "Alma",
-    role: "Software Engineer",
-    comment: "Amazing experience! Highly recommended for developers at any level.",
-    image: "https://i.postimg.cc/yN3yLy70/rtegk.png"
-  },
-  {
-    name: "Sadia",
-    role: "UI/UX Designer",
-    comment: "Beautiful design and very user-friendly interface. Loved it!",
-    image: "https://i.postimg.cc/yYS6YJ6v/rthk.png"
-  },
-  {
-    name: "Rifat Rahamn",
-    role: "Fullstack Developer",
-    comment: "Great service and reliable content. It helped me land my dream job!",
-    image: "https://i.postimg.cc/fy9ZYKbD/intern-1.jpg"
-  }
+  { name: "Promiti", role: "Frontend Developer", comment: "This platform has changed the way I learn. The content is excellent and well-structured!", image: "https://i.postimg.cc/TPnWy7RN/wefk.png" },
+  { name: "Alma", role: "Software Engineer", comment: "Amazing experience! Highly recommended for developers at any level.", image: "https://i.postimg.cc/yN3yLy70/rtegk.png" },
+  { name: "Sadia", role: "UI/UX Designer", comment: "Beautiful design and very user-friendly interface. Loved it!", image: "https://i.postimg.cc/yYS6YJ6v/rthk.png" },
+  { name: "Rifat Rahamn", role: "Fullstack Developer", comment: "Great service and reliable content. It helped me land my dream job!", image: "https://i.postimg.cc/fy9ZYKbD/intern-1.jpg" }
 ];
 
 const StarRating = () => (
@@ -40,10 +22,23 @@ const StarRating = () => (
 );
 
 export default function Review() {
+  const [slidePercentage, setSlidePercentage] = useState(60);
+
+  useEffect(() => {
+    const updateSlide = () => {
+      setSlidePercentage(window.innerWidth < 768 ? 100 : 60);
+    };
+    updateSlide();
+    window.addEventListener('resize', updateSlide);
+    return () => window.removeEventListener('resize', updateSlide);
+  }, []);
+
   return (
     <section className="py-12 my-10 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
-
+        <h2 className="text-2xl md:text-4xl font-bold text-[#17549A] text-center mb-8">
+          Our Student and Intern Reviews
+        </h2>
 
         <Carousel
           infiniteLoop
@@ -53,13 +48,13 @@ export default function Review() {
           showStatus={false}
           transitionTime={800}
           centerMode
-          centerSlidePercentage={window.innerWidth < 768 ? 100 : 60} // Responsive width
+          centerSlidePercentage={slidePercentage}
           showArrows={true}
         >
           {reviews.map((review, index) => (
             <div key={index} className="flex justify-center">
-              <div className="w-full max-w-sm md:max-w-md bg-white p-6 md:p-8 rounded-2xl shadow-lg flex flex-col items-center text-center my-10">
-                <div className='w-24 md:w-32 border-4 border-[#32C4F0] shadow-lg rounded-full overflow-hidden mb-4'>
+              <div className="w-[280px] sm:w-[300px] md:w-[350px] bg-white p-4 md:p-6 rounded-2xl shadow-lg flex flex-col items-center text-center my-6">
+                <div className="w-20 md:w-24 border-4 border-[#32C4F0] shadow-lg rounded-full overflow-hidden mb-4">
                   <img
                     src={review.image}
                     alt={review.name}
@@ -67,19 +62,15 @@ export default function Review() {
                   />
                 </div>
                 <StarRating />
-                <h4 className="text-lg md:text-xl font-semibold mb-1">{review.name}</h4>
-                <p className="text-sm text-gray-500 mb-3">{review.role}</p>
-                <p className="text-sm text-gray-700 text-justify px-1">
+                <h4 className="text-base md:text-lg font-semibold mb-1">{review.name}</h4>
+                <p className="text-xs text-gray-500 mb-2">{review.role}</p>
+                <p className="text-sm text-gray-700 text-center px-1">
                   "{review.comment}"
                 </p>
               </div>
             </div>
           ))}
         </Carousel>
-
-        <h2 className="text-3xl text-[#17549A] md:text-4xl font-bold  text-center mb-10">
-          Our Student and Intern Reviews
-        </h2>
       </div>
     </section>
   );
