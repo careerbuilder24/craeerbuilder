@@ -1,17 +1,36 @@
 import { FaBold, FaItalic, FaAlignLeft, FaAlignCenter, FaAlignRight, FaLink } from 'react-icons/fa';
 import { Textarea } from 'flowbite-react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Swal from 'sweetalert2';
 
 export default function Page() {
+    const [title, setTitle] = useState('');
     const [note, setNote] = useState('');
     const [category, setCategory] = useState('');
     const [featuredImage, setFeaturedImage] = useState(null);
     const [alignment, setAlignment] = useState('left');
-    const [fontSize, setFontSize] = useState('16'); // Default font size in pt
+    const [fontSize, setFontSize] = useState('16');
     const [linkUrl, setLinkUrl] = useState('');
     const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false);
-    const editorRef = React.useRef(null);
+    const [showPreview, setShowPreview] = useState(false);
+    const [blogContent, setBlogContent] = useState('');
+
+    const editorRef = useRef(null);
+
+    useEffect(() => {
+        const savedDraft = localStorage.getItem('blog_draft');
+        if (savedDraft) {
+            const draft = JSON.parse(savedDraft);
+            setTitle(draft.title || '');
+            setNote(draft.note || '');
+            setCategory(draft.category || '');
+            setFeaturedImage(draft.featuredImage || null);
+            if (editorRef.current && draft.blogContent) {
+                editorRef.current.innerHTML = draft.blogContent;
+            }
+        }
+    }, []);
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
@@ -24,13 +43,8 @@ export default function Page() {
         setFeaturedImage(null);
     };
 
-    const toggleBold = () => {
-        document.execCommand('bold');
-    };
-
-    const toggleItalic = () => {
-        document.execCommand('italic');
-    };
+    const toggleBold = () => document.execCommand('bold');
+    const toggleItalic = () => document.execCommand('italic');
 
     const handleAlign = (alignType) => {
         setAlignment(alignType);
@@ -62,18 +76,99 @@ export default function Page() {
         }
     };
 
+    const handlePreview = () => {
+        if (editorRef.current) {
+            setBlogContent(editorRef.current.innerHTML);
+            setShowPreview(true);
+        }
+    };
+
+    const handleSaveDraft = () => {
+        if (editorRef.current) {
+            Swal.fire({
+                title: 'Save as Draft?',
+                text: "Do you want to save this blog as a draft?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#17549A',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Save Draft',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const draft = {
+                        title,
+                        note,
+                        category,
+                        featuredImage,
+                        blogContent: editorRef.current.innerHTML,
+                        dateSaved: new Date().toISOString()
+                    };
+                    localStorage.setItem('blog_draft', JSON.stringify(draft));
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Draft Saved!',
+                        text: 'Your blog draft has been successfully saved.',
+                        confirmButtonColor: '#17549A'
+                    });
+                }
+            });
+        }
+    };
+
+    const handlePublishBlog = async () => {
+        if (editorRef.current) {
+            Swal.fire({
+                title: 'Publish Blog?',
+                text: 'Are you sure you want to publish this blog?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#17549A',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Publish',
+                cancelButtonText: 'Cancel'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const blogData = {
+                        title,
+                        note,
+                        category,
+                        featuredImage,
+                        blogContent: editorRef.current.innerHTML
+                    };
+
+                    const res = await fetch('/api/StudentBlog', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(blogData)
+                    });
+
+                    if (res.ok) {
+                        Swal.fire('Published!', 'Your blog has been published.', 'success');
+                        localStorage.removeItem('blog_draft');
+                    } else {
+                        Swal.fire('Failed!', 'Blog could not be published.', 'error');
+                    }
+                } else {
+                    Swal.fire('Cancelled', 'Your blog was not published.', 'info');
+                }
+            });
+        }
+    };
+
     return (
         <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', padding: '20px', maxWidth: '1200px', margin: '0 auto', flexWrap: 'wrap' }}>
-            {/* Left Side */}
             <div style={{ flex: 2, minWidth: '300px' }}>
                 <div>
                     <label><strong>Title:</strong></label>
                     <input
                         type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                         placeholder="Enter title"
                         style={{ width: '100%', padding: '8px', margin: '8px 0', borderRadius: '5px' }}
                         className='border'
-
                     />
                 </div>
                 <div>
@@ -85,7 +180,7 @@ export default function Page() {
                         style={{ width: '100%', padding: '8px', margin: '8px 0', height: '100px', borderRadius: '5px' }}
                     />
                 </div>
-                <div style={{ backgroundColor: '#ffffffff' }} className="border p-2 mt-10">
+                <div style={{ backgroundColor: '#fff' }} className="border p-2 mt-10">
                     <div className="mb-5 text-center">
                         <label><strong>Blog Section</strong></label>
                     </div>
@@ -104,6 +199,7 @@ export default function Page() {
                         </select>
                         <button onClick={() => setIsLinkDialogOpen(true)}><FaLink /></button>
                     </div>
+
                     {isLinkDialogOpen && (
                         <div>
                             <label>Enter URL:</label>
@@ -122,9 +218,13 @@ export default function Page() {
                             <button onClick={() => setIsLinkDialogOpen(false)} style={{ padding: '8px', backgroundColor: '#ccc', color: 'white', borderRadius: '5px' }}>Cancel</button>
                         </div>
                     )}
+
                     <div
                         ref={editorRef}
                         contentEditable
+                        data-gramm="false"
+                        data-gramm_editor="false"
+                        suppressContentEditableWarning={true}
                         style={{
                             width: '100%',
                             padding: '10px',
@@ -136,20 +236,59 @@ export default function Page() {
                         }}
                         placeholder="Start typing your blog content..."
                     ></div>
+
+                    {showPreview && (
+                        <div style={{ marginTop: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '15px', backgroundColor: '#f9f9f9' }}>
+                            <h3 className='font-bold'>Live Preview</h3>
+                            {/* Render blog content with proper HTML */}
+                            <div
+                                dangerouslySetInnerHTML={{ __html: blogContent }}
+                                style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}
+                            />
+                            <button
+                                onClick={() => setShowPreview(false)}
+                                style={{ marginTop: '10px', padding: '8px', backgroundColor: '#ccc', borderRadius: '5px' }}
+                            >
+                                Close Preview
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
 
-            {/* Right Side */}
             <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr', gap: '20px', minWidth: '300px' }}>
-                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#ffffffff' }}>
+                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#fff' }}>
                     <h3 className='font-bold'>Actions</h3>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                        <button style={{ padding: '10px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px' }}>Save Draft</button>
-                        <button style={{ padding: '10px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px' }}>Preview</button>
+                        <button
+                            onClick={handleSaveDraft}
+                            style={{ padding: '10px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px' }}
+                        >
+                            Save Draft
+                        </button>
+                        <button
+                            onClick={handlePreview}
+                            style={{ padding: '10px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px' }}
+                        >
+                            Preview
+                        </button>
                     </div>
-                    <button style={{ padding: '10px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px', marginTop: '10px' }} className='w-full' >Publish</button>
+                    <button
+                        onClick={handlePublishBlog}
+                        style={{
+                            padding: '10px',
+                            backgroundColor: '#17549A',
+                            color: 'white',
+                            borderRadius: '5px',
+                            marginTop: '10px'
+                        }}
+                        className='w-full'
+                    >
+                        Publish
+                    </button>
                 </div>
-                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#ffffffff' }}>
+
+                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#fff' }}>
                     <h3 className='font-bold'>Category</h3>
                     <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: '100%', padding: '8px', borderRadius: '5px' }} className='border'>
                         <option value="">Select a category</option>
@@ -159,7 +298,8 @@ export default function Page() {
                         <option value="entertainment">Entertainment</option>
                     </select>
                 </div>
-                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#ffffffff' }}>
+
+                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#fff' }}>
                     <h3 className='font-bold'>Featured Image</h3>
                     <input type="file" onChange={handleImageUpload} style={{ width: '100%', padding: '8px', borderRadius: '5px' }} />
                     {featuredImage && (

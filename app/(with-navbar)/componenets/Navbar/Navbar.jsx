@@ -64,6 +64,7 @@ export default function Navbar() {
     try {
       await logOut(); // assuming this clears your auth context
       sessionStorage.removeItem('manualUser'); // remove from session storage
+       localStorage.removeItem('blog_draft');
       setUserProfile(null); // clear user profile
 
       // Force full reload to login page
