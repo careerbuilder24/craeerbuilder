@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function POST(req) {
     try {
         const body = await req.json();
-        const { title, note, category, featuredImage, blogContent } = body;
+        const { title, note, category, featuredImage, blogContent, email } = body;
 
         if (!title || !blogContent) {
             return NextResponse.json({
@@ -15,9 +15,9 @@ export async function POST(req) {
         }
 
         await db.execute(
-            `INSERT INTO  student_published_blogs (title, note, category, featuredImage, blogContent)
-             VALUES (?, ?, ?, ?, ?)`,
-            [title, note, category, featuredImage, blogContent]
+            `INSERT INTO  student_published_blogs (title, note, category, featuredImage, blogContent, email)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+            [title, note, category, featuredImage, blogContent,email]
         );
 
         return NextResponse.json({
@@ -34,3 +34,23 @@ export async function POST(req) {
         }, { status: 500 });
     }
 }
+
+// Get method 
+export async function GET() {
+    try {
+        const query = 'SELECT * FROM users_login.student_published_blogs';
+        const [row] = await db.execute(query);
+        return NextResponse.json({
+            success: true,
+            data: row,
+        }, { status: 200 })
+    } catch (error) {
+        console.error('error of getting data', error);
+        return NextResponse.json({
+            success: false,
+            message: 'Error for Get Data',
+            error: error.message
+        }, { status: 500 })
+    }
+}
+

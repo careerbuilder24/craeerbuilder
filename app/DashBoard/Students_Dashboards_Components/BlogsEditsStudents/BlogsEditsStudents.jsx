@@ -3,6 +3,7 @@ import { Textarea } from 'flowbite-react';
 import Image from 'next/image';
 import React, { useState, useEffect, useRef } from 'react';
 import Swal from 'sweetalert2';
+import useUserMatching from '@/hooks/useUserMatching';
 
 export default function Page() {
     const [title, setTitle] = useState('');
@@ -15,6 +16,10 @@ export default function Page() {
     const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false);
     const [showPreview, setShowPreview] = useState(false);
     const [blogContent, setBlogContent] = useState('');
+    const [savedRange, setSavedRange] = useState(null);
+
+      const {  matchedStudent } = useUserMatching();
+    //    console.log(matchedStudent?.email)
 
     const editorRef = useRef(null);
 
@@ -59,18 +64,28 @@ export default function Page() {
         }
     };
 
+    const handleOpenLinkDialog = () => {
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0) {
+            setSavedRange(selection.getRangeAt(0).cloneRange());
+        }
+        setIsLinkDialogOpen(true);
+    };
+
     const handleInsertLink = () => {
-        if (linkUrl) {
+        if (linkUrl && savedRange) {
             const selection = window.getSelection();
-            if (selection.rangeCount > 0) {
-                const range = selection.getRangeAt(0);
-                const linkNode = document.createElement('a');
-                linkNode.href = linkUrl;
-                linkNode.target = '_blank';
-                linkNode.style.color = 'blue';
-                linkNode.appendChild(range.extractContents());
-                range.insertNode(linkNode);
-            }
+            selection.removeAllRanges();
+            selection.addRange(savedRange);
+
+            const linkNode = document.createElement('a');
+            linkNode.href = linkUrl;
+            linkNode.target = '_blank';
+            linkNode.style.color = 'blue';
+            linkNode.appendChild(savedRange.extractContents());
+            savedRange.insertNode(linkNode);
+
+            setSavedRange(null);
             setLinkUrl('');
             setIsLinkDialogOpen(false);
         }
@@ -135,6 +150,7 @@ export default function Page() {
                         note,
                         category,
                         featuredImage,
+                        email: matchedStudent?.email,
                         blogContent: editorRef.current.innerHTML
                     };
 
@@ -197,7 +213,7 @@ export default function Page() {
                             <option value="16">16 pt</option>
                             <option value="18">18 pt</option>
                         </select>
-                        <button onClick={() => setIsLinkDialogOpen(true)}><FaLink /></button>
+                        <button onClick={handleOpenLinkDialog}><FaLink /></button>
                     </div>
 
                     {isLinkDialogOpen && (
@@ -214,8 +230,29 @@ export default function Page() {
                                     borderRadius: '5px',
                                 }}
                             />
-                            <button onClick={handleInsertLink} style={{ padding: '8px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px', marginBottom: '10px' }}>Insert Link</button>
-                            <button onClick={() => setIsLinkDialogOpen(false)} style={{ padding: '8px', backgroundColor: '#ccc', color: 'white', borderRadius: '5px' }}>Cancel</button>
+                            <button
+                                onClick={handleInsertLink}
+                                style={{
+                                    padding: '8px',
+                                    backgroundColor: '#17549A',
+                                    color: 'white',
+                                    borderRadius: '5px',
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Insert Link
+                            </button>
+                            <button
+                                onClick={() => setIsLinkDialogOpen(false)}
+                                style={{
+                                    padding: '8px',
+                                    backgroundColor: '#ccc',
+                                    color: 'white',
+                                    borderRadius: '5px',
+                                }}
+                            >
+                                Cancel
+                            </button>
                         </div>
                     )}
 
@@ -240,7 +277,6 @@ export default function Page() {
                     {showPreview && (
                         <div style={{ marginTop: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '15px', backgroundColor: '#f9f9f9' }}>
                             <h3 className='font-bold'>Live Preview</h3>
-                            {/* Render blog content with proper HTML */}
                             <div
                                 dangerouslySetInnerHTML={{ __html: blogContent }}
                                 style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}
