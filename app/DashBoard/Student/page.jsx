@@ -2,8 +2,9 @@
 
 'use client';
 
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { FiChevronRight, FiChevronDown } from 'react-icons/fi';
 import './student.css';
 import Link from 'next/link';
 import CvUpload from '../Students_Dashboards_Components/CvUpload/CvUpload';
@@ -41,6 +42,36 @@ import UploadedCertificate from '../Students_Dashboards_Components/UploadedCerti
 import UploadedPicture from '../Students_Dashboards_Components/UploadedPicture/UploadedPicture';
 
 const PageContent = () => {
+  const sections = [
+    { key: "courses", label: "Courses", uploadedKey: "UploadedCourses" },
+    { key: "portfolio", label: "Portfolio", uploadedKey: "UploadedPortfolio" },
+    { key: "certificate", label: "Certificate", uploadedKey: "UploadedCertificate" },
+    { key: "picture", label: "Picture", uploadedKey: "UploadedPicture" },
+  ];
+
+  const [openSections, setOpenSections] = useState({});
+  const contentRefs = useRef({});
+
+  const toggleSection = (key) => {
+    setOpenSections((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  // Effect to set maxHeight for smooth transition on open/close
+  useEffect(() => {
+    sections.forEach(({ key }) => {
+      const el = contentRefs.current[key];
+      if (el) {
+        if (openSections[key]) {
+          el.style.maxHeight = el.scrollHeight + "px";
+        } else {
+          el.style.maxHeight = "0px";
+        }
+      }
+    });
+  }, [openSections, sections]);
   // state managements
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -132,139 +163,51 @@ const PageContent = () => {
         );
       default:
         return (
-         
+
 
           <ul className="mt-3 text-left "> {/* <-- Ensures all children align left */}
             <li>
-              <Link href="/" className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-700 rounded">Home</Link>
+              <Link href="/" className="block px-2 py-1  hover:bg-blue-100 hover:text-blue-700 rounded ">Home</Link>
             </li>
-            <li onClick={() => handleSectionClick('Profile')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Profile Edit</li>
+            <li onClick={() => handleSectionClick('Profile')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded ">Profile Edit</li>
             <li onClick={() => handleSectionClick('CvUpdate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">CV Update</li>
+            
+            {/* toggle sections */}
+            {sections.map(({ key, label, uploadedKey }) => {
+              const isOpen = !!openSections[key];
+              return (
+                <div key={key} className="my-2 p-2 rounded-lg bg-[#222222] text-white">
+                  <div
+                    onClick={() => toggleSection(key)}
+                    className="flex items-center justify-between cursor-pointer px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700"
+                  >
+                    <span className="block">{label}</span>
+                    {isOpen ? (
+                      <FiChevronDown className="h-5 w-5 transition-transform duration-300" />
+                    ) : (
+                      <FiChevronRight className="h-5 w-5 transition-transform duration-300" />
+                    )}
+                  </div>
 
-         
-            <details className="group my-2 p-2  rounded-lg">
-              <summary className="list-none cursor-pointer">
-                <div
-                  onClick={() => handleSectionClick('Achivements')}
-                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
-                  // style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Achievements
+                  <div
+                    ref={(el) => (contentRefs.current[key] = el)}
+                    className="overflow-hidden transition-max-height duration-500 ease-in-out"
+                    style={{ maxHeight: "0px" }}
+                  >
+                    <ul className="ml-4 mt-1 text-left">
+                      <li
+                        onClick={() => handleSectionClick(uploadedKey)}
+                        className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700 text-white"
+                      >
+                        Uploaded {label}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </summary>
-              <ul className="ml-4 mt-1 text-left">
-                <li
-                  onClick={() => handleSectionClick('UploadedAchievements')}
-                  className=" cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
-                  style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Uploaded Achievements
-                </li>
-              </ul>
-            </details>
-            <details className="group">
-              <summary className="list-none cursor-pointer">
-                <div
-                  onClick={() => handleSectionClick('courses')}
-                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
-                  // style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Courses
-                </div>
-              </summary>
-              <ul className="ml-4 mt-1 text-left">
-                <li
-                  onClick={() => handleSectionClick('UploadedCourses')}
-                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
-                  style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Uploaded Courses
-                </li>
-              </ul>
-            </details>
+              );
+            })}
 
-            <details className="group">
-              <summary className="list-none cursor-pointer">
-                <div
-                  onClick={() => handleSectionClick('Portfolio')}
-                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
-                  // style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Portfolio
-                </div>
-              </summary>
-              <ul className="ml-4 mt-1 text-left">
-                <li
-                  onClick={() => handleSectionClick('UploadedPortfolio')}
-                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
-                  style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Uploaded Portfolio
-                </li>
-              </ul>
-            </details>
-            <details className="group">
-              <summary className="list-none cursor-pointer">
-                <div
-                  onClick={() => handleSectionClick('Certificate')}
-                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
-                  // style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Certificate
-                </div>
-              </summary>
-              <ul className="ml-4 mt-1 text-left">
-                <li
-                  onClick={() => handleSectionClick('UploadedCertificate')}
-                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
-                  style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Uploaded Certificate
-                </li>
-              </ul>
-            </details>
-            <details className="group">
-              <summary className="list-none cursor-pointer">
-                <div
-                  onClick={() => handleSectionClick('Pictures')}
-                  className="block px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700 text-left"
-                  // style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Picture
-                </div>
-              </summary>
-              <ul className="ml-4 mt-1 text-left">
-                <li
-                  onClick={() => handleSectionClick('UploadedPicture')}
-                  className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700"
-                  style={{ textDecoration: 'none' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = 'none')}
-                >
-                  Uploaded Picture
-                </li>
-              </ul>
-            </details>
 
-           
             <li onClick={() => handleSectionClick('Videos')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Videos</li>
             <li onClick={() => handleSectionClick('Blog')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Blog</li>
             <li onClick={() => handleSectionClick('AllBlogs')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">All Blogs</li>
@@ -322,7 +265,7 @@ const PageContent = () => {
         case 'Certificate':
           return <Certificate />;
         case 'UploadedCertificate':
-          return <UploadedCertificate/>;
+          return <UploadedCertificate />;
         case 'Pictures':
           return <PicturesEdits />;
         case 'UploadedPicture':
