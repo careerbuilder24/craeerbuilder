@@ -165,56 +165,100 @@ const PageContent = () => {
         return (
 
 
-          <ul className="mt-3 text-left "> {/* <-- Ensures all children align left */}
-            <li>
-              <Link href="/" className="block px-2 py-1  hover:bg-blue-100 hover:text-blue-700 rounded ">Home</Link>
-            </li>
-            <li onClick={() => handleSectionClick('Profile')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded ">Profile Edit</li>
-            <li onClick={() => handleSectionClick('CvUpdate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">CV Update</li>
+          <div
+            className={`sidebar ${isSidebarOpen ? 'open' : ''} bg-[#222222] text-white h-screen overflow-y-auto`}
+          >
+            <button
+              className="w-full text-left p-2 hover:bg-red-500"
+              onClick={toggleSidebar}
+              aria-label="Close sidebar"
+            >
+              ✖ Close
+            </button>
 
-            {/* toggle sections */}
-            {sections.map(({ key, label, uploadedKey }) => {
-              const isOpen = !!openSections[key];
-              return (
-                <div key={key} className="my-2 p-2 rounded-lg bg-[#222222] text-white overflow-y-hidden">
+            <ul className="mt-3 text-left px-3 pb-10"> {/* Padding bottom avoids scroll conflict */}
+              <li>
+                <Link
+                  href="/"
+                  className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-700 rounded"
+                >
+                  Home
+                </Link>
+              </li>
+              <li
+                onClick={() => handleSectionClick('Profile')}
+                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+              >
+                Profile Edit
+              </li>
+              <li
+                onClick={() => handleSectionClick('CvUpdate')}
+                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+              >
+                CV Update
+              </li>
+
+              {sections.map(({ key, label, uploadedKey }) => {
+                const isOpen = !!openSections[key];
+                return (
                   <div
-                    onClick={() => {
-                      toggleSection(key);             // Expand/collapse
-                      handleSectionClick(key);        // Load the main component
-                    }}
-                    className="flex items-center justify-between cursor-pointer px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700"
+                    key={key}
+                    className="my-2 bg-[#222222] rounded"
                   >
-                    <span className="block">{label}</span>
-                    {isOpen ? (
-                      <FiChevronDown className="h-5 w-5 transition-transform duration-300" />
-                    ) : (
-                      <FiChevronRight className="h-5 w-5 transition-transform duration-300" />
-                    )}
+                    <div
+                      onClick={() => {
+                        toggleSection(key);
+                        handleSectionClick(key);  // Important for middle content load
+                      }}
+                      className="flex items-center justify-between px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                    >
+                      <span>{label}</span>
+                      {isOpen ? (
+                        <FiChevronDown className="h-5 w-5" />
+                      ) : (
+                        <FiChevronRight className="h-5 w-5" />
+                      )}
+                    </div>
+
+                    <div
+                      ref={(el) => (contentRefs.current[key] = el)}
+                      className="overflow-hidden transition-all duration-500 ease-in-out"
+                      style={{ maxHeight: "0px" }}
+                    >
+                      <ul className="ml-4 mt-1">
+                        <li
+                          onClick={() => handleSectionClick(uploadedKey)}
+                          className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                        >
+                          Uploaded {label}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
+                );
+              })}
 
-                  <div
-                    ref={(el) => (contentRefs.current[key] = el)}
-                    className="overflow-hidden transition-max-height duration-500 ease-in-out"
-                    style={{ maxHeight: "0px" }}
-                  >
-                    <ul className="ml-4 mt-1 text-left">
-                      <li
-                        onClick={() => handleSectionClick(uploadedKey)}
-                        className="px-2 py-1 cursor-pointer rounded hover:bg-blue-100 hover:text-blue-700 text-white"
-                      >
-                        Uploaded {label}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              );
-            })}
+              <li
+                onClick={() => handleSectionClick('Videos')}
+                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+              >
+                Videos
+              </li>
+              <li
+                onClick={() => handleSectionClick('Blog')}
+                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+              >
+                Blog
+              </li>
+              <li
+                onClick={() => handleSectionClick('AllBlogs')}
+                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+              >
+                All Blogs
+              </li>
+            </ul>
+          </div>
 
-
-            <li onClick={() => handleSectionClick('Videos')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Videos</li>
-            <li onClick={() => handleSectionClick('Blog')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">Blog</li>
-            <li onClick={() => handleSectionClick('AllBlogs')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">All Blogs</li>
-          </ul>
 
         );
     }
