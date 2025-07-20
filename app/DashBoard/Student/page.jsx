@@ -171,14 +171,17 @@ const PageContent = () => {
             </li>
             <li onClick={() => handleSectionClick('Profile')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded ">Profile Edit</li>
             <li onClick={() => handleSectionClick('CvUpdate')} className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded">CV Update</li>
-            
+
             {/* toggle sections */}
             {sections.map(({ key, label, uploadedKey }) => {
               const isOpen = !!openSections[key];
               return (
-                <div key={key} className="my-2 p-2 rounded-lg bg-[#222222] text-white">
+                <div key={key} className="my-2 p-2 rounded-lg bg-[#222222] text-white overflow-y-hidden">
                   <div
-                    onClick={() => toggleSection(key)}
+                    onClick={() => {
+                      toggleSection(key);             // Expand/collapse
+                      handleSectionClick(key);        // Load the main component
+                    }}
                     className="flex items-center justify-between cursor-pointer px-2 py-1 rounded hover:bg-blue-100 hover:text-blue-700"
                   >
                     <span className="block">{label}</span>
@@ -256,17 +259,17 @@ const PageContent = () => {
           return <UploadedCourses />;
         case 'UploadedAchievements':
           return <UploadedAchievements />;
-        case 'Portfolio':
+        case 'portfolio':
           return <StudentsPortfolioEdit />;
         case 'UploadedPortfolio':
           return <UploadedPortfolio />;
         case 'courses':
           return <StudentsCourses />;
-        case 'Certificate':
+        case 'certificate':
           return <Certificate />;
         case 'UploadedCertificate':
           return <UploadedCertificate />;
-        case 'Pictures':
+        case 'picture':
           return <PicturesEdits />;
         case 'UploadedPicture':
           return <UploadedPicture />;
