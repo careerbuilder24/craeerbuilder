@@ -15,35 +15,62 @@ export default function Page() {
     const [portfolioData, setPortfolioData] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
 
-    const {matchedStudent} = useUserMatching()
+    const { matchedStudent } = useUserMatching()
     // const {matchedStudentProfilesEmail} = useMatchingUploadedCourses()
 
-    
+
     console.log(matchedStudent?.email)
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     };
 
+
+  
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-            // if (!matchedStudentProfilesEmail?.email) {
-            //                 Swal.fire({
-            //                     title: 'Warning!',
-            //                     text: 'Please Fill Up your profile Edit.',
-            //                     icon: 'warning',
-            //                     confirmButtonText: 'OK'
-            //                 });
-            //                 return;
-            //             }
 
-        // 1. Upload to ImgBB
+        // ✅ Basic Empty Fields Check
+        if (
+            !portfolioTitle.trim() ||
+            !webPortfolioLink.trim() ||
+            !category.trim() ||
+            !description.trim() ||
+            !date.trim() ||
+            !file ||
+            !matchedStudent?.email
+        ) {
+            return Swal.fire({
+                title: 'Warning!',
+                text: 'Please fill in all required fields before submitting.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        }
+
+        // ✅ Confirmation Before Submit
+        const confirmation = await Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to submit this portfolio?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, submit it!',
+            cancelButtonText: 'Cancel',
+        });
+
+        if (!confirmation.isConfirmed) {
+            return Swal.fire('Cancelled', 'Submission was cancelled.', 'info');
+        }
+
+        // ✅ Proceed with Image Upload and Data Save
         let imageUrl = '';
+
         if (file) {
             const formData = new FormData();
             formData.append('image', file);
 
-            const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee'; // Replace with your real key
+            const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee';
 
             try {
                 const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
@@ -54,31 +81,29 @@ export default function Page() {
                 imageUrl = data.data.url;
             } catch (err) {
                 console.error('ImgBB Upload Error:', err);
-                return alert('Image upload failed!');
+                return Swal.fire('Error', 'Image upload failed!', 'error');
             }
         }
 
-        // 2. Send to your backend API (Next.js API route)
         try {
             const response = await fetch('/api/SavePortfolioAdded', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     portfolioTitle,
                     webPortfolioLink,
                     imageUrl,
                     category,
                     description,
-                     email: matchedStudent?.email,
+                    email: matchedStudent?.email,
                     date,
                 }),
             });
 
             const result = await response.json();
+
             if (result.success) {
-                alert('Portfolio added successfully!');
+                Swal.fire('Success!', 'Portfolio added successfully!', 'success');
                 setPortfolioData([{ portfolioTitle, webPortfolioLink, file, category, description, date }, ...portfolioData]);
                 setPortfolioTitle('');
                 setWebPortfolioLink('');
@@ -87,10 +112,11 @@ export default function Page() {
                 setDescription('');
                 setDate('');
             } else {
-                alert('Database save failed!');
+                Swal.fire('Failed', 'Database save failed!', 'error');
             }
         } catch (err) {
             console.error('API Error:', err);
+            Swal.fire('Error', 'Submission failed!', 'error');
         }
     };
 

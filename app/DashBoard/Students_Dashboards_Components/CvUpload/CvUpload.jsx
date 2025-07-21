@@ -4,9 +4,8 @@ import Image from "next/image";
 import Head from "next/head";
 
 export default function Page() {
-  const facebookIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAkCAYAAAB15jFqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADzSURBVFhH7ZUxCsJAEEW9jJ0XsBELj2HnGSR3sLSxs7O0sPAGFh7BA4iKARFEBBFGJrAwWf9mJxhWi/nwmjAzj91NNq32KKcUdMZn6i2ONFgfKJnU0Z2d0ksZk1YynFxpurrTdvckl33+KuBnqEdSS9rPLoUsFtQrqSWVK6sK6pWopbyl2qB+iVrK56UN6peopaHwlvMuoJ4QKim/QKGg+hgqaeg8l5sHrI9h0hJJpHzrSHg4Cn9Gfm02v33M84HSb6JZfeNSXi2aKWlc+pPt5YsEzZRAqfs3SlBQHZrnA6U+djmYNIZJS5jUpDH+V9osOb0BDRhzSNyArKMAAAAASUVORK5CYII=";
-  const linkedinIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAnCAYAAABuf0pMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFLSURBVFhH7Zg/SgNBFIdzkZSeQAgIltba5QQ5gaUXsIt4g3SB9HapcwArQQQ1kBCwsLFJM8m3+pa3j8kyyPxp5gdfM/Nm38fszi7s4HK2dmeTVze8fskCveh59bRpGAxv/IVJOfYcPXz8CfgKMnF+/15WAKpAR+Bi8pYM3UfTCtw+bl3KrHd7N51/nRbIESR0c2gE2KJcsbejVwBjiJlggfHdZ1PAHPcuVoIEVs8/nSKf4H8TJGAfluwCRI4Mc+xIrAQLkNgPIAkWkBMgSPrG2bXF8rszbhMkwAV0ESdCIqdDoNaOwak3a3QBX3PBJxFdoA97XRJdgLWcEtbYdWBPUHQBHjodO59cgFod+8m1glWgClSBYAEWCvos63GwoVbPW8EggZQpLqCbtwLAvUsdvo66ObQCwE6kQvfRdARKUAWKCvz+oin6k2rjDi5lfqkTjl0iAAAAAElFTkSuQmCC";
-  const youtubeIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAbCAYAAADh0qZQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEwSURBVFhH5ZgxDoIwFEA5DZ6DRHcPwB1cOYKTC+dwdPIC3EEHBzRxcXBwcah5QxNMfj8tYK3xJy8mQv9//hYKZvPdxewXS3PM8yTBLdus1uLBlMgOs5l4ICUy6cvU8JI8l6W51bW5b7fm0TTm2bZv9EX3XMYDuch5KgqxZpdeSZJ9OpCValtUSToYK7SOqpJMS6xgxiQHUCV91ttUQUMkB1AlY4fkAE5J1khIsH6ZsjHdd63LySRtAWSHruVokhZkQ7saLBl6+3EVuFaVtyw1pRz/Lcn40LUZLEnRkLCSfCZ94Yzd5yUPcEpC7JAcQJWMuS1SS3IAVTLmA8bgvZvbR6xwXdmgSsLY/dgntMc06JUEfmX39QEQt/iEPdeOJxc5tQ5avCS/zW+80qb/50BuXoEv6oT8g5gaAAAAAElFTkSuQmCC";
+
+
   const [cvData, setCvData] = useState({
     name: "",
     maritalStatus: "",
@@ -240,19 +239,7 @@ export default function Page() {
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(12);
-      // const socialLinks = [
-      //   `Facebook: ${cvData.socialMedia.facebook || "Not provided"}`,
-      //   `LinkedIn: ${cvData.socialMedia.linkedin || "Not provided"}`,
-      //   `YouTube: ${cvData.socialMedia.youtube || "Not provided"}`,
-      // ];
 
-      // socialLinks.forEach((link) => {
-      //   const wrappedLink = doc.splitTextToSize(link, maxWidth);
-      //   wrappedLink.forEach((line) => {
-      //     doc.text(line, leftMargin, y);
-      //     y += 12;
-      //   });
-      // });
 
       const socialIcons = {
         facebook: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFUAAABVCAYAAAA49ahaAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAUbSURBVHhe7ZzNihU5FIB9GX9BUcFhVLAV5zHciYsBGWbXLlyIuHKhKIgL0Z3ILHoh4hu48BHmAaT7tg0iiAgiRL4rgbp1T24lqeQkKavgA+2+lZ+vU5WTk6p76K+3u2YmLbPUDFQj9crOrrn4fM+ce7gwZ+7um5O3PpoT/340R/8+MEduHJjD13/Bv/kZv+MzfJZzOJcypLK1KSb16ptdc+HZwpy9t78UZKWNhbIok7KpQ6o7N+pSGVGn7+yvjL5cUAd1UafUllyoSGXE/PFokXREhkLdtEFj9GaXeu7BYnkPlDpaAtpCm6S2piKb1PNPF+b4P+VG5hC0jTZKbR9Lcqlb/+2ZU7frldmHttJmqS+xJJX655OFygSUGtpM26U+xZBMKmGM1OCWoA9S30IZLZWAmyBcamSL0Jexi4hRUrde7RUNk3JBn+ib1GcfoqVeerlnjt2cnlALfaOPUt+HiJLKX3HKQi30MWbEBkvlfjPFS94FfQ29xwZLndKk5At9lly4CJJaQ9h0efuT2X7xxey8+2Y+HPxYYg/7//f/f1/y+PXX5eelckIJCbe8pRIcS5Vpce3+56Wo0IM/gFReDL4LBC+pLONKrpQYcbFHSqk48FnSekktuZYfI5QjpVTAheSoy6BUMjlS4RpwyY89UkuFoezWoNSS6bvuJBR75JCKE8mVZaNUkrlSoRqMveztkUMqbEp0O6Wy7VAyYx8z00tHLqm4cW3NOKWynyMVpkXoQdzK6EZil1RxqgSOJHdOqSWXoojwPRjROcVtAkeSO1EqW7pSIVqEzPrS+ZpI29+iVPbKpQK04LL1ObjcpfM1wVXf35pUbr6l95l8Z/4apOKqP2GtSeVxGelkTXylMqKl87XBWdfhmtQaMlGtSe1nsNak1pCAbk1qPwpYkUqGWzpJm9akQnd3YEVq6VDK0qLUbmi1IpWHZ6UTtGlRKu5EqTyVLJ2QGmTYrQ8XPod0XhdWW1L9OcCdKFVrUw+pGgdipfpz0N0cXJGqNfNrSSXJItWfg24EsCJVK9WnJZV7s1R/DnAnStVanmpJpR6p/hzgTpQqfTgHWlLJdkn15+K3kCrVnRNR6pQuf82ZH5yX/5QmKs0YFZwTlWYyhS0QF4RCPgezu3S+Rao3F86QqpYn+lpcpjqDf61l6hAtSnUuU+eESjzOhMqc+ovHmfqbk9TxOJPUoBkBuGhNanfmhzWp88ZfOIMbf/MWdTiDW9QtPUxRg1RcDT5MAaUf+2lJqtdjP1A6tGpJajeUsohSoWQU0IrU/qxvcUot+dBvK1KDH/rl5quVCuzTglTc9Ccoi1MqlHqRogWpUS9SWEq88lO71FGv/ECJl9Nqlzr65TTQfo2yZqlJXqME7Rd+a5WKg2Qv/ILmq+m1Sk36arpFK4NVo9R+JmoTQVKhls1BTbqbej4ESyXDXUMiWwv62s3q+xAsFeavUNpMlFSYv+zLTbRU4K84xVsBfYoZoZZRUoH7zZQmL/oSeg/tM1qqpYYNw7GEhE2bSCYVCI5L72/FQJt9A3sfkkoFlnElv3IpFNrqs/QMIblUC5mckt8UNARtG8o2xZJNqoVkbqkdBAnasinBnILsUoFtB/ZzSoZf1E0bXFsgKVGR2oUtXfbKNSY06qAuaRs5J+pSLYwYHpchjEk5gimLMilbY1RKFJPah4CbEcXDszyVTBCOIO6B3VHNv/kZv+MzfJZzOHds0J6KaqROiVlqBmapydk1PwFEkshF4PY93gAAAABJRU5ErkJggg==", // ← replace with actual base64
@@ -392,185 +379,202 @@ export default function Page() {
           }}
         />
       </Head>
+      <div className="flex flex-col md:flex-row lg:flex-row items-center justify-center">
 
-      <div className="p-4 max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6">Create Your CV</h1>
+        <div className="p-4 max-w-4xl mx-auto">
+          <h1 className="text-2xl font-bold mb-6">Create Your CV</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* Side Panel */}
-          <div className="col-span-1 bg-[#44B5E6] text-white p-4 rounded-lg">
-            <div className="text-center mb-4">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="mb-2 lg:w-full "
-              />
-              {cvData.profileImage && (
-                <Image
-                  src={cvData.profileImage}
-                  alt="Profile"
-                  width={400}
-                  height={400}
-                  className="w-full  h-full  mx-auto"
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {/* Side Panel */}
+            <div className="col-span-1 bg-[#44B5E6] text-white p-4 rounded-lg">
+              <div className="text-center mb-4">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="mb-2 lg:w-full "
                 />
-              )}
-            </div>
-            <p className="font-bold text-lg">{cvData.name}</p>
-            <p>{cvData.contact.email}</p>
-            <p>{cvData.contact.phone}</p>
-            <p>{cvData.contact.address}</p>
-            <p>{cvData.contact.permanentAddress}</p>
+                {cvData.profileImage && (
+                  <Image
+                    src={cvData.profileImage}
+                    alt="Profile"
+                    width={400}
+                    height={400}
+                    className="w-full  h-full  mx-auto"
+                  />
+                )}
+              </div>
+              <p className="font-bold text-lg">{cvData.name}</p>
+              <p>{cvData.contact.email}</p>
+              <p>{cvData.contact.phone}</p>
+              <p>{cvData.contact.address}</p>
+              <p>{cvData.contact.permanentAddress}</p>
 
-            <div className="mt-4">
-              <h3 className="font-semibold text-lg">Core Skills</h3>
-              <p>{cvData.coreSkills}</p>
+              <div className="mt-4">
+                <h3 className="font-semibold text-lg">Core Skills</h3>
+                <p>{cvData.coreSkills}</p>
+              </div>
+            </div>
+            {/* Main Content */}
+            <div className="col-span-2 bg-gray-100 p-4 rounded-lg">
+              <div className="mb-4">
+                <label className="font-bold mb-2">Name</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={cvData.name}
+                  onChange={(e) => handleInputChange(e, "name")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Marital Status</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={cvData.maritalStatus}
+                  onChange={(e) => handleInputChange(e, "maritalStatus")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Email</label>
+                <input
+                  type="email"
+                  className="w-full p-2 border rounded"
+                  value={cvData.contact.email}
+                  onChange={(e) => handleInputChange(e, "contact", "email")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Phone</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={cvData.contact.phone}
+                  onChange={(e) => handleInputChange(e, "contact", "phone")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Address</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={cvData.contact.address}
+                  onChange={(e) => handleInputChange(e, "contact", "address")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Permanent Address</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={cvData.contact.permanentAddress}
+                  onChange={(e) => handleInputChange(e, "contact", "permanentAddress")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Facebook</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={cvData.socialMedia.facebook}
+                  onChange={(e) => handleInputChange(e, "socialMedia", "facebook")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">LinkedIn</label>
+                <input
+                  type="text"
+                  className="w-full p-2 border rounded"
+                  value={cvData.socialMedia.linkedin}
+                  onChange={(e) => handleInputChange(e, "socialMedia", "linkedin")}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Objective</label>
+                <textarea
+                  className="w-full p-2 border rounded"
+                  value={cvData.objective}
+                  onChange={(e) => handleInputChange(e, "objective")}
+                ></textarea>
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Education</label>
+                <textarea
+                  className="w-full p-2 border rounded"
+                  value={cvData.education}
+                  onChange={(e) => handleInputChange(e, "education")}
+                ></textarea>
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Work Experience</label>
+                <textarea
+                  className="w-full p-2 border rounded"
+                  value={cvData.workExperience}
+                  onChange={(e) => handleInputChange(e, "workExperience")}
+                ></textarea>
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Core Skills</label>
+                <textarea
+                  className="w-full p-2 border rounded"
+                  value={cvData.coreSkills}
+                  onChange={(e) => handleInputChange(e, "coreSkills")}
+                ></textarea>
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Extra Curriculum</label>
+                <textarea
+                  className="w-full p-2 border rounded"
+                  value={cvData.extraCurriculum}
+                  onChange={(e) => handleInputChange(e, "extraCurriculum")}
+                ></textarea>
+              </div>
+
+              <div className="mb-4">
+                <label className="font-bold mb-2">Career Summary</label>
+                <textarea
+                  className="w-full p-2 border rounded"
+                  value={cvData.careerSummary}
+                  onChange={(e) => handleInputChange(e, "careerSummary")}
+                ></textarea>
+              </div>
             </div>
           </div>
-          {/* Main Content */}
-          <div className="col-span-2 bg-gray-100 p-4 rounded-lg">
-            <div className="mb-4">
-              <label className="font-bold mb-2">Name</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={cvData.name}
-                onChange={(e) => handleInputChange(e, "name")}
-              />
-            </div>
 
-            <div className="mb-4">
-              <label className="font-bold mb-2">Marital Status</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={cvData.maritalStatus}
-                onChange={(e) => handleInputChange(e, "maritalStatus")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Email</label>
-              <input
-                type="email"
-                className="w-full p-2 border rounded"
-                value={cvData.contact.email}
-                onChange={(e) => handleInputChange(e, "contact", "email")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Phone</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={cvData.contact.phone}
-                onChange={(e) => handleInputChange(e, "contact", "phone")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Address</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={cvData.contact.address}
-                onChange={(e) => handleInputChange(e, "contact", "address")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Permanent Address</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={cvData.contact.permanentAddress}
-                onChange={(e) => handleInputChange(e, "contact", "permanentAddress")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Facebook</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={cvData.socialMedia.facebook}
-                onChange={(e) => handleInputChange(e, "socialMedia", "facebook")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">LinkedIn</label>
-              <input
-                type="text"
-                className="w-full p-2 border rounded"
-                value={cvData.socialMedia.linkedin}
-                onChange={(e) => handleInputChange(e, "socialMedia", "linkedin")}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Objective</label>
-              <textarea
-                className="w-full p-2 border rounded"
-                value={cvData.objective}
-                onChange={(e) => handleInputChange(e, "objective")}
-              ></textarea>
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Education</label>
-              <textarea
-                className="w-full p-2 border rounded"
-                value={cvData.education}
-                onChange={(e) => handleInputChange(e, "education")}
-              ></textarea>
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Work Experience</label>
-              <textarea
-                className="w-full p-2 border rounded"
-                value={cvData.workExperience}
-                onChange={(e) => handleInputChange(e, "workExperience")}
-              ></textarea>
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Core Skills</label>
-              <textarea
-                className="w-full p-2 border rounded"
-                value={cvData.coreSkills}
-                onChange={(e) => handleInputChange(e, "coreSkills")}
-              ></textarea>
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Extra Curriculum</label>
-              <textarea
-                className="w-full p-2 border rounded"
-                value={cvData.extraCurriculum}
-                onChange={(e) => handleInputChange(e, "extraCurriculum")}
-              ></textarea>
-            </div>
-
-            <div className="mb-4">
-              <label className="font-bold mb-2">Career Summary</label>
-              <textarea
-                className="w-full p-2 border rounded"
-                value={cvData.careerSummary}
-                onChange={(e) => handleInputChange(e, "careerSummary")}
-              ></textarea>
-            </div>
-          </div>
+          <button
+            className="bg-green-500 text-white px-4 py-2 rounded mt-4"
+            onClick={downloadCv}
+          >
+            Download CV
+          </button>
         </div>
 
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded mt-4"
-          onClick={downloadCv}
-        >
-          Download CV
-        </button>
+        <div className="w-full max-w-[600px] mx-auto flex flex-col items-center mt-10 md:mt-0 md:ml-10">
+          <p className="text-center my-5 text-3xl font-bold">Follow This Pattern</p>
+          <img
+            className="w-full lg:w-10/12 h-fit transition-transform duration-300 hover:scale-125 cursor-zoom-in"
+            src="https://i.postimg.cc/Yjc6FMj2/werfhj.png"
+            alt="Zoomable Image"
+          />
+          <img
+            className="w-full lg:w-10/12 mt-5 h-fit transition-transform duration-300 hover:scale-125 cursor-zoom-in"
+            src="https://i.postimg.cc/ZnH6ngX0/wrfeoihw.png"
+            alt="Zoomable Image"
+          />
+        </div>
+
       </div>
     </>
 

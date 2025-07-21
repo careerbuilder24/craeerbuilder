@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import useUserMatching from '@/hooks/useUserMatching';
+import Swal from 'sweetalert2';
 
 export default function Certificate() {
   const [images, setImages] = useState([]);
   const [imageDetails, setImageDetails] = useState([]);
   const [submittedImages, setSubmittedImages] = useState([]);
   const [modalImage, setModalImage] = useState(null);
-  const {matchedStudent} = useUserMatching()
-    // const {matchedStudentProfilesEmail} = useMatchingUploadedCourses()
+  const { matchedStudent } = useUserMatching()
+  // const {matchedStudentProfilesEmail} = useMatchingUploadedCourses()
 
-    
-    console.log(matchedStudent?.email)
+
+  console.log(matchedStudent?.email)
   // Handle image upload
   const handleImageUpload = (e) => {
     const files = e.target.files;
@@ -47,7 +48,45 @@ export default function Certificate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee';  // Replace with your real API key
+    if (!matchedStudent?.email) {
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please fill up your profile before submitting.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    // ✅ Check if any image or text/date fields are empty
+    if (
+      images.length === 0 ||
+      imageDetails.some(detail => !detail.text.trim() || !detail.date.trim())
+    ) {
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please add all images and fill their details before submitting.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    // ✅ Confirm before submission
+    const confirm = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to upload and submit these certificates?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, submit',
+      cancelButtonText: 'Cancel',
+    });
+
+    if (!confirm.isConfirmed) {
+      return Swal.fire('Cancelled', 'Submission cancelled.', 'info');
+    }
+
+    const imgbbApiKey = '3d64b0e9dee39ca593b9da32467663ee'; // Replace with your real API key
     const uploadedImages = [];
 
     for (const image of images) {
@@ -69,52 +108,50 @@ export default function Certificate() {
           imageUrl = data.data.url;
         } else {
           console.error('ImgBB Upload Failed:', data);
+          await Swal.fire('Error', 'An image failed to upload.', 'error');
           continue;
         }
       } catch (err) {
         console.error('ImgBB Upload Error:', err);
+        await Swal.fire('Error', 'Image upload error occurred.', 'error');
         continue;
       }
 
       uploadedImages.push({
         text: detail.text,
         date: detail.date,
-         email: matchedStudent?.email,
+        email: matchedStudent?.email,
         imageUrl,
       });
     }
 
-    console.log('Uploaded Images:', uploadedImages);
-
     if (uploadedImages.length === 0) {
-      alert('No images uploaded successfully.');
-      return;
+      return Swal.fire('Failed', 'No images uploaded successfully.', 'error');
     }
 
-    // Save to MySQL via API
+    // ✅ Save to MySQL via API
     try {
       const res = await fetch('/api/certificates', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ images: uploadedImages }),
       });
 
       const data = await res.json();
       if (data.success) {
-        alert('Certificates uploaded and saved to database!');
+        await Swal.fire('Success', 'Certificates uploaded and saved!', 'success');
         setSubmittedImages(uploadedImages);
         setImages([]);
         setImageDetails([]);
       } else {
-        alert('Database save failed!');
+        Swal.fire('Error', 'Database save failed!', 'error');
       }
     } catch (err) {
       console.error('API Error:', err);
-      alert('Server error saving certificates.');
+      Swal.fire('Error', 'Server error saving certificates.', 'error');
     }
   };
+
 
   // Modal functions
   const handleImageClick = (imageSrc) => setModalImage(imageSrc);

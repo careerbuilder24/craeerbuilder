@@ -59,17 +59,23 @@ export default function Page() {
 
     // Submit hosted URLs to backend
     const handleSubmit = async () => {
-             if (!matchedStudent?.email) {
-                    Swal.fire({
-                        title: 'Warning!',
-                        text: 'Please Fill Up your profile Edit.',
-                        icon: 'warning',
-                        confirmButtonText: 'OK'
-                    });
-                    return;
-                }
+        if (!matchedStudent?.email) {
+            Swal.fire({
+                title: 'Warning!',
+                text: 'Please fill up your profile before submitting.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
         if (images.length === 0) {
-            Swal.fire('Please upload at least one image before submitting.');
+            Swal.fire({
+                title: 'Warning!',
+                text: 'Please upload at least one image before submitting.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
             return;
         }
 
@@ -103,15 +109,16 @@ export default function Page() {
                 } else {
                     Swal.fire('Failed!', 'Failed to save images.', 'error');
                 }
+
             } catch (error) {
                 console.error('Error saving images:', error);
                 Swal.fire('Error!', 'An error occurred while saving images.', 'error');
             }
+
         } else {
             Swal.fire('Cancelled', 'Image submission cancelled.', 'info');
         }
     };
-
 
     const handleModalClick = (e) => {
         if (e.target === e.currentTarget) {
@@ -144,7 +151,9 @@ export default function Page() {
                     {images.map((image) => (
                         <div key={image.id} className="relative">
                             <div className="w-full h-48 relative cursor-pointer">
-                                <img
+                                <Image
+                                    width={200}
+                                    height={200}
                                     src={image.src}
                                     alt="Uploaded"
                                     objectFit="cover"
