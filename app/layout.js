@@ -50,7 +50,8 @@ const geistMono = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning >
+     <meta name="google-site-verification" content="JIbZKrPfCJNylwsne6R8FT4toE9p_jP3CnyaWJ-Fu1s" />
       <body className="antialiased" suppressHydrationWarning>
         <AuthContextProvider>
           {children}
