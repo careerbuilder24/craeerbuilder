@@ -25,6 +25,19 @@ export default function Page() {
         'Engineering', 'Engineering', 'IT & Software', 'IT & Software', 'Engineering'
     ];
 
+    const [showModal, setShowModal] = useState(false);
+    const [selectedJob, setSelectedJob] = useState(null);
+
+    const openModal = (job) => {
+        setSelectedJob(job);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedJob(null);
+    };
+
     return (
         <>
             <Navbar />
@@ -57,7 +70,10 @@ export default function Page() {
                                         <p className="text-gray-600">{job.company}</p>
                                         <p className="text-sm text-gray-500">{job.location}</p>
                                     </div>
-                                    <button className="mt-4 md:mt-0 px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm self-end md:self-auto">
+                                    <button
+                                        onClick={() => openModal(job)}
+                                        className="mt-4 md:mt-0 px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm self-end md:self-auto"
+                                    >
                                         Apply Now
                                     </button>
                                 </div>
@@ -65,74 +81,148 @@ export default function Page() {
                         </div>
                     </main>
 
-
-                   
                     {/* Right - Advertisement Section */}
                     <aside className="md:col-span-1 order-3 bg-white p-4 rounded shadow text-center h-fit md:sticky md:top-28 md:max-h-[calc(100vh-7rem)] overflow-auto space-y-6">
                         <h2 className="text-xl font-semibold mb-4">Sponsored</h2>
 
-                        {/* Advertisement 1 */}
+                        {/* Ad 1 */}
                         <div className="flex justify-center mb-2">
                             <span className="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
                                 100% FREE
                             </span>
                         </div>
-                        <div className="bg-gray-200 rounded p-4 shadow flex flex-col items-center">
+                        <Link
+                            href="https://coursya.com/product/coursera/launch-your-online-business/?utm_source=LinkedIn%20&utm_campaign=pm"
+                            className="group bg-gray-200 rounded p-4 shadow flex flex-col items-center hover:bg-gray-400 cursor-pointer ease-in-out duration-300"
+                        >
                             <img
                                 src="https://i.postimg.cc/T1YHBvM9/sfgoj.png"
                                 alt="Ad 1"
                                 className="mb-3 rounded w-full object-cover"
                             />
-                            <p className="text-gray-700 mb-2">
-                                Boost your career with <strong>SkillUp Academy</strong>! Join our coding Boot camp today.
+                            <p className="text-gray-700 mb-2 group-hover:text-white ease-in-out duration-300">
+                                Boost your career with <strong className="group-hover:text-white">SkillUp Academy</strong>! Join our coding Boot camp today.
                             </p>
-                            <Link
-                                href="https://coursya.com/product/coursera/launch-your-online-business/?utm_source=LinkedIn%20&utm_campaign=pm"
-                                className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-                            >
+                            <div className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
                                 Learn More
-                            </Link>
-                        </div>
+                            </div>
+                        </Link>
 
-                        {/* Advertisement 2 */}
-                        <div className="bg-gray-200 rounded p-4 shadow flex flex-col items-center">
+
+                        {/* Ad 2 */}
+                        <Link href="https://www.datacamp.com/" className="group bg-gray-200 rounded p-4 shadow flex flex-col items-center hover:bg-gray-400 cursor-pointer ease-in-out duration-300">
                             <img
                                 src="https://i.postimg.cc/pr5McPh7/ewrj.png"
                                 alt="Ad 2"
                                 className="mb-3 rounded w-full object-cover"
                             />
-                            <p className="text-gray-700 mb-2">
+                            <p className="text-gray-700 mb-2 group-hover:text-white">
                                 Join <strong>DataCamp</strong> and become a data science pro in 3 months.
                             </p>
-                            <Link
-                                href="https://www.datacamp.com/"
+                            <div
+                                
                                 className="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
                             >
                                 Try Free
-                            </Link>
-                        </div>
+                            </div>
+                        </Link>
 
-                        {/* Advertisement 3 */}
-                        <div className="bg-gray-200 rounded p-4 shadow flex flex-col items-center">
+                        {/* Ad 3 */}
+                        <Link  href="https://www.fiverr.com/" className="group bg-gray-200 rounded p-4 shadow flex flex-col items-center hover:bg-gray-400 cursor-pointer ease-in-out duration-300">
                             <img
                                 src="https://i.postimg.cc/kGGgJrVF/sergoj.png"
                                 alt="Ad 3"
                                 className="mb-3 rounded w-full object-cover"
                             />
-                            <p className="text-gray-700 mb-2">
+                            <p className="text-gray-700 mb-2 group-hover:text-white">
                                 Kickstart your freelancing career with <strong>Fiverr Pro</strong>.
                             </p>
-                            <Link
-                                href="https://www.fiverr.com/"
+                            <div
+                               
                                 className="inline-block px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm"
                             >
                                 Get Started
-                            </Link>
-                        </div>
+                            </div>
+                        </Link>
                     </aside>
-
                 </div>
             </div>
+
+            {/* Modal for Job Application */}
+            {showModal && selectedJob && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg w-full max-w-lg p-6 relative">
+                        <button
+                            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl"
+                            onClick={closeModal}
+                        >
+                            ×
+                        </button>
+                        <h2 className="text-xl font-bold mb-4">
+                            Apply for {selectedJob.title}
+                        </h2>
+                        <form className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Upload CV/Resume
+                                </label>
+                                <input
+                                    type="file"
+                                    className="w-full border px-3 py-2 rounded"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Cover Letter
+                                </label>
+                                <textarea
+                                    rows={4}
+                                    className="w-full border px-3 py-2 rounded"
+                                    placeholder="Write your cover letter..."
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Last Academic Institution
+                                </label>
+                                <input
+                                    type="text"
+                                    className="w-full border px-3 py-2 rounded"
+                                    placeholder="e.g., Institution Name "
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    CGPA
+                                </label>
+                                <input
+                                    type="text"
+                                    className="w-full border px-3 py-2 rounded"
+                                    placeholder="e.g., CGPA "
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Experience
+                                </label>
+                                <input
+                                    type="text"
+                                    className="w-full border px-3 py-2 rounded"
+                                    placeholder="e.g.,  years of Experience"
+                                />
+                            </div>
+                            <div className="flex justify-end">
+                                <button
+                                    type="submit"
+                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                >
+                                    Submit Application
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
