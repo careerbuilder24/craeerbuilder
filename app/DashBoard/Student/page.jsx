@@ -304,6 +304,7 @@ const PageContent = () => {
                   Home
                 </Link>
               </li>
+
               {/* First section of sidebar */}
               {sidebarMenu.map((menu, index) => (
                 <li key={menu.label} className="">
@@ -320,16 +321,16 @@ const PageContent = () => {
                     style={{ maxHeight: '0px' }}
                   >
                     {menu.children.map((child) => (
-                      <li
+                      <p
                         key={child}
                         onClick={() => handleSectionClick(child.replace(/\s+/g, ''))}
-                       
-                        className="cursor-pointer hover:bg-blue-100 hover:text-blue-700   rounded "
+                        className="cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
                       >
                         {child}
-                      </li>
+                      </p>
                     ))}
                   </div>
+
                 </li>
               ))}
 

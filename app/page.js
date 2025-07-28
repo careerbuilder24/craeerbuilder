@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import Navbar from "./(with-navbar)/componenets/Navbar/Navbar";
@@ -12,25 +12,26 @@ import Chatbot from "./(with-navbar)/componenets/chatBot/Chatbot";
 import Review from "./(with-navbar)/componenets/review/Review";
 import ConnectorsCompany from "./(with-navbar)/componenets/Connectors-Company/ConnectorsCompany";
 import BlogPost from "./(with-navbar)/componenets/BlogPost/BlogPost";
+
 export default function Home() {
-
-
   return (
     <>
       <HelmetHead
-        title="Best IT Service and Support Company"
-        description="We Here to Build Career of Young Generation."
-        keywords="Career,Graphics,Motion Graphics,web Development"
-        author="Developer"
+        title="Career Builder | Best IT Training, Internship & Career Support Platform"
+        description="Join Career Builder to master graphics design, motion graphics, web development, and more. Build your skills, get internships, and boost your career with expert guidance."
+        keywords="Career Builder, IT Training Bangladesh, Graphics Design Course, Motion Graphics Course, Web Development, Internship Opportunities, Career Support"
+        author="Career Builder Team"
       />
       <Navbar />
       <ButtonTopMaker />
-      <Banner />
-      <WelcomeText />
-      <FirstSection />
-      <BlogPost />
-      <ConnectorsCompany />
-      <Review />
+      <main>
+        <Banner />
+        <WelcomeText />
+        <FirstSection />
+        <BlogPost />
+        <ConnectorsCompany />
+        <Review />
+      </main>
       <Footer />
       <Chatbot />
     </>
