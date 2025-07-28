@@ -17,11 +17,14 @@ export default function Home() {
   return (
     <>
       <HelmetHead
-        title="Career Builder | Best IT Training, Internship & Career Support Platform"
-        description="Join Career Builder to master graphics design, motion graphics, web development, and more. Build your skills, get internships, and boost your career with expert guidance."
-        keywords="Career Builder, IT Training Bangladesh, Graphics Design Course, Motion Graphics Course, Web Development, Internship Opportunities, Career Support"
-        author="Career Builder Team"
-      />
+        title="Best IT Service and Support Company"
+        description="We Here to Build Career of Young Generation."
+        keywords="Career,Graphics,Motion Graphics,web Development"
+        author="Developer"
+      >
+        <meta name="google-site-verification" content="JIbZKrPfCJNylwsne6R8FT4toE9p_jP3CnyaWJ-Fu1s" />
+      </HelmetHead>
+
       <Navbar />
       <ButtonTopMaker />
       <main>
