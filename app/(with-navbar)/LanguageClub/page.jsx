@@ -74,7 +74,7 @@ export default function LanguageClub() {
 
           {/* Additional IELTS Tips */}
           <div className="bg-blue-50 border-l-4 border-blue-400 p-6 mb-12 rounded shadow">
-            <h4 className="text-lg font-semibold mb-2 text-blue-700">✨ Expert IELTS Success Tips:</h4>
+            <h4 className="text-lg font-semibold mb-2 text-blue-700"> Expert IELTS Success Tips:</h4>
             <ul className="list-disc list-inside space-y-2 text-gray-800">
               <li><strong>Use Time Smartly:</strong> In Reading, don’t dwell too long on one question.</li>
               <li><strong>Voice Clarity:</strong> In Speaking, clarity and confidence matter more than accent.</li>
