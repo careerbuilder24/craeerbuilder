@@ -65,22 +65,22 @@ export default function Page() {
                         </div>
                     </main>
 
-                  
+
+                   
                     {/* Right - Advertisement Section */}
                     <aside className="md:col-span-1 order-3 bg-white p-4 rounded shadow text-center h-fit md:sticky md:top-28 md:max-h-[calc(100vh-7rem)] overflow-auto space-y-6">
                         <h2 className="text-xl font-semibold mb-4">Sponsored</h2>
 
-                        {/* Advertisement  Badge */}
+                        {/* Advertisement 1 */}
                         <div className="flex justify-center mb-2">
                             <span className="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
-                                100% fREE
+                                100% FREE
                             </span>
                         </div>
-
                         <div className="bg-gray-200 rounded p-4 shadow flex flex-col items-center">
                             <img
                                 src="https://i.postimg.cc/T1YHBvM9/sfgoj.png"
-                                alt="Demo Advertisement"
+                                alt="Ad 1"
                                 className="mb-3 rounded w-full object-cover"
                             />
                             <p className="text-gray-700 mb-2">
@@ -91,6 +91,42 @@ export default function Page() {
                                 className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
                             >
                                 Learn More
+                            </Link>
+                        </div>
+
+                        {/* Advertisement 2 */}
+                        <div className="bg-gray-200 rounded p-4 shadow flex flex-col items-center">
+                            <img
+                                src="https://i.postimg.cc/pr5McPh7/ewrj.png"
+                                alt="Ad 2"
+                                className="mb-3 rounded w-full object-cover"
+                            />
+                            <p className="text-gray-700 mb-2">
+                                Join <strong>DataCamp</strong> and become a data science pro in 3 months.
+                            </p>
+                            <Link
+                                href="https://www.datacamp.com/"
+                                className="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
+                            >
+                                Try Free
+                            </Link>
+                        </div>
+
+                        {/* Advertisement 3 */}
+                        <div className="bg-gray-200 rounded p-4 shadow flex flex-col items-center">
+                            <img
+                                src="https://i.postimg.cc/kGGgJrVF/sergoj.png"
+                                alt="Ad 3"
+                                className="mb-3 rounded w-full object-cover"
+                            />
+                            <p className="text-gray-700 mb-2">
+                                Kickstart your freelancing career with <strong>Fiverr Pro</strong>.
+                            </p>
+                            <Link
+                                href="https://www.fiverr.com/"
+                                className="inline-block px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm"
+                            >
+                                Get Started
                             </Link>
                         </div>
                     </aside>

@@ -22,7 +22,7 @@ export default function Home() {
         keywords="Career,Graphics,Motion Graphics,web Development"
         author="Developer"
       >
-        <meta name="google-site-verification" content="JIbZKrPfCJNylwsne6R8FT4toE9p_jP3CnyaWJ-Fu1s" />
+        {/* <meta name="google-site-verification" content="JIbZKrPfCJNylwsne6R8FT4toE9p_jP3CnyaWJ-Fu1s" /> */}
       </HelmetHead>
 
       <Navbar />
