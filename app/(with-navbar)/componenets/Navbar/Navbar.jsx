@@ -59,12 +59,12 @@ export default function Navbar() {
   //   }
   // };
 
-  
+
   const handleSignOut = async () => {
     try {
       await logOut(); // assuming this clears your auth context
       sessionStorage.removeItem('manualUser'); // remove from session storage
-       localStorage.removeItem('blog_draft');
+      localStorage.removeItem('blog_draft');
       setUserProfile(null); // clear user profile
 
       // Force full reload to login page
@@ -139,7 +139,7 @@ export default function Navbar() {
           <Link href="/University" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>University</Link>
           <Link href="/StudyAbroad" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Study Abroad</Link>
           <Link href="/CareerGuide" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Language Club</Link>
-          <Link href="/FA_Q" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Jobs</Link>
+          <Link href="/JOBS" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Jobs</Link>
           <Link href="/FA_Q" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>FAQ</Link>
           <Link href="/About_Us" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>About</Link>
           <Link href="/Contuct_US" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Contact</Link>
@@ -218,7 +218,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Dropdown Menu */}
-      {isNavOpen && (
+      {/* {isNavOpen && (
         <div className="lg:hidden absolute w-full bg-[#2DA9E1] text-white flex flex-col items-center p-4 space-y-4">
           <Link href="/">Home</Link>
           <Link href="/Courses">Courses</Link>
@@ -240,7 +240,83 @@ export default function Navbar() {
           <Link href="/About_Us" className='hover:text-blue-400 transition-colors'>About Us</Link>
           <Link href="/Contuct_US" className='hover:text-blue-400 transition-colors'>Contact</Link>
         </div>
+      )} */}
+
+
+      {isNavOpen && (
+        <div className="lg:hidden absolute w-full bg-[#2DA9E1] text-white flex flex-col items-center p-4 space-y-4 z-50">
+          <Link href="/" onClick={() => setIsNavOpen(false)}>Home</Link>
+          <Link href="/Courses" onClick={() => setIsNavOpen(false)}>Courses</Link>
+
+          <button onClick={() => setIsStudentsDropdownOpen(!isStudentsDropdownOpen)} className="flex items-center gap-2">
+            Students <IoIosArrowDown size={14} />
+          </button>
+          {isStudentsDropdownOpen && (
+            <div className="w-full flex flex-col text-center">
+              <Link href="/RunningStudents" onClick={() => setIsNavOpen(false)} className="block py-2">Running Students</Link>
+              <Link href="/RunningIntern" onClick={() => setIsNavOpen(false)} className="block py-2">Running Interns</Link>
+              <Link href="/RunningEmployee" onClick={() => setIsNavOpen(false)} className="block py-2">Running Employee</Link>
+            </div>
+          )}
+
+          <Link href="/Gallery" onClick={() => setIsNavOpen(false)}>Gallery</Link>
+          <Link href="/University" onClick={() => setIsNavOpen(false)}>University</Link>
+          <Link href="/CareerGuide" onClick={() => setIsNavOpen(false)}>Career Guide</Link>
+          <Link href="/FA_Q" onClick={() => setIsNavOpen(false)}>FAQ</Link>
+          <Link href="/About_Us" onClick={() => setIsNavOpen(false)}>About Us</Link>
+          <Link href="/Contuct_US" onClick={() => setIsNavOpen(false)}>Contact</Link>
+
+          {/* Mobile Login/Profile Section */}
+          <div className="w-full mt-4 border-t border-white/40 pt-4">
+            {ManualUser ? (
+              <>
+                <div className="flex items-center justify-center gap-3 mb-2">
+                  <Image
+                    src={userProfile?.photo_url || ManualUser?.photoURL || userIcon}
+                    alt="User"
+                    width={32}
+                    height={32}
+                    className="rounded-full"
+                  />
+                  <p>{ManualUser.name}</p>
+                </div>
+                <Link
+                  href="/profile"
+                  onClick={() => setIsNavOpen(false)}
+                  className="block py-2 text-center hover:underline"
+                >
+                  Profile
+                </Link>
+                <Link
+                  href="/DashBoard/Student"
+                  onClick={() => setIsNavOpen(false)}
+                  className="block py-2 text-center hover:underline"
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    handleSignOut();
+                    setIsNavOpen(false);
+                  }}
+                  className="block w-full text-center py-2 mt-2 bg-red-600 rounded hover:bg-red-700"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/log_in"
+                onClick={() => setIsNavOpen(false)}
+                className="block text-center py-2 mt-2 bg-blue-600 rounded hover:bg-blue-700"
+              >
+                Login
+              </Link>
+            )}
+          </div>
+        </div>
       )}
+
     </header>
   );
 }

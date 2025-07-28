@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import React, { Suspense, useEffect, useRef, useState } from 'react';
@@ -40,7 +38,7 @@ import UploadedCourses from '../Students_Dashboards_Components/UploadedCourses/U
 import UploadedPortfolio from '../Students_Dashboards_Components/UploadedPortfolio/UploadedPortfolio';
 import UploadedCertificate from '../Students_Dashboards_Components/UploadedCertificate/UploadedCertificate';
 import UploadedPicture from '../Students_Dashboards_Components/UploadedPicture/UploadedPicture';
-
+import logo from '../../../assets/logo.jpg';
 const PageContent = () => {
   const sections = [
     { key: "courses", label: "Courses", uploadedKey: "UploadedCourses" },
@@ -48,6 +46,81 @@ const PageContent = () => {
     { key: "certificate", label: "Certificate", uploadedKey: "UploadedCertificate" },
     { key: "picture", label: "Picture", uploadedKey: "UploadedPicture" },
   ];
+  const sidebarMenu = [
+    {
+      label: "Page Management",
+      children: [
+        "Create Page", "All Pages", "Page Category", "Main Page", "Sub Page", "Sub-Sub Page"
+      ]
+    },
+    {
+      label: "Blog Management",
+      children: ["Create Post", "All Posts"]
+    },
+    {
+      label: "Course Management",
+      children: ["Create Course", "All Courses"]
+    },
+    {
+      label: "Category Management",
+      children: ["Create Category", "All Categories"]
+    },
+    {
+      label: "Student Management",
+      children: [
+        "Student Profile", "Running Students", "Intern Students",
+        "Employed Students", "All Students"
+      ]
+    },
+    {
+      label: "Photo Gallery",
+      children: [
+        "Orientation", "Certification", "Awards Giving", "Pohela Boishakh",
+        "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Photos"
+      ]
+    },
+    {
+      label: "Video Gallery",
+      children: [
+        "Orientation", "Certification", "Awards Giving", "Pohela Boishakh",
+        "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Videos"
+      ]
+    },
+    {
+      label: "University",
+      children: ["Add University", "All Universities"]
+    },
+    {
+      label: "Study Abroad",
+      children: [
+        "Add University", "Candidate Application",
+        "Pending Application", "Approved Application", "Rejected Application", "All Universities"
+      ]
+    },
+    {
+      label: "Payment Management",
+      children: [
+        "Add Payment", "Course Payment", "Internship Payment", "Employment Payment",
+        "Study Abroad Payment", "Refund Payment", "Discount Payment", "Due Payment", "Others Payment"
+      ]
+    },
+    {
+      label: "Language Program",
+      children: ["Add Language Course", "All Language Courses"]
+    },
+    {
+      label: "Job Circular",
+      children: ["Circular Job", "Job Applicants", "All Jobs"]
+    }
+  ];
+  const [openDropdowns, setOpenDropdowns] = useState({});
+
+  const toggleDropdown = (label) => {
+    setOpenDropdowns((prev) => ({
+      ...prev,
+      [label]: !prev[label],
+    }));
+  };
 
   const [openSections, setOpenSections] = useState({});
   const contentRefs = useRef({});
@@ -73,10 +146,12 @@ const PageContent = () => {
     });
   }, [openSections, sections]);
   // state managements
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('');
-  const [navbarColor, setNavbarColor] = useState('#17549A');
-  const [sidebarColor, setSidebarColor] = useState('#222');
+  const dropdownRefs = useRef({});
+
+
+
   const [userRole, setUserRole] = useState('');
   const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
 
@@ -98,6 +173,41 @@ const PageContent = () => {
     'About_Us_Added',
     'Contact_Us_Added',
   ];
+
+  sidebarMenu.forEach(({ label }) => {
+    const el = dropdownRefs.current[label];
+    if (el) {
+      if (openDropdowns[label]) {
+        el.style.maxHeight = el.scrollHeight + 'px';
+      } else {
+        el.style.maxHeight = '0px';
+      }
+    }
+  });
+  useEffect(() => {
+    sections.forEach(({ key }) => {
+      const el = contentRefs.current[key];
+      if (el) {
+        if (openSections[key]) {
+          el.style.maxHeight = el.scrollHeight + "px";
+        } else {
+          el.style.maxHeight = "0px";
+        }
+      }
+    });
+
+    sidebarMenu.forEach(({ label }) => {
+      const el = dropdownRefs.current[label];
+      if (el) {
+        if (openDropdowns[label]) {
+          el.style.maxHeight = el.scrollHeight + 'px';
+        } else {
+          el.style.maxHeight = '0px';
+        }
+      }
+    });
+  }, [openSections, openDropdowns, sections, sidebarMenu]);
+
 
   useEffect(() => {
     if (ManualUser && userAdmin) {
@@ -148,7 +258,7 @@ const PageContent = () => {
           <ul className="mt-3">
             <Link href="/">Home</Link>
             {adminSections.map((section) => (
-              <li key={section} onClick={() => handleSectionClick(section)}>
+              <li key={section} onClljiujick={() => handleSectionClick(section)}>
                 {section.replace(/_/g, ' ')}
               </li>
             ))}
@@ -175,25 +285,64 @@ const PageContent = () => {
             >
               ✖ Close
             </button>
+            <Link href="/">
+              <div className='flex justify-center items-center'>
+                <Image
+                  src={logo}
+                  alt="Logo"
+                  className=" md:w-36 lg:w-40 h-auto w-full rounded-lg flex-shrink-0 mt-5"
+                />
+              </div>
+            </Link>
 
             <ul className="mt-3 text-left px-3 pb-10"> {/* Padding bottom avoids scroll conflict */}
               <li>
                 <Link
                   href="/"
-                  className="block px-2 py-1 hover:bg-blue-100 hover:text-blue-700 rounded"
+                  className="block px-2  hover:bg-blue-100 hover:text-blue-700 rounded"
                 >
                   Home
                 </Link>
               </li>
+              {/* First section of sidebar */}
+              {sidebarMenu.map((menu, index) => (
+                <li key={menu.label} className="">
+                  <div
+                    onClick={() => toggleDropdown(menu.label)}
+                    className="flex justify-between items-center cursor-pointer hover:bg-blue-100 hover:text-blue-700 px-2  rounded"
+                  >
+                    <span>{menu.label}</span>
+                    {openDropdowns[menu.label] ? <FiChevronDown /> : <FiChevronRight />}
+                  </div>
+                  <div
+                    ref={(el) => (dropdownRefs.current[menu.label] = el)}
+                    className="ml-4  space-y-1 overflow-hidden transition-all duration-500 ease-in-out"
+                    style={{ maxHeight: '0px' }}
+                  >
+                    {menu.children.map((child) => (
+                      <li
+                        key={child}
+                        onClick={() => handleSectionClick(child.replace(/\s+/g, ''))}
+                       
+                        className="cursor-pointer hover:bg-blue-100 hover:text-blue-700   rounded "
+                      >
+                        {child}
+                      </li>
+                    ))}
+                  </div>
+                </li>
+              ))}
+
+
               <li
                 onClick={() => handleSectionClick('Profile')}
-                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
               >
                 Profile Edit
               </li>
               <li
                 onClick={() => handleSectionClick('CvUpdate')}
-                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
               >
                 CV Update
               </li>
@@ -210,7 +359,7 @@ const PageContent = () => {
                         toggleSection(key);
                         handleSectionClick(key);  // Important for middle content load
                       }}
-                      className="flex items-center justify-between px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                      className="flex items-center justify-between px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
                     >
                       <span>{label}</span>
                       {isOpen ? (
@@ -225,10 +374,10 @@ const PageContent = () => {
                       className="overflow-hidden transition-all duration-500 ease-in-out"
                       style={{ maxHeight: "0px" }}
                     >
-                      <ul className="ml-4 mt-1">
+                      <ul className="ml-4 ">
                         <li
                           onClick={() => handleSectionClick(uploadedKey)}
-                          className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                          className="px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
                         >
                           Uploaded {label}
                         </li>
@@ -240,19 +389,19 @@ const PageContent = () => {
 
               <li
                 onClick={() => handleSectionClick('Videos')}
-                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
               >
                 Videos
               </li>
               <li
                 onClick={() => handleSectionClick('Blog')}
-                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
               >
                 Blog
               </li>
               <li
                 onClick={() => handleSectionClick('AllBlogs')}
-                className="px-2 py-1 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
               >
                 All Blogs
               </li>
@@ -276,7 +425,7 @@ const PageContent = () => {
           return <GalleryAdded />;
         case 'University_BioData_Added':
           return <UniversityBioDataAdded />;
-        case 'Career_Guide_Blog_Added':
+        case 'Career_Guilde_Blog_Added':
           return <CareerGuideBlogAdded />;
         case 'Published_Post':
           return <PublishedPost />;
@@ -335,7 +484,7 @@ const PageContent = () => {
         <meta name="description" content="Manage your profile, achievements, courses, and portfolio on Career Builder" />
         <meta name="keywords" content="student, dashboard, profile, CV, achievements, portfolio, Career Builder" />
       </Head>
-      <section className="navbar" style={{ backgroundColor: navbarColor }}>
+      <section className="navbar" >
         <button className="sidebar-toggle" onClick={toggleSidebar} aria-label="Toggle sidebar">
           {isSidebarOpen ? '✖' : '☰'}
         </button>
@@ -351,7 +500,7 @@ const PageContent = () => {
           />
         </div>
       </section>
-      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} style={{ backgroundColor: sidebarColor }}>
+      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} >
         <button className="close-sidebar" onClick={toggleSidebar} aria-label="Close sidebar">
           ✖ Close
         </button>

@@ -45,7 +45,7 @@ export default function Welcome_Page() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             </Head>
             <div className="welcome-page">
-                <Image src={logo} alt="Welcome GIF" className="welcome-gif" />
+                <Image src={logo} alt="Welcome GIF" className="welcome-gif " />
             </div>
 
             <style jsx>{`

@@ -212,6 +212,10 @@
   margin: 20px 0;
   cursor: pointer;
 }
+li, span, a {
+  text-decoration: none !important;
+}
+
 
 /* Media Queries for Mobile Devices */
 @media screen and (max-width: 768px) {

@@ -14,15 +14,14 @@ import ConnectorsCompany from "./(with-navbar)/componenets/Connectors-Company/Co
 import BlogPost from "./(with-navbar)/componenets/BlogPost/BlogPost";
 export default function Home() {
 
-  
+
   return (
     <>
-
       <HelmetHead
-        title="Best IT Service and Suport Company"
+        title="Best IT Service and Support Company"
         description="We Here to Build Career of Young Generation."
         keywords="Career,Graphics,Motion Graphics,web Development"
-        author="Muhibullah Sir"
+        author="Developer"
       />
       <Navbar />
       <ButtonTopMaker />
