@@ -290,7 +290,7 @@ const PageContent = () => {
                 <Image
                   src={logo}
                   alt="Logo"
-                  className=" md:w-36 lg:w-40 h-auto w-full rounded-lg flex-shrink-0 mt-5"
+                  className=" md:w-36 lg:w-full h-auto w-full rounded-lg flex-shrink-0 mt-5"
                 />
               </div>
             </Link>
