@@ -39,6 +39,24 @@ import UploadedPortfolio from '../Students_Dashboards_Components/UploadedPortfol
 import UploadedCertificate from '../Students_Dashboards_Components/UploadedCertificate/UploadedCertificate';
 import UploadedPicture from '../Students_Dashboards_Components/UploadedPicture/UploadedPicture';
 import logo from '../../../assets/logo.jpg';
+import {
+  FiHome,
+  FiFileText,
+  FiBook,
+  FiLayers,
+  FiUsers,
+  FiImage,
+  FiVideo,
+  FiGlobe,
+  FiTrendingUp,
+  FiCreditCard,
+  FiMessageCircle,
+  FiBriefcase
+} from 'react-icons/fi';
+import { ImProfile } from "react-icons/im";
+import { MdOutlineSystemUpdateAlt } from "react-icons/md";
+
+
 const PageContent = () => {
   const sections = [
     { key: "courses", label: "Courses", uploadedKey: "UploadedCourses" },
@@ -48,71 +66,70 @@ const PageContent = () => {
   ];
   const sidebarMenu = [
     {
-      label: "Page Management",
+      label: "Page",
+      icon: <FiFileText />,
       children: [
         "Create Page", "All Pages", "Page Category", "Main Page", "Sub Page", "Sub-Sub Page"
       ]
     },
     {
-      label: "Blog Management",
+      label: "Blogs",
+      icon: <FiMessageCircle />,
       children: ["Create Post", "All Posts"]
     },
     {
-      label: "Course Management",
+      label: "Course",
+      icon: <FiBook />,
       children: ["Create Course", "All Courses"]
     },
     {
-      label: "Category Management",
+      label: "Category",
+      icon: <FiLayers />,
       children: ["Create Category", "All Categories"]
     },
     {
-      label: "Student Management",
-      children: [
-        "Student Profile", "Running Students", "Intern Students",
-        "Employed Students", "All Students"
-      ]
+      label: "Student",
+      icon: <FiUsers />,
+      children: ["Student Profile", "Running Students", "Intern Students", "Employed Students", "All Students"]
     },
     {
       label: "Photo Gallery",
-      children: [
-        "Orientation", "Certification", "Awards Giving", "Pohela Boishakh",
-        "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Photos"
-      ]
+      icon: <FiImage />,
+      children: ["Orientation", "Certification", "Awards Giving", "Pohela Boishakh", "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Photos"]
     },
     {
       label: "Video Gallery",
-      children: [
-        "Orientation", "Certification", "Awards Giving", "Pohela Boishakh",
-        "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Videos"
-      ]
+      icon: <FiVideo />,
+      children: ["Orientation", "Certification", "Awards Giving", "Pohela Boishakh", "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Videos"]
     },
     {
       label: "University",
+      icon: <FiGlobe />,
       children: ["Add University", "All Universities"]
     },
     {
       label: "Study Abroad",
-      children: [
-        "Add University", "Candidate Application",
-        "Pending Application", "Approved Application", "Rejected Application", "All Universities"
-      ]
+      icon: <FiTrendingUp />,
+      children: ["Add University", "Candidate Application", "Pending Application", "Approved Application", "Rejected Application", "All Universities"]
     },
     {
-      label: "Payment Management",
-      children: [
-        "Add Payment", "Course Payment", "Internship Payment", "Employment Payment",
-        "Study Abroad Payment", "Refund Payment", "Discount Payment", "Due Payment", "Others Payment"
-      ]
+      label: "Payment",
+      icon: <FiCreditCard />,
+      children: ["Add Payment", "Course Payment", "Internship Payment", "Employment Payment", "Study Abroad Payment", "Refund Payment", "Discount Payment", "Due Payment", "Others Payment"]
     },
     {
-      label: "Language Program",
+      label: "Language",
+      icon: <FiBook />,
       children: ["Add Language Course", "All Language Courses"]
     },
     {
       label: "Job Circular",
+      icon: <FiBriefcase />,
       children: ["Circular Job", "Job Applicants", "All Jobs"]
     }
   ];
+
+
   const [openDropdowns, setOpenDropdowns] = useState({});
 
   const toggleDropdown = (label) => {
@@ -241,6 +258,7 @@ const PageContent = () => {
         return phrases[nextIndex];
       });
     }, 1000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -271,6 +289,7 @@ const PageContent = () => {
             <li onClick={() => handleSectionClick('Profile')}>Profile</li>
           </ul>
         );
+
       default:
         return (
 
@@ -285,6 +304,7 @@ const PageContent = () => {
             >
               ✖ Close
             </button>
+
             <Link href="/">
               <div className='flex justify-center items-center'>
                 <Image
@@ -295,56 +315,64 @@ const PageContent = () => {
               </div>
             </Link>
 
+
             <ul className="mt-3 text-left px-3 pb-10"> {/* Padding bottom avoids scroll conflict */}
               <li>
                 <Link
                   href="/"
-                  className="block px-2  hover:bg-blue-100 hover:text-blue-700 rounded"
+                  className=" px-2 flex items-center gap-3 text-[#DCDCDE]   hover:bg-blue-100 hover:text-blue-700 rounded"
                 >
+                  <FiHome />
                   Home
                 </Link>
               </li>
 
               {/* First section of sidebar */}
+
               {sidebarMenu.map((menu, index) => (
-                <li key={menu.label} className="">
+                <li key={menu.label}>
                   <div
                     onClick={() => toggleDropdown(menu.label)}
-                    className="flex justify-between items-center cursor-pointer hover:bg-blue-100 hover:text-blue-700 px-2  rounded"
+                    className="group flex justify-between items-center cursor-pointer text-[#DCDCDE] hover:bg-blue-100 hover:text-blue-700 px-2 rounded"
                   >
-                    <span>{menu.label}</span>
+                    <span className="flex items-center gap-2">
+                      {menu.icon}
+                      {menu.label}
+                    </span>
                     {openDropdowns[menu.label] ? <FiChevronDown /> : <FiChevronRight />}
                   </div>
+
                   <div
                     ref={(el) => (dropdownRefs.current[menu.label] = el)}
-                    className="ml-4  space-y-1 overflow-hidden transition-all duration-500 ease-in-out"
+                    className="ml-4 space-y-1 overflow-hidden transition-all duration-500 ease-in-out text-[#DCDCDE]"
                     style={{ maxHeight: '0px' }}
                   >
                     {menu.children.map((child) => (
                       <p
                         key={child}
                         onClick={() => handleSectionClick(child.replace(/\s+/g, ''))}
-                        className="cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                        className="cursor-pointer hover:text-blue-700 hover:bg-blue-100 rounded text-[#DCDCDE]"
                       >
                         {child}
                       </p>
                     ))}
                   </div>
-
                 </li>
               ))}
 
 
               <li
                 onClick={() => handleSectionClick('Profile')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2 flex items-center gap-3  cursor-pointer   text-[#DCDCDE]  hover:bg-blue-100 hover:text-blue-800  rounded"
               >
+                <ImProfile className='  text-[#DCDCDE] hover:bg-blue-100 hover:text-blue-700   ' />
                 Profile Edit
               </li>
               <li
                 onClick={() => handleSectionClick('CvUpdate')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2 flex items-center gap-3 cursor-pointer   text-[#DCDCDE]  hover:bg-blue-100 group-hover:text-blue-700   rounded"
               >
+                <MdOutlineSystemUpdateAlt className=' text-[#DCDCDE]  hover:bg-blue-100 group-hover:text-blue-700  ' />
                 CV Update
               </li>
 
@@ -353,20 +381,20 @@ const PageContent = () => {
                 return (
                   <div
                     key={key}
-                    className="my-2 bg-[#222222] rounded"
+                    className=" bg-[#222222] rounded my-5"
                   >
                     <div
                       onClick={() => {
                         toggleSection(key);
                         handleSectionClick(key);  // Important for middle content load
                       }}
-                      className="flex items-center justify-between px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                      className="flex items-center justify-between px-2  cursor-pointer text-[#DCDCDE]  hover:bg-blue-100 hover:text-blue-800 rounded"
                     >
                       <span>{label}</span>
                       {isOpen ? (
-                        <FiChevronDown className="h-5 w-5" />
+                        <FiChevronDown />
                       ) : (
-                        <FiChevronRight className="h-5 w-5" />
+                        <FiChevronRight />
                       )}
                     </div>
 
@@ -375,10 +403,10 @@ const PageContent = () => {
                       className="overflow-hidden transition-all duration-500 ease-in-out"
                       style={{ maxHeight: "0px" }}
                     >
-                      <ul className="ml-4 ">
+                      <ul className=" ">
                         <li
                           onClick={() => handleSectionClick(uploadedKey)}
-                          className="px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                          className="px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
                         >
                           Uploaded {label}
                         </li>
@@ -390,29 +418,29 @@ const PageContent = () => {
 
               <li
                 onClick={() => handleSectionClick('Videos')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
               >
                 Videos
               </li>
               <li
                 onClick={() => handleSectionClick('Blog')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
               >
                 Blog
               </li>
               <li
                 onClick={() => handleSectionClick('AllBlogs')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
               >
                 All Blogs
               </li>
             </ul>
           </div>
 
-
         );
     }
   };
+
 
   const renderActiveSection = () => {
     // admin side dashboard

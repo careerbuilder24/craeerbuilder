@@ -150,7 +150,7 @@ export default function UniversityPage() {
                             onClick={() => toggleDetails(university.id)}
                             className='bg-white rounded-lg shadow-md p-4 flex flex-col gap-3 hover:shadow-lg transition w-full cursor-pointer'
                           >
-                            <header className='flex items-center justify-between'>
+                            <div className='flex items-center justify-between'>
                               <div className='flex items-center gap-4'>
                                 <Image
                                   src={university.logo}
@@ -169,14 +169,14 @@ export default function UniversityPage() {
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  handleApplyClick(university);
+                                   handleApplyClick(university);
                                 }}
                                 className='bg-blue-600 text-white text-sm px-3 py-1 rounded hover:bg-blue-700'
                                 aria-label={`Apply to ${university.name}`}
                               >
                                 Apply
                               </button>
-                            </header>
+                            </div>
 
                             {expandedUniversityId === university.id && (
                               <section className='mt-4 space-y-6'>
@@ -210,7 +210,7 @@ export default function UniversityPage() {
             </div>
 
             {/* Right: Advertisement Section */}
-            <aside className="w-full lg:w-72 order-3 bg-white p-4 rounded shadow text-center h-fit lg:sticky lg:top-28 lg:max-h-[calc(100vh-7rem)] overflow-auto space-y-6">
+            <aside className="w-full lg:w-72 order-3 bg-white p-4 rounded shadow text-center h-fit lg:sticky lg:top-28  overflow-y-hidden space-y-6">
               <h2 className="text-xl font-semibold mb-4">Sponsored</h2>
 
               <div className="flex justify-center mb-2">

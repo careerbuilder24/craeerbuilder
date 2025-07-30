@@ -137,8 +137,8 @@ export default function Navbar() {
 
           <Link href="/Gallery" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Gallery</Link>
           <Link href="/University" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>University</Link>
-          <Link href="/StudyAbroad" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Study Abroad</Link>
-          <Link href="/LanguageClub" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Language Club</Link>
+          <Link href="/StudyAbroad" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Abroad</Link>
+          <Link href="/LanguageClub" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Language</Link>
           <Link href="/JOBS" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Jobs</Link>
           <Link href="/FA_Q" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>FAQ</Link>
           <Link href="/About_Us" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>About</Link>

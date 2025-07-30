@@ -82,7 +82,7 @@ export default function Page() {
                     </main>
 
                     {/* Right - Advertisement Section */}
-                    <aside className="md:col-span-1 order-3 bg-white p-4 rounded shadow text-center h-fit md:sticky md:top-28 md:max-h-[calc(100vh-7rem)] overflow-auto space-y-6">
+                    <aside className="md:col-span-1 order-3 bg-white p-4 rounded shadow text-center h-fit md:sticky md:top-28 overflow-y-hidden space-y-6">
                         <h2 className="text-xl font-semibold mb-4">Sponsored</h2>
 
                         {/* Ad 1 */}
