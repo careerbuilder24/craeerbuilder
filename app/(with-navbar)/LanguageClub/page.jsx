@@ -3,10 +3,22 @@ import React from 'react';
 import Navbar from '../componenets/Navbar/Navbar';
 import Footer from '../componenets/Footer/Footer';
 import Image from 'next/image';
+import HelmetHead from '@/app/HelmetHead/HelmetHead';
+import Link from 'next/link';
 
 export default function LanguageClub() {
   return (
     <>
+
+      <HelmetHead
+        title="Best Education Tech Website"
+        description="We Here to Build Career of Young Generation."
+        keywords="Career,Graphics,Motion Graphics,web Development"
+        author="Developer"
+      >
+
+      </HelmetHead>
+
       <Navbar />
 
       <div className='container mx-auto mt-28'>
@@ -504,6 +516,12 @@ export default function LanguageClub() {
 
 
         </div>
+
+        
+
+
+        {/* advertisements */}
+
       </div>
 
       <Footer />
