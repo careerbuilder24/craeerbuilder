@@ -41,7 +41,7 @@ export default function Banner() {
                     {[img, img2, img4, img5].map((src, index) => (
                         <div
                             key={index}
-                            className="flex justify-center mt-3 items-center w-full h-[29vh] md:h-[50vh] lg:h-[100vh]  " // Centers content
+                            className="flex relative justify-center mt-3 items-center w-full h-[29vh] md:h-[50vh] lg:h-[100vh]  " // Centers content
                         >
                             <Image
                                 src={src}
@@ -53,6 +53,7 @@ export default function Banner() {
                                 onDragStart={(e) => e.preventDefault()}
                                 className="w-full max-w-[100%] lg:max-w-[120%] xl:max-w-[130%]" // Make image width larger on larger screens
                             />
+                            <h1 className='absolute bottom-0 right-0 text-white  font-serif text-5xl'>Lets Build Career</h1>
                         </div>
                     ))}
 
