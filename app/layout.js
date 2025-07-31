@@ -46,6 +46,10 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+ export const metadata = {
+  title: 'Career Builder ',
+  description: 'Career builder guide where can learned how to get career better'
+ }
 
 
 export default function RootLayout({ children }) {

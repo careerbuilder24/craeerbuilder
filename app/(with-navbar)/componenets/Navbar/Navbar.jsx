@@ -109,9 +109,14 @@ export default function Navbar() {
           <Image
             src={logo}
             alt="Logo"
-            className="w-32 md:w-36 lg:w-40 h-auto min-w-[128px] flex-shrink-0"
+            width={249}
+            height={56}
+            priority 
+            className="h-auto w-[249px]" 
+            placeholder="blur" 
           />
         </Link>
+
 
 
         {/* Navbar Links */}
