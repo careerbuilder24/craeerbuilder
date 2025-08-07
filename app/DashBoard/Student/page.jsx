@@ -77,6 +77,7 @@ const adminSectionIcons = {
 import { ImProfile } from "react-icons/im";
 import { MdOutlineSystemUpdateAlt } from "react-icons/md";
 import Create_Page from '../Students_Dashboards_Components/Create_Page/CreatePage';
+import All_Page from '../Students_Dashboards_Components/All_Page/All_Page';
 
 
 const PageContent = () => {
@@ -92,7 +93,7 @@ const PageContent = () => {
       icon: <FiFileText />,
       children: [
         { label: "Create Page", key: "Create_Page" },
-        { label: "All Pages", key: "AllPages" },
+        { label: "All Page", key: "All_Page" },
         { label: "Page Category", key: "PageCategory" },
         { label: "Main Page", key: "MainPage" },
         { label: "Sub Page", key: "SubPage" },
@@ -396,7 +397,7 @@ const PageContent = () => {
               <li
                 key={section}
                 onClick={() => handleSectionClick(section)}
-                className="group hover:bg-blue-100  px-2 rounded flex items-center gap-2  hover:text-blue-700 cursor-pointer transition-colors duration-200"
+                className="group hover:bg-blue-100   px-2 rounded flex items-center gap-2  hover:text-blue-700 cursor-pointer transition-colors duration-200"
               >
                 {adminSectionIcons[section] && (
                   <span className="text-inherit">{adminSectionIcons[section]}</span>
@@ -412,7 +413,7 @@ const PageContent = () => {
               <li key={menu.label}>
                 <div
                   onClick={() => toggleDropdown(menu.label)}
-                  className="group flex justify-between items-center cursor-pointer  hover:bg-blue-100 hover:text-blue-700 px-2 rounded relative"
+                  className="group flex justify-between  items-center cursor-pointer  hover:bg-blue-100 hover:text-blue-700 px-2 rounded relative"
                 >
                   <span className="flex items-center gap-2">
                     {menu.icon}
@@ -463,7 +464,7 @@ const PageContent = () => {
 
 
           <div
-            className={`sidebar ${isSidebarOpen ? 'open' : ''} bg-[#222222] text-white h-screen overflow-y-auto`}
+            className={`sidebar ${isSidebarOpen ? 'open' : ''} bg-[#222222]   text-white h-screen overflow-y-auto `}
           >
             <button
               className="w-full text-left p-2 hover:bg-red-500"
@@ -584,6 +585,8 @@ const PageContent = () => {
           return <CourseAdded />;
         case 'Create_Page':
           return <Create_Page />;
+        case 'All_Page':
+          return <All_Page />;
         case 'Students_Added':
           return <StudentsAdded />;
         case 'Gallery_Added':

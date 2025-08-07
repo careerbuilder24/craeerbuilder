@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect, useRef } from 'react';
 import Counter from '../NumberCounter/Counter';
 import { PiStudentFill } from "react-icons/pi";
