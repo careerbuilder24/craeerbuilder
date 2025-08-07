@@ -141,24 +141,7 @@ export default function PublishedPost() {
                                 <th className="px-4 py-2">Actions</th>
                             </tr>
                         </thead>
-                        {/* Modal */}
-                        {isModalOpen && (
-                            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                                <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full relative">
-                                    <button
-                                        onClick={closeModal}
-                                        className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl font-bold"
-                                    >
-                                        ×
-                                    </button>
-                                    <div className="text-gray-800 max-h-[60vh] overflow-y-auto">
-                                        <div
-                                            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(modalContent) }}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+
 
                         {editModalOpen && editingPost && (
                             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -342,6 +325,25 @@ export default function PublishedPost() {
                             ))}
                         </tbody>
                     </table>
+
+                    {/* Modal */}
+                    {isModalOpen && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                            <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl w-full relative">
+                                <button
+                                    onClick={closeModal}
+                                    className="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-xl font-bold"
+                                >
+                                    ×
+                                </button>
+                                <div className="text-gray-800 max-h-[60vh] overflow-y-auto">
+                                    <div
+                                        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(modalContent) }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* <div className="flex justify-end mt-4">

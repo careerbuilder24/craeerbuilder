@@ -18,7 +18,7 @@ export default function Page() {
     const [blogContent, setBlogContent] = useState('');
     const [savedRange, setSavedRange] = useState(null);
 
-      const {  matchedStudent } = useUserMatching();
+    const { matchedStudent } = useUserMatching();
     //    console.log(matchedStudent?.email)
 
     const editorRef = useRef(null);
@@ -37,12 +37,33 @@ export default function Page() {
         }
     }, []);
 
-    const handleImageUpload = (e) => {
+    const handleImageUpload = async (e) => {
         const file = e.target.files[0];
-        if (file) {
-            setFeaturedImage(URL.createObjectURL(file));
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const res = await fetch(`https://api.imgbb.com/1/upload?key=3d64b0e9dee39ca593b9da32467663ee`, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                setFeaturedImage(data.data.url); // Set the hosted image URL
+                Swal.fire('Uploaded!', 'Image successfully uploaded to ImgBB.', 'success');
+            } else {
+                throw new Error('ImgBB upload failed');
+            }
+        } catch (error) {
+            console.error('Upload error:', error);
+            Swal.fire('Error', 'Failed to upload image.', 'error');
         }
     };
+
 
     const handleCancelImage = () => {
         setFeaturedImage(null);
@@ -112,6 +133,7 @@ export default function Page() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     const draft = {
+
                         title,
                         note,
                         category,
@@ -149,9 +171,11 @@ export default function Page() {
                         title,
                         note,
                         category,
-                        featuredImage,
+                        featuredImage, // this is now the ImgBB URL
                         email: matchedStudent?.email,
                         blogContent: editorRef.current.innerHTML
+
+
                     };
 
                     const res = await fetch('/api/StudentBlog', {

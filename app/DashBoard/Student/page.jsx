@@ -53,8 +53,30 @@ import {
   FiMessageCircle,
   FiBriefcase
 } from 'react-icons/fi';
+import {
+  FiUserPlus,
+  FiBookOpen,
+  FiMessageSquare,
+  FiHelpCircle,
+  FiInfo,
+  FiPhone
+} from 'react-icons/fi';
+
+const adminSectionIcons = {
+  Students_Added: <FiUserPlus />,
+  Manage_Users: <FiUsers />,
+  Course_Added: <FiBookOpen />,
+  Gallery_Added: <FiImage />,
+  University_Added: <FiGlobe />,
+  Career_Guide_Blog: <FiFileText />,
+  Published_Post: <FiMessageSquare />,
+  FAQ_Added: <FiHelpCircle />,
+  About_Us_Added: <FiInfo />,
+  Contact_Us_Added: <FiPhone />
+};
 import { ImProfile } from "react-icons/im";
 import { MdOutlineSystemUpdateAlt } from "react-icons/md";
+import Create_Page from '../Students_Dashboards_Components/Create_Page/CreatePage';
 
 
 const PageContent = () => {
@@ -69,65 +91,135 @@ const PageContent = () => {
       label: "Page",
       icon: <FiFileText />,
       children: [
-        "Create Page", "All Pages", "Page Category", "Main Page", "Sub Page", "Sub-Sub Page"
+        { label: "Create Page", key: "Create_Page" },
+        { label: "All Pages", key: "AllPages" },
+        { label: "Page Category", key: "PageCategory" },
+        { label: "Main Page", key: "MainPage" },
+        { label: "Sub Page", key: "SubPage" },
+        { label: "Sub-Sub Page", key: "SubSubPage" }
       ]
     },
     {
       label: "Blogs",
       icon: <FiMessageCircle />,
-      children: ["Create Post", "All Posts"]
+      badgeCount: 2,
+      children: [
+        { label: "Create Post", key: "CreatePost" },
+        { label: "All Posts", key: "AllPosts" }
+      ]
     },
     {
       label: "Course",
       icon: <FiBook />,
-      children: ["Create Course", "All Courses"]
+      children: [
+        { label: "Create Course", key: "CreateCourse" },
+        { label: "All Courses", key: "AllCourses" }
+      ]
     },
     {
       label: "Category",
       icon: <FiLayers />,
-      children: ["Create Category", "All Categories"]
+      children: [
+        { label: "Create Category", key: "CreateCategory" },
+        { label: "All Categories", key: "AllCategories" }
+      ]
     },
     {
       label: "Student",
       icon: <FiUsers />,
-      children: ["Student Profile", "Running Students", "Intern Students", "Employed Students", "All Students"]
+      children: [
+        { label: "Student Profile", key: "StudentProfile" },
+        { label: "Running Students", key: "RunningStudents" },
+        { label: "Intern Students", key: "InternStudents" },
+        { label: "Employed Students", key: "EmployedStudents" },
+        { label: "All Students", key: "AllStudents" }
+      ]
     },
     {
       label: "Photo Gallery",
       icon: <FiImage />,
-      children: ["Orientation", "Certification", "Awards Giving", "Pohela Boishakh", "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Photos"]
+      children: [
+        { label: "Orientation", key: "PhotoOrientation" },
+        { label: "Certification", key: "PhotoCertification" },
+        { label: "Awards Giving", key: "PhotoAwards" },
+        { label: "Pohela Boishakh", key: "PhotoPohelaBoishakh" },
+        { label: "Eid-ul-Fitre", key: "PhotoEidFitre" },
+        { label: "Eid-ul-Adha", key: "PhotoEidAdha" },
+        { label: "News Event", key: "PhotoNews" },
+        { label: "Charity Program", key: "PhotoCharity" },
+        { label: "All Photos", key: "AllPhotos" }
+      ]
     },
     {
       label: "Video Gallery",
       icon: <FiVideo />,
-      children: ["Orientation", "Certification", "Awards Giving", "Pohela Boishakh", "Eid-ul-Fitre", "Eid-ul-Adha", "News Event", "Charity Program", "All Videos"]
+      children: [
+        { label: "Orientation", key: "VideoOrientation" },
+        { label: "Certification", key: "VideoCertification" },
+        { label: "Awards Giving", key: "VideoAwards" },
+        { label: "Pohela Boishakh", key: "VideoPohelaBoishakh" },
+        { label: "Eid-ul-Fitre", key: "VideoEidFitre" },
+        { label: "Eid-ul-Adha", key: "VideoEidAdha" },
+        { label: "News Event", key: "VideoNews" },
+        { label: "Charity Program", key: "VideoCharity" },
+        { label: "All Videos", key: "AllVideos" }
+      ]
     },
     {
       label: "University",
       icon: <FiGlobe />,
-      children: ["Add University", "All Universities"]
+      badgeCount: 3, // <- add this
+      children: [
+        { label: "Add University", key: "AddUniversity" },
+        { label: "All Universities", key: "AllUniversities" }
+      ]
     },
     {
       label: "Study Abroad",
       icon: <FiTrendingUp />,
-      children: ["Add University", "Candidate Application", "Pending Application", "Approved Application", "Rejected Application", "All Universities"]
+      children: [
+        { label: "Add University", key: "SA_AddUniversity" },
+        { label: "Candidate Application", key: "SA_CandidateApp" },
+        { label: "Pending Application", key: "SA_PendingApp" },
+        { label: "Approved Application", key: "SA_ApprovedApp" },
+        { label: "Rejected Application", key: "SA_RejectedApp" },
+        { label: "All Universities", key: "SA_AllUniversities" }
+      ]
     },
     {
       label: "Payment",
       icon: <FiCreditCard />,
-      children: ["Add Payment", "Course Payment", "Internship Payment", "Employment Payment", "Study Abroad Payment", "Refund Payment", "Discount Payment", "Due Payment", "Others Payment"]
+      children: [
+        { label: "Add Payment", key: "AddPayment" },
+        { label: "Course Payment", key: "CoursePayment" },
+        { label: "Internship Payment", key: "InternshipPayment" },
+        { label: "Employment Payment", key: "EmploymentPayment" },
+        { label: "Study Abroad Payment", key: "StudyAbroadPayment" },
+        { label: "Refund Payment", key: "RefundPayment" },
+        { label: "Discount Payment", key: "DiscountPayment" },
+        { label: "Due Payment", key: "DuePayment" },
+        { label: "Others Payment", key: "OthersPayment" }
+      ]
     },
     {
       label: "Language",
       icon: <FiBook />,
-      children: ["Add Language Course", "All Language Courses"]
+      children: [
+        { label: "Add Language Course", key: "AddLanguageCourse" },
+        { label: "All Language Courses", key: "AllLanguageCourses" }
+      ]
     },
     {
       label: "Job Circular",
       icon: <FiBriefcase />,
-      children: ["Circular Job", "Job Applicants", "All Jobs"]
+      children: [
+        { label: "Circular Job", key: "CircularJob" },
+        { label: "Job Applicants", key: "JobApplicants" },
+        { label: "All Jobs", key: "AllJobs" }
+      ]
     }
   ];
+
 
 
   const [openDropdowns, setOpenDropdowns] = useState({});
@@ -183,8 +275,8 @@ const PageContent = () => {
     'Manage_Users',
     'Course_Added',
     'Gallery_Added',
-    'University_BioData_Added',
-    'Career_Guide_Blog_Added',
+    'University_Added',
+    'Career_Guide_Blog',
     'Published_Post',
     'FAQ_Added',
     'About_Us_Added',
@@ -273,11 +365,87 @@ const PageContent = () => {
     switch (userRole) {
       case 'Admin':
         return (
+
+          // Admin Users
+
           <ul className="mt-3">
-            <Link href="/">Home</Link>
+            {/* <Link href="/">Home</Link> */}
+
+            <Link href="/">
+              <div className='flex justify-center items-center'>
+                <Image
+                  src={logo}
+                  alt="Logo"
+                  className=" md:w-36 lg:w-full h-auto w-full rounded-lg flex-shrink-0 "
+                />
+              </div>
+            </Link>
+            <li>
+              <Link
+                href="/"
+                className=" px-2 flex items-center gap-3    hover:bg-blue-100 hover:text-blue-700 rounded"
+              >
+                <FiHome />
+                Home
+              </Link>
+            </li>
+
+
+
             {adminSections.map((section) => (
-              <li key={section} onClljiujick={() => handleSectionClick(section)}>
+              <li
+                key={section}
+                onClick={() => handleSectionClick(section)}
+                className="group hover:bg-blue-100  px-2 rounded flex items-center gap-2  hover:text-blue-700 cursor-pointer transition-colors duration-200"
+              >
+                {adminSectionIcons[section] && (
+                  <span className="text-inherit">{adminSectionIcons[section]}</span>
+                )}
                 {section.replace(/_/g, ' ')}
+              </li>
+            ))}
+
+
+
+
+            {sidebarMenu.map((menu, index) => (
+              <li key={menu.label}>
+                <div
+                  onClick={() => toggleDropdown(menu.label)}
+                  className="group flex justify-between items-center cursor-pointer  hover:bg-blue-100 hover:text-blue-700 px-2 rounded relative"
+                >
+                  <span className="flex items-center gap-2">
+                    {menu.icon}
+                    <p>{menu.label}</p>
+                  </span>
+
+                  <div className="flex items-center gap-1">
+                    {/* Badge if present */}
+                    {menu.badgeCount > 0 && (
+                      <span className="bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                        {menu.badgeCount}
+                      </span>
+                    )}
+                    {openDropdowns[menu.label] ? <FiChevronDown /> : <FiChevronRight />}
+                  </div>
+                </div>
+
+                <div
+                  ref={(el) => (dropdownRefs.current[menu.label] = el)}
+                  className="ml-4 space-y-1 overflow-hidden transition-all duration-500 ease-in-out  "
+                  style={{ maxHeight: '0px' }}
+                >
+                  {menu.children.map(({ label, key }) => (
+                    <p
+                      key={key}
+                      onClick={() => handleSectionClick(key)}
+                      className="ml-4 pl-2 mt-3 py-1 cursor-pointer hover:text-blue-700 hover:bg-blue-100 rounded  transition-colors duration-200"
+                    >
+                      {label}
+                    </p>
+                  ))}
+
+                </div>
               </li>
             ))}
           </ul>
@@ -305,6 +473,7 @@ const PageContent = () => {
               ✖ Close
             </button>
 
+            {/* Students Users */}
             <Link href="/">
               <div className='flex justify-center items-center'>
                 <Image
@@ -320,59 +489,24 @@ const PageContent = () => {
               <li>
                 <Link
                   href="/"
-                  className=" px-2 flex items-center gap-3 text-[#DCDCDE]   hover:bg-blue-100 hover:text-blue-700 rounded"
+                  className=" px-2 flex items-center gap-3    hover:bg-blue-100 hover:text-blue-700 rounded"
                 >
                   <FiHome />
                   Home
                 </Link>
               </li>
-
-              {/* First section of sidebar */}
-
-              {sidebarMenu.map((menu, index) => (
-                <li key={menu.label}>
-                  <div
-                    onClick={() => toggleDropdown(menu.label)}
-                    className="group flex justify-between items-center cursor-pointer text-[#DCDCDE] hover:bg-blue-100 hover:text-blue-700 px-2 rounded"
-                  >
-                    <span className="flex items-center gap-2">
-                      {menu.icon}
-                      {menu.label}
-                    </span>
-                    {openDropdowns[menu.label] ? <FiChevronDown /> : <FiChevronRight />}
-                  </div>
-
-                  <div
-                    ref={(el) => (dropdownRefs.current[menu.label] = el)}
-                    className="ml-4 space-y-1 overflow-hidden transition-all duration-500 ease-in-out text-[#DCDCDE]"
-                    style={{ maxHeight: '0px' }}
-                  >
-                    {menu.children.map((child) => (
-                      <p
-                        key={child}
-                        onClick={() => handleSectionClick(child.replace(/\s+/g, ''))}
-                        className="cursor-pointer hover:text-blue-700 hover:bg-blue-100 rounded text-[#DCDCDE]"
-                      >
-                        {child}
-                      </p>
-                    ))}
-                  </div>
-                </li>
-              ))}
-
-
               <li
                 onClick={() => handleSectionClick('Profile')}
-                className="px-2 flex items-center gap-3  cursor-pointer   text-[#DCDCDE]  hover:bg-blue-100 hover:text-blue-800  rounded"
+                className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
               >
-                <ImProfile className='  text-[#DCDCDE] hover:bg-blue-100 hover:text-blue-700   ' />
+                <ImProfile className='   hover:bg-blue-100 hover:text-blue-700   ' />
                 Profile Edit
               </li>
               <li
                 onClick={() => handleSectionClick('CvUpdate')}
-                className="px-2 flex items-center gap-3 cursor-pointer   text-[#DCDCDE]  hover:bg-blue-100 group-hover:text-blue-700   rounded"
+                className="px-2 flex items-center gap-3 cursor-pointer     hover:bg-blue-100 group-hover:text-blue-700   rounded"
               >
-                <MdOutlineSystemUpdateAlt className=' text-[#DCDCDE]  hover:bg-blue-100 group-hover:text-blue-700  ' />
+                <MdOutlineSystemUpdateAlt className='  hover:bg-blue-100 group-hover:text-blue-700  ' />
                 CV Update
               </li>
 
@@ -388,7 +522,7 @@ const PageContent = () => {
                         toggleSection(key);
                         handleSectionClick(key);  // Important for middle content load
                       }}
-                      className="flex items-center justify-between px-2  cursor-pointer text-[#DCDCDE]  hover:bg-blue-100 hover:text-blue-800 rounded"
+                      className="flex items-center justify-between px-2  cursor-pointer   hover:bg-blue-100 hover:text-blue-800 rounded"
                     >
                       <span>{label}</span>
                       {isOpen ? (
@@ -397,7 +531,7 @@ const PageContent = () => {
                         <FiChevronRight />
                       )}
                     </div>
-
+                    {/* text-[#DCDCDE] */}
                     <div
                       ref={(el) => (contentRefs.current[key] = el)}
                       className="overflow-hidden transition-all duration-500 ease-in-out"
@@ -406,7 +540,7 @@ const PageContent = () => {
                       <ul className=" ">
                         <li
                           onClick={() => handleSectionClick(uploadedKey)}
-                          className="px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
+                          className="px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded  "
                         >
                           Uploaded {label}
                         </li>
@@ -418,19 +552,19 @@ const PageContent = () => {
 
               <li
                 onClick={() => handleSectionClick('Videos')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded  "
               >
                 Videos
               </li>
               <li
                 onClick={() => handleSectionClick('Blog')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded  "
               >
                 Blog
               </li>
               <li
                 onClick={() => handleSectionClick('AllBlogs')}
-                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded text-[#DCDCDE] "
+                className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded  "
               >
                 All Blogs
               </li>
@@ -448,13 +582,15 @@ const PageContent = () => {
       switch (activeSection) {
         case 'Course_Added':
           return <CourseAdded />;
+        case 'Create_Page':
+          return <Create_Page />;
         case 'Students_Added':
           return <StudentsAdded />;
         case 'Gallery_Added':
           return <GalleryAdded />;
-        case 'University_BioData_Added':
+        case 'University_Added':
           return <UniversityBioDataAdded />;
-        case 'Career_Guilde_Blog_Added':
+        case 'Career_Guide_Blog':
           return <CareerGuideBlogAdded />;
         case 'Published_Post':
           return <PublishedPost />;

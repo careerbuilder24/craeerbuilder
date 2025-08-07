@@ -1,11 +1,15 @@
 import React from 'react';
 import { RiArrowRightSLine } from "react-icons/ri";
 import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import Link from 'next/link';
 import './Footer.css';
 
 export default function Footer() {
     return (
         <>
+            {/* <Link href="/FA_Q" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>FAQ</Link>
+          <Link href="/About_Us" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>About</Link>
+          <Link href="/Contuct_US" className='px-1.5 py-1 hover:text-blue-400 transition-colors text-sm xl:text-base'>Contact</Link> */}
             <div className='footer-container'>
                 <div className='bg-[#2BAAE3] lg:bg-[#17549A] text-white w-full py-20'>
 
@@ -17,7 +21,7 @@ export default function Footer() {
                             <div className='flex flex-col w-full md:w-auto' key={index}>
                                 <h1 className='font-bold mb-2 text-left cursor-pointer'>{category}</h1>
 
-                                {category === "Important Links" && [
+                                {/* {category === "Important Links" && [
                                     "Mobile Apps Development",
                                     "Custom Software Development",
                                     "School Management Software",
@@ -26,6 +30,22 @@ export default function Footer() {
                                     <div key={item} className='flex items-center mb-1'>
                                         <RiArrowRightSLine />
                                         <h1 className='hover:underline cursor-pointer whitespace-nowrap'>{item}</h1>
+                                    </div>
+                                ))} */}
+                                {category === "Important Links" && [
+                                    { name: "FAQ", link: "/FA_Q" },
+                                    { name: "About", link: "/About_Us" },
+                                    { name: "Contact", link: "/Contuct_US" },
+                                    { name: "Restaurant Management Software", link: "/products/restaurant-management" }
+                                ].map(item => (
+                                    <div key={item.name} className='flex items-center mb-1'>
+                                        <RiArrowRightSLine />
+                                        <Link
+                                            href={item.link}
+                                            className='hover:underline cursor-pointer whitespace-nowrap text-sm'
+                                        >
+                                            {item.name}
+                                        </Link>
                                     </div>
                                 ))}
 

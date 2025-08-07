@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import AdminFooter from '@/app/(with-navbar)/componenets/Admin Footer/AdminFooter';
 import Swal from 'sweetalert2';
+import ButtonTopMaker from '@/app/buttonTopMaker/ButtonTopMaker';
 
 
 export default function Page() {
@@ -277,7 +278,7 @@ export default function Page() {
 
 
 
-   
+
 
 
     return (
@@ -358,7 +359,20 @@ export default function Page() {
                 </div>
 
                 {/* Right Side */}
-                <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr', gap: '20px', minWidth: '300px' }}>
+                <div
+                    style={{
+                        flex: 1,
+                        minWidth: '300px',
+                        maxHeight: '100vh',
+                        overflowY: 'auto',
+                        position: 'sticky',
+                        alignSelf: 'flex-start',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '20px',
+                    }}
+                    className='top-28 overflow-y-hidden'
+                >
                     <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#ffffffff' }}>
                         <h3 className='font-bold'>Actions</h3>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
@@ -399,7 +413,7 @@ export default function Page() {
                                 <Image
                                     width={200}
                                     height={200}
-                                    src={URL.createObjectURL(featuredImage)} 
+                                    src={URL.createObjectURL(featuredImage)}
                                     alt="Featured Preview"
                                     style={{ width: '100%', borderRadius: '5px' }}
                                 />
@@ -460,7 +474,9 @@ export default function Page() {
                     </div>
                 </div>
             </div>
+            <ButtonTopMaker />
             <AdminFooter />
+
         </>
     );
 }

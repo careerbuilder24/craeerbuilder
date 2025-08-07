@@ -1,5 +1,6 @@
 import useMatchingUploadedBlog from "@/hooks/useMatchingUploadedBlog";
 import usePublishedBlogs from "@/hooks/usePublishedBlogs";
+import Image from "next/image";
 import React, { useState } from "react";
 
 export default function AllBlogs() {
@@ -8,7 +9,7 @@ export default function AllBlogs() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [searchText, setSearchText] = useState("");
-  const {matchedStudentUploadedBlogs} = useMatchingUploadedBlog();
+  const { matchedStudentUploadedBlogs } = useMatchingUploadedBlog();
 
   console.log(matchedStudentUploadedBlogs)
   const entriesPerPage = 13;
@@ -109,12 +110,14 @@ export default function AllBlogs() {
                 {/* <td className="border border-gray-300 px-2 py-2">{blog.id}</td> */}
                 <td className="border border-gray-300 px-2 py-2">{blog.title}</td>
                 <td className="border border-gray-300 px-2 py-2">{blog.category}</td>
-                <td className="border border-gray-300 px-2 py-2">{blog.note}</td>
+                <td className="border border-gray-300 px-2 py-2 text-justify">{blog.note}</td>
                 <td className="border border-gray-300 px-2 py-2">
                   {new Date(blog.datePublished).toLocaleDateString()}
                 </td>
                 <td className="border border-gray-300 px-2 py-2">
-                  <img
+                  <Image
+                    width={400}
+                    height={400}
                     src={blog.featuredImage}
                     alt="Blog Image"
                     className="w-16 h-16 object-cover mx-auto rounded"

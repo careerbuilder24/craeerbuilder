@@ -7,6 +7,7 @@ export async function POST(req) {
         const body = await req.json();
         const { title, note, category, featuredImage, blogContent, email } = body;
 
+        // Basic validation
         if (!title || !blogContent) {
             return NextResponse.json({
                 success: false,
@@ -14,16 +15,25 @@ export async function POST(req) {
             }, { status: 400 });
         }
 
+        // Optional: validate image URL
+        if (featuredImage && typeof featuredImage !== 'string') {
+            return NextResponse.json({
+                success: false,
+                message: 'Invalid image URL format.'
+            }, { status: 400 });
+        }
+
         await db.execute(
-            `INSERT INTO  student_published_blogs (title, note, category, featuredImage, blogContent, email)
-             VALUES (?, ?, ?, ?, ?, ?)`,
-            [title, note, category, featuredImage, blogContent,email]
+            `INSERT INTO student_published_blogs 
+            (title, note, category, featuredImage, blogContent, email)
+            VALUES (?, ?, ?, ?, ?, ?)`,
+            [title, note, category, featuredImage, blogContent, email]
         );
 
         return NextResponse.json({
             success: true,
             message: 'Blog published successfully.'
-        });
+        }, { status: 200 });
 
     } catch (error) {
         console.error('Error publishing blog:', error);
@@ -35,22 +45,21 @@ export async function POST(req) {
     }
 }
 
-// Get method 
+// GET Method: Fetch all published blogs
 export async function GET() {
     try {
-        const query = 'SELECT * FROM users_login.student_published_blogs';
-        const [row] = await db.execute(query);
+        const [rows] = await db.execute('SELECT * FROM users_login.student_published_blogs');
         return NextResponse.json({
             success: true,
-            data: row,
-        }, { status: 200 })
+            data: rows,
+        }, { status: 200 });
     } catch (error) {
-        console.error('error of getting data', error);
+        console.error('Error fetching blogs:', error);
         return NextResponse.json({
             success: false,
-            message: 'Error for Get Data',
+            message: 'Error fetching blog data.',
             error: error.message
-        }, { status: 500 })
+        }, { status: 500 });
     }
 }
 

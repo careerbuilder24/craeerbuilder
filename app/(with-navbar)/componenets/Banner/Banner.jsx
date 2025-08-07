@@ -38,6 +38,7 @@ export default function Banner() {
                     onMouseLeave={handleMouseLeave} // Resume autoplay after hover
                 >
                     {/* parts of image */}
+
                     {[img, img2, img4, img5].map((src, index) => (
                         <div
                             key={index}
@@ -46,12 +47,12 @@ export default function Banner() {
                             <Image
                                 src={src}
                                 alt={`Slide ${index + 1}`}
-                                layout="responsive" // Makes the image responsive
-                                width={1600} // You can adjust this width based on your image's actual size
-                                height={900} // You can adjust this height to match the aspect ratio
-                                objectFit="contain" // Ensures the image scales without distortion
+                                layout="responsive" 
+                                width={1600} 
+                                height={900} 
+                                objectFit="contain" 
                                 onDragStart={(e) => e.preventDefault()}
-                                className="w-full max-w-[100%] lg:max-w-[120%] xl:max-w-[130%]" // Make image width larger on larger screens
+                                className="w-full max-w-[100%] lg:max-w-[120%] xl:max-w-[130%]" 
                             />
                             <h1 className='absolute bottom-0 right-0 text-white  font-serif text-5xl'>Lets Build Career</h1>
                         </div>
