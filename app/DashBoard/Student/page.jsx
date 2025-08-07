@@ -78,6 +78,7 @@ import { ImProfile } from "react-icons/im";
 import { MdOutlineSystemUpdateAlt } from "react-icons/md";
 import Create_Page from '../Students_Dashboards_Components/Create_Page/CreatePage';
 import All_Page from '../Students_Dashboards_Components/All_Page/All_Page';
+import Add_Students from '../Students_Dashboards_Components/Add_Students/Add_Students';
 
 
 const PageContent = () => {
@@ -129,7 +130,7 @@ const PageContent = () => {
       label: "Student",
       icon: <FiUsers />,
       children: [
-        { label: "Student Profile", key: "StudentProfile" },
+        { label: "Add Student", key: "Add_Student" },
         { label: "Running Students", key: "RunningStudents" },
         { label: "Intern Students", key: "InternStudents" },
         { label: "Employed Students", key: "EmployedStudents" },
@@ -605,6 +606,8 @@ const PageContent = () => {
           return <ContactUsAdded />;
         case 'Manage_Users':
           return <ManageUsers />;
+        case 'Add_Student':
+          return <Add_Students />;
         default: return <AdminWelcomePage />;
       }
     } else {

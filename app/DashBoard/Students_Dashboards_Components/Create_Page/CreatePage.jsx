@@ -191,11 +191,27 @@ export default function CreatePage() {
 function BannerEditor() {
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    const imageUrls = files.map(file => URL.createObjectURL(file));
+    setImages(prev => [...prev, ...imageUrls]);
+  };
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <div>
       <h2 className="text-xl font-semibold mb-4">Edit Banner</h2>
+
       <input
         type="text"
         placeholder="Title"
@@ -212,13 +228,44 @@ function BannerEditor() {
       />
       <input
         type="file"
-        onChange={(e) => setImage(e.target.files[0])}
+        accept="image/*"
+        multiple
+        onChange={handleImageUpload}
         className="mb-2"
       />
+
+      {images.length > 0 && (
+        <div className="relative w-full max-w-md mx-auto my-4">
+          <img
+            src={images[currentIndex]}
+            alt={`Banner ${currentIndex + 1}`}
+            className="w-full h-64 object-cover rounded"
+          />
+
+          <button
+            onClick={prevSlide}
+            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white px-2 py-1 rounded"
+          >
+            ‹
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white px-2 py-1 rounded"
+          >
+            ›
+          </button>
+
+          <div className="text-center mt-2 text-sm text-gray-500">
+            {currentIndex + 1} / {images.length}
+          </div>
+        </div>
+      )}
+
       <button className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
     </div>
   );
 }
+
 
 function SponsorUploader() {
   const [image, setImage] = useState(null);
