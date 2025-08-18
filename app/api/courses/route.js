@@ -210,32 +210,32 @@ export async function PUT(req) {
 // DELETE 
 
 export async function DELETE(req) {
-    try {
-        // const { id } = await req.json();
-        // if (!id) {
-        //     return NextResponse.json({ success: false, message: 'Missing ID' }, { status: 400 });
-        // }
+  try {
+    const url = new URL(req.url);
+    const id = url.searchParams.get("id"); 
 
-        const { id } = await req.json();
-        if (!id || typeof id !== 'number') {
-            return NextResponse.json({ success: false, message: 'Missing or invalid ID' }, { status: 400 });
-        }
-
-
-        const query = 'DELETE FROM users_login.courses WHERE id = ?';
-        await promisePool.execute(query, [id]);
-
-        return NextResponse.json({ success: true, message: 'Deleted successfully' }, { status: 200 });
-
-    } catch (err) {
-        console.log('the delete error is:', err)
-        return NextResponse.json({
-            success: false,
-            message: 'Error deleting gallery item',
-            error: err.message
-        }, { status: 500 })
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Missing course ID" },
+        { status: 400 }
+      );
     }
+
+    await promisePool.execute(
+      "DELETE FROM users_login.courses WHERE id = ?",
+      [id]
+    );
+
+    return NextResponse.json(
+      { success: true, message: "Deleted successfully" },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error("Delete error:", err);
+    return NextResponse.json(
+      { success: false, message: "Error deleting course", error: err.message },
+      { status: 500 }
+    );
+  }
 }
-
-
 

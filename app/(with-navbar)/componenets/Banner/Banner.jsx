@@ -26,7 +26,7 @@ export default function Banner() {
             <Head>
                 <link rel="preload" href={img} as="image" />
             </Head>
-            <div className=" relative w-full mt-16 lg:mt-0 "> 
+            <div className=" relative w-full mt-16 lg:mt-10 "> 
                 <Carousel
                     autoPlay={autoPlay}            // Auto play based on state
                     interval={2500}                // Set the interval time for autoplay
@@ -54,7 +54,7 @@ export default function Banner() {
                                 onDragStart={(e) => e.preventDefault()}
                                 className="w-full max-w-[100%] lg:max-w-[120%] xl:max-w-[130%]" 
                             />
-                            <h1 className='absolute bottom-0 right-0 text-white  font-serif text-5xl'>Lets Build Career</h1>
+                            <h1 className='absolute bottom-0 right-0 text-white  font-serif lg:text-5xl text-wrap text-sm'>Lets Build Career</h1>
                         </div>
                     ))}
 

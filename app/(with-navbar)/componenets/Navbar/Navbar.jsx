@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import logo from '../../../../assets/hv.png';
 import userIcon from '../../../../assets/propfilelogo.PNG';
+import Cookies from 'js-cookie';
 
 export default function Navbar() {
   const router = useRouter();
@@ -64,7 +65,9 @@ export default function Navbar() {
     try {
       await logOut(); // assuming this clears your auth context
       sessionStorage.removeItem('manualUser'); // remove from session storage
+      Cookies.remove("manualUser");
       localStorage.removeItem('blog_draft');
+      localStorage.removeItem('blogDraft');
       setUserProfile(null); // clear user profile
 
       // Force full reload to login page
@@ -181,7 +184,7 @@ export default function Navbar() {
               {/* Dropdown Menu */}
               <div className="hidden group-hover:block absolute right-0  w-48 bg-white rounded-md shadow-lg py-1 z-50">
                 <Link
-                  href="/profile"
+                  href="/Pro_file"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,5 +1,6 @@
 // import withBundleAnalyzer from '@next/bundle-analyzer';
 // // 3d64b0e9dee39ca593b9da32467663ee
+// npx ngrok http 3000  
 // const nextConfig = {
 //   // Specify the custom output directory for build artifacts
 //   // distDir: 'dist',  

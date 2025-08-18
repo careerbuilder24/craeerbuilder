@@ -36,7 +36,7 @@
 
 
 // app/layout.js
-import { AuthContextProvider } from "./context/AuthContext";
+import ClientProviders from "./ClientProviders/ClientProviders.jsx";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <body className="antialiased">
-        <AuthContextProvider>{children}</AuthContextProvider>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );

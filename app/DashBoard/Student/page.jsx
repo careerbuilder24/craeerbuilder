@@ -28,7 +28,7 @@ import AboutUsAdded from '../Students_Dashboards_Components/Admin/About_Us_Added
 import ContactUsAdded from '../Students_Dashboards_Components/Admin/Contact_Us_Added/ContactUsAdded';
 import ManageUsers from '../Students_Dashboards_Components/Admin/Manage_Users/ManageUsers';
 import AdminWelcomePage from '../Students_Dashboards_Components/Admin_Welcome_Page/AdminWelcomePage';
-import GalleryAdded from '../Students_Dashboards_Components/Admin/Gallery_Added/GalleryAdded';
+
 import { UserAuth } from '@/app/context/AuthContext';
 import usersAdmin from '@/hooks/useAdminUser';
 import { ThemeToggle } from '@/app/(with-navbar)/componenets/ThemeToggle/ThemeToggle';
@@ -38,6 +38,7 @@ import UploadedCourses from '../Students_Dashboards_Components/UploadedCourses/U
 import UploadedPortfolio from '../Students_Dashboards_Components/UploadedPortfolio/UploadedPortfolio';
 import UploadedCertificate from '../Students_Dashboards_Components/UploadedCertificate/UploadedCertificate';
 import UploadedPicture from '../Students_Dashboards_Components/UploadedPicture/UploadedPicture';
+
 import logo from '../../../assets/logo.jpg';
 import {
   FiHome,
@@ -68,7 +69,7 @@ const adminSectionIcons = {
   Course_Added: <FiBookOpen />,
   Gallery_Added: <FiImage />,
   University_Added: <FiGlobe />,
-  Career_Guide_Blog: <FiFileText />,
+  // Career_Guide_Blog: <FiFileText />,
   Published_Post: <FiMessageSquare />,
   FAQ_Added: <FiHelpCircle />,
   About_Us_Added: <FiInfo />,
@@ -80,13 +81,43 @@ import Create_Page from '../Students_Dashboards_Components/Create_Page/CreatePag
 import All_Page from '../Students_Dashboards_Components/All_Page/All_Page';
 import Add_Students from '../Students_Dashboards_Components/Add_Students/Add_Students';
 
+// import usePublishedBlog from '@/hooks/usePublishedBlog';
+import AllCourse from '../Students_Dashboards_Components/Admin/AllCourse/AllCourse';
+import AllPhoto from '../Students_Dashboards_Components/Admin/AllPhoto/AllPhoto';
+import OrientationImage from '../Students_Dashboards_Components/Admin/OrientationImage/OrientationImage';
+import AdminCertificationImage from '../Students_Dashboards_Components/Admin/AdminCertificationImage/AdminCertificationImage';
+import AwardsGiving from '../Students_Dashboards_Components/Admin/AwardsGiving/AwardsGiving';
+import PohelaBoishakhImage from '../Students_Dashboards_Components/Admin/pohelaboishakImage/pohelaboishakImage';
+import EidUlFitre from '../Students_Dashboards_Components/Admin/EidUlFitre/EidUlFitre';
+import EidUlAdha from '../Students_Dashboards_Components/Admin/EidUlAdha/EidUlAdha';
+import News from '../Students_Dashboards_Components/Admin/News/News';
+import UploadCharityImage from '../Students_Dashboards_Components/Admin/UploadCharityImage/UploadCharityImage';
+import { RiGraduationCapFill } from 'react-icons/ri';
+import { BsPersonFillCheck, BsPersonVcard } from 'react-icons/bs';
+import { PiCertificateFill } from 'react-icons/pi';
+import { SlPicture } from 'react-icons/sl';
+import { AiFillPicture } from 'react-icons/ai';
+import StudentEnrollCourse from '../Students_Dashboards_Components/StudentEnrollCourse/StudentEnrollCourse';
+
 
 const PageContent = () => {
+
+
+  // const { published } = usePublishedBlog();
+
+  // console.log(published)
+
+  // console.log(blogCount)
+
+
   const sections = [
-    { key: "courses", label: "Courses", uploadedKey: "UploadedCourses" },
-    { key: "portfolio", label: "Portfolio", uploadedKey: "UploadedPortfolio" },
-    { key: "certificate", label: "Certificate", uploadedKey: "UploadedCertificate" },
-    { key: "picture", label: "Picture", uploadedKey: "UploadedPicture" },
+    // { key: "Enroll Course", icon: <BsPersonFillCheck />, label: "Enroll Course", uploadedKey: "Enroll_Course" },
+    { key: "courses", icon: <RiGraduationCapFill />, label: "Courses Added", uploadedKey: "UploadedCourses" },
+    { key: "portfolio", icon: <BsPersonVcard />, label: "Portfolio", uploadedKey: "UploadedPortfolio" },
+    { key: "certificate", icon: <PiCertificateFill />, label: "Certificate", uploadedKey: "UploadedCertificate" },
+    { key: "picture", icon: <AiFillPicture />, label: "Picture", uploadedKey: "UploadedPicture" },
+
+
   ];
   const sidebarMenu = [
     {
@@ -104,18 +135,18 @@ const PageContent = () => {
     {
       label: "Blogs",
       icon: <FiMessageCircle />,
-      badgeCount: 2,
+      // badgeCount: published?.data?.length || 0,
       children: [
-        { label: "Create Post", key: "CreatePost" },
-        { label: "All Posts", key: "AllPosts" }
+        { label: "Create Post", key: "Create_Post" },
+        { label: "All Posts", key: "All_Posts" }
       ]
     },
     {
       label: "Course",
       icon: <FiBook />,
       children: [
-        { label: "Create Course", key: "CreateCourse" },
-        { label: "All Courses", key: "AllCourses" }
+        { label: "Create Course", key: "Create_Course" },
+        { label: "All Courses", key: "All_Course" }
       ]
     },
     {
@@ -134,22 +165,22 @@ const PageContent = () => {
         { label: "Running Students", key: "RunningStudents" },
         { label: "Intern Students", key: "InternStudents" },
         { label: "Employed Students", key: "EmployedStudents" },
-        { label: "All Students", key: "AllStudents" }
+        { label: "All Students", key: "All_Students" }
       ]
     },
     {
       label: "Photo Gallery",
       icon: <FiImage />,
       children: [
-        { label: "Orientation", key: "PhotoOrientation" },
-        { label: "Certification", key: "PhotoCertification" },
-        { label: "Awards Giving", key: "PhotoAwards" },
-        { label: "Pohela Boishakh", key: "PhotoPohelaBoishakh" },
-        { label: "Eid-ul-Fitre", key: "PhotoEidFitre" },
-        { label: "Eid-ul-Adha", key: "PhotoEidAdha" },
-        { label: "News Event", key: "PhotoNews" },
-        { label: "Charity Program", key: "PhotoCharity" },
-        { label: "All Photos", key: "AllPhotos" }
+        { label: "All Photos", key: "AllPhoto" },
+        { label: "Orientation", key: "OrientationImage" },
+        { label: "Certification", key: "AdminCertificationImage" },
+        { label: "Awards Giving", key: "AwardsGiving" },
+        { label: "Pohela Boishakh", key: "pohelaboishakImage" },
+        { label: "Eid-ul-Fitre", key: "EidUlFitre" },
+        { label: "Eid-ul-Adha", key: "EidUlAdha" },
+        { label: "News Event", key: "News" },
+        { label: "Charity Program", key: "UploadCharityImage" },
       ]
     },
     {
@@ -264,7 +295,7 @@ const PageContent = () => {
 
 
   const [userRole, setUserRole] = useState('');
-  const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
+  // const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
 
 
   const { ManualUser } = UserAuth();
@@ -275,10 +306,10 @@ const PageContent = () => {
   const adminSections = [
     'Students_Added',
     'Manage_Users',
-    'Course_Added',
-    'Gallery_Added',
+    // 'Course_Added',
+    // 'Gallery_Added',
     'University_Added',
-    'Career_Guide_Blog',
+    // 'Career_Guide_Blog',
     'Published_Post',
     'FAQ_Added',
     'About_Us_Added',
@@ -341,20 +372,62 @@ const PageContent = () => {
     }
   }, [searchParams, userRole]);
 
+  useEffect(() => {
+    if (ManualUser && userAdmin) {
+      const isAdmin = userAdmin.some(
+        (admin) => admin.email === ManualUser.email && admin.role === 'Admin'
+      );
+      setUserRole(isAdmin ? 'Admin' : 'user');
+    }
+  }, [ManualUser, userAdmin]);
+
+
+
+  // Determine role
+  useEffect(() => {
+    if (ManualUser && userAdmin) {
+      const isAdmin = userAdmin.some(
+        (admin) =>
+          admin.email === ManualUser.email && admin.role === "Admin"
+      );
+      setUserRole(isAdmin ? "Admin" : "user");
+    }
+  }, [ManualUser, userAdmin]);
+
+  // Set default section based on role
+  useEffect(() => {
+    if (!userRole) return; // Wait until role is ready
+
+    const section = searchParams.get("section");
+    if (!section) {
+      setActiveSection(
+        userRole === "Admin" ? "AdminWelcomePage" : "Welcome_Page"
+      );
+    } else {
+      setActiveSection(section);
+    }
+  }, [userRole, searchParams]);
+
+  // While loading role, render nothing (no flicker)
+  if (userRole === null) {
+    return (
+      <div className="flex justify-center items-center h-screen text-lg font-semibold">
+        Loading dashboard...
+      </div>
+    );
+  }
 
   // for txt repeat change
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimatedText((prev) => {
-        const phrases = ["Welcome", "to", "Career", "Builder"];
-        const currentIndex = phrases.indexOf(prev);
-        const nextIndex = (currentIndex + 1) % phrases.length;
-        return phrases[nextIndex];
-      });
-    }, 1000);
+  // useEffect(() => {
+  //   const phrase = "Welcome to Career Builder";
+  //   const interval = setInterval(() => {
+  //     setAnimatedText((prev) => (prev ? "" : phrase)); // toggle between empty and phrase
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
+
+
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -450,6 +523,7 @@ const PageContent = () => {
                 </div>
               </li>
             ))}
+
           </ul>
         );
       case 'middle user':
@@ -459,7 +533,7 @@ const PageContent = () => {
             <li onClick={() => handleSectionClick('Profile')}>Profile</li>
           </ul>
         );
-
+      // student panel 
       default:
         return (
 
@@ -494,7 +568,7 @@ const PageContent = () => {
                   className=" px-2 flex items-center gap-3    hover:bg-blue-100 hover:text-blue-700 rounded"
                 >
                   <FiHome />
-                  Home
+                  Dashboard
                 </Link>
               </li>
               <li
@@ -502,17 +576,29 @@ const PageContent = () => {
                 className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
               >
                 <ImProfile className='   hover:bg-blue-100 hover:text-blue-700   ' />
-                Profile Edit
+                Profile
               </li>
               <li
                 onClick={() => handleSectionClick('CvUpdate')}
-                className="px-2 flex items-center gap-3 cursor-pointer     hover:bg-blue-100 group-hover:text-blue-700   rounded"
+                className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
               >
-                <MdOutlineSystemUpdateAlt className='  hover:bg-blue-100 group-hover:text-blue-700  ' />
-                CV Update
+                <MdOutlineSystemUpdateAlt className='   hover:bg-blue-100 hover:text-blue-700   ' />
+                 CV Update
               </li>
 
-              {sections.map(({ key, label, uploadedKey }) => {
+           
+
+              <li
+                onClick={() => handleSectionClick('Enroll_Course')}
+                className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
+              >
+                <BsPersonFillCheck className='   hover:bg-blue-100 hover:text-blue-700   ' />
+                Enroll Course
+              </li>
+
+
+
+              {sections.map(({ key, label, icon, uploadedKey }) => {
                 const isOpen = !!openSections[key];
                 return (
                   <div
@@ -526,7 +612,11 @@ const PageContent = () => {
                       }}
                       className="flex items-center justify-between px-2  cursor-pointer   hover:bg-blue-100 hover:text-blue-800 rounded"
                     >
-                      <span>{label}</span>
+
+                      <span className="flex items-center gap-2">
+                        {icon}
+                        <p>{label}</p>
+                      </span>
                       {isOpen ? (
                         <FiChevronDown />
                       ) : (
@@ -557,7 +647,10 @@ const PageContent = () => {
                 className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded  "
               >
                 Videos
+
+
               </li>
+
               <li
                 onClick={() => handleSectionClick('Blog')}
                 className="px-2  cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded  "
@@ -582,21 +675,39 @@ const PageContent = () => {
     // admin side dashboard
     if (userRole === 'Admin') {
       switch (activeSection) {
-        case 'Course_Added':
-          return <CourseAdded />;
         case 'Create_Page':
           return <Create_Page />;
         case 'All_Page':
           return <All_Page />;
         case 'Students_Added':
           return <StudentsAdded />;
-        case 'Gallery_Added':
-          return <GalleryAdded />;
+        case 'pohelaboishakImage':
+          return <PohelaBoishakhImage />;
+        case 'EidUlFitre':
+          return <EidUlFitre />;
+        case 'EidUlAdha':
+          return <EidUlAdha />;
+        case 'UploadCharityImage':
+          return <UploadCharityImage />;
+        case 'News':
+          return <News />;
+        case 'AllPhoto':
+          return <AllPhoto />;
+        case 'OrientationImage':
+          return <OrientationImage />;
+        case 'AdminCertificationImage':
+          return <AdminCertificationImage />;
+        case 'AwardsGiving':
+          return <AwardsGiving />;
         case 'University_Added':
           return <UniversityBioDataAdded />;
-        case 'Career_Guide_Blog':
+        case 'Create_Post':
           return <CareerGuideBlogAdded />;
-        case 'Published_Post':
+        case 'Create_Course':
+          return <CourseAdded />;
+        case 'All_Course':
+          return <AllCourse />;
+        case 'All_Posts':
           return <PublishedPost />;
         case 'FAQ_Added':
           return <FAQAdded />;
@@ -617,6 +728,8 @@ const PageContent = () => {
           return <Profile />;
         case 'CvUpdate':
           return <CvUpload />;
+        case 'Enroll_Course':
+          return <StudentEnrollCourse />;
         case 'Achivements':
           return <Achivements />;
         case 'UploadedCourses':
@@ -659,7 +772,10 @@ const PageContent = () => {
         <button className="sidebar-toggle" onClick={toggleSidebar} aria-label="Toggle sidebar">
           {isSidebarOpen ? '✖' : '☰'}
         </button>
-        <h1 className="text-3xl font-bold text-white">{animatedText}</h1>
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold hidden md:block lg:block text-white break-words">
+          Welcome to Career Builder
+        </h1>
+
         <div className="user-logo gap-3">
           <ThemeToggle />
           <Image
