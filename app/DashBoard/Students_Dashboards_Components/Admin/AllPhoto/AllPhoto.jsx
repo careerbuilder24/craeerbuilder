@@ -9,7 +9,7 @@ import useEidulfitreImages from '@/hooks/useEidulfitreImages';
 import useEidUlAdha from '@/hooks/useEidUlAdha';
 import useNewsEvent from '@/hooks/useNewsEvent';
 import useCharity from '@/hooks/useCharity';
-import useAwardGiving from '@/hooks/useAwardgiving';
+import useAwardGiving from '@/hooks//useAwardGiving';
 
 
 export default function AllPhoto() {
