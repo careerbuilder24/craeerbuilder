@@ -2,19 +2,15 @@ import usePublishedBlog from '@/hooks/usePublishedBlog';
 import React, { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 import Swal from 'sweetalert2';
+// import usePublishedBlogs from '@/hooks/usePublishedBlogs';
 
 export default function PublishedPost() {
     const [modalContent, setModalContent] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { published, loading, error } = usePublishedBlog();
     const [posts, setPosts] = useState([]);
-
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editingPost, setEditingPost] = useState(null);
-
-
-
-
 
 
     useEffect(() => {

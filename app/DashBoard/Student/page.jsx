@@ -27,7 +27,7 @@ import FAQAdded from '../Students_Dashboards_Components/Admin/FAQ_Added/FAQAdded
 import AboutUsAdded from '../Students_Dashboards_Components/Admin/About_Us_Added/AboutUsAdded';
 import ContactUsAdded from '../Students_Dashboards_Components/Admin/Contact_Us_Added/ContactUsAdded';
 import ManageUsers from '../Students_Dashboards_Components/Admin/Manage_Users/ManageUsers';
-import AdminWelcomePage from '../Students_Dashboards_Components/Admin_Welcome_Page/AdminWelcomePage';
+import AdminWelcomePage from '../Students_Dashboards_Components/AdminWelcomePage/AdminWelcomePage';
 
 import { UserAuth } from '@/app/context/AuthContext';
 import usersAdmin from '@/hooks/useAdminUser';
@@ -76,7 +76,7 @@ const adminSectionIcons = {
   Contact_Us_Added: <FiPhone />
 };
 import { ImProfile } from "react-icons/im";
-import { MdOutlineSystemUpdateAlt } from "react-icons/md";
+import { MdDashboard, MdOutlineSystemUpdateAlt } from "react-icons/md";
 import Create_Page from '../Students_Dashboards_Components/Create_Page/CreatePage';
 import All_Page from '../Students_Dashboards_Components/All_Page/All_Page';
 import Add_Students from '../Students_Dashboards_Components/Add_Students/Add_Students';
@@ -98,21 +98,34 @@ import { PiCertificateFill } from 'react-icons/pi';
 import { SlPicture } from 'react-icons/sl';
 import { AiFillPicture } from 'react-icons/ai';
 import StudentEnrollCourse from '../Students_Dashboards_Components/StudentEnrollCourse/StudentEnrollCourse';
+import { IoNotificationsSharp } from 'react-icons/io5';
+import { IoMdHome } from 'react-icons/io';
+import useRegistered from '@/hooks/useRegistered';
+import { HiOutlineArrowLeftEndOnRectangle } from 'react-icons/hi2';
+import ProfileEdit from '../Students_Dashboards_Components/ProfileEdit/ProfileEdit';
+import useStudentEditProfile from '@/hooks/useStudentEditProfile';
+import { TfiWorld } from 'react-icons/tfi';
 
 
 const PageContent = () => {
 
+  const [register] = useRegistered();
 
-  // const { published } = usePublishedBlog();
+  const firstUser = register?.data?.[0]?.role ?? ""; // default empty string
 
-  // console.log(published)
 
-  // console.log(blogCount)
+
+  console.log(firstUser)  // "Admin"
+  const [studentEditProfile] = useStudentEditProfile();
+
+
+
+  //  console.log(register?.data?.[0]?.role); 
 
 
   const sections = [
     // { key: "Enroll Course", icon: <BsPersonFillCheck />, label: "Enroll Course", uploadedKey: "Enroll_Course" },
-    { key: "courses", icon: <RiGraduationCapFill />, label: "Courses Added", uploadedKey: "UploadedCourses" },
+    { key: "courses", icon: <RiGraduationCapFill />, label: "Courses", uploadedKey: "UploadedCourses" },
     { key: "portfolio", icon: <BsPersonVcard />, label: "Portfolio", uploadedKey: "UploadedPortfolio" },
     { key: "certificate", icon: <PiCertificateFill />, label: "Certificate", uploadedKey: "UploadedCertificate" },
     { key: "picture", icon: <AiFillPicture />, label: "Picture", uploadedKey: "UploadedPicture" },
@@ -294,14 +307,16 @@ const PageContent = () => {
 
 
 
-  const [userRole, setUserRole] = useState('');
-  // const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
+  const [userRole, setUserRole] = useState(null);
+
+
 
 
   const { ManualUser } = UserAuth();
   const { userAdmin } = usersAdmin();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const email = ManualUser?.email || ""; // fallback to empty string
 
   const adminSections = [
     'Students_Added',
@@ -310,6 +325,7 @@ const PageContent = () => {
     // 'Gallery_Added',
     'University_Added',
     // 'Career_Guide_Blog',
+    "Profile_Edit",
     'Published_Post',
     'FAQ_Added',
     'About_Us_Added',
@@ -351,81 +367,47 @@ const PageContent = () => {
   }, [openSections, openDropdowns, sections, sidebarMenu]);
 
 
-  useEffect(() => {
-    if (ManualUser && userAdmin) {
-      const isAdmin = userAdmin.some(
-        (admin) => admin.email === ManualUser.email && admin.role === 'Admin'
-      );
-      setUserRole(isAdmin ? 'Admin' : 'user');
-    }
-  }, [ManualUser, userAdmin]);
-
-  // Block access to admin sections for non-admin users
-  useEffect(() => {
-    const section = searchParams.get('section');
-    if (section) {
-      setActiveSection(section);
-      if (!userRole || (userRole !== 'Admin' && adminSections.includes(section))) {
-        // router.push('/DashBoard/Student'); // redirect to safe location
-        router.push('/');
-      }
-    }
-  }, [searchParams, userRole]);
-
-  useEffect(() => {
-    if (ManualUser && userAdmin) {
-      const isAdmin = userAdmin.some(
-        (admin) => admin.email === ManualUser.email && admin.role === 'Admin'
-      );
-      setUserRole(isAdmin ? 'Admin' : 'user');
-    }
-  }, [ManualUser, userAdmin]);
 
 
-
-  // Determine role
-  useEffect(() => {
-    if (ManualUser && userAdmin) {
-      const isAdmin = userAdmin.some(
-        (admin) =>
-          admin.email === ManualUser.email && admin.role === "Admin"
-      );
-      setUserRole(isAdmin ? "Admin" : "user");
-    }
-  }, [ManualUser, userAdmin]);
 
   // Set default section based on role
   useEffect(() => {
-    if (!userRole) return; // Wait until role is ready
+    if (!userAdmin || !ManualUser) return;
 
-    const section = searchParams.get("section");
-    if (!section) {
-      setActiveSection(
-        userRole === "Admin" ? "AdminWelcomePage" : "Welcome_Page"
-      );
+    const isAdmin = userAdmin.some(admin =>
+      admin?.email?.toLowerCase() === ManualUser.email?.toLowerCase() &&
+      admin?.role?.toLowerCase() === 'admin'
+    );
+
+    if (isAdmin) {
+      setUserRole("Admin");   //  exact string match
+      setActiveSection("AdminWelcomePage");
     } else {
-      setActiveSection(section);
+      setUserRole("Student"); //  not "user", use "Student"
+      setActiveSection("Welcome_Page");
     }
-  }, [userRole, searchParams]);
+  }, [userAdmin, ManualUser]);
+
+
+
+
+
+
+
+
+
+
 
   // While loading role, render nothing (no flicker)
   if (userRole === null) {
     return (
-      <div className="flex justify-center items-center h-screen text-lg font-semibold">
-        Loading dashboard...
+      <div className="flex flex-col justify-center items-center h-screen text-lg font-semibold ">
+        <span className='text-red-500 text-3xl'> You have no Access to see this page </span>
+        <Link className='p-5 bg-blue-500 rounded-md text-white' href={'/'}>Back to home</Link>
       </div>
     );
   }
 
-  // for txt repeat change
-  // useEffect(() => {
-  //   const phrase = "Welcome to Career Builder";
-  //   const interval = setInterval(() => {
-  //     setAnimatedText((prev) => (prev ? "" : phrase)); // toggle between empty and phrase
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, []);
 
 
 
@@ -433,7 +415,10 @@ const PageContent = () => {
 
   const handleSectionClick = (section) => {
     setActiveSection(section);
-    router.push(`/DashBoard/Student?section=${section}`);
+
+
+    router.push(`/DashBoard/Student?section=${section}&email=${encodeURIComponent(email)}`);
+
   };
 
   const renderSidebarForRole = () => {
@@ -443,88 +428,101 @@ const PageContent = () => {
 
           // Admin Users
 
-          <ul className="mt-3">
-            {/* <Link href="/">Home</Link> */}
+          <>
 
-            <Link href="/">
-              <div className='flex justify-center items-center'>
-                <Image
-                  src={logo}
-                  alt="Logo"
-                  className=" md:w-36 lg:w-full h-auto w-full rounded-lg flex-shrink-0 "
-                />
-              </div>
-            </Link>
-            <li>
+            <ul className="mt-3">
+              {/* <Link href="/">Home</Link> */}
+
+              <Link href="/">
+                <div className='flex justify-center items-center'>
+                  <Image
+                    src={logo}
+                    alt="Logo"
+                    className=" md:w-36 lg:w-full h-auto w-full rounded-lg flex-shrink-0 "
+                  />
+                </div>
+              </Link>
+              <li>
+                <Link
+                  href="/"
+                  className=" px-2 flex items-center gap-3    hover:bg-blue-100 hover:text-blue-700 rounded"
+                >
+                  <FiHome />
+                  Home
+                </Link>
+              </li>
+
+
+
+              {adminSections.map((section) => (
+                <li
+                  key={section}
+                  onClick={() => handleSectionClick(section)}
+                  className="group hover:bg-blue-100   px-2 rounded flex items-center gap-2  hover:text-blue-700 cursor-pointer transition-colors duration-200"
+                >
+                  {adminSectionIcons[section] && (
+                    <span className="text-inherit">{adminSectionIcons[section]}</span>
+                  )}
+                  {section.replace(/_/g, ' ')}
+                </li>
+              ))}
+
+
+
+
+              {sidebarMenu.map((menu, index) => (
+                <li key={menu.label}>
+                  <div
+                    onClick={() => toggleDropdown(menu.label)}
+                    className="group flex justify-between  items-center cursor-pointer  hover:bg-blue-100 hover:text-blue-700 px-2 rounded relative"
+                  >
+                    <span className="flex items-center gap-2">
+                      {menu.icon}
+                      <p>{menu.label}</p>
+                    </span>
+
+                    <div className="flex items-center gap-1">
+                      {/* Badge if present */}
+                      {menu.badgeCount > 0 && (
+                        <span className="bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                          {menu.badgeCount}
+                        </span>
+                      )}
+                      {openDropdowns[menu.label] ? <FiChevronDown /> : <FiChevronRight />}
+                    </div>
+                  </div>
+
+                  <div
+                    ref={(el) => (dropdownRefs.current[menu.label] = el)}
+                    className="ml-4 space-y-1 overflow-hidden transition-all duration-500 ease-in-out  "
+                    style={{ maxHeight: '0px' }}
+                  >
+                    {menu.children.map(({ label, key }) => (
+                      <p
+                        key={key}
+                        onClick={() => handleSectionClick(key)}
+                        className="ml-4 pl-2 mt-3 py-1 cursor-pointer hover:text-blue-700 hover:bg-blue-100 rounded  transition-colors duration-200"
+                      >
+                        {label}
+                      </p>
+                    ))}
+
+                  </div>
+                </li>
+              ))}
+
+            </ul>
+            <div className=" relative bottom-0">
               <Link
                 href="/"
-                className=" px-2 flex items-center gap-3    hover:bg-blue-100 hover:text-blue-700 rounded"
+                className="flex items-center gap-2 font-bold p-5 bg-[#17549A] py-2 hover:bg-blue-100 hover:text-blue-700 rounded duration-300 ease-in-out"
               >
-                <FiHome />
-                Home
+                <HiOutlineArrowLeftEndOnRectangle className='text-2xl' />
+                Back Home
               </Link>
-            </li>
+            </div>
+          </>
 
-
-
-            {adminSections.map((section) => (
-              <li
-                key={section}
-                onClick={() => handleSectionClick(section)}
-                className="group hover:bg-blue-100   px-2 rounded flex items-center gap-2  hover:text-blue-700 cursor-pointer transition-colors duration-200"
-              >
-                {adminSectionIcons[section] && (
-                  <span className="text-inherit">{adminSectionIcons[section]}</span>
-                )}
-                {section.replace(/_/g, ' ')}
-              </li>
-            ))}
-
-
-
-
-            {sidebarMenu.map((menu, index) => (
-              <li key={menu.label}>
-                <div
-                  onClick={() => toggleDropdown(menu.label)}
-                  className="group flex justify-between  items-center cursor-pointer  hover:bg-blue-100 hover:text-blue-700 px-2 rounded relative"
-                >
-                  <span className="flex items-center gap-2">
-                    {menu.icon}
-                    <p>{menu.label}</p>
-                  </span>
-
-                  <div className="flex items-center gap-1">
-                    {/* Badge if present */}
-                    {menu.badgeCount > 0 && (
-                      <span className="bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                        {menu.badgeCount}
-                      </span>
-                    )}
-                    {openDropdowns[menu.label] ? <FiChevronDown /> : <FiChevronRight />}
-                  </div>
-                </div>
-
-                <div
-                  ref={(el) => (dropdownRefs.current[menu.label] = el)}
-                  className="ml-4 space-y-1 overflow-hidden transition-all duration-500 ease-in-out  "
-                  style={{ maxHeight: '0px' }}
-                >
-                  {menu.children.map(({ label, key }) => (
-                    <p
-                      key={key}
-                      onClick={() => handleSectionClick(key)}
-                      className="ml-4 pl-2 mt-3 py-1 cursor-pointer hover:text-blue-700 hover:bg-blue-100 rounded  transition-colors duration-200"
-                    >
-                      {label}
-                    </p>
-                  ))}
-
-                </div>
-              </li>
-            ))}
-
-          </ul>
         );
       case 'middle user':
         return (
@@ -562,32 +560,60 @@ const PageContent = () => {
 
 
             <ul className="mt-3 text-left px-3 pb-10"> {/* Padding bottom avoids scroll conflict */}
-              <li>
-                <Link
-                  href="/"
-                  className=" px-2 flex items-center gap-3    hover:bg-blue-100 hover:text-blue-700 rounded"
-                >
-                  <FiHome />
-                  Dashboard
-                </Link>
+
+              <li
+                onClick={() => handleSectionClick('dashboard')}
+                className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
+              >
+
+                <MdDashboard className='hover:bg-blue-100 hover:text-blue-700' />
+                Dashboard
               </li>
+
+
+              <Link
+                href={'/'}
+                className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
+              >
+                <IoMdHome className="hover:bg-blue-100 hover:text-blue-700 text-xl" />
+                Visit Website
+              </Link>
+
+              <li
+                onClick={() => {
+                  const matchedProfile = studentEditProfile?.data?.find(
+                    (profile) => profile.email === ManualUser?.email
+                  );
+                  if (matchedProfile) {
+                    router.push(
+                      `/${matchedProfile.category}/${matchedProfile.id}?tab=profile&email=${matchedProfile.email}`
+                    );
+                  } else {
+                    router.push("/"); // fallback
+                  }
+                }}
+                className="px-2 flex items-center gap-3 cursor-pointer hover:bg-blue-100 hover:text-blue-800 rounded"
+              >
+                <TfiWorld className='hover:bg-blue-100 hover:text-blue-700' />
+
+
+                Visit Profile
+              </li>
+
               <li
                 onClick={() => handleSectionClick('Profile')}
                 className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
               >
                 <ImProfile className='   hover:bg-blue-100 hover:text-blue-700   ' />
-                Profile
+                Profile Edit
               </li>
               <li
                 onClick={() => handleSectionClick('CvUpdate')}
                 className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
               >
                 <MdOutlineSystemUpdateAlt className='   hover:bg-blue-100 hover:text-blue-700   ' />
-                 CV Update
+                CV Update
               </li>
-
-           
-
               <li
                 onClick={() => handleSectionClick('Enroll_Course')}
                 className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
@@ -663,7 +689,20 @@ const PageContent = () => {
               >
                 All Blogs
               </li>
+
+
+
             </ul>
+
+            <div className=" relative bottom-0 lg:mt-36 md:mt-36 ">
+              <Link
+                href="/"
+                className="flex items-center justify-center gap-2 font-bold p-10 bg-[#17549A] py-2 hover:bg-blue-100 hover:text-blue-700 rounded duration-300 ease-in-out"
+              >
+                <HiOutlineArrowLeftEndOnRectangle className='text-2xl ' />
+                Back Home
+              </Link>
+            </div>
           </div>
 
         );
@@ -726,8 +765,12 @@ const PageContent = () => {
         // student side dashboard components
         case 'Profile':
           return <Profile />;
+        case 'Profile_Edit':
+          return <ProfileEdit />;
         case 'CvUpdate':
           return <CvUpload />;
+        case 'dashboard':
+          return <Welcome_Page />;
         case 'Enroll_Course':
           return <StudentEnrollCourse />;
         case 'Achivements':
@@ -776,16 +819,52 @@ const PageContent = () => {
           Welcome to Career Builder
         </h1>
 
-        <div className="user-logo gap-3">
+
+        {/* notify icon */}
+        <div className="user-logo gap-3 relative">
           <ThemeToggle />
+
+          {userRole !== "Admin" && (
+            <div className="relative group">
+              <button className="notification-btn relative">
+                <IoNotificationsSharp className="text-xl text-[#2CAAE1]" />
+                <span className="notification-badge">3</span>
+              </button>
+
+              {/* Notification Dropdown */}
+              <div
+                className="notification-dropdown grid-cols-3 absolute top-0 right-0
+        opacity-0 invisible group-hover:opacity-100 group-hover:visible
+        transition-opacity duration-300 ease-in-out
+        shadow-lg rounded-xl p-4 z-50"
+              >
+                <ul className="notification-grid">
+                  <li>Job Enquiry: 50</li>
+                  <li>Job Post: 50</li>
+                  <li>My Portfolio: 50</li>
+                  <li>Blog Post: 50</li>
+                  <li>Picture: 50</li>
+                  <li>Videos: 50</li>
+                  <li>Course: 50</li>
+                  <li>Study Abroad: 50</li>
+                  <li>Language: 50</li>
+                  <li>University: 50</li>
+                  <li>Latest Blog: 50</li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {/* Profile Image always */}
           <Image
-            width={200}
-            height={200}
+            width={40}
+            height={40}
             src="https://i.postimg.cc/s2RQWVG5/gilbert.png"
             alt="Student Profile Dashboard"
             className="user-image"
           />
         </div>
+
       </section>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} >
         <button className="close-sidebar" onClick={toggleSidebar} aria-label="Close sidebar">
@@ -810,153 +889,4 @@ export default function Page() {
 
 
 
-
-
-// for user purpose development
-// 'use client';
-
-// import React, { Suspense, useEffect, useState } from 'react';
-// import { useRouter, useSearchParams } from 'next/navigation';
-// import './student.css';
-// import Link from 'next/link';
-// import CvUpload from '../Students_Dashboards_Components/CvUpload/CvUpload';
-// import Profile from '../Students_Dashboards_Components/Profile/Profile';
-// import Achivements from '../Students_Dashboards_Components/Achivements/Achivements';
-// import StudentsCourses from '../Students_Dashboards_Components/StudentsCourses/StudentsCourses';
-// import StudentsPortfolioEdit from '../Students_Dashboards_Components/StudentsPortfolioEdit/StudentsPortfolioEdit';
-// import PicturesEdits from '../Students_Dashboards_Components/PicturesEdits/PicturesEdits';
-// import VideosEdits from '../Students_Dashboards_Components/videosEdit/videosEdits';
-// import BlogsEditsStudents from '../Students_Dashboards_Components/BlogsEditsStudents/BlogsEditsStudents';
-// import Certificate from '../Students_Dashboards_Components/certificate/Certificate';
-// import Welcome_Page from '../Welcome_Page/Welcome_Page';
-// import AllBlogs from '../Students_Dashboards_Components/AllBlog/AllBlogs';
-// import { UserAuth } from '@/app/context/AuthContext';
-// import Image from 'next/image';
-
-// const PageContent = () => {
-//   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-//   const [activeSection, setActiveSection] = useState('');
-//   const [navbarColor, setNavbarColor] = useState('#17549A');
-//   const [sidebarColor, setSidebarColor] = useState('#222');
-//   const [userRole, setUserRole] = useState('User'); // Only User role now
-//   const [animatedText, setAnimatedText] = useState('Welcome to Career Builder');
-
-//   const { ManualUser } = UserAuth();
-
-//   const router = useRouter();
-//   const searchParams = useSearchParams();
-
-//   // Animated text effect
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       const phrases = ["Welcome", "to", "Career", "Builder"];
-//       setAnimatedText((prev) => {
-//         const currentIndex = phrases.indexOf(prev);
-//         const nextIndex = (currentIndex + 1) % phrases.length;
-//         return phrases[nextIndex];
-//       });
-//     }, 1000);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   // Get active section from query parameters
-//   useEffect(() => {
-//     const section = searchParams.get('section');
-//     if (section) setActiveSection(section);
-//   }, [searchParams]);
-
-//   const toggleSidebar = () => {
-//     setIsSidebarOpen(!isSidebarOpen);
-//   };
-
-//   const handleSectionClick = (section) => {
-//     setActiveSection(section);
-//     router.push(`/DashBoard/Student?section=${section}`);
-//   };
-
-//   // Render Sidebar for User role only
-//   const renderSidebarForRole = () => {
-//     return (
-//       <ul className="mt-3">
-//         <Link href="/">Home</Link>
-//         <li onClick={() => handleSectionClick('Profile')}>Profile Edit</li>
-//         <li onClick={() => handleSectionClick('CvUpdate')}>CV Update</li>
-//         <li onClick={() => handleSectionClick('Achivements')}>Achievements</li>
-//         <li onClick={() => handleSectionClick('courses')}>Courses</li>
-//         <li onClick={() => handleSectionClick('Portfolio')}>Portfolio</li>
-//         <li onClick={() => handleSectionClick('Certificate')}>Certificate</li>
-//         <li onClick={() => handleSectionClick('Pictures')}>Pictures</li>
-//         <li onClick={() => handleSectionClick('Videos')}>Videos</li>
-//         <li onClick={() => handleSectionClick('Blog')}>Blog</li>
-//         <li onClick={() => handleSectionClick('AllBlogs')}>All Blogs</li>
-//       </ul>
-//     );
-//   };
-
-//   // Render active section for User role only
-//   const renderActiveSection = () => {
-//     switch (activeSection) {
-//       case 'Profile':
-//         return <Profile />;
-//       case 'CvUpdate':
-//         return <CvUpload />;
-//       case 'Achivements':
-//         return <Achivements />;
-//       case 'Portfolio':
-//         return <StudentsPortfolioEdit />;
-//       case 'courses':
-//         return <StudentsCourses />;
-//       case 'Certificate':
-//         return <Certificate />;
-//       case 'Pictures':
-//         return <PicturesEdits />;
-//       case 'Videos':
-//         return <VideosEdits />;
-//       case 'Blog':
-//         return <BlogsEditsStudents />;
-//       case 'AllBlogs':
-//         return <AllBlogs />;
-//       default:
-//         return <Welcome_Page />;
-//     }
-//   };
-
-//   return (
-//     <>
-//       <section className="navbar" style={{ backgroundColor: navbarColor }}>
-//         <button className="sidebar-toggle" onClick={toggleSidebar} aria-label="Toggle sidebar">
-//           {isSidebarOpen ? '✖' : '☰'}
-//         </button>
-//         <h1 className="text-3xl font-bold text-white">{animatedText}</h1>
-//         <div className="user-logo gap-3">
-//           <Image
-//             width={200}
-//             height={200}
-//             src="https://i.postimg.cc/s2RQWVG5/gilbert.png"
-//             alt="Student Profile Dashboard"
-//             className="user-image"
-//           />
-//         </div>
-//       </section>
-//       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} style={{ backgroundColor: sidebarColor }}>
-//         <button className="close-sidebar" onClick={toggleSidebar} aria-label="Close sidebar">
-//           ✖ Close
-//         </button>
-//         {renderSidebarForRole()}
-//       </div>
-//       <main className="main-content-area">
-//         {renderActiveSection()}
-//       </main>
-//     </>
-//   );
-// };
-
-// export default function Page() {
-//   return (
-//     <Suspense fallback={<div>Loading...</div>}>
-//       <PageContent />
-//     </Suspense>
-//   );
-// }
 

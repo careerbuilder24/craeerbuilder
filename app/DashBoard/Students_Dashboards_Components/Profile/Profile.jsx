@@ -29,7 +29,9 @@ export default function Page() {
   const [register] = useRegistered();
   const [studentEditProfile] = useStudentEditProfile();
   const [newlySubmittedStudent, setNewlySubmittedStudent] = useState(null);
-   const {  ManualUser } = UserAuth();
+  const { ManualUser } = UserAuth();
+
+
 
   const fields = [
     { name: 'name', label: 'Name', type: 'text', placeholder: 'Enter Name' },
@@ -103,8 +105,14 @@ export default function Page() {
         setLoading(false);
         return;
       }
+const payload = { 
+  ...formData, 
+  uploadedImage: imageUrl, 
+  category: formData.category, 
+  id: matchedStudent?.id   
+};
 
-      const payload = { ...formData, uploadedImage: imageUrl };
+
 
       const response = await fetch('/api/students_Edit_Profile', {
         method: 'POST',
@@ -137,14 +145,20 @@ export default function Page() {
 
   // profile matched section for show specific data
   // const latestRegisteredUser = register?.data?.[register?.data?.length - 1];
-const matchedStudent = studentEditProfile?.data?.find(
-  (profile) => profile.email === ManualUser?.email
-);
+  const matchedStudent = studentEditProfile?.data?.find(
+    (profile) => profile.email === ManualUser?.email
+  );
 
 
-  const finalStudentData =  matchedStudent  || newlySubmittedStudent;
+
+
+
+
+  const finalStudentData = matchedStudent || newlySubmittedStudent;
   console.log(ManualUser)
   console.log(matchedStudent)
+
+
 
   return (
     <>
@@ -213,6 +227,27 @@ const matchedStudent = studentEditProfile?.data?.find(
                     />
                   </label>
                 ))}
+                <div className="mb-4">
+                  <label className="block font-medium mb-1">Select Student Category:</label>
+                  <select
+                    name="category"
+                    value={formData.category || ""}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded"
+                  >
+                    <option value="">--Select--</option>
+                    <option value="Students_Graphics">Students_Graphics</option>
+                    <option value="Students_Motions">Students_Motions</option>
+                    <option value="Students_Affiliating">Students_Affiliating</option>
+                    <option value="Students_Video">Students_Video</option>
+                    <option value="Students_Business_Development">Students_Business_Development</option>
+                    <option value="Students_Frontend_Developmet">Students_Frontend_Developmet</option>
+                    <option value="Students_Backend_Development">Students_Backend_Development</option>
+                    <option value="Students_DigitalMarketing">Students_DigitalMarketing</option>
+                  </select>
+                </div>
+
+
                 {textAreas.map((field, idx) => (
                   <label key={idx} className="flex flex-col sm:col-span-2">
                     {field.label}

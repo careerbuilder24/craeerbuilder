@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react'
 import useStudents from '@/hooks/useStudents';
 import Navbar from '@/app/(with-navbar)/componenets/Navbar/Navbar';
@@ -26,6 +26,8 @@ import GraphicsVideos from '@/app/(with-navbar)/componenets/RunningGraphicsStude
 
 export default function Page() {
   const { id } = useParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const sidebarRef = useRef(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
@@ -95,17 +97,35 @@ export default function Page() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // Tab categories
+  // Tab categories (map with slugs for URLs)
   const tabCategories = [
-    "Profile (CV)",
-    "Achievements",
-    "Courses",
-    "Portfolio",
-    "Certificate",
-    "Pictures",
-    "Videos",
-    "Blog"
+    { name: "Profile (CV)", slug: "profile" },
+    { name: "Achievements", slug: "achievements" },
+    { name: "Courses", slug: "courses" },
+    { name: "Portfolio", slug: "portfolio" },
+    { name: "Certificate", slug: "certificate" },
+    { name: "Pictures", slug: "pictures" },
+    { name: "Videos", slug: "videos" },
+    { name: "Blog", slug: "blog" }
   ];
+
+  // On mount → set active tab from URL
+  useEffect(() => {
+    const tabSlug = searchParams.get("tab");
+    if (tabSlug) {
+      const foundIndex = tabCategories.findIndex(t => t.slug === tabSlug);
+      if (foundIndex !== -1) {
+        setActiveTabIndex(foundIndex);
+      }
+    }
+  }, [searchParams]);
+
+  // Handle tab change → update URL
+  const handleTabChange = (index) => {
+    setActiveTabIndex(index);
+    const slug = tabCategories[index].slug;
+    router.push(`/Students_Graphics/${id}?tab=${slug}`, { scroll: false });
+  };
 
   return (
     <>
@@ -182,14 +202,16 @@ export default function Page() {
                     onClick={() => {
                       setActiveTabIndex(index);
                       setIsSidebarOpen(false);
+                      router.push(`/Students_Graphics/${id}?tab=${category.slug}`, { scroll: false });
                     }}
                     className={`hover:bg-blue-200 text-[#34E5EB] w-full h-10 cursor-pointer border-b border-[#DDDDDD] text-center pt-2 ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
                       }`}
                   >
-                    {category}
+                    {category.name}
                   </li>
                 ))}
               </ul>
+
             </div>
           </div>
 
@@ -250,7 +272,7 @@ export default function Page() {
           )}
 
           {/* Desktop Tabs */}
-          <Tabs selectedIndex={activeTabIndex} onSelect={setActiveTabIndex} className='flex flex-col md:flex-row h-auto w-full'>
+          <Tabs selectedIndex={activeTabIndex} onSelect={handleTabChange} className='flex flex-col md:flex-row h-auto w-full'>
             <TabList className='hidden lg:flex flex-col border-r border-gray-300 bg-[#17549A] w-2/12 h-auto text-white'>
               {graphic && (
                 <Image
@@ -268,17 +290,22 @@ export default function Page() {
               >
                 Hire Me
               </button>
-              {tabCategories.map((category, index) => (
+              {tabCategories.map((tab, index) => (
                 <Tab
                   key={index}
+                  onClick={() => {
+                    setActiveTabIndex(index);
+                    router.push(`/Students_Graphics/${id}?tab=${tab.slug}`, { scroll: false });
+                  }}
                   className={`p-2 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 cursor-pointer ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
                     }`}
                   style={{ borderBottom: '1px solid #8dbff7' }}
                 >
-                  {category}
+                  {tab.name}
                 </Tab>
               ))}
             </TabList>
+
 
             {/* Tab Content */}
             <div className='w-full'>

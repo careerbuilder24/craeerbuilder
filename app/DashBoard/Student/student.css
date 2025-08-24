@@ -17,10 +17,14 @@
 .navbar h1 {
   margin: 0;
   font-size: 1.5rem;
-  color: white; /* Ensure navbar menu text is white */
-  position: absolute; /* Absolute positioning */
-  left: 50%; /* Move to the middle horizontally */
-  transform: translateX(-50%); /* Center-align the text */
+  color: white;
+  /* Ensure navbar menu text is white */
+  position: absolute;
+  /* Absolute positioning */
+  left: 50%;
+  /* Move to the middle horizontally */
+  transform: translateX(-50%);
+  /* Center-align the text */
 }
 
 .sidebar-toggle {
@@ -80,7 +84,8 @@
 .sidebar li {
   margin: 10px 0;
   cursor: pointer;
-  color: white; /* Ensure sidebar menu text is white */
+  color: white;
+  /* Ensure sidebar menu text is white */
 }
 
 .sidebar li:hover {
@@ -89,7 +94,8 @@
 
 /* Main Content Area */
 .main-content-area {
-  margin-top: 60px; /* Account for fixed navbar height */
+  margin-top: 60px;
+  /* Account for fixed navbar height */
   padding: 20px;
 }
 
@@ -99,6 +105,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
 /* student.css */
 
 /* Wrapper for the text */
@@ -121,6 +128,7 @@
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -138,12 +146,15 @@
 .word:nth-child(1) {
   animation-delay: 0s;
 }
+
 .word:nth-child(2) {
   animation-delay: 1s;
 }
+
 .word:nth-child(3) {
   animation-delay: 2s;
 }
+
 .word:nth-child(4) {
   animation-delay: 3s;
 }
@@ -177,7 +188,8 @@
 .sidebar {
   position: fixed;
   top: 0;
-  left: -250px; /* Initially hidden off-screen */
+  left: -250px;
+  /* Initially hidden off-screen */
   width: 250px;
   height: 100%;
   background-color: #222;
@@ -189,7 +201,8 @@
 }
 
 .sidebar.open {
-  left: 0; /* Sidebar slides in */
+  left: 0;
+  /* Sidebar slides in */
 }
 
 /* Close Button */
@@ -212,27 +225,36 @@
   margin: 20px 0;
   cursor: pointer;
 }
-li, span, a {
+
+li,
+span,
+a {
   text-decoration: none !important;
 }
 
 
 /* Media Queries for Mobile Devices */
 @media screen and (max-width: 768px) {
+
   /* Sidebar Styling */
   .sidebar {
-    width: 100%; /* Full width for mobile */
-    left: -100%; /* Completely hidden off-screen */
+    width: 100%;
+    /* Full width for mobile */
+    left: -100%;
+    /* Completely hidden off-screen */
   }
 
   .sidebar.open {
-    left: 0; /* Fully visible */
+    left: 0;
+    /* Fully visible */
   }
 
   /* Main Content Adjustment */
   .main-content-area {
-    margin-left: 0; /* No margin for content */
-    margin-top: 60px; /* Add spacing for the fixed navbar */
+    margin-left: 0;
+    /* No margin for content */
+    margin-top: 60px;
+    /* Add spacing for the fixed navbar */
     padding: 15px;
   }
 
@@ -247,26 +269,153 @@ li, span, a {
   }
 }
 
+.notification-btn {
+  background-color: white;
+  /* Blue background */
+  border: 2px solid #17549A;
+  /* White border */
+  border-radius: 50%;
+  /* Circle */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  color: white;
+  /* Icon color */
+  font-size: 1.25rem;
+  /* Adjust icon size */
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  /* Smaller badge */
+  font-weight: bold;
+  padding: 1px 4px;
+  /* Adjust padding for small badge */
+  border-radius: 50%;
+  border: 1px solid white;
+  /* Optional: white border around badge */
+}
+
+
+/* Optional: hover effect */
+.notification-btn:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 50px;
+  /* below the notification icon */
+  right: 0;
+  background: white;
+  color: #333;
+  width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 10px 0;
+  z-index: 50;
+}
+
+.notification-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-dropdown li {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.notification-dropdown li:hover {
+  background-color: #f0f0f0;
+  color: #17549A;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 40px;
+  /* below the notification icon */
+  right: 0;
+  background: #F3F4F6;
+  color: #333;
+  width: 400px;
+  /* adjust as needed */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  z-index: 50;
+}
+
+.notification-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columns */
+  gap: 10px;
+  /* space between items */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-grid li {
+  background-color: white;
+  box-shadow: #f0f0f0;
+  padding: 8px 6px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+.notification-grid li:hover {
+  background-color: #f0f0f0;
+  color: #17549A;
+}
+
+
+
+
 @media screen and (max-width: 480px) {
+
   /* Sidebar for Extra Small Devices */
   .sidebar {
-    width: 100%; /* Take full width of the screen */
-    left: -100%; /* Hide initially */
+    width: 100%;
+    /* Take full width of the screen */
+    left: -100%;
+    /* Hide initially */
   }
 
   .sidebar.open {
-    left: 0; /* Fully visible */
+    left: 0;
+    /* Fully visible */
   }
 
   /* Navbar Toggle for Small Devices */
   .sidebar-toggle {
-    font-size: 35px; /* Larger toggle icon */
+    font-size: 35px;
+    /* Larger toggle icon */
   }
 
   /* Adjust Main Content */
   .main-content-area {
-    margin-left: 0; /* Content doesn't shift */
-    margin-top: 120px; /* Add more margin for smaller devices */
+    margin-left: 0;
+    /* Content doesn't shift */
+    margin-top: 120px;
+    /* Add more margin for smaller devices */
     padding: 10px;
   }
 

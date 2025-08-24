@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import { SiGmail } from "react-icons/si";
 import gmailimg from '../../assets/gml.PNG'
@@ -40,38 +41,38 @@ export default function Login() {
   //   }
   // };
 
-  const handleManualSignIn = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+const handleManualSignIn = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    console.log("Login Attempt:", { email, password });
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+    const result = await response.json();
 
-      console.log("Response Status:", response.status);  // Log HTTP status
-      const result = await response.json();
-      console.log("Backend Response:", result);  // Log backend response
-
-      if (!response.ok) {
-        throw new Error(result.message || "Login failed. Please check your credentials.");
-      }
-
-      toast.success(result.message);
-      loginUserManual(result.user);
-      router.push("/");
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast.error(error.message || "Login failed. Please try again.");
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      throw new Error(result.message || "Login failed. Please check your credentials.");
     }
-  };
 
+    // ✅ Store user info in cookies
+    Cookies.set('user_name', result.user.name, { expires: 7 });  // expires in 7 days
+    Cookies.set('user_email', result.user.email, { expires: 7 });
+
+    toast.success(result.message);
+    loginUserManual(result.user);
+    router.push("/");
+
+  } catch (error) {
+    console.error("Error during login:", error);
+    toast.error(error.message || "Login failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
   // console.log("RECAPTCHA SITE KEY:", process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY);
 
 

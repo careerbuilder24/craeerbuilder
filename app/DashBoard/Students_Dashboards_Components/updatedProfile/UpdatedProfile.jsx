@@ -79,6 +79,9 @@ export default function UpdatedProfile({ image, formData, matchedStudent }) {
     }
   };
 
+
+  
+
   return (
     <div className="bg-gray-200 p-6 rounded shadow-md">
       <img src={matchedStudent.uploadedImage} alt='user image' width={200} height={200} />

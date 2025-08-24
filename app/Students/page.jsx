@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
-import Image from 'next/image';
 import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri'
-import Link from 'next/link';
 import 'react-tabs/style/react-tabs.css';
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import useStudents from '@/hooks/useStudents';
 import useMotion from '@/hooks/useMotion';
 import useAffiliate from '@/hooks/useAffiliate';
@@ -15,13 +15,8 @@ import useBusiness from '@/hooks/useBusiness';
 import useFrontend from '@/hooks/useFrontend';
 import useBackend from '@/hooks/useBackend';
 import useDigital from '@/hooks/useDigital';
-import gif from '../../assets/gif3.gif'
 
-import './Students.css'
-import Time from '../Time/Time';
-import useDateTime from '@/hooks/useDateTime';
-import Loader from '../(with-navbar)/componenets/Loader/Loader';
-import GraphicsStudnets from '../(with-navbar)/componenets/StudentsCategories/GraphicsStudnets/GraphicsStudnets';
+import GraphicsStudents from '../(with-navbar)/componenets/StudentsCategories/GraphicsStudnets/GraphicsStudnets';
 import MotionStudents from '../(with-navbar)/componenets/StudentsCategories/MotionStudents/MotionStudents';
 import AffiliatingStudents from '../(with-navbar)/componenets/StudentsCategories/AffiliatingStudents/AffiliatingStudents';
 import VideoMarketingStudents from '../(with-navbar)/componenets/StudentsCategories/VideoMarketingStudents/VideoMarketingStudents';
@@ -29,19 +24,51 @@ import BusinessDevelopmentStudents from '../(with-navbar)/componenets/StudentsCa
 import FrontendDevelopmentStudents from '../(with-navbar)/componenets/StudentsCategories/FrontendDevelopmentStudents/FrontendDevelopmentStudents';
 import BackendDevelopmentStudents from '../(with-navbar)/componenets/StudentsCategories/BackendDevelopmentStudents/BackendDevelopmentStudents';
 import DigitalMarketingStudents from '../(with-navbar)/componenets/StudentsCategories/DigitalMarketingStudents/DigitalMarketingStudents';
-import GraphicsStudents from '../(with-navbar)/componenets/StudentsCategories/GraphicsStudnets/GraphicsStudnets';
 
-
-// import { Head } from 'next/document';
+import './Students.css'
 
 export default function Page() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const sidebarRef = useRef(null);
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Tab categories with slugs
+  const tabCategories = [
+    { name: 'Graphic Design', slug: 'graphic-design' },
+    { name: 'Motion Graphics', slug: 'motion-graphics' },
+    { name: 'Affiliate Marketing', slug: 'affiliate-marketing' },
+    { name: 'Video Editing', slug: 'video-editing' },
+    { name: 'Business Development', slug: 'business-development' },
+    { name: 'Frontend Development', slug: 'frontend-development' },
+    { name: 'Backend Development', slug: 'backend-development' },
+    { name: 'Digital Marketing', slug: 'digital-marketing' },
+  ];
+
+  // Set tab from URL param on mount
+  useEffect(() => {
+    const tabSlug = searchParams.get("tab");
+    if (tabSlug) {
+      const index = tabCategories.findIndex(t => t.slug === tabSlug);
+      if (index !== -1) {
+        setActiveTabIndex(index);
+      }
+    }
+  }, [searchParams]);
+
+  // Handle tab change + update URL
+  const handleTabChange = (index) => {
+    setActiveTabIndex(index);
+    const slug = tabCategories[index].slug;
+    router.push(`?tab=${slug}`, { scroll: false });
+  };
+
   // for mobile Sections
   const handleSidebarItemClick = (index) => {
-    setActiveTabIndex(index);
+    handleTabChange(index);
+    setIsSidebarOpen(false);
   };
 
   const toggleSidebar = () => {
@@ -71,7 +98,7 @@ export default function Page() {
   }, [isSidebarOpen]);
 
   // Fetching all data
-  const [students, loading] = useStudents();
+  const [students] = useStudents();
   const Motions = useMotion();
   const Affiliate = useAffiliate();
   const Video = useVideo();
@@ -83,34 +110,25 @@ export default function Page() {
   // Search query and pagination state
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12; // Number of items per page
+  const itemsPerPage = 12;
 
   // Function to apply search and pagination for each data type
   const applySearchAndPagination = (data) => {
-    // Filter based on search query
     const filteredData = data.filter(item =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       item.id.toString().includes(searchQuery)
     );
-
-    // Pagination logic
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-
     return { currentData, totalPages };
   };
 
-  // Handle page change
-  const handlePageChange = (page) => setCurrentPage(page);
-
-  // Reset to page 1 when search query changes or tab changes
   useEffect(() => {
-    setCurrentPage(1); // Reset to page 1 when switching tabs
+    setCurrentPage(1);
   }, [activeTabIndex, searchQuery]);
 
-  // Get current data for the active tab
   const { currentData, totalPages } = (() => {
     switch (activeTabIndex) {
       case 1:
@@ -132,20 +150,12 @@ export default function Page() {
     }
   })();
 
-
-
-
   return (
     <main>
       <Navbar />
-      <div className='mt-28  bg-gray-100 h-full w-10/12 lg:w-7/12 container mx-auto mb-10'>
+      <div className='mt-28 bg-gray-100 h-full w-10/12 lg:w-7/12 container mx-auto mb-10'>
         <div className="flex flex-col lg:flex-row justify-center items-center gap-4">
-          <div className="flex-shrink-0">
-            <h1 className="text-2xl text-[#2CAAE1] whitespace-nowrap">
-              All Students
-            </h1>
-          </div>
-
+          <h1 className="text-2xl text-[#2CAAE1] whitespace-nowrap">All Students</h1>
           <input
             type="text"
             value={searchQuery}
@@ -155,159 +165,85 @@ export default function Page() {
           />
         </div>
 
-
-        {/* Mobile Sidebar Toggle Button */}
+        {/* Mobile Sidebar Toggle */}
         <div className="block lg:hidden fixed top-64 right-1 z-40">
           <button
             onClick={toggleSidebar}
             className="p-2 bg-[#87d3ec] rounded-full text-white transition-all duration-300 transform hover:scale-110"
           >
-            {isSidebarOpen ? (
-              <RiArrowLeftSLine size={24} /> // Left Arrow when sidebar is open
-            ) : (
-              <RiArrowRightSLine size={24} /> // Right Arrow when sidebar is closed
-            )}
+            {isSidebarOpen ? <RiArrowLeftSLine size={24} /> : <RiArrowRightSLine size={24} />}
           </button>
         </div>
+
         {/* Mobile Sidebar */}
-        <div
-          className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
-        >
+        <div className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
           <div ref={sidebarRef} className="w-44 bg-[#17549A] text-white h-full">
-            <h2 className="text-lg font-bold mb-4 text-center">All Students</h2> {/* Add margin bottom here */}
-            <ul className="flex flex-col items-center  ">
-              {['Graphic Design', 'Motion Graphics', 'Affiliate Marketing', 'Video Editing', 'Business Development', 'Frontend Development', 'Backend Development', 'Digital Marketing'].map((category, index) => (
+            <h2 className="text-lg font-bold mb-4 text-center">All Students</h2>
+            <ul className="flex flex-col items-center">
+              {tabCategories.map((tab, index) => (
                 <li
                   key={index}
-                  className="hover:bg-blue-200 text-[#34E5EB] focus:outline-none hover:text-blue-600 border-b border-[#DDDDDD] w-full h-10 cursor-pointer transition-all duration-200 text-center "
                   onClick={() => handleSidebarItemClick(index)}
+                  className={`hover:bg-blue-200 text-[#34E5EB] w-full h-10 cursor-pointer border-b border-[#DDDDDD] text-center pt-2 ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''}`}
                 >
-                  {category}
+                  {tab.name}
                 </li>
               ))}
             </ul>
-
-            {/* <div className='flex-col text-center text-2xl mt-4 font-semibold'>
-              <h2>Welcome To</h2>
-              <h2>Career Builder</h2>
-            </div>
-            <div className='w-11/12 mt-6 ml-1'>
-              <Image src={gif} width={500} height={500} className='rounded-lg' />
-            </div> */}
           </div>
         </div>
 
-
-
-
-
-        <Tabs selectedIndex={activeTabIndex} onSelect={index => setActiveTabIndex(index)} className='flex flex-col lg:flex-row md:flex-row '>
-
+        {/* Tabs */}
+        <Tabs selectedIndex={activeTabIndex} onSelect={handleTabChange} className='flex flex-col lg:flex-row'>
           {/* Tab List */}
-          <TabList style={{ width: 300 }} className='flex bg-[#0054a5] w-2/12 h-auto flex-col border-r border-gray-300 cursor-pointer mt-4 hidden  lg:flex sticky top-0 z-10   rounded-md  '>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600 mt-5 border-b border-[#DDDDDD]'>Graphic Design</Tab>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Motion Graphics</Tab>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Affiliate Marketing</Tab>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Video Editing</Tab>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Business Development</Tab>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Frontend Development</Tab>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Backend Development</Tab>
-            <Tab className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] focus:outline-none hover:text-blue-600  border-b border-[#DDDDDD]'>Digital Marketing</Tab>
+          <TabList className='flex bg-[#0054a5] w-full md:w-5/12 lg:w-3/12 h-auto flex-col border-r border-gray-300 cursor-pointer mt-4 hidden lg:flex sticky top-0 z-10 rounded-md'>
+            {tabCategories.map((tab, index) => (
+              <Tab
+                key={index}
+                className={`p-4 text-left 
+        text-[#8dbff7] border-b border-[#DDDDDD] 
+        hover:bg-blue-200 hover:text-blue-700 
+        whitespace-nowrap md:whitespace-normal 
+        ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''}`}
+              >
+                {tab.name}
+              </Tab>
+            ))}
           </TabList>
+
+
+
 
           {/* Tab Panels */}
           <div className='p-4 w-full'>
             <TabPanel>
-              {/* tab panel 1 */}
-              {/* Graphics Students tab */}
-              <GraphicsStudents
-                graphics={students}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
-            </TabPanel>
-
-            <TabPanel>
-              {/* tab panel 2 */}
-              {/* Motion Graphics tab */}
-              <MotionStudents
-                motions={Motions}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
-            </TabPanel>
-
-            <TabPanel>
-              {/* tab panel 3 */}
-              {/* Affiliate Marketing tab */}
-              <AffiliatingStudents
-                affiliate={Affiliate}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
-
+              <GraphicsStudents graphics={students} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
             </TabPanel>
             <TabPanel>
-              {/* tab panel 4 */}
-              {/* Video Marketing tab */}
-              <VideoMarketingStudents
-                videoMarketing={Video}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
-
+              <MotionStudents motions={Motions} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
             </TabPanel>
             <TabPanel>
-              {/* tab panel 5 */}
-              {/* businesse  tab */}
-              <BusinessDevelopmentStudents
-                business={business}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
+              <AffiliatingStudents affiliate={Affiliate} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
             </TabPanel>
             <TabPanel>
-              {/* tab panel 6 */}
-              {/* businesse  tab */}
-              <FrontendDevelopmentStudents
-                frontend={Frontend}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
-
+              <VideoMarketingStudents videoMarketing={Video} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
             </TabPanel>
             <TabPanel>
-              {/* tab panel 7 */}
-              {/* Backends  tab */}
-              <BackendDevelopmentStudents
-                backend={Backend}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
+              <BusinessDevelopmentStudents business={business} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
             </TabPanel>
             <TabPanel>
-              {/* tab panel 8 */}
-              {/* Backends  tab */}
-              <DigitalMarketingStudents
-                digital={digital}
-                searchQuery={searchQuery}
-                currentPage={currentPage}
-                handlePageChange={handlePageChange}
-              />
+              <FrontendDevelopmentStudents frontend={Frontend} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
+            </TabPanel>
+            <TabPanel>
+              <BackendDevelopmentStudents backend={Backend} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
+            </TabPanel>
+            <TabPanel>
+              <DigitalMarketingStudents digital={digital} searchQuery={searchQuery} currentPage={currentPage} handlePageChange={setCurrentPage} />
             </TabPanel>
           </div>
         </Tabs>
-
-
       </div>
-      <Footer></Footer>
+      <Footer />
     </main>
   );
 }
