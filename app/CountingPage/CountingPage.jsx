@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import Counter from '../NumberCounter/Counter';
 import { PiStudentFill } from "react-icons/pi";
@@ -25,34 +25,35 @@ export default function CountingPage() {
         };
     }, []);
 
-    return (
-        <main ref={sectionRef}>
-            <div className="container mx-auto flex flex-col lg:flex-row flex-wrap justify-center items-center gap-6 text-white my-16 px-4">
+    const items = [
+        { icon: <PiStudentFill />, label: "Running Students", target: 200 },
+        { icon: <IoIosPeople />, label: "Running Interns", target: 150 },
+        { icon: <ImOffice />, label: "Running Employee", target: 100 },
+        { icon: <ImOffice />, label: "Running Batch", target: 80 },
+        { icon: <ImOffice />, label: "Upcoming Batch", target: 80 },
+        { icon: <ImOffice />, label: "Upcoming Webinar", target: 80 }
+    ];
 
-                {[
-                    { icon: <PiStudentFill />, label: "Running Students", target: 200 },
-                    { icon: <IoIosPeople />, label: "Running Interns", target: 150 },
-                    { icon: <ImOffice />, label: "Running Employee", target: 100 },
-                    { icon: <ImOffice />, label: "Running Batch", target: 80 },
-                    { icon: <ImOffice />, label: "Upcoming Batch", target: 80 },
-                    { icon: <ImOffice />, label: "Upcoming Webinar", target: 80 }
-                ].map((item, index) => (
+    return (
+        <main ref={sectionRef} className='my-16'>
+            <div className="container mx-auto grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-6 px-4 lg:px-28">
+
+                {items.map((item, index) => (
                     <div
                         key={index}
-                        className="flex flex-col items-center flex-shrink-0 w-52 md:w-56 h-40 bg-[#2CAAE1] rounded-md justify-center px-4"
+                        className="flex flex-col items-center w-full h-32 lg:w-48 lg:h-32 bg-gradient-to-br from-[#17549A]/90 to-[#4CA0E0]/60 backdrop-blur-md border border-white/20 rounded-lg justify-center px-3 shadow-md transition transform hover:scale-105 hover:shadow-xl cursor-pointer"
                     >
-                        <div className="text-3xl md:text-4xl lg:text-5xl mb-2">
+                        <div className="text-2xl md:text-3xl mb-1 text-white drop-shadow-md">
                             {item.icon}
                         </div>
-                        <p className="text-base md:text-lg font-bold text-center mb-1">
+                        <p className="text-sm md:text-base font-semibold text-center mb-1 text-white drop-shadow-md">
                             {item.label}
                         </p>
-                        <div className="text-2xl md:text-3xl font-semibold">
+                        <div className="text-xl md:text-2xl font-semibold text-white drop-shadow-md">
                             <Counter target={item.target} start={startCounting} />
                         </div>
                     </div>
                 ))}
-
             </div>
         </main>
     );

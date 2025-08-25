@@ -125,11 +125,11 @@ export default function Page() {
                 author="Muhibullah"
             />
             <Navbar />
-            <main className='lg:mt-40 mt-24 mb-10 overflow-hidden'>
-                <div className='w-full flex flex-col justify-center items-center'>
-                    <div className='relative lg:w-7/12 overflow-hidden rounded-lg mt-5'>
+            <main className='lg:mt-14 mt-24 mb-10 overflow-hidden container mx-auto'>
+                <div className='w-full flex flex-col justify-center items-center container'>
+                    <div className='relative lg:w-7/12 w-full overflow-hidden rounded-lg mt-5 container mx-auto'>
                         {VideoEdits && (
-                            <div className='absolute bottom-5 right-6'>
+                            <div className='absolute bottom-5 right-6 z-10'>
                                 <a
                                     href={VideoEdits?.pdfUrl}
                                     download
@@ -141,10 +141,15 @@ export default function Page() {
                         )}
                         <Image
                             src={img1}
-                            className='mt-4 w-full transition-transform duration-300 ease-in-out'
                             alt="Cover Image"
+                            width={300}        // Match sidebar width on medium devices
+                            height={400}       // Adjust height to maintain aspect ratio
+                            className="w-full  h-auto  object-fill rounded-lg mx-auto transition-transform duration-300 ease-in-out"
                         />
                     </div>
+
+
+
                 </div>
 
                 <div className='border-b-2 border-slate-200 lg:w-7/12 container mx-auto rounded-xl'>
