@@ -118,6 +118,11 @@ export default function Welcome_Page() {
         title: "University",
         link: "/University"
       },
+      {
+        title: "Public Blog",
+        link: "/CareerGuide"
+      }
+
     ];
   }, [matchedProfile]);
 
