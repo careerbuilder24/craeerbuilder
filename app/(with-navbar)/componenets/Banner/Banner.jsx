@@ -65,7 +65,7 @@ export default function Banner() {
                             )}
                         </AnimatePresence>
                     ))}
-                    <div className="absolute inset-0 bg-black/60" />
+                    <div className="absolute inset-0 bg-black/30" />
                 </div>
 
                 {/* Hero Content */}
@@ -88,7 +88,7 @@ export default function Banner() {
                     {/* Buttons */}
                     <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                         <motion.button
-                            onClick={() => setShowVideo(true)} // 👈 toggle video
+                            onClick={() => setShowVideo(true)}
                             className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 shadow-xl transition relative"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
