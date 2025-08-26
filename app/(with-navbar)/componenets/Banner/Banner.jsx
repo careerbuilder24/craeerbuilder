@@ -65,7 +65,7 @@ export default function Banner() {
                             )}
                         </AnimatePresence>
                     ))}
-                    <div className="absolute inset-0 bg-black/30" />
+                    <div className="absolute inset-0 bg-black/20" />
                 </div>
 
                 {/* Hero Content */}
@@ -118,7 +118,6 @@ export default function Banner() {
                     </span>
                 </div>
 
-                {/* Video Modal 👇 */}
                 <AnimatePresence>
                     {showVideo && (
                         <motion.div
