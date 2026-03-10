@@ -22,7 +22,7 @@ export default function Page() {
  const {matchedStudentProfilesEmail,matchedStudentProfiles} = useMatchingUploadedCourses();
 
 //  const [register] = useRegistered(); // Array of registered users
-     const { UploadedCourse } = useUploadedCourse();
+    //  const { UploadedCourse } = useUploadedCourse();
 
 // console.log(matchedCourses?.email)
 // console.log(register)

@@ -1,169 +1,272 @@
-import useStudents from '@/hooks/useStudents';
-import { useParams } from 'next/navigation';
-import { BsFillTelephoneFill } from "react-icons/bs";
-import { AiOutlineMail } from "react-icons/ai";
-import { FaEarthAfrica } from "react-icons/fa6";
-import { GoDotFill } from "react-icons/go";
-import useMotion from '@/hooks/useMotion';
-import React from 'react'
+'use client';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
-import useVideo from '@/hooks/useVideo';
-import useBusiness from '@/hooks/useBusiness';
-import useDigital from '@/hooks/useDigital';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
+import useCVEdit from '@/hooks/useCVEdit';
+import useStudentEditProfile from '@/hooks/useStudentEditProfile';
 
-export default function CuriculamVite() {
+export default function page() {
     const { id } = useParams();
-    // const [students, loading] = useStudents();
+    const { CvEdit } = useCVEdit();
+    const [studentEditProfile] = useStudentEditProfile();
 
-    const DigitalMarketing = useDigital();
-    const DigitalMarketings = DigitalMarketing.find(Onestudent => Onestudent?.id === Number(id));
-   
-    return (
-        <>
-            <div className='flex flex-col-reverse lg:flex-row '>
+    const students = studentEditProfile?.data || [];
 
-                <div className='  lg:w-8/12'>
+    // Find the current student by id
+    const student = useMemo(
+        () => students.find((s) => s.id === Number(id)),
+        [students, id]
+    );
 
+    // Find CV that matches this student
+    const matchedCv = useMemo(() => {
+        if (!student || !CvEdit) return null;
+        return CvEdit.find(
+            (cv) =>
+                cv?.student_id === student.id ||
+                cv?.email?.trim() === student?.email?.trim()
+        );
+    }, [CvEdit, student]);
 
-                    <p className='text-2xl text-red-400 font-bold text-center '>Objective</p>
+    // Convert workExperience string to an array for rendering
+    const workExp = useMemo(() => {
+        if (!matchedCv?.workExperience) return [];
+        // Split by double newline to separate each job
+        return matchedCv.workExperience.split('\n\n').map((jobStr) => {
+            const lines = jobStr.split('\n').filter(Boolean);
+            return {
+                position: lines[0] || 'N/A',
+                company: lines[0] || 'N/A', // adjust if you have company separately
+                duration: 'N/A', // you can parse duration if needed
+                description: lines.slice(1).join('\n'),
+            };
+        });
+    }, [matchedCv?.workExperience]);
 
-                    <p className=' my-5 text-sm px-2'>Dynamic and results-oriented professional with a proven track record in [your industry/field]. Possessing strong skills in [specific skills or technologies], I excel in driving projects to completion and delivering innovative solutions. With [number] years of experience in [specific roles or sectors], I am adept at [mention key responsibilities or achievements]. Committed to continuous learning and professional development, I thrive in fast-paced environments and collaborate effectively with diverse teams to achieve organizational goals.</p>
-
-                    <p className='text-2xl text-red-400 font-bold my-4 text-center'>Education</p>
-                    <div className='flex flex-row lg:ml-16 ml-5 gap-3 '>
-                        <p><strong>9 GCSEs including English </strong></p>
-                        <p className='text-sm'> | London Bridge</p>
-                    </div>
-                    <div className='flex  flex-row  gap-3 text-sm lg:ml-16 ml-5'>
-                        <p>Comprehensive School </p>
-                        <p className='text-sm'> | Sep 2021 - May 2023</p>
-                    </div>
-                    <div className='flex flex-col lg:flex-row  gap-1 text-sm lg:ml-16 ml-5'>
-                        <p>Predicted Grades (6),</p>
-                        <p> Mathematuics (7),</p>
-                        <p> Scince (6),</p>
-                        <p>Art (6),</p>
-                    </div>
-                    <div className='text-sm  my-5 lg:ml-16 ml-5'>
-                        <p>Extracurricular Activites:</p>
-                        <p>-Talented musician, achieving Grade 7 Piano and Grade 5 flute.</p>
-                        <p>-Captain of the school netball team for the 4 seasons which connected of 2 separate age groups. 11-13 and 14-16</p>
-                        <p>-Acted as mentor for years 1 and 2.</p>
-                        <p>-Looked after the school and ensured all areas reminder clean an Environment Perfect</p>
-                        <p>Memberships</p>
-                        <p>-Member of the school club attending various national champion</p>
-                        <p>as a piano player for the school chair.</p>
-                        <p>-Member of the school club</p>
-                    </div>
-
-
-                    <p className='text-2xl text-red-400 font-bold my-4 text-center ml-16'>Career Summery</p>
-
-                    <div className='flex flex-col lg:flex-row lg:ml-3 ml-5 lg:gap-5 gap-2 font-bold  text-sm '>
-                        <p>
-                            <strong>May 2022 - Aug 2022</strong>
-                        </p>
-                        <div className='flex flex-col'>
-                            <p>
-                                <strong>Action Aid Cancer Charity, London</strong>
-                            </p>
-                            <p><strong>
-                                Volountry Fundraiser</strong></p>
-                        </div>
-
-                    </div>
-                    <div className='lg:ml-3 ml-5 mt-4 text-sm'>
-                        <p>Outline</p>
-                        <p>Support the Action Aid CCancer Charity Shop to fundraise by going door to door for contributions, rising over $600 for Charity with 12 weeks</p>
-                    </div>
-
-                    <p className='text-2xl text-red-400 font-bold my-4 text-center'>Additional</p>
-
-                    <div className='lg:ml-3 ml-6 mb-10 lg:mb-0 text-sm '>
-                        <p className='font-bold'><strong>Awards</strong></p>
-                        <p className='mt-1 mb-3'>Winner of the London Bridge Comperative School Geography Awards 2020</p>
-
-                        <p>Participated in the UK Young Competition 2022 as part of the London</p>
-                        <p>Bridge Comphrensive School Chair was took 1st place</p>
-                        <p className='my-1 font-bold'><strong>Software</strong></p>
-                        <p > MS Word, MS Excel, MS Powerpoint</p>
-                        <p className='my-1 font-bold'><strong>Language</strong></p>
-                        <p>English (native), Spanish(conversational)</p>
-                    </div>
-                </div>
-
-                <div className='bg-[#44b5e6] lg:w-4/12    rounded-lg '>
-
-                    {DigitalMarketings ? (
-                        <div className='flex flex-col   w-full h-full '>
-                            <div className='w-ful mt-4 text-white'>
-                                <img
-                                    src={DigitalMarketings?.image}
-                                    onDragStart={(e) => e.preventDefault()}
-                                    alt={DigitalMarketings?.title}
-                                    className="mt-4 shadow-lg w-10/12 mx-auto mb-8  "
-                                    width={100}
-                                    height={100}
-
-                                    style={{ border: '4px solid #ffffff', }} // Custom border radius
-                                    onError={(e) => { e.target.src = 'fallback-image-url.jpg'; }} // Fallback image in case of error
-                                />
-                                <p className='text-center text-2xl font-bold'>{DigitalMarketings.name}</p>
-                                <p className='text-xl text-center'>Student</p>
-                                <p className='text-center mt-20 text-xl font-bold mb-2'>Contact Details</p>
-                                <hr className='w-96 h-1  ml-1' />
-                                <div className='flex flex-row gap-2 justify-center items-center  mt-1'>
-                                    <BsFillTelephoneFill className='text-white' />
-                                    <p>+88017535366</p>
-                                </div>
-                                <div className='flex flex-row gap-2 justify-center items-center'>
-                                    <AiOutlineMail className='text-white my-3' />
-                                    <p>abula@gmail.com</p>
-                                </div>
-                                <div className='flex flex-row gap-2 justify-center items-center'>
-                                    <FaEarthAfrica className='text-white' />
-                                    <p>London</p>
-                                </div>
-
-                                <p className='text-center mt-20 text-xl font-bold mb-2'>Core Skills</p>
-                                <hr className='w-80 h-1  ' />
-                                <div className='flex mt-3 ml-5'>
-                                    <GoDotFill className='mt-1 text-sm mr-3' />
-                                    <p>Communication and delegation</p>
-                                </div>
-                                <div className='flex mt-2 ml-5'>
-                                    <GoDotFill className='mt-1 text-sm mr-3' />
-                                    <p>Fundraising experience</p>
-
-                                </div>
-                                <div className='flex  ml-5 mt-2'>
-                                    <GoDotFill className=' text-sm mr-3' />
-                                    <p>Captain of the school netball team</p>
-                                </div>
-                                <div className='flex  ml-5 mt-2'>
-                                    <GoDotFill className=' text-sm mr-3' />
-                                    <p>Member of the school piano club</p>
-                                </div>
-                                <div className='flex  ml-5 mt-2'>
-                                    <GoDotFill className=' text-sm mr-3' />
-                                    <p>School coding national competitor</p>
-                                </div>
-                                <div className='flex  ml-5 mt-2'>
-                                    <GoDotFill className=' text-sm mr-3' />
-                                    <p>IT skills - predicted 6 at GCSE</p>
-                                </div>
-                            </div>
-
-                        </div>
-                    ) : (
-                        <div className="flex justify-center items-center w-9/12 mx-auto lg:mb-5 h-40">
-                            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-600"></div>
-                        </div>
-                    )}
-                </div>
-
+    if (!matchedCv) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <p className="text-gray-600 text-lg">No CV data found for this student.</p>
             </div>
+        );
+    }
 
-        </>
-    )
+    return (
+        <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4 sm:p-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 bg-white shadow-lg rounded-2xl w-full max-w-5xl overflow-hidden">
+
+                {/* Left Side */}
+                <div className="bg-sky-100 p-4 sm:p-6 flex flex-col">
+                    <div className="w-32 h-32 sm:w-40 sm:h-40 container mx-auto rounded-full overflow-hidden mb-4">
+                        <Image
+                            src={matchedCv?.profileImage}
+                            alt="Profile Picture"
+                            width={160}
+                            height={160}
+                            className="object-cover w-full h-full"
+                        />
+                    </div>
+
+                    <p className="text-lg sm:text-xl font-bold text-gray-800 text-center my-5 md:text-3xl">
+                        {matchedCv?.name}
+                    </p>
+
+                    <p className="text-gray-600 mb-4 text-center md:text-left">
+                        {matchedCv?.careerSummary || "No career summary"}
+                    </p>
+
+                    <div className="mb-6 w-full">
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center md:text-left">
+                            Contact Details
+                        </h3>
+                        <p className="text-gray-700 text-sm sm:text-base">Phone No: {matchedCv?.phone}</p>
+                        <p className="text-gray-700 text-sm sm:text-base">Email: {matchedCv?.email}</p>
+                        <p className="text-gray-700 text-sm sm:text-base">Location: {matchedCv?.address}</p>
+                        <p className="text-gray-700 text-sm sm:text-base">{matchedCv?.fatherName}</p>
+                        <p className="text-gray-700 text-sm sm:text-base">{matchedCv?.motherName}</p>
+                        <div className="text-gray-700 text-sm sm:text-base text-center md:text-left space-y-1">
+                            {matchedCv?.linkedin && (
+                                <p>
+                                    LinkedIn: <a href={matchedCv.linkedin} target="_blank" className="text-blue-600 underline">Link</a>
+                                </p>
+                            )}
+                            {matchedCv?.facebook && (
+                                <p>
+                                    Facebook: <a href={matchedCv.facebook} target="_blank" className="text-blue-600 underline">Link</a>
+                                </p>
+                            )}
+                            {matchedCv?.youtube && (
+                                <p>
+                                    YouTube: <a href={matchedCv.youtube} target="_blank" className="text-blue-600 underline">Link</a>
+                                </p>
+                            )}
+                        </div>
+                    </div>
+
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center md:text-left">
+                        Core Skills
+                    </h2>
+                    <p className="text-gray-600 mb-4 text-center md:text-left">
+                        {matchedCv?.coreSkills || "No skills listed"}
+                    </p>
+
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center md:text-left">
+                        Soft Skills
+                    </h2>
+                    <p className="text-gray-600 mb-4 text-center md:text-left">
+                        {matchedCv?.softSkills || "No soft skills listed"}
+                    </p>
+
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center md:text-left">
+                        Projects
+                    </h2>
+                    <p className="text-gray-600 mb-4 text-center md:text-left">
+                        {matchedCv?.projects?.length
+                            ? `${matchedCv.projects.length} projects`
+                            : "No projects available"}
+                    </p>
+
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-800 text-center md:text-left">
+                        Reference
+                    </h2>
+                    <p className="text-gray-600 mb-4 text-center md:text-left">
+                        {matchedCv?.references?.length
+                            ? `${matchedCv.references.length} reference(s)`
+                            : matchedCv?.reference || "No references available"}
+                    </p>
+                </div>
+
+                {/* Right Side */}
+                <div className="col-span-2 p-4 sm:p-6">
+                    {/* Objective */}
+                    <section className="mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold text-red-600 mb-2">Objective</h2>
+                        <p className="text-gray-700 text-justify text-sm sm:text-base">
+                            {matchedCv?.objective || "No objective added"}
+                        </p>
+                    </section>
+
+                    {/* Education */}
+                    <section className="mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold text-red-600 mb-2">Education</h2>
+                        {matchedCv?.education?.length ? (
+                            matchedCv.education.map((edu, idx) => {
+                                // Skip rendering if all key fields are empty
+                                if (!edu.institute && !edu.major && !edu.year && !edu.result) return null;
+
+                                return (
+                                    <div key={idx} className="mb-2">
+                                        {edu.institute && (
+                                            <p className="text-gray-800 font-semibold text-sm sm:text-base">{edu.institute}</p>
+                                        )}
+                                        {(edu.major || edu.year) && (
+                                            <p className="text-gray-700 text-sm sm:text-base">
+                                                {edu.major ? edu.major : ""}{edu.major && edu.year ? " " : ""}{edu.year ? `(${edu.year})` : ""}
+                                            </p>
+                                        )}
+                                        {edu.result && (
+                                            <p className="text-gray-700 text-sm sm:text-base">Result: {edu.result}</p>
+                                        )}
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <p className="text-gray-700">No education data available.</p>
+                        )}
+                    </section>
+
+
+                    {/* Work Experience */}
+                    <section className="mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold text-red-600 mb-2">Work Experience</h2>
+                        {workExp.length ? (
+                            workExp.map((job, idx) => (
+                                <div key={idx} className="mb-2">
+                                    <p className="font-semibold text-gray-800">{job.position}</p>
+                                    <p className="text-gray-700 text-sm">{job.duration}</p>
+                                    <p className="text-gray-700 whitespace-pre-line">{job.description}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-gray-600">No work experience available.</p>
+                        )}
+                    </section>
+
+                    {/* Projects */}
+                    <section className="mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold text-red-600 mb-2">Projects</h2>
+                        {matchedCv?.projects?.length ? (
+                            matchedCv.projects.map((proj, idx) => (
+                                <div key={idx} className="mb-2">
+                                    <div className="flex gap-5">
+                                        <p className="font-semibold text-gray-800">{proj.title}</p>
+                                        {proj.link && (
+                                            <Link
+                                                href={proj.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-blue-600 underline"
+                                            >
+                                                Link
+                                            </Link>
+                                        )}
+                                    </div>
+                                    <p className="text-gray-700 whitespace-pre-line">{proj.description}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-gray-600">No projects available.</p>
+                        )}
+                    </section>
+
+                    {/* Certificates */}
+                    <section className="mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold text-red-600 mb-2">Certificates</h2>
+                        {matchedCv?.certificates?.length ? (
+                            matchedCv.certificates.map((cer, idx) => (
+                                <div key={idx} className="mb-2">
+                                    <div className="flex gap-5">
+                                        <p className="font-semibold text-gray-800">{cer.name}</p>
+                                        {cer.link && (
+                                            <Link
+                                                href={cer.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-blue-600 underline"
+                                            >
+                                                Link
+                                            </Link>
+                                        )}
+                                    </div>
+                                    <p className="text-gray-700 whitespace-pre-line">{cer.description}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-gray-600">No certificates available.</p>
+                        )}
+                    </section>
+
+                    {/* Extra Curriculum */}
+                    <section className="mb-6">
+                        <h2 className="text-xl sm:text-2xl font-bold text-red-600 mb-2">Extra Curriculum</h2>
+                        {matchedCv?.extraCurriculum ? (
+                            <p className="text-gray-700 whitespace-pre-line">{matchedCv.extraCurriculum}</p>
+                        ) : (
+                            <p className="text-gray-600">No extra curriculum activities available.</p>
+                        )}
+                    </section>
+
+                    {/* Additional */}
+                    <section>
+                        <h2 className="text-xl sm:text-2xl font-bold text-red-600 mb-2">Additional</h2>
+                        <h3 className="font-semibold text-gray-800">Languages</h3>
+                        <p className="text-gray-700 text-sm sm:text-base">
+                            {matchedCv?.languagePreference || "Not specified"}
+                        </p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    );
 }

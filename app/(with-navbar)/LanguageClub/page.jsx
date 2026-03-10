@@ -7,6 +7,680 @@ import HelmetHead from '@/app/HelmetHead/HelmetHead';
 import Link from 'next/link';
 
 export default function LanguageClub() {
+
+const japaneseCourses = [
+  {
+    title: "Basic Hiragana & Katakana",
+    slug: "basic-hiragana-katakana",
+    batch: "Batch 345243428798",
+    seats: "25",
+    date: "2025-05-02T10:36",
+    duration: "8 weeks",
+    level: "Beginner",
+    instructor: "Ms. Aiko Tanaka",
+    image: "https://i.postimg.cc/KjbZppPx/jp.png",
+    description:
+      "Learn to read and write the two fundamental Japanese scripts — Hiragana and Katakana. This course is ideal for absolute beginners who want to start their Japanese learning journey from scratch.",
+    syllabus: [
+      "Introduction to Japanese sounds and writing",
+      "Mastering Hiragana characters",
+      "Learning Katakana for foreign words",
+      "Basic pronunciation practice",
+      "Simple vocabulary and sentence structure",
+    ],
+    objectives: [
+      "Be able to read and write all Hiragana and Katakana characters confidently",
+      "Understand the basic sentence structure of Japanese",
+      "Gain familiarity with essential daily vocabulary",
+    ],
+    benefits: [
+      "Perfect foundation before learning Kanji or grammar",
+      "Access to printable worksheets and online quizzes",
+      "Weekly live pronunciation sessions",
+    ],
+    schedule: [
+      "Week 1: Introduction to Japanese phonetics and characters",
+      "Week 2: Hiragana group A–K",
+      "Week 3: Hiragana group S–T",
+      "Week 4: Katakana basics and usage",
+      "Week 5: Vocabulary and pronunciation practice",
+      "Week 6: Short reading exercises",
+      "Week 7: Speaking and writing activities",
+      "Week 8: Final review and certification quiz",
+    ],
+    career: [
+      "Provides the foundation for JLPT N5/N4 preparation",
+      "Helps with communication for tourists and international students",
+      "Useful for anime fans and culture enthusiasts starting their journey",
+    ],
+    certification:
+      "Upon completion, students receive a 'Basic Japanese Literacy Certificate' endorsed by the Language Learning Club.",
+    reviews: [
+      {
+        name: "Rina Kobayashi",
+        text: "This course gave me confidence to start learning Japanese seriously. Aiko-sensei’s teaching style is amazing!",
+      },
+      {
+        name: "Mark Stevens",
+        text: "The live pronunciation sessions helped me improve my accent. Perfect for beginners!",
+      },
+    ],
+  },
+  {
+    title: "JLPT N4 Preparation",
+    slug: "jlpt-n4-preparation",
+    batch: "Batch 934826493624",
+    seats: "20",
+    date: "2025-07-05T09:30",
+    duration: "12 weeks",
+    level: "Pre-Intermediate",
+    instructor: "Prof. Kenji Nakamura",
+    image: "https://i.postimg.cc/KjbZppPx/jp.png",
+    description:
+      "Prepare for the JLPT N4 exam with intensive lessons on grammar, reading, listening, and vocabulary. Ideal for students aiming to move from N5 to N4 proficiency.",
+    syllabus: [
+      "JLPT N4 grammar patterns",
+      "Reading comprehension strategies",
+      "Listening skill enhancement",
+      "Kanji and vocabulary expansion",
+      "Mock tests and performance feedback",
+    ],
+    objectives: [
+      "Develop advanced sentence structures and grammar",
+      "Strengthen comprehension and analytical listening skills",
+      "Score confidently in the JLPT N4 exam",
+    ],
+    benefits: [
+      "Personalized feedback from JLPT-certified teachers",
+      "Access to mock exams and vocabulary drills",
+      "Comprehensive test strategy and time management tips",
+    ],
+    schedule: [
+      "Week 1–2: N4 grammar foundations",
+      "Week 3–4: Reading comprehension and translation practice",
+      "Week 5–6: Listening drills and vocabulary sets",
+      "Week 7–8: Kanji memorization and usage",
+      "Week 9–10: Mock tests and corrections",
+      "Week 11–12: Final exam and review session",
+    ],
+    career: [
+      "Essential for students pursuing Japanese university admission or work visas",
+      "Improves employability for Japanese-speaking roles",
+      "Prepares learners for JLPT N3 advanced certification",
+    ],
+    certification:
+      "Students receive an official 'JLPT N4 Preparation Certificate' after completing all modules and mock exams.",
+    reviews: [
+      {
+        name: "Akira Matsumoto",
+        text: "Great structured lessons. The mock tests really helped me get used to the real exam format.",
+      },
+      {
+        name: "Sarah Lin",
+        text: "I passed JLPT N4 thanks to this course! The grammar explanations were clear and concise.",
+      },
+    ],
+  },
+  {
+    title: "Kanji Mastery 101",
+    slug: "kanji-mastery-101",
+    batch: "Batch 134245424423",
+    seats: "28",
+    date: "2025-08-02T11:00",
+    duration: "6 weeks",
+    level: "All Levels",
+    instructor: "Mr. Daichi Mori",
+    image: "https://i.postimg.cc/9027PpzB/dsjofg.png",
+    description:
+      "Learn the logic behind Japanese Kanji characters with stroke order practice, radicals, and mnemonic techniques to remember complex symbols easily.",
+    syllabus: [
+      "Understanding Kanji origins",
+      "Stroke order and radicals",
+      "Top 100 common Kanji characters",
+      "Daily writing and reading practice",
+      "Kanji memory tips and quizzes",
+    ],
+    objectives: [
+      "Recognize and write 100+ foundational Kanji",
+      "Understand meaning and radical structure",
+      "Apply Kanji knowledge in reading and writing tasks",
+    ],
+    benefits: [
+      "Custom Kanji flashcards and interactive quizzes",
+      "Lifetime access to stroke-order animations",
+      "Live Kanji drawing workshops every week",
+    ],
+    schedule: [
+      "Week 1: Kanji origins and radicals",
+      "Week 2: Top 50 Kanji practice",
+      "Week 3: Stroke order perfection sessions",
+      "Week 4: Reading Kanji in short texts",
+      "Week 5: Vocabulary expansion using Kanji",
+      "Week 6: Final Kanji test and certification",
+    ],
+    career: [
+      "Boosts reading comprehension for JLPT N5–N3 levels",
+      "Helpful for translators, manga readers, and calligraphy enthusiasts",
+      "Valuable skill for Japanese business professionals",
+    ],
+    certification:
+      "Graduates earn a 'Kanji Proficiency Certificate' verifying their mastery of 100 essential characters.",
+    reviews: [
+      {
+        name: "Taro Yamada",
+        text: "Daichi-sensei made Kanji fun! The mnemonics and quizzes were so helpful.",
+      },
+      {
+        name: "Lina Ghosh",
+        text: "Before this course, Kanji scared me. Now I can actually read short texts confidently!",
+      },
+    ],
+  },
+];
+
+const ieltsCourses = [
+  {
+    title: "IELTS Speaking Masterclass",
+    slug: "ielts-speaking-masterclass",
+    batch: "Batch 9988234",
+    seats: "30",
+    date: "2025-03-10T09:00",
+    duration: "6 weeks",
+    level: "Intermediate",
+    instructor: "John Smith",
+    image: "https://i.postimg.cc/ZqHKnBQ6/jbhhb.png",
+    description:
+      "Master the IELTS Speaking section with expert tips, live practice sessions, and mock interviews.",
+    syllabus: [
+      "Understanding IELTS Speaking format",
+      "Fluency and coherence practice",
+      "Pronunciation improvement",
+      "Vocabulary and topic-specific phrases",
+      "Mock interview sessions"
+    ],
+    objectives: [
+      "Improve speaking fluency and confidence",
+      "Learn strategies for Part 1, 2, and 3",
+      "Handle common IELTS topics effectively"
+    ],
+    benefits: [
+      "Personalized feedback from certified IELTS instructors",
+      "Weekly live speaking sessions",
+      "Access to recorded mock interviews"
+    ],
+    schedule: [
+      "Week 1: IELTS Speaking overview and strategies",
+      "Week 2: Part 1 – Introduction & general questions",
+      "Week 3: Part 2 – Long turn practice",
+      "Week 4: Part 3 – Two-way discussion and opinion questions",
+      "Week 5: Mock speaking sessions",
+      "Week 6: Final evaluation & feedback"
+    ],
+    career: [
+      "Helps students aiming for higher IELTS bands",
+      "Useful for university admission and work visas",
+      "Builds confidence for academic and professional communication"
+    ],
+    certification:
+      "Upon completion, students receive a 'IELTS Speaking Mastery Certificate' from the Language Learning Club.",
+    reviews: [
+      {
+        name: "Alice Johnson",
+        text: "The speaking sessions were very interactive and practical. Highly recommend!"
+      },
+      {
+        name: "Michael Brown",
+        text: "I improved my band score from 6.5 to 7.5 after this course."
+      }
+    ]
+  },
+  {
+    title: "IELTS Writing Task 2 Intensive",
+    slug: "ielts-writing-task2-intensive",
+    batch: "Batch 83427342",
+    seats: "25",
+    date: "2025-04-01T11:00",
+    duration: "8 weeks",
+    level: "Advanced",
+    instructor: "Emma Wilson",
+    image: "https://i.postimg.cc/6Qbqz4ht/werpgytj.png",
+    description:
+      "Focus on IELTS Writing Task 2 with essay structures, argument development, and exam strategies.",
+    syllabus: [
+      "Understanding Task 2 question types",
+      "Essay planning techniques",
+      "Coherence and cohesion practice",
+      "Grammar and vocabulary enhancement",
+      "Timed essay writing practice"
+    ],
+    objectives: [
+      "Write essays that meet IELTS Task 2 criteria",
+      "Organize arguments coherently",
+      "Improve vocabulary and grammar usage"
+    ],
+    benefits: [
+      "Detailed feedback on essay writing",
+      "Access to sample essays and templates",
+      "Strategies for scoring higher in Writing Task 2"
+    ],
+    schedule: [
+      "Week 1–2: Introduction to Task 2 and essay types",
+      "Week 3–4: Structuring essays & developing ideas",
+      "Week 5–6: Vocabulary and grammar for Task 2",
+      "Week 7: Timed essay practice",
+      "Week 8: Final assessment and feedback"
+    ],
+    career: [
+      "Essential for students seeking high IELTS Writing bands",
+      "Supports academic writing skills for university",
+      "Improves professional communication in English"
+    ],
+    certification:
+      "Students receive a 'IELTS Writing Excellence Certificate' after completing the course.",
+    reviews: [
+      {
+        name: "David Lee",
+        text: "The essay structure templates were extremely helpful. I finally got Band 8 in Writing!"
+      },
+      {
+        name: "Sophia Martinez",
+        text: "Clear explanations and practical exercises. This course boosted my writing confidence."
+      }
+    ]
+  },
+  {
+    title: "IELTS Listening & Reading Bootcamp",
+    slug: "ielts-listening-reading-bootcamp",
+    batch: "Batch 5628391",
+    seats: "35",
+    date: "2025-06-05T10:00",
+    duration: "5 weeks",
+    level: "Intermediate",
+    instructor: "Robert Green",
+    image: "https://i.postimg.cc/x1bzXRG5/lk.png",
+    description:
+      "Improve your listening and reading skills for IELTS with targeted exercises, practice tests, and strategies to maximize your score.",
+    syllabus: [
+      "Listening comprehension strategies",
+      "Identifying key information",
+      "Reading skimming and scanning techniques",
+      "Time management for Listening & Reading",
+      "Practice tests with feedback"
+    ],
+    objectives: [
+      "Enhance listening accuracy under exam conditions",
+      "Improve reading speed and comprehension",
+      "Develop strategies for tackling difficult questions"
+    ],
+    benefits: [
+      "Weekly mock tests with detailed analysis",
+      "Tips to avoid common mistakes",
+      "Access to recorded listening sessions"
+    ],
+    schedule: [
+      "Week 1: Introduction & Listening basics",
+      "Week 2: Listening practice & techniques",
+      "Week 3: Reading comprehension strategies",
+      "Week 4: Combined Listening & Reading practice",
+      "Week 5: Final mock test and review"
+    ],
+    career: [
+      "Helps improve overall IELTS band score",
+      "Useful for academic and professional English proficiency",
+      "Prepares students for university admission exams"
+    ],
+    certification:
+      "Upon completion, students receive a 'IELTS Listening & Reading Certificate' from the Language Learning Club.",
+    reviews: [
+      {
+        name: "Emma Watson",
+        text: "This bootcamp helped me get Band 8 in Listening and Reading. The practice tests were invaluable."
+      },
+      {
+        name: "Liam Smith",
+        text: "The tips and techniques made tricky questions much easier to handle."
+      }
+    ]
+  }
+];
+
+
+const portugueseCourses = [
+  {
+    title: "Portuguese Beginner Essentials",
+    slug: "portuguese-beginner-essentials",
+    batch: "Batch 1012345",
+    seats: "30",
+    date: "2025-05-12T09:00",
+    duration: "6 weeks",
+    level: "Beginner",
+    instructor: "Maria Silva",
+    image: "https://i.postimg.cc/59n7gxhG/sdfogi.png",
+    description:
+      "Start your Portuguese learning journey with foundational vocabulary, pronunciation, and basic conversation skills.",
+    syllabus: [
+      "Introduction to Portuguese alphabet and sounds",
+      "Basic greetings and self-introduction",
+      "Common phrases for daily life",
+      "Numbers, dates, and time",
+      "Simple conversation practice"
+    ],
+    objectives: [
+      "Develop confidence in basic spoken Portuguese",
+      "Understand essential grammar and sentence structure",
+      "Engage in everyday conversations"
+    ],
+    benefits: [
+      "Interactive exercises with native instructors",
+      "Audio and video practice materials",
+      "Weekly live conversational sessions"
+    ],
+    schedule: [
+      "Week 1: Portuguese sounds and alphabet",
+      "Week 2: Greetings and self-introduction",
+      "Week 3: Numbers, dates, and time",
+      "Week 4: Basic grammar essentials",
+      "Week 5: Everyday conversation practice",
+      "Week 6: Final review and assessment"
+    ],
+    career: [
+      "Prepare for travel and cultural immersion",
+      "Foundation for Portuguese language exams",
+      "Useful for international students and tourists"
+    ],
+    certification:
+      "Students receive a 'Portuguese Beginner Certificate' upon course completion.",
+    reviews: [
+      {
+        name: "Lucas Pereira",
+        text: "Maria made learning Portuguese easy and fun. Great for beginners!"
+      },
+      {
+        name: "Sofia Costa",
+        text: "I gained confidence to speak in daily situations after this course."
+      }
+    ]
+  },
+  {
+    title: "Portuguese Intermediate Conversation",
+    slug: "portuguese-intermediate-conversation",
+    batch: "Batch 1023456",
+    seats: "25",
+    date: "2025-06-01T11:00",
+    duration: "8 weeks",
+    level: "Intermediate",
+    instructor: "João Almeida",
+    image: "https://i.postimg.cc/jSr7JfMm/rghk.png",
+    description:
+      "Enhance your Portuguese conversation skills, expand vocabulary, and learn to express ideas fluently in different situations.",
+    syllabus: [
+      "Intermediate grammar and sentence structures",
+      "Daily conversation practice",
+      "Listening comprehension exercises",
+      "Cultural expressions and idioms",
+      "Role-playing and real-life scenarios"
+    ],
+    objectives: [
+      "Speak Portuguese fluently in a variety of contexts",
+      "Improve listening comprehension and response accuracy",
+      "Learn common idioms and cultural expressions"
+    ],
+    benefits: [
+      "Weekly live practice with native speakers",
+      "Personalized feedback on spoken Portuguese",
+      "Access to multimedia exercises and practice tests"
+    ],
+    schedule: [
+      "Week 1–2: Intermediate grammar review",
+      "Week 3–4: Conversational topics practice",
+      "Week 5–6: Listening comprehension sessions",
+      "Week 7: Role-playing exercises",
+      "Week 8: Final conversational assessment"
+    ],
+    career: [
+      "Helps in academic or professional Portuguese settings",
+      "Prepares for higher-level language exams",
+      "Useful for cultural immersion and travel"
+    ],
+    certification:
+      "Students receive a 'Portuguese Intermediate Certificate' after completing all modules.",
+    reviews: [
+      {
+        name: "Mariana Santos",
+        text: "João’s teaching helped me speak confidently with native speakers."
+      },
+      {
+        name: "Pedro Fernandes",
+        text: "I improved my conversation skills a lot and feel ready for real-life situations."
+      }
+    ]
+  },
+  {
+    title: "Portuguese Advanced Writing & Reading",
+    slug: "portuguese-advanced-writing-reading",
+    batch: "Batch 1034567",
+    seats: "20",
+    date: "2025-07-10T10:00",
+    duration: "5 weeks",
+    level: "Advanced",
+    instructor: "Ana Ribeiro",
+    image: "https://i.postimg.cc/jSr7JfMm/rghk.png",
+    description:
+      "Focus on advanced Portuguese writing and reading skills, essay structuring, comprehension, and formal communication.",
+    syllabus: [
+      "Advanced grammar and syntax",
+      "Essay and report writing",
+      "Reading comprehension strategies",
+      "Formal communication and emails",
+      "Timed exercises and assessments"
+    ],
+    objectives: [
+      "Write well-structured essays and formal texts",
+      "Improve comprehension of complex Portuguese texts",
+      "Develop advanced reading and writing proficiency"
+    ],
+    benefits: [
+      "Personalized essay feedback from instructors",
+      "Sample essays and reading exercises",
+      "Weekly live writing workshops"
+    ],
+    schedule: [
+      "Week 1: Advanced grammar and writing techniques",
+      "Week 2: Reading comprehension exercises",
+      "Week 3: Essay writing practice",
+      "Week 4: Formal communication & reports",
+      "Week 5: Final assessment and feedback"
+    ],
+    career: [
+      "Useful for academic and professional communication",
+      "Prepares for advanced Portuguese exams",
+      "Strengthens skills for work or study in Portuguese-speaking countries"
+    ],
+    certification:
+      "Students receive an 'Advanced Portuguese Writing & Reading Certificate' upon completion.",
+    reviews: [
+      {
+        name: "Ricardo Lima",
+        text: "Ana’s course gave me confidence to write essays and understand advanced texts."
+      },
+      {
+        name: "Clara Mendes",
+        text: "I feel ready for professional and academic Portuguese after this course."
+      }
+    ]
+  }
+];
+
+
+const germanCourses = [
+  {
+    title: "German Beginner Essentials",
+    slug: "german-beginner-essentials",
+    batch: "Batch 2012345",
+    seats: "30",
+    date: "2025-05-15T09:00",
+    duration: "6 weeks",
+    level: "Beginner",
+    instructor: "Anna Müller",
+    image: "https://i.postimg.cc/fLZDhxfy/wefjokij.png",
+    description:
+      "Start learning German with foundational vocabulary, pronunciation, and basic conversation skills for everyday situations.",
+    syllabus: [
+      "Introduction to German alphabet and sounds",
+      "Basic greetings and self-introduction",
+      "Numbers, dates, and telling time",
+      "Simple sentence structure",
+      "Basic conversational phrases"
+    ],
+    objectives: [
+      "Communicate confidently in basic German",
+      "Understand essential grammar and sentence formation",
+      "Engage in simple conversations"
+    ],
+    benefits: [
+      "Interactive exercises with native instructors",
+      "Audio and video practice materials",
+      "Weekly live conversation sessions"
+    ],
+    schedule: [
+      "Week 1: German alphabet and pronunciation",
+      "Week 2: Greetings and self-introduction",
+      "Week 3: Numbers, dates, and time",
+      "Week 4: Basic grammar essentials",
+      "Week 5: Everyday conversation practice",
+      "Week 6: Final review and assessment"
+    ],
+    career: [
+      "Prepare for travel and cultural immersion",
+      "Foundation for German language exams",
+      "Useful for students and tourists"
+    ],
+    certification:
+      "Students receive a 'German Beginner Certificate' upon completion.",
+    reviews: [
+      {
+        name: "Lukas Schmidt",
+        text: "Anna made learning German easy and fun. Highly recommend for beginners!"
+      },
+      {
+        name: "Sophie Fischer",
+        text: "I gained confidence to speak German in daily situations after this course."
+      }
+    ]
+  },
+  {
+    title: "German Intermediate Conversation",
+    slug: "german-intermediate-conversation",
+    batch: "Batch 2023456",
+    seats: "25",
+    date: "2025-06-05T11:00",
+    duration: "8 weeks",
+    level: "Intermediate",
+    instructor: "Maximilian Bauer",
+    image: "https://i.postimg.cc/fLZDhxfy/wefjokij.png",
+    description:
+      "Enhance your German speaking skills, improve vocabulary, and express ideas fluently in different real-life situations.",
+    syllabus: [
+      "Intermediate grammar and sentence structures",
+      "Daily conversation practice",
+      "Listening comprehension exercises",
+      "Idiomatic expressions and cultural notes",
+      "Role-playing and situational dialogues"
+    ],
+    objectives: [
+      "Speak German fluently in a variety of contexts",
+      "Improve listening comprehension and response accuracy",
+      "Learn idioms and cultural expressions"
+    ],
+    benefits: [
+      "Weekly live practice with native speakers",
+      "Personalized feedback on speaking",
+      "Access to multimedia exercises and practice tests"
+    ],
+    schedule: [
+      "Week 1–2: Intermediate grammar review",
+      "Week 3–4: Conversational topics practice",
+      "Week 5–6: Listening comprehension sessions",
+      "Week 7: Role-playing exercises",
+      "Week 8: Final conversational assessment"
+    ],
+    career: [
+      "Useful for professional and academic settings",
+      "Preparation for intermediate German exams",
+      "Helps in cultural immersion and travel"
+    ],
+    certification:
+      "Students receive a 'German Intermediate Certificate' upon completion.",
+    reviews: [
+      {
+        name: "Clara Weber",
+        text: "Maximilian’s course helped me speak confidently with native speakers."
+      },
+      {
+        name: "Jonas Meier",
+        text: "My conversation skills improved significantly; very practical course!"
+      }
+    ]
+  },
+  {
+    title: "German Advanced Writing & Reading",
+    slug: "german-advanced-writing-reading",
+    batch: "Batch 2034567",
+    seats: "20",
+    date: "2025-07-12T10:00",
+    duration: "5 weeks",
+    level: "Advanced",
+    instructor: "Sabine Hoffmann",
+    image: "https://i.postimg.cc/fLZDhxfy/wefjokij.png",
+    description:
+      "Focus on advanced German writing and reading, essay structuring, comprehension, and formal communication skills.",
+    syllabus: [
+      "Advanced grammar and syntax",
+      "Essay and report writing",
+      "Reading comprehension strategies",
+      "Formal communication and emails",
+      "Timed exercises and assessments"
+    ],
+    objectives: [
+      "Write well-structured essays and formal texts",
+      "Understand complex German texts",
+      "Develop advanced reading and writing proficiency"
+    ],
+    benefits: [
+      "Personalized essay feedback",
+      "Sample essays and reading exercises",
+      "Weekly live writing workshops"
+    ],
+    schedule: [
+      "Week 1: Advanced grammar and writing techniques",
+      "Week 2: Reading comprehension exercises",
+      "Week 3: Essay writing practice",
+      "Week 4: Formal communication & reports",
+      "Week 5: Final assessment and feedback"
+    ],
+    career: [
+      "Useful for academic and professional communication",
+      "Prepares for advanced German exams",
+      "Strengthens skills for work or study in Germany or German-speaking countries"
+    ],
+    certification:
+      "Students receive an 'Advanced German Writing & Reading Certificate' upon completion.",
+    reviews: [
+      {
+        name: "Tobias Krüger",
+        text: "Sabine’s course gave me confidence to write essays and read complex texts in German."
+      },
+      {
+        name: "Laura Becker",
+        text: "I feel ready for professional and academic German after this course."
+      }
+    ]
+  }
+];
+
+
+
+
   return (
     <>
 
@@ -204,6 +878,58 @@ export default function LanguageClub() {
                 <li><strong>Track Progress:</strong> Review errors, maintain a log, and revise tough concepts weekly.</li>
                 <li><strong>Use Trusted Resources:</strong> ETS Official Guide, Magoosh, Manhattan Prep, Kaplan.</li>
               </ul>
+
+
+
+
+                {/* ✅ 3-column grid layout */}
+              <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 mt-10">
+                {ieltsCourses.map((course, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
+                  >
+                    {/* Image */}
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-48 object-cover"
+                    />
+
+                    {/* Content */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                        {course.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-1">
+                        <span className="font-medium">Batch:</span> {course.batch}
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-1 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">group</span>
+                        {course.seats} Seats
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-3 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">schedule</span>
+                        {course.date}
+                      </p>
+
+                      {/* ✅ View Button */}
+                      <div className="flex justify-center mt-4">
+                        <Link href={`/language-club/IELTS/${course.slug}`} className='w-full'>
+                          <button className="bg-[#17549A] text-white   w-full rounded-md hover:bg-blue-700 transition py-2">
+                            View
+                          </button>
+                        </Link>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Bonus Tips */}
@@ -344,6 +1070,61 @@ export default function LanguageClub() {
                 </tbody>
               </table>
             </div>
+            <section className="mt-10 mb-16">
+              <h2 className="text-2xl font-semibold mb-6 text-center text-red-600">
+                🇯🇵 Popular Japanese Language Courses
+              </h2>
+
+              {/* ✅ 3-column grid layout */}
+              <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
+                {japaneseCourses.map((course, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
+                  >
+                    {/* Image */}
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-48 object-cover"
+                    />
+
+                    {/* Content */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                        {course.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-1">
+                        <span className="font-medium">Batch:</span> {course.batch}
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-1 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">group</span>
+                        {course.seats} Seats
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-3 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">schedule</span>
+                        {course.date}
+                      </p>
+
+                      {/* ✅ View Button */}
+                      <div className="flex justify-center mt-4">
+                        <Link href={`/language-club/japana/${course.slug}`} className='w-full'>
+                          <button className="bg-[#17549A] text-white   w-full rounded-md hover:bg-blue-700 transition py-2">
+                            View
+                          </button>
+                        </Link>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
           </section>
 
           <div className='flex justify-center items-center'>
@@ -422,6 +1203,60 @@ export default function LanguageClub() {
                 <li><strong>Tip:</strong> Stick to one dialect at first to avoid confusion.</li>
               </ul>
             </div>
+
+
+              {/* ✅ 3-column grid layout */}
+              <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 mt-10">
+                {portugueseCourses.map((course, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
+                  >
+                    {/* Image */}
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-48 object-cover"
+                    />
+
+                    {/* Content */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                        {course.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-1">
+                        <span className="font-medium">Batch:</span> {course.batch}
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-1 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">group</span>
+                        {course.seats} Seats
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-3 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">schedule</span>
+                        {course.date}
+                      </p>
+
+                      {/* ✅ View Button */}
+                      <div className="flex justify-center mt-4">
+                        <Link href={`/language-club/Portuguese-Language-Club/${course.slug}`} className='w-full'>
+                          <button className="bg-[#17549A] text-white   w-full rounded-md hover:bg-blue-700 transition py-2">
+                            View
+                          </button>
+                        </Link>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+
+
+
           </section>
 
           <div className='flex justify-center items-center'>
@@ -474,6 +1309,60 @@ export default function LanguageClub() {
                 </tbody>
               </table>
             </div>
+
+            
+              {/* ✅ 3-column grid layout */}
+              <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 mt-10">
+                {germanCourses.map((course, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300"
+                  >
+                    {/* Image */}
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-48 object-cover"
+                    />
+
+                    {/* Content */}
+                    <div className="p-4">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                        {course.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-1">
+                        <span className="font-medium">Batch:</span> {course.batch}
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-1 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">group</span>
+                        {course.seats} Seats
+                      </p>
+
+                      <p className="text-gray-600 text-sm mb-3 flex items-center gap-2">
+                        <span className="material-icons text-gray-500 text-sm">schedule</span>
+                        {course.date}
+                      </p>
+
+                      {/* ✅ View Button */}
+                      <div className="flex justify-center mt-4">
+                        <Link href={`/language-club/German-Language-CLub/${course.slug}`} className='w-full'>
+                          <button className="bg-[#17549A] text-white   w-full rounded-md hover:bg-blue-700 transition py-2">
+                            View
+                          </button>
+                        </Link>
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+
+
+
           </section>
 
           {/* German Language Learning Guide */}
@@ -517,7 +1406,7 @@ export default function LanguageClub() {
 
         </div>
 
-        
+
 
 
         {/* advertisements */}

@@ -1,224 +1,736 @@
-import React, { useState } from 'react';
+// 'use client';
+// import React, { useState, useEffect } from 'react';
+// import Image from 'next/image';
+// import axios from 'axios';
+// import Swal from 'sweetalert2';
+// import ButtonTopMaker from '@/app/buttonTopMaker/ButtonTopMaker';
+// import Chatbot from '../../chatBot/Chatbot';
+// import { UserAuth } from '@/app/context/AuthContext';
+// import useRegistered from '@/hooks/useRegistered';
+// import usePublishedBlogs from '@/hooks/usePublishedBlogs';
+
+// export default function StudentsBlogs({ student }) {
+//     const { ManualUser } = UserAuth();
+//     const [register] = useRegistered();
+//     const [selectedBlog, setSelectedBlog] = useState(null);
+//     const [comments, setComments] = useState([]);
+//     const [newComment, setNewComment] = useState('');
+//     const [loadingComments, setLoadingComments] = useState(false);
+
+//     // For modal
+//     const [isModalOpen, setIsModalOpen] = useState(false);
+
+//     const { publishedBlogs, loading: loadingBlogs } = usePublishedBlogs();
+//     const studentBlogs =
+//         publishedBlogs?.filter((blog) => blog.email === student?.email) || [];
+
+//     useEffect(() => {
+//         if (!selectedBlog && studentBlogs.length > 0) {
+//             setSelectedBlog(studentBlogs[0]);
+//         }
+//     }, [studentBlogs, selectedBlog]);
+
+//     // Fetch comments
+//     const fetchComments = async (blogId) => {
+//         setLoadingComments(true);
+//         try {
+//             const { data } = await axios.get('/api/Students_Blog_comments');
+//             if (data.success) {
+//                 const validEmails = register?.data?.map((u) => u.email).filter(Boolean);
+//                 const filtered = data.data.filter(
+//                     (c) => Number(c.blogId) === Number(blogId) && validEmails.includes(c.email)
+//                 );
+
+//                 const commentMap = {};
+//                 const rootComments = [];
+
+//                 filtered.forEach((c) => {
+//                     commentMap[c.id] = { ...c, replies: [] };
+//                 });
+
+//                 filtered.forEach((c) => {
+//                     if (c.parentId && commentMap[c.parentId]) {
+//                         commentMap[c.parentId].replies.push(commentMap[c.id]);
+//                     } else if (!c.parentId) {
+//                         rootComments.push(commentMap[c.id]);
+//                     }
+//                 });
+
+//                 setComments(rootComments);
+//             }
+//         } catch (err) {
+//             console.error('Error fetching comments:', err);
+//         } finally {
+//             setLoadingComments(false);
+//         }
+//     };
+
+//     useEffect(() => {
+//         if (selectedBlog?.id) {
+//             fetchComments(selectedBlog.id);
+//             setNewComment('');
+//         }
+//     }, [selectedBlog, register]);
+
+//     // Comment submit
+//     const handleCommentSubmit = async (e) => {
+//         e.preventDefault();
+//         if (!ManualUser) return Swal.fire('Login Required', 'You must log in to comment.', 'warning');
+//         if (!newComment.trim()) return;
+
+//         const userName = ManualUser.name || 'Anonymous';
+//         const userEmail = ManualUser.email || 'anonymous@example.com';
+
+//         try {
+//             const { data } = await axios.post('/api/Students_Blog_comments', {
+//                 user: userName,
+//                 email: userEmail,
+//                 text: newComment,
+//                 blogId: selectedBlog.id,
+//             });
+
+//             if (data.success) {
+//                 setComments((prev) => [
+//                     ...prev,
+//                     {
+//                         id: data.insertId || prev.length + 1,
+//                         user: userName,
+//                         email: userEmail,
+//                         text: newComment,
+//                         blogId: selectedBlog.id,
+//                         replies: [],
+//                         created_at: new Date().toISOString(),
+//                     },
+//                 ]);
+//                 setNewComment('');
+//             } else {
+//                 Swal.fire('Error', data.message, 'error');
+//             }
+//         } catch (err) {
+//             console.error(err);
+//             Swal.fire('Error', 'Something went wrong while posting comment.', 'error');
+//         }
+//     };
+
+//     // Delete comment
+//     const handleDeleteComment = async (id) => {
+//         if (!ManualUser?.email) return;
+//         try {
+//             const { data } = await axios.delete(
+//                 `/api/Students_Blog_comments?id=${id}&email=${ManualUser.email}`
+//             );
+//             if (data.success) {
+//                 const deleteRecursive = (list) =>
+//                     list.filter((c) => c.id !== id).map((c) => ({ ...c, replies: deleteRecursive(c.replies) }));
+//                 setComments((prev) => deleteRecursive(prev));
+//             } else Swal.fire('Error', data.message, 'error');
+//         } catch (err) {
+//             console.error(err);
+//             Swal.fire('Error', 'Something went wrong while deleting.', 'error');
+//         }
+//     };
+
+//     const Comment = ({ comment }) => {
+//         const [replyText, setReplyText] = useState('');
+//         const [showReplyBox, setShowReplyBox] = useState(false);
+
+//         const handleReplySubmitLocal = async () => {
+//             if (!ManualUser) return Swal.fire('Login Required', 'You must log in to reply.', 'warning');
+//             if (!replyText.trim()) return;
+
+//             const userName = ManualUser.name || 'Anonymous';
+//             const userEmail = ManualUser.email || 'anonymous@example.com';
+//             const tempId = `temp-${Date.now()}`;
+
+//             try {
+//                 const { data } = await axios.post('/api/Students_Blog_comments', {
+//                     user: userName,
+//                     email: userEmail,
+//                     text: replyText,
+//                     blogId: selectedBlog.id,
+//                     parentId: comment.id,
+//                 });
+
+//                 if (data.success) {
+//                     const addReply = (list) =>
+//                         list.map((c) => {
+//                             if (c.id === comment.id) {
+//                                 return {
+//                                     ...c,
+//                                     replies: [
+//                                         ...c.replies,
+//                                         {
+//                                             id: data.insertId || tempId,
+//                                             user: userName,
+//                                             email: userEmail,
+//                                             text: replyText,
+//                                             created_at: new Date().toISOString(),
+//                                             replies: [],
+//                                         },
+//                                     ],
+//                                 };
+//                             }
+//                             return { ...c, replies: addReply(c.replies) };
+//                         });
+
+//                     setComments((prev) => addReply(prev));
+//                     setReplyText('');
+//                     setShowReplyBox(true);
+//                 }
+//             } catch (err) {
+//                 console.error(err);
+//                 Swal.fire('Error', 'Something went wrong while posting reply.', 'error');
+//             }
+//         };
+
+//         return (
+//             <div className="border-b pb-4 mb-4">
+//                 <div className="flex justify-between items-center">
+//                     <p className="font-semibold">{comment.user}</p>
+//                     {comment.email === ManualUser?.email && (
+//                         <button
+//                             onClick={() => handleDeleteComment(comment.id)}
+//                             className="text-xs text-red-500 hover:underline"
+//                         >
+//                             Delete
+//                         </button>
+//                     )}
+//                 </div>
+//                 <p className="text-sm">{comment.text}</p>
+//                 <p className="text-xs text-gray-500">
+//                     {comment.created_at ? new Date(comment.created_at).toLocaleString() : ''}
+//                 </p>
+//             </div>
+//         );
+//     };
+
+//     if (loadingBlogs) {
+//         return (
+//             <div className="flex justify-center items-center h-64">
+//                 <p className="text-xl font-semibold">Loading...</p>
+//             </div>
+//         );
+//     }
+
+//     return (
+//         <>
+//             <ButtonTopMaker />
+//             <div className="flex flex-col md:flex-row lg:flex-row md:space-x-4 shadow-2xl">
+//                 {/* Blog content */}
+//                 <div className="flex flex-col w-full md:w-9/12 mt-5 mx-3">
+//                     {selectedBlog ? (
+//                         <>
+//                             {selectedBlog.featuredImage && (
+//                                 <div>
+//                                     <Image
+//                                         src={selectedBlog.featuredImage}
+//                                         alt="Blog Image"
+//                                         width={500}
+//                                         height={500}
+//                                         className="w-full rounded-lg cursor-pointer"
+//                                         onClick={() => setIsModalOpen(true)}
+//                                     />
+//                                 </div>
+//                             )}
+
+//                             <h2 className="my-4 font-bold text-2xl">{selectedBlog.title}</h2>
+//                             <p className="text-xs text-gray-500 mb-2">
+//                                 {selectedBlog.datePublished
+//                                     ? new Date(selectedBlog.datePublished).toLocaleDateString()
+//                                     : ''}{' '}
+//                                 | {selectedBlog.category}
+//                             </p>
+//                             <div
+//                                 className="text-sm prose max-w-none text-justify"
+//                                 dangerouslySetInnerHTML={{ __html: selectedBlog.blogContent }}
+//                             />
+
+//                             <div className="mt-10 mx-3 mr-9">
+//                                 <h3 className="text-xl font-bold">Comments</h3>
+//                                 {loadingComments ? (
+//                                     <p className="text-sm text-gray-500">Loading comments...</p>
+//                                 ) : comments.length === 0 ? (
+//                                     <p className="text-sm text-gray-500">No comments yet.</p>
+//                                 ) : (
+//                                     comments.map((comment) => <Comment key={comment.id} comment={comment} />)
+//                                 )}
+
+//                                 <form onSubmit={handleCommentSubmit} className="mt-5">
+//                                     <textarea
+//                                         className="w-full p-3 border border-gray-300 rounded-lg"
+//                                         rows={4}
+//                                         placeholder="Write your comment..."
+//                                         value={newComment}
+//                                         onChange={(e) => setNewComment(e.target.value)}
+//                                     />
+//                                     <button
+//                                         type="submit"
+//                                         className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+//                                     >
+//                                         Submit Comment
+//                                     </button>
+//                                 </form>
+//                             </div>
+//                         </>
+//                     ) : (
+//                         <p className="text-center text-gray-500">Select a blog to view</p>
+//                     )}
+//                 </div>
+
+//                 {/* Sidebar */}
+//                 <div className="flex flex-col w-full md:w-4/12 mt-5 mx-3">
+//                     <h2 className="my-4 font-bold text-xl">Other Blogs</h2>
+//                     <div className="grid grid-cols-1 gap-3">
+//                         {studentBlogs.map((blog) => {
+//                             const isSelected = selectedBlog?.id === blog.id;
+//                             return (
+//                                 <div
+//                                     key={blog.id}
+//                                     className={`flex flex-col gap-4 cursor-pointer p-2 rounded ${isSelected ? 'bg-blue-100' : ''
+//                                         }`}
+//                                     onClick={() => setSelectedBlog(blog)}
+//                                 >
+//                                     {blog.featuredImage && (
+//                                         <Image
+//                                             src={blog.featuredImage}
+//                                             width={100}
+//                                             height={100}
+//                                             className="w-full lg:w-10/12 rounded-lg"
+//                                             alt="blog sub Image"
+//                                         />
+//                                     )}
+//                                     <div>
+//                                         <p className="font-semibold">{blog.title}</p>
+//                                         <p className="text-xs text-gray-500">{blog.category}</p>
+//                                     </div>
+//                                 </div>
+//                             );
+//                         })}
+//                     </div>
+//                 </div>
+//             </div>
+
+//             {/* Modal for blog image */}
+//             {/* Modal for blog image */}
+//             {isModalOpen && (
+//                 <div
+//                     className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+//                     onClick={() => setIsModalOpen(false)} // close if background clicked
+//                 >
+//                     <div
+//                         className="relative max-w-3xl w-full p-4"
+//                         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside modal
+//                     >
+//                         <button
+//                             onClick={() => setIsModalOpen(false)}
+//                             className="absolute top-2 right-2 text-white text-2xl font-bold"
+//                         >
+//                             ✕
+//                         </button>
+//                         <Image
+//                             src={selectedBlog.featuredImage}
+//                             alt="Blog Modal Image"
+//                             width={800}
+//                             height={800}
+//                             className="w-full max-h-[80vh] object-contain rounded-lg"
+//                         />
+//                     </div>
+//                 </div>
+//             )}
+
+
+//             <Chatbot />
+//         </>
+//     );
+// }
+'use client';
+import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
-import img1 from '../../../../../assets/blogimg3.PNG';
-import img2 from '../../../../../assets/blogimg2.PNG';
-import img3 from '../../../../../assets/blogimg3.PNG';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import ButtonTopMaker from '@/app/buttonTopMaker/ButtonTopMaker';
+import Chatbot from '../../chatBot/Chatbot';
+import { UserAuth } from '@/app/context/AuthContext';
+import useRegistered from '@/hooks/useRegistered';
+import usePublishedBlogs from '@/hooks/usePublishedBlogs';
+import useStudentEditProfile from '@/hooks/useStudentEditProfile';
 
-import { FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa';
-
-export default function StudentsBlogs() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 2; // Number of items per page
-
-    // Example related content (replace with actual content)
-    const relatedContent = [
-        { img: img1, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "Web Development 101" },
-        { img: img1, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "Advanced React Techniques" },
-        { img: img2, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "JavaScript Best Practices" },
-        { img: img3, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "Node.js for Beginners" },
-        { img: img1, text: "Lorem ipsum dolor sit amet consectetur adipisicing elit sit amet consectetur adipisicing elit.", title: "CSS Grid and Flexbox" },
-    ];
-
-    // Selected content state
-    const [selectedContent, setSelectedContent] = useState(relatedContent[0]);
-
-    // Calculate the number of pages
-    const totalPages = Math.ceil(relatedContent.length / itemsPerPage);
-
-    // Get current items to display based on the page
-    const currentItems = relatedContent.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
-
-    // Handle page change
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
-
-    const [comments, setComments] = useState([
-        { id: 1, user: 'Sushmita Shen', text: 'Great article, really informative!' },
-        { id: 2, user: 'Robert Jr', text: 'I learned a lot, thanks for sharing!' },
-    ]);
-
+export default function StudentsBlogs({ student }) {
+    const { ManualUser } = UserAuth();
+    const [register] = useRegistered();
+    const [selectedBlog, setSelectedBlog] = useState(null);
+    const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const [loadingComments, setLoadingComments] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-    const handleCommentSubmit = (e) => {
-        e.preventDefault();
-        if (newComment.trim() !== '') {
-            setComments([...comments, { id: comments.length + 1, user: 'Anonymous', text: newComment }]);
-            setNewComment('');
+    const { publishedBlogs, loading: loadingBlogs } = usePublishedBlogs();
+    const [studentEditProfile] = useStudentEditProfile();
+
+    // Find current student data
+    const studentData = useMemo(() => {
+        if (!studentEditProfile?.data || !student) return null;
+        return studentEditProfile.data.find(
+            s =>
+                s.id === student.id ||
+                s.email?.trim()?.toLowerCase() === student.email?.trim()?.toLowerCase()
+        );
+    }, [studentEditProfile, student]);
+
+    // Determine if access is restricted
+    const isRestricted = !studentData || studentData.status !== 'accepted';
+
+    // Filter blogs for this student
+    const studentBlogs = useMemo(() => {
+        if (!publishedBlogs) return [];
+        return publishedBlogs.filter((blog) => blog.email === student?.email);
+    }, [publishedBlogs, student]);
+
+    useEffect(() => {
+        if (!selectedBlog && studentBlogs.length > 0) {
+            setSelectedBlog(studentBlogs[0]);
+        }
+    }, [studentBlogs, selectedBlog]);
+
+    // Fetch comments
+    const fetchComments = async (blogId) => {
+        setLoadingComments(true);
+        try {
+            const { data } = await axios.get('/api/Students_Blog_comments');
+            if (data.success) {
+                const validEmails = register?.data?.map((u) => u.email).filter(Boolean);
+                const filtered = data.data.filter(
+                    (c) => Number(c.blogId) === Number(blogId) && validEmails.includes(c.email)
+                );
+
+                const commentMap = {};
+                const rootComments = [];
+
+                filtered.forEach((c) => {
+                    commentMap[c.id] = { ...c, replies: [] };
+                });
+
+                filtered.forEach((c) => {
+                    if (c.parentId && commentMap[c.parentId]) {
+                        commentMap[c.parentId].replies.push(commentMap[c.id]);
+                    } else if (!c.parentId) {
+                        rootComments.push(commentMap[c.id]);
+                    }
+                });
+
+                setComments(rootComments);
+            }
+        } catch (err) {
+            console.error('Error fetching comments:', err);
+        } finally {
+            setLoadingComments(false);
         }
     };
 
-    const shareUrl = "https://blog-post-url.com";
+    useEffect(() => {
+        if (selectedBlog?.id) {
+            fetchComments(selectedBlog.id);
+            setNewComment('');
+        }
+    }, [selectedBlog, register]);
 
-    // Function to handle click on related content
-    const handleRelatedContentClick = (content) => {
-        setSelectedContent(content);
+    const handleCommentSubmit = async (e) => {
+        e.preventDefault();
+        if (!ManualUser) return Swal.fire('Login Required', 'You must log in to comment.', 'warning');
+        if (!newComment.trim()) return;
+
+        const userName = ManualUser.name || 'Anonymous';
+        const userEmail = ManualUser.email || 'anonymous@example.com';
+
+        try {
+            const { data } = await axios.post('/api/Students_Blog_comments', {
+                user: userName,
+                email: userEmail,
+                text: newComment,
+                blogId: selectedBlog.id,
+            });
+
+            if (data.success) {
+                setComments((prev) => [
+                    ...prev,
+                    {
+                        id: data.insertId || prev.length + 1,
+                        user: userName,
+                        email: userEmail,
+                        text: newComment,
+                        blogId: selectedBlog.id,
+                        replies: [],
+                        created_at: new Date().toISOString(),
+                    },
+                ]);
+                setNewComment('');
+            } else {
+                Swal.fire('Error', data.message, 'error');
+            }
+        } catch (err) {
+            console.error(err);
+            Swal.fire('Error', 'Something went wrong while posting comment.', 'error');
+        }
     };
 
-    return (
-        <>
-            <div className="flex flex-col md:flex-row lg:flex-row md:space-x-4">
-                {/* First part - Blog content */}
-                <div className="flex flex-col w-full md:w-9/12 mt-5 mx-3">
-                    <div className="mt-3">
-                        {/* Blog Content */}
-                        <div>
-                            <Image
-                                src={selectedContent.img}
-                                alt="Blog Image"
-                                width={500}
-                                height={500}
-                                onDragStart={(e) => e.preventDefault()}
-                                className="w-full rounded-lg"
-                            />
-                            <h2 className="my-4 font-bold">{selectedContent.title}</h2>
-                            <p className="text-sm">{selectedContent.text}</p>
-                        </div>
+    const handleDeleteComment = async (id) => {
+        if (!ManualUser?.email) return;
+        try {
+            const { data } = await axios.delete(
+                `/api/Students_Blog_comments?id=${id}&email=${ManualUser.email}`
+            );
+            if (data.success) {
+                const deleteRecursive = (list) =>
+                    list.filter((c) => c.id !== id).map((c) => ({ ...c, replies: deleteRecursive(c.replies) }));
+                setComments((prev) => deleteRecursive(prev));
+            } else Swal.fire('Error', data.message, 'error');
+        } catch (err) {
+            console.error(err);
+            Swal.fire('Error', 'Something went wrong while deleting.', 'error');
+        }
+    };
 
-                        
-                        {/* Share Buttons */}
-                        <div className="flex flex-col gap-4 mt-5 text-sm sm:flex-row sm:space-x-4 sm:mt-6 w-6/12 lg:w-full sm:text-base">
-                            <a
-                                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center space-x-2 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 w-full sm:w-auto"
-                            >
-                                <FaFacebook size={20} />
-                                <span className=" sm:inline">Share on Facebook</span>
-                            </a>
+    const Comment = ({ comment }) => {
+        const [replyText, setReplyText] = useState('');
+        const [showReplyBox, setShowReplyBox] = useState(false);
 
-                            <a
-                                href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(shareUrl)}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center space-x-2 bg-blue-700 text-white py-2 px-4 rounded-lg hover:bg-blue-800 w-full sm:w-auto"
-                            >
-                                <FaLinkedin size={20} />
-                                <span className=" sm:inline">Share on LinkedIn</span>
-                            </a>
+        const handleReplySubmitLocal = async () => {
+            if (!ManualUser) return Swal.fire('Login Required', 'You must log in to reply.', 'warning');
+            if (!replyText.trim()) return;
 
-                            <a
-                                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center space-x-2 bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-500 w-full sm:w-auto"
-                            >
-                                <FaTwitter size={20} />
-                                <span className=" sm:inline">Share on Twitter</span>
-                            </a>
-                        </div>
+            const userName = ManualUser.name || 'Anonymous';
+            const userEmail = ManualUser.email || 'anonymous@example.com';
+            const tempId = `temp-${Date.now()}`;
 
+            try {
+                const { data } = await axios.post('/api/Students_Blog_comments', {
+                    user: userName,
+                    email: userEmail,
+                    text: replyText,
+                    blogId: selectedBlog.id,
+                    parentId: comment.id,
+                });
 
-                        {/* Comment Section */}
-                        <div className="mt-10 mx-3  mr-9">
-                            <h3 className="text-xl font-bold">Comments</h3>
-                            {/* Existing Comments */}
-                            <div className="mt-4">
-                                {comments.map((comment) => (
-                                    <div key={comment.id} className="border-b pb-4 mb-4">
-                                        <p className="font-semibold">{comment.user} says:</p>
-                                        <p className="text-sm">{comment.text}</p>
-                                    </div>
-                                ))}
-                            </div>
+                if (data.success) {
+                    const addReply = (list) =>
+                        list.map((c) => {
+                            if (c.id === comment.id) {
+                                return {
+                                    ...c,
+                                    replies: [
+                                        ...c.replies,
+                                        {
+                                            id: data.insertId || tempId,
+                                            user: userName,
+                                            email: userEmail,
+                                            text: replyText,
+                                            created_at: new Date().toISOString(),
+                                            replies: [],
+                                        },
+                                    ],
+                                };
+                            }
+                            return { ...c, replies: addReply(c.replies) };
+                        });
 
-                            {/* Comment Form */}
-                            <form onSubmit={handleCommentSubmit} className="mt-5">
-                                <textarea
-                                    className="w-full p-3 border border-gray-300 rounded-lg"
-                                    rows="4"
-                                    placeholder="Write your comment..."
-                                    value={newComment}
-                                    onChange={(e) => setNewComment(e.target.value)}
-                                ></textarea>
-                                <button
-                                    type="submit"
-                                    className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                                >
-                                    Submit Comment
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+                    setComments((prev) => addReply(prev));
+                    setReplyText('');
+                    setShowReplyBox(true);
+                }
+            } catch (err) {
+                console.error(err);
+                Swal.fire('Error', 'Something went wrong while posting reply.', 'error');
+            }
+        };
+
+        return (
+            <div className="border-b pb-4 mb-4">
+                <div className="flex justify-between items-center">
+                    <p className="font-semibold">{comment.user}</p>
+                    {comment.email === ManualUser?.email && (
+                        <button
+                            onClick={() => handleDeleteComment(comment.id)}
+                            className="text-xs text-red-500 hover:underline"
+                        >
+                            Delete
+                        </button>
+                    )}
                 </div>
+                <p className="text-sm">{comment.text}</p>
+                <p className="text-xs text-gray-500">
+                    {comment.created_at ? new Date(comment.created_at).toLocaleString() : ''}
+                </p>
+            </div>
+        );
+    };
 
-                {/* Second part - Related Content */}
-                <div className="flex flex-col w-full md:w-4/12 mt-5 mx-3">
-                    <div className="mt-3">
-                        <div className="mt-3">
-                            <h2 className="my-4 font-bold text-xl">Work & Life</h2>
-                            <hr className="border-t-2 border-gray-800 shadow-lg my-4" />
-                            <p className="text-sm">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas
-                                modi sit amet consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas modi sit amet
-                                consectetur adipisicing elit. Perferendis ad, qui ut dolore voluptas modi.
-                            </p>
-                        </div>
-                        <h2 className="my-4 font-bold text-xl">Related Content</h2>
-                        <hr className="border-t-2 border-gray-800 shadow-lg my-4" />
-                        <div className="grid grid-cols-1 gap-3">
-                            {currentItems.map((item, index) => (
-                                <div
-                                    key={index}
-                                    className="flex flex-row gap-4 cursor-pointer"
-                                    onClick={() => handleRelatedContentClick(item)} // Update the selected content when clicked
-                                >
-                                    <Image
-                                        onDragStart={(e) => e.preventDefault()}
-                                        src={item.img}
-                                        width={100}
-                                        height={100}
-                                        className="w-full rounded-lg"
-                                        alt='blog sub Image'
-                                    />
-                                    <p className="text-sm mt-4">{item.text}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+    useEffect(() => {
+        if (studentData) {
+            setLoading(false);
+        }
+    }, [studentData]);
 
-                    {/* Pagination Controls */}
-                    <div className="flex justify-center mt-4">
-                        <nav className="inline-flex items-center space-x-2">
-                            {/* Left Arrow */}
-                            <button
-                                className="px-4 py-2 bg-[#0054A5] text-white hover:bg-[#2CAAE1] border rounded-md cursor-pointer"
-                                disabled={currentPage === 1}
-                                onClick={() => handlePageChange(currentPage - 1)}
-                            >
-                                &laquo; {/* Left arrow */}
-                            </button>
-
-                            {/* Page Numbers */}
-                            {[...Array(totalPages).keys()].map((pageIndex) => (
-                                <button
-                                    key={pageIndex + 1}
-                                    className={`px-4 py-2 bg-[#0054A5] text-white rounded-md hover:bg-[#2CAAE1] ${currentPage === pageIndex + 1 ? 'bg-blue-500 text-white' : ''}`}
-                                    onClick={() => handlePageChange(pageIndex + 1)}
-                                >
-                                    {pageIndex + 1}
-                                </button>
-                            ))}
-
-                            {/* Right Arrow */}
-                            <button
-                                className="px-4 py-2 bg-[#0054A5] text-white hover:bg-[#2CAAE1] border rounded-md cursor-pointer"
-                                disabled={currentPage === totalPages}
-                                onClick={() => handlePageChange(currentPage + 1)}
-                            >
-                                &raquo; {/* Right arrow */}
-                            </button>
-                        </nav>
-                    </div>
-
-
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen bg-gray-100">
+                <div className="text-center">
+                    <div className="loader mb-4 border-4 border-blue-500 border-dashed rounded-full w-12 h-12 animate-spin mx-auto"></div>
+                    <p className="text-gray-600 text-lg">Loading student CV...</p>
                 </div>
             </div>
+        );
+    }
+    if (isRestricted) {
+        return (
+            <div className="flex justify-center items-center min-h-screen bg-gray-100">
+                <div className="bg-white shadow-md rounded-xl p-6 max-w-md text-center">
+                    <Image
+                        src="https://i.postimg.cc/NFcfNNkr/logo.jpg"
+                        alt="Restricted"
+                        width={300}
+                        height={300}
+                        className="mx-auto mb-4"
+                    />
+                    <h2 className="text-2xl font-semibold text-gray-800">Access Restricted</h2>
+                    <p className="text-gray-600 mt-2">
+                        This student's blogs are only visible after admin approval.
+                    </p>
+                    <p className="text-gray-500 mt-1">
+                        (Status: {studentData?.status || 'pending'})
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    // --- Main Blog Content ---
+    return (
+        <>
+            <ButtonTopMaker />
+            <div className="flex flex-col md:flex-row lg:flex-row md:space-x-4 shadow-2xl">
+                {/* Blog content */}
+                <div className="flex flex-col w-full md:w-9/12 mt-5 mx-3">
+                    {selectedBlog ? (
+                        <>
+                            {selectedBlog.featuredImage && (
+                                <div>
+                                    <Image
+                                        src={selectedBlog.featuredImage}
+                                        alt="Blog Image"
+                                        width={500}
+                                        height={500}
+                                        className="w-full rounded-lg cursor-pointer"
+                                        onClick={() => setIsModalOpen(true)}
+                                    />
+                                </div>
+                            )}
+
+                            <h2 className="my-4 font-bold text-2xl">{selectedBlog.title}</h2>
+                            <p className="text-xs text-gray-500 mb-2">
+                                {selectedBlog.datePublished
+                                    ? new Date(selectedBlog.datePublished).toLocaleDateString()
+                                    : ''}{' '}
+                                | {selectedBlog.category}
+                            </p>
+                            <div
+                                className="text-sm prose max-w-none text-justify"
+                                dangerouslySetInnerHTML={{ __html: selectedBlog.blogContent }}
+                            />
+
+                            <div className="mt-10 mx-3 mr-9">
+                                <h3 className="text-xl font-bold">Comments</h3>
+                                {loadingComments ? (
+                                    <p className="text-sm text-gray-500">Loading comments...</p>
+                                ) : comments.length === 0 ? (
+                                    <p className="text-sm text-gray-500">No comments yet.</p>
+                                ) : (
+                                    comments.map((comment) => <Comment key={comment.id} comment={comment} />)
+                                )}
+
+                                <form onSubmit={handleCommentSubmit} className="mt-5">
+                                    <textarea
+                                        className="w-full p-3 border border-gray-300 rounded-lg"
+                                        rows={4}
+                                        placeholder="Write your comment..."
+                                        value={newComment}
+                                        onChange={(e) => setNewComment(e.target.value)}
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                                    >
+                                        Submit Comment
+                                    </button>
+                                </form>
+                            </div>
+                        </>
+                    ) : (
+                        <p className="text-center text-gray-500">Select a blog to view</p>
+                    )}
+                </div>
+
+                {/* Sidebar */}
+                <div className="flex flex-col w-full md:w-4/12 mt-5 mx-3">
+                    <h2 className="my-4 font-bold text-xl">Other Blogs</h2>
+                    <div className="grid grid-cols-1 gap-3">
+                        {studentBlogs.map((blog) => {
+                            const isSelected = selectedBlog?.id === blog.id;
+                            return (
+                                <div
+                                    key={blog.id}
+                                    className={`flex flex-col gap-4 cursor-pointer p-2 rounded ${isSelected ? 'bg-blue-100' : ''
+                                        }`}
+                                    onClick={() => setSelectedBlog(blog)}
+                                >
+                                    {blog.featuredImage && (
+                                        <Image
+                                            src={blog.featuredImage}
+                                            width={100}
+                                            height={100}
+                                            className="w-full lg:w-10/12 rounded-lg"
+                                            alt="blog sub Image"
+                                        />
+                                    )}
+                                    <div>
+                                        <p className="font-semibold">{blog.title}</p>
+                                        <p className="text-xs text-gray-500">{blog.category}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+
+            {/* Modal for blog image */}
+            {isModalOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    <div
+                        className="relative max-w-3xl w-full p-4"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="absolute top-2 right-2 text-white text-2xl font-bold"
+                        >
+                            ✕
+                        </button>
+                        <Image
+                            src={selectedBlog.featuredImage}
+                            alt="Blog Modal Image"
+                            width={800}
+                            height={800}
+                            className="w-full max-h-[80vh] object-contain rounded-lg"
+                        />
+                    </div>
+                </div>
+            )}
+
+            <Chatbot />
         </>
     );
 }

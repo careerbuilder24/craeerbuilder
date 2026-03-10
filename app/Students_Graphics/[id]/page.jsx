@@ -1,20 +1,16 @@
-'use client'
+'use client';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react'
-import useStudents from '@/hooks/useStudents';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import Navbar from '@/app/(with-navbar)/componenets/Navbar/Navbar';
-import img1 from '../../../assets/image1.PNG'
+import Footer from '@/app/(with-navbar)/componenets/Footer/Footer';
+import HelmetHead from '@/app/HelmetHead/HelmetHead';
 import Image from 'next/image';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import Footer from '@/app/(with-navbar)/componenets/Footer/Footer';
-import HelmetHead from '@/app/HelmetHead/HelmetHead';
-import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri'
+import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
 import { Mail, MessageCircle } from "lucide-react";
-import './Graphics.css'
-import 'swiper/css';
-import 'swiper/css/navigation';
-import useMotion from '@/hooks/useMotion';
+import './Graphics.css';
+
 import CuriculamVite from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/CuriculamVite/CuriculamVite';
 import Achivements from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/Achivements/Achivements';
 import CourseDuration from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/CourseDuration/CourseDuration';
@@ -23,81 +19,35 @@ import PortFolio from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/P
 import GraphicsStudentsGallery from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/GraphicsStudentsGallery/GraphicsStudentsGallery';
 import StudentsBlogs from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/StudentsBlogs/StudentsBlogs';
 import GraphicsVideos from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/GraphicsVideo/GraphicsVideos';
+import img1 from '../../../assets/image1.PNG';
+import Loader from '@/app/(with-navbar)/componenets/Loader/Loader';
+import useStudentEditProfile from '@/hooks/useStudentEditProfile';
+import useRegistered from '@/hooks/useRegistered';
+import { UserAuth } from '@/app/context/AuthContext';
+import './Graphics.css';
 
-export default function Page() {
-  const { id } = useParams();
+export default function GraphicsStudentPage() {
+  const { slug, id } = useParams();
   const searchParams = useSearchParams();
   const router = useRouter();
   const sidebarRef = useRef(null);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
-  const [students, loading] = useStudents();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const motionsData = useMotion();
-  const [countdown, setCountdown] = useState({
-    months: 0,
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-    finished: false,
-  });
 
-  const graphic = students?.find(Onestudent => Onestudent?.id === Number(id));
+  const [studentEditProfile] = useStudentEditProfile();
+  const [register] = useRegistered();
+  const { ManualUser } = UserAuth();
 
-  // Countdown effect
-  useEffect(() => {
-    if (motionsData && motionsData.length > 0 && id) {
-      const student = motionsData.find((motion) => motion.id === parseInt(id));
-      if (student) {
-        const targetDate = new Date(student.date);
-        const interval = setInterval(() => {
-          const now = new Date();
-          const difference = targetDate - now;
-          if (difference <= 0) {
-            setCountdown({ ...countdown, finished: true });
-            clearInterval(interval);
-          } else {
-            const months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30));
-            const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-            setCountdown({ months, days, hours, minutes, seconds, finished: false });
-          }
-        }, 1000);
-        return () => clearInterval(interval);
-      }
-    }
-  }, [motionsData, id]);
+  const students = studentEditProfile?.data || [];
+  const student = useMemo(
+    () => students.find(s => s.id === Number(id)),
+    [students, id]
+  );
 
-  // Mobile sidebar handlers
-  const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
-  const handleClickOutside = (event) => {
-    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-      setIsSidebarOpen(false);
-    }
-  };
+  const MatchedEmail = register?.data?.find(profile => profile.email === ManualUser?.email);
 
-  useEffect(() => {
-    if (isSidebarOpen) {
-      document.body.classList.add('no-scroll');
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.body.classList.remove('no-scroll');
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.body.classList.remove('no-scroll');
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isSidebarOpen]);
-
-  // Modal handlers
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  // Tab categories (map with slugs for URLs)
   const tabCategories = [
     { name: "Profile (CV)", slug: "profile" },
     { name: "Achievements", slug: "achievements" },
@@ -109,42 +59,81 @@ export default function Page() {
     { name: "Blog", slug: "blog" }
   ];
 
-  // On mount → set active tab from URL
+  // Clean slug generator
+  const formatSlug = (text) =>
+    text?.trim().replace(/\s+/g, "_").toLowerCase() || "student";
+
+  // Set active tab from URL
   useEffect(() => {
     const tabSlug = searchParams.get("tab");
     if (tabSlug) {
       const foundIndex = tabCategories.findIndex(t => t.slug === tabSlug);
-      if (foundIndex !== -1) {
-        setActiveTabIndex(foundIndex);
-      }
+      if (foundIndex !== -1) setActiveTabIndex(foundIndex);
     }
   }, [searchParams]);
 
-  // Handle tab change → update URL
+  // Update URL with slug + tab + email
+  useEffect(() => {
+    if (!student) return;
+    const currentTab = searchParams.get("tab") || "profile";
+    const slugName = formatSlug(student.name || "student");
+    const email = MatchedEmail?.email ? `&email=${MatchedEmail.email}` : "";
+    const newUrl = `/Students_Graphics/${slugName}/${id}?tab=${currentTab}${email}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [student, MatchedEmail?.email, id, searchParams]);
+
   const handleTabChange = (index) => {
     setActiveTabIndex(index);
+    if (!student) return;
     const slug = tabCategories[index].slug;
-    router.push(`/Students_Graphics/${id}?tab=${slug}`, { scroll: false });
+    const slugName = formatSlug(student.name || "student");
+    const email = MatchedEmail?.email ? `&email=${MatchedEmail.email}` : "";
+    const newUrl = `/Students_Graphics/${slugName}/${id}?tab=${slug}${email}`;
+    window.history.replaceState(null, "", newUrl);
   };
+
+  // Sidebar toggle
+  const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setIsSidebarOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.classList.add("no-scroll");
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.body.classList.remove("no-scroll");
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.body.classList.remove("no-scroll");
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSidebarOpen]);
+
+  if (!student) return <Loader />;
 
   return (
     <>
       <HelmetHead
-        title="Graphics Students"
-        description="Here have the specific data of Graphics students who have completed the courses"
-        keywords="Batch Graphics,CV Education,objective,courses,portfolio,Blog"
+        title={`${student.name} - Student Details`}
+        description={`Profile and details of student ${student.name}`}
+        keywords="student profile, portfolio, courses, achievements"
         author="Muhibullah"
       />
-
       <Navbar />
 
-      <main className='lg:mt-16 mt-24 mb-10 overflow-hidden'>
-        <div className='w-full flex flex-col justify-center items-center '>
-          <div className='relative md:w-full lg:w-7/12 overflow-hidden rounded-lg mt-5'>
-            {graphic && (
-              <div className='absolute bottom-5 right-6'>
+      <main className="lg:mt-16 mt-24 mb-10 overflow-hidden">
+        {/* Cover */}
+        <div className="w-full flex flex-col justify-center items-center">
+          <div className="relative md:w-full lg:w-7/12 overflow-hidden rounded-lg mt-5 container">
+            {student.pdfUrl && (
+              <div className="absolute bottom-5 right-6">
                 <a
-                  href={graphic?.pdfUrl}
+                  href={student.pdfUrl}
                   download
                   className="mt-2 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
                 >
@@ -152,16 +141,15 @@ export default function Page() {
                 </a>
               </div>
             )}
-            <Image
-              src={img1}
-              className="mt-4 w-full large-only"
-              alt="Cover Image"
-            />
+            <div className="relative w-full h-40 md:h-48 lg:h-56 rounded-lg overflow-hidden mt-5">
+              <Image src={img1} alt="cover Image" fill className="object-cover" priority />
+            </div>
           </div>
         </div>
 
-        <div className='border-b-2 border-slate-200 lg:w-7/12 container mx-auto rounded-xl'>
-          {/* Mobile Toggle Button */}
+        {/* Tabs + Sidebar */}
+        <div className="border-b-2 border-slate-200 lg:w-7/12 container mx-auto rounded-xl relative">
+          {/* Mobile toggle */}
           <div className="block lg:hidden fixed top-64 right-1 z-40">
             <button
               onClick={toggleSidebar}
@@ -171,152 +159,83 @@ export default function Page() {
             </button>
           </div>
 
-          {/* Mobile Sidebar */}
+          {/* Mobile sidebar */}
           <div
-            className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-              }`}
+            className={`fixed inset-0 bg-gray-800 bg-opacity-25 z-30 lg:hidden transition-transform duration-500 ease-in-out ${
+              isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
           >
             <div ref={sidebarRef} className="w-44 bg-[#17549A] text-white h-full">
-              {graphic && (
-                <Image
-                  src={graphic.image}
-                  alt="Student"
-                  className="ml-10 mt-4"
-                  width={100}
-                  height={100}
-                  style={{ border: '4px solid #fff' }}
-                />
-              )}
-
+              <Image
+                src={student.uploadedImage}
+                alt={student.name}
+                width={100}
+                height={100}
+                className="mx-auto mt-4 "
+              />
               <button
-                className="bg-blue-500 text-white rounded-xl w-8/12 h-10 hover:bg-[#44b5e6] transition duration-300 m-5 ml-10"
-                onClick={openModal}
+                className="bg-blue-500 text-white rounded-xl w-8/12 h-10 hover:bg-[#44b5e6] transition duration-300 m-5 mx-auto"
+                onClick={() => setIsModalOpen(true)}
               >
                 Hire Me
               </button>
-
               <ul className="flex flex-col items-center">
                 {tabCategories.map((category, index) => (
                   <li
                     key={index}
                     onClick={() => {
-                      setActiveTabIndex(index);
+                      handleTabChange(index);
                       setIsSidebarOpen(false);
-                      router.push(`/Students_Graphics/${id}?tab=${category.slug}`, { scroll: false });
                     }}
-                    className={`hover:bg-blue-200 text-[#34E5EB] w-full h-10 cursor-pointer border-b border-[#DDDDDD] text-center pt-2 ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
-                      }`}
+                    className={`hover:bg-blue-200 w-full h-10 cursor-pointer border-b border-[#DDDDDD] text-center pt-2 ${
+                      activeTabIndex === index ? "bg-blue-200 text-blue-600" : "text-[#34E5EB]"
+                    }`}
                   >
                     {category.name}
                   </li>
                 ))}
               </ul>
-
             </div>
           </div>
 
-          {/* Modal */}
-          {isModalOpen && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-              <div className="bg-white p-6 rounded-2xl shadow-2xl w-96 text-center relative">
-                <button
-                  onClick={closeModal}
-                  className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl"
-                >
-                  &times;
-                </button>
-                <h2 className="text-2xl font-bold mb-4 text-gray-800">Hire Me</h2>
-                <form className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="Title"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  />
-                  <textarea
-                    placeholder="Your Message"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  />
-                  <input
-                    type="text"
-                    placeholder="WhatsApp Number"
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                  />
-                  <div className="flex justify-center gap-4 mt-4">
-                    <button
-                      type="button"
-                      className="flex items-center gap-2 bg-[#122549] text-white px-5 py-2 rounded-lg hover:bg-blue-600 transition-transform"
-                    >
-                      <Mail className="w-5 h-5" /> Send Email
-                    </button>
-                    <button
-                      type="button"
-                      className="flex items-center gap-2 bg-green-500 text-white px-5 py-2 rounded-lg hover:bg-green-600 transition-transform"
-                    >
-                      <MessageCircle className="w-5 h-5" /> WhatsApp
-                    </button>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full mt-6 bg-[#17549A] text-white px-6 py-2 rounded-lg hover:bg-[#4887fc] transition-transform"
-                  >
-                    Submit
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
-
-          {/* Desktop Tabs */}
-          <Tabs selectedIndex={activeTabIndex} onSelect={handleTabChange} className='flex flex-col md:flex-row h-auto w-full'>
-            <TabList className='hidden lg:flex flex-col border-r border-gray-300 bg-[#17549A] w-2/12 h-auto text-white'>
-              {graphic && (
-                <Image
-                  src={graphic.image}
-                  alt="Student"
-                  className="mt-4 w-10/12 mx-auto mb-8"
-                  width={100}
-                  height={100}
-                  style={{ border: '4px solid #fff' }}
-                />
-              )}
+          {/* Desktop tabs */}
+          <Tabs selectedIndex={activeTabIndex} onSelect={handleTabChange} className="flex flex-col md:flex-row h-auto w-full">
+            <TabList className="hidden lg:flex flex-col border-r border-gray-300 bg-[#17549A] w-2/12 h-auto text-white">
+              <Image
+                src={student.uploadedImage}
+                alt={student.name}
+                width={100}
+                height={100}
+                className="mt-4 mx-auto border-2 border-white"
+              />
               <button
-                className="bg-blue-500 text-white rounded-xl w-8/12 h-10 hover:bg-[#44b5e6] transition duration-300 mb-5 mx-auto"
-                onClick={openModal}
+                className="bg-blue-500 text-white rounded-xl w-8/12 h-10 hover:bg-[#44b5e6] transition duration-300 mb-5 mx-auto mt-5"
+                onClick={() => setIsModalOpen(true)}
               >
                 Hire Me
               </button>
               {tabCategories.map((tab, index) => (
                 <Tab
                   key={index}
-                  onClick={() => {
-                    setActiveTabIndex(index);
-                    router.push(`/Students_Graphics/${id}?tab=${tab.slug}`, { scroll: false });
-                  }}
-                  className={`p-2 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 cursor-pointer ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : ''
-                    }`}
-                  style={{ borderBottom: '1px solid #8dbff7' }}
+                  className={`p-2 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 cursor-pointer ${
+                    activeTabIndex === index ? "bg-blue-200 text-blue-600" : ""
+                  }`}
                 >
                   {tab.name}
                 </Tab>
               ))}
             </TabList>
 
-
-            {/* Tab Content */}
-            <div className='w-full'>
-              <TabPanel><CuriculamVite /></TabPanel>
-              <TabPanel><Achivements /></TabPanel>
-              <TabPanel><CourseDuration /></TabPanel>
-              <TabPanel><PortFolio /></TabPanel>
-              <TabPanel><Certifactes /></TabPanel>
-              <TabPanel><GraphicsStudentsGallery /></TabPanel>
-              <TabPanel><GraphicsVideos /></TabPanel>
-              <TabPanel><StudentsBlogs /></TabPanel>
+            {/* Panels */}
+            <div className="w-full">
+              <TabPanel><CuriculamVite student={student} /></TabPanel>
+              <TabPanel><Achivements student={student} /></TabPanel>
+              <TabPanel><CourseDuration student={student} /></TabPanel>
+              <TabPanel><PortFolio student={student} /></TabPanel>
+              <TabPanel><Certifactes student={student} /></TabPanel>
+              <TabPanel><GraphicsStudentsGallery student={student} /></TabPanel>
+              <TabPanel><GraphicsVideos student={student} /></TabPanel>
+              <TabPanel><StudentsBlogs student={student} /></TabPanel>
             </div>
           </Tabs>
         </div>
@@ -324,5 +243,5 @@ export default function Page() {
 
       <Footer />
     </>
-  )
+  );
 }

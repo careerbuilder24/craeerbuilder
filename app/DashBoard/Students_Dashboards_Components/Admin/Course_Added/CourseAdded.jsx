@@ -1,24 +1,21 @@
+// export default CourseAdded;
 'use client';
 
-import AdminFooter from '@/app/(with-navbar)/componenets/Admin Footer/AdminFooter';
-import Image from 'next/image';
-// import UseAdminCourseAdded from '@/hooks/UseAdminCourseAdded';
-import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
-import { LuClock9 } from 'react-icons/lu';
-import { MdAccessTime, MdPeopleAlt } from 'react-icons/md';
-import { RiHeart3Fill } from 'react-icons/ri';
-import StarRatings from 'react-star-ratings';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-
-
+import Image from 'next/image';
+import AdminFooter from '@/app/(with-navbar)/componenets/Admin Footer/AdminFooter';
+// import useDetailsCourses from '@/hooks/useDetailsCourses';
 
 const CourseAdded = () => {
-
-  // state managements
-  
+  const [loading, setLoading] = useState(false);
   const [benefits, setBenefits] = useState(['']);
   const [projects, setProjects] = useState(['']);
+  const [courseOutlines, setCourseOutlines] = useState([{ title: '', desc: '' }]);
+  const [classSchedule, setClassSchedule] = useState([]);
+  const [numberOfClasses, setNumberOfClasses] = useState('');
+  const [startDate, setStartDate] = useState('');
+// const {DetailsCourses} = useDetailsCourses()
   const [formData, setFormData] = useState({
     courseTitle: '',
     batchNumber: '',
@@ -26,43 +23,18 @@ const CourseAdded = () => {
     timeLeft: '',
     starRating: '',
     courseCost: '',
-    courseOutlineTitle: '',
-    courseOutlineDesc: '',
     tutorVideo: '',
+    bannerImage: '',
     instructorImage: '',
     gifFile: '',
   });
 
-  const addBenefitField = () => setBenefits([...benefits, '']);
-  const addProjectField = () => setProjects([...projects, '']);
 
-
-
-
-
-
-
-
-
-  const handleBenefitChange = (index, value) => {
-    const updatedBenefits = [...benefits];
-    updatedBenefits[index] = value;
-    setBenefits(updatedBenefits);
-  };
-
-  const handleProjectChange = (index, value) => {
-    const updatedProjects = [...projects];
-    updatedProjects[index] = value;
-    setProjects(updatedProjects);
-
-
-
-  };
+  //  Upload to ImgBB
   const uploadToImgBB = async (file) => {
     const formData = new FormData();
     formData.append('image', file);
-
-    const imgBBApiKey = '3d64b0e9dee39ca593b9da32467663ee'; // Replace with your real API key
+    const imgBBApiKey = '3d64b0e9dee39ca593b9da32467663ee';
 
     const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgBBApiKey}`, {
       method: 'POST',
@@ -70,423 +42,385 @@ const CourseAdded = () => {
     });
 
     const result = await response.json();
-    if (result.success) {
-      return result.data.url;
-    } else {
-      throw new Error('Failed to upload to ImgBB');
-    }
+    if (result.success) return result.data.url;
+    else throw new Error('Upload failed');
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
 
   const handleChange = async (e) => {
     const { name, value, files } = e.target;
 
-    if (name === 'instructorImage' || name === 'gifFile') {
-      const file = files[0];
+    // Files to upload to ImgBB
+    if (name === 'instructorImage' || name === 'gifFile' || name === 'bannerImage') {
+      const file = files?.[0];
       if (file) {
         try {
+          setLoading(true);
           const uploadedUrl = await uploadToImgBB(file);
-          setFormData((prev) => ({
-            ...prev,
-            [name]: uploadedUrl,
-          }));
+          setFormData((prev) => ({ ...prev, [name]: uploadedUrl }));
         } catch (error) {
-          console.error('ImgBB upload failed:', error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Image Upload Failed',
-            text: `Couldn't upload ${name} to ImgBB.`,
-          });
+          Swal.fire('Error', `Couldn't upload ${name} to ImgBB.`, 'error');
+        } finally {
+          setLoading(false);
         }
       }
     } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
+      setFormData({ ...formData, [name]: value });
     }
   };
 
+  //  Dynamic sections (benefits, projects, outlines)
+  const addBenefitField = () => setBenefits([...benefits, '']);
+  const addProjectField = () => setProjects([...projects, '']);
+  const addOutlineField = () => setCourseOutlines([...courseOutlines, { title: '', desc: '' }]);
 
+  const handleBenefitChange = (i, value) => {
+    const updated = [...benefits];
+    updated[i] = value;
+    setBenefits(updated);
+  };
+
+  const handleProjectChange = (i, value) => {
+    const updated = [...projects];
+    updated[i] = value;
+    setProjects(updated);
+  };
+
+  const handleOutlineChange = (i, field, value) => {
+    const updated = [...courseOutlines];
+    updated[i][field] = value;
+    setCourseOutlines(updated);
+  };
+
+  const removeOutlineField = (index) => {
+    const updated = courseOutlines.filter((_, i) => i !== index);
+    setCourseOutlines(updated);
+  };
+
+  //  Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // const payload = { ...formData, benefits, projects, courseOutlines };
+    const payload = {
+      ...formData,
+      benefits,
+      projects,
+      courseOutlines,
+      startDate,
+      numberOfClasses,
+      classSchedule
+    };
 
-    const payload = { ...formData, benefits, projects };
-
-    // Show confirmation dialog first
     const result = await Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to add this course?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes, Add Course!',
-      cancelButtonText: 'Cancel',
     });
 
-    // If user confirms the action
-    if (result.isConfirmed) {
-      try {
-        const response = await fetch('/api/courses', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+    if (!result.isConfirmed) {
+      Swal.fire('Cancelled', 'Course addition cancelled.', 'info');
+      return;
+    }
 
-        const data = await response.json();
-
-        if (response.ok) {
-          // SweetAlert success message
-          Swal.fire({
-            icon: 'success',
-            title: 'Course Added',
-            text: 'Course added successfully!',
-          });
-        } else {
-          // SweetAlert error message
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Error: ' + data.error,
-          });
-        }
-      } catch (error) {
-        console.error('Error submitting form:', error);
-
-        // SweetAlert error message for catch block
-        Swal.fire({
-          icon: 'error',
-          title: 'Submission Failed',
-          text: 'Something went wrong while submitting the form. Please try again later.',
-        });
-      }
-    } else {
-      // If the user cancels the action
-      Swal.fire({
-        icon: 'info',
-        title: 'Action Cancelled',
-        text: 'The course addition was cancelled.',
+    try {
+      const res = await fetch('/api/courses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      const data = await res.json();
+      if (res.ok) Swal.fire('Success', 'Course added successfully!', 'success');
+      else Swal.fire('Error', data.error || 'Something went wrong', 'error');
+    } catch (err) {
+      Swal.fire('Error', 'Submission failed. Try again.', 'error');
     }
   };
-
-
-
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setSelectedCourse({ ...selectedCourse, [name]: value });
-  // };
-
-
-
-
-
-
-  // console.log(courses)
-  // const encodedImageUrl = encodeURIComponent(courses.instructor_image);
+// console.log(DetailsCourses)
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-5xl mx-auto p-6 bg-white shadow-xl rounded-2xl mt-10 space-y-8"
+      >
+        <h1 className="text-3xl font-bold text-center mb-8">Add Course Details</h1>
 
-
-        <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto', fontFamily: 'Arial, sans-serif' }}>
-          <header>
-            <h1 style={{ textAlign: 'center', marginBottom: '40px' }} className="font-bold lg:text-3xl mt-10 ">
-              Add Course Details
-            </h1>
-          </header>
-
-          <section>
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '20px',
-              }}
-            >
-              {/* Title Section */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="courseTitle" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Course Title:
-                </label>
-                <input
-                  type="text"
-                  id="courseTitle"
-                  name="courseTitle"
-                  value={formData.courseTitle}
-                  onChange={handleChange}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-                  placeholder="Enter course title"
-                />
-              </div>
-
-              {/* Batch Number Section */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="batchNumber" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Batch Number:
-                </label>
-                <input
-                  type="text"
-                  id="batchNumber"
-                  name="batchNumber"
-                  value={formData.batchNumber}
-                  onChange={handleChange}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-                  placeholder="Enter batch number"
-                />
-              </div>
-
-              {/* Seats Left Section */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="seatsLeft" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Seats Left:
-                </label>
-                <input
-                  type="number"
-                  id="seatsLeft"
-                  name="seatsLeft"
-                  value={formData.seatsLeft}
-                  onChange={handleChange}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-                  placeholder="Enter seats left"
-                />
-              </div>
-
-              {/* Time Left Section */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="timeLeft" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Time Left:
-                </label>
-                <input
-                  type="datetime-local"
-                  id="timeLeft"
-                  name="timeLeft"
-                  value={formData.timeLeft}
-                  onChange={handleChange}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-                />
-              </div>
-
-              {/* Star Rating */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="starRating" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Star Rating:
-                </label>
-                <input
-                  type="number"
-                  id="starRating"
-                  name="starRating"
-                  value={formData.starRating}
-                  onChange={handleChange}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-                  placeholder="Enter star rating (e.g., 4.5)"
-                />
-              </div>
-
-              {/* Course Cost */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="courseCost" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Course Cost:
-                </label>
-                <input
-                  type="number"
-                  id="courseCost"
-                  name="courseCost"
-                  value={formData.courseCost}
-                  onChange={handleChange}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-                  placeholder="Enter course cost"
-                />
-              </div>
-
-              {/* Course Outline */}
-              <div style={{ flex: '1 1 100%' }}>
-                <label htmlFor="courseOutlineTitle" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Course Outline Title:
-                </label>
-                <input
-                  type="text"
-                  id="courseOutlineTitle"
-                  name="courseOutlineTitle"
-                  value={formData.courseOutlineTitle}
-                  onChange={handleChange}
-                  style={{ width: '100%', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}
-                  placeholder="Enter outline title"
-                />
-
-                <label
-                  htmlFor="courseOutlineDesc"
-                  style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px', marginTop: '10px' }}
-                >
-                  Course Outline Description:
-                </label>
-                <textarea
-                  id="courseOutlineDesc"
-                  name="courseOutlineDesc"
-                  value={formData.courseOutlineDesc}
-                  onChange={handleChange}
-                  style={{
-                    width: '100%',
-                    padding: '10px',
-                    height: '100px',
-                    border: '1px solid #ccc',
-                    borderRadius: '4px',
-                  }}
-                  placeholder="Enter outline description"
-                ></textarea>
-              </div>
-
-              {/* Video Upload */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="tutorVideo" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Upload Tutor's Video:
-                </label>
-                <input
-                  type="file"
-                  id="tutorVideo"
-                  name="tutorVideo"
-                  style={{ width: '100%', border: '1px solid #ccc', borderRadius: '4px' }}
-                  accept="video/*"
-                  onChange={handleChange}
-                />
-              </div>
-
-              {/* Instructor Image */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="instructorImage" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Instructor Image:
-                </label>
-                <input
-                  type="file"
-                  id="instructorImage"
-                  name="instructorImage"
-                  style={{ width: '100%', border: '1px solid #ccc', borderRadius: '4px' }}
-                  accept="image/*"
-                  onChange={handleChange}
-                />
-              </div>
-
-              {/* GIF File */}
-              <div style={{ flex: '1 1 calc(50% - 20px)', minWidth: '300px' }}>
-                <label htmlFor="gifFile" style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>
-                  Upload GIF:
-                </label>
-                <input
-                  type="file"
-                  id="gifFile"
-                  name="gifFile"
-                  style={{ width: '100%', border: '1px solid #ccc', borderRadius: '4px' }}
-                  accept="image/gif"
-                  onChange={handleChange}
-                />
-              </div>
-
-              {/* Course Benefits */}
-              <div style={{ flex: '1 1 100%' }}>
-                <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Course Benefits:</label>
-                {benefits.map((benefit, index) => (
-                  <div key={index} style={{ marginBottom: '10px' }}>
-                    <input
-                      type="text"
-                      value={benefit}
-                      onChange={(e) => handleBenefitChange(index, e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '10px',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px',
-                        marginBottom: '5px',
-                      }}
-                      placeholder={`Benefit ${index + 1}`}
-                    />
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={addBenefitField}
-                  style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#007BFF',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Add Benefit
-                </button>
-              </div>
-
-              {/* Course Projects */}
-              <div style={{ flex: '1 1 100%' }}>
-                <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '5px' }}>Course Projects:</label>
-                {projects.map((project, index) => (
-                  <div key={index} style={{ marginBottom: '10px' }}>
-                    <input
-                      type="text"
-                      value={project}
-                      onChange={(e) => handleProjectChange(index, e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '10px',
-                        border: '1px solid #ccc',
-                        borderRadius: '4px',
-                        marginBottom: '5px',
-                      }}
-                      placeholder={`Project ${index + 1}`}
-                    />
-                  </div>
-                ))}
-                <button
-                  type="button"
-                  onClick={addProjectField}
-                  style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#007BFF',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Add Project
-                </button>
-              </div>
+        {/* Basic Info */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            { label: 'Course Title', name: 'courseTitle', type: 'text' },
+            { label: 'Batch Number', name: 'batchNumber', type: 'text' },
+            { label: 'Seats Left', name: 'seatsLeft', type: 'number' },
+            { label: 'Time Left', name: 'timeLeft', type: 'datetime-local' },
+            { label: 'Star Rating', name: 'starRating', type: 'number' },
+            { label: 'Course Cost', name: 'courseCost', type: 'number' },
+          ].map(({ label, name, type }) => (
+            <div key={name}>
+              <label className="font-semibold mb-2 block">{label}</label>
+              <input
+                type={type}
+                name={name}
+                value={formData[name]}
+                onChange={handleChange}
+                className="w-full p-3 border rounded-lg focus:ring focus:ring-blue-200"
+                placeholder={`Enter ${label.toLowerCase()}`}
+              />
             </div>
-          </section>
+          ))}
+        </div>
 
-          {/* Submit Button */}
-          <footer style={{ textAlign: 'center', marginTop: '20px' }}>
-            <button
-              type="submit"
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#007BFF',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '5px',
-                cursor: 'pointer',
-              }}
-            >
-              Submit
-            </button>
-          </footer>
+        <div>
+          <h2 className="text-xl font-semibold mb-3">Class Schedule</h2>
+
+          <div className="mb-4">
+            <label className="font-semibold block mb-1">Start Date</label>
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="w-full p-2 border rounded-lg"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="font-semibold block mb-1">Number of Classes/Sessions</label>
+            <input
+              type="number"
+              value={numberOfClasses}
+              onChange={(e) => setNumberOfClasses(e.target.value)}
+              className="w-full p-2 border rounded-lg"
+            />
+          </div>
+
+          {classSchedule.map((cls, index) => (
+            <div key={index} className="flex gap-2 mb-2 items-center">
+              <input
+                type="text"
+                placeholder="Day (e.g., Sunday)"
+                value={cls.day}
+                onChange={(e) => {
+                  const updated = [...classSchedule];
+                  updated[index].day = e.target.value;
+                  setClassSchedule(updated);
+                }}
+                className="p-2 border rounded-lg w-1/3"
+              />
+              <input
+                type="time"
+                placeholder="Start Time"
+                value={cls.startTime}
+                onChange={(e) => {
+                  const updated = [...classSchedule];
+                  updated[index].startTime = e.target.value;
+                  setClassSchedule(updated);
+                }}
+                className="p-2 border rounded-lg w-1/3"
+              />
+              <input
+                type="time"
+                placeholder="End Time"
+                value={cls.endTime}
+                onChange={(e) => {
+                  const updated = [...classSchedule];
+                  updated[index].endTime = e.target.value;
+                  setClassSchedule(updated);
+                }}
+                className="p-2 border rounded-lg w-1/3"
+              />
+              <button
+                type="button"
+                onClick={() => setClassSchedule(classSchedule.filter((_, i) => i !== index))}
+                className="text-red-500 font-bold"
+              >
+                X
+              </button>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={() =>
+              setClassSchedule([...classSchedule, { day: '', startTime: '', endTime: '' }])
+            }
+            className="bg-blue-500 text-white px-3 py-1 rounded-lg mt-2"
+          >
+            + Add Schedule
+          </button>
+        </div>
+
+
+        {/* Course Outlines Section */}
+        <div>
+          <h2 className="text-xl font-semibold mb-3">Course Outlines</h2>
+          {courseOutlines.map((outline, i) => (
+            <div key={i} className="border p-4 rounded-xl mb-4 bg-gray-50">
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-semibold text-gray-700">Outline {i + 1}</span>
+                {courseOutlines.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeOutlineField(i)}
+                    className="text-red-500 hover:text-red-700 text-sm"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+              <input
+                type="text"
+                value={outline.title}
+                onChange={(e) => handleOutlineChange(i, 'title', e.target.value)}
+                placeholder="Outline title"
+                className="w-full p-2 border rounded-lg mb-2"
+              />
+              <textarea
+                value={outline.desc}
+                onChange={(e) => handleOutlineChange(i, 'desc', e.target.value)}
+                placeholder="Outline description"
+                className="w-full p-2 border rounded-lg"
+                rows={3}
+              ></textarea>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={addOutlineField}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2"
+          >
+            + Add More Outline
+          </button>
+        </div>
+
+        {/* Media Upload */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            {/* banner image  */}
+            <label className="font-semibold mb-2 block">Banner Image</label>
+            <input
+              type="file"
+              name="bannerImage"
+              accept="image/*"
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg"
+            />
+            {formData.bannerImage && (
+              <Image
+                src={formData.bannerImage}
+                alt="Banner"
+                width={200}
+                height={100}
+                className="rounded-xl mt-2 border"
+              />
+            )}
+          </div>
+
+          <div>
+            <label className="font-semibold mb-2 block">Tutor Video</label>
+            <input
+              type="file"
+              name="tutorVideo"
+              accept="video/*"
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="font-semibold mb-2 block">Instructor Image</label>
+            <input
+              type="file"
+              name="instructorImage"
+              accept="image/*"
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg"
+            />
+            {formData.instructorImage && (
+              <Image
+                src={formData.instructorImage}
+                alt="Instructor"
+                width={100}
+                height={100}
+                className="rounded-xl mt-2 border"
+              />
+            )}
+          </div>
+
+          <div>
+            <label className="font-semibold mb-2 block">GIF File</label>
+            <input
+              type="file"
+              name="gifFile"
+              accept="image/gif"
+              onChange={handleChange}
+              className="w-full p-2 border rounded-lg"
+            />
+            {formData.gifFile && (
+              <Image
+                src={formData.gifFile}
+                alt="Course GIF"
+                width={100}
+                height={100}
+                className="rounded-xl mt-2 border"
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Benefits */}
+        <div>
+          <label className="font-semibold mb-2 block">Course Benefits</label>
+          {benefits.map((b, i) => (
+            <input
+              key={i}
+              value={b}
+              onChange={(e) => handleBenefitChange(i, e.target.value)}
+              placeholder={`Benefit ${i + 1}`}
+              className="w-full p-3 border rounded-lg mb-2"
+            />
+          ))}
+          <button
+            type="button"
+            onClick={addBenefitField}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2"
+          >
+            + Add Benefit
+          </button>
+        </div>
+
+        {/* Projects */}
+        <div>
+          <label className="font-semibold mb-2 block">Course Projects</label>
+          {projects.map((p, i) => (
+            <input
+              key={i}
+              value={p}
+              onChange={(e) => handleProjectChange(i, e.target.value)}
+              placeholder={`Project ${i + 1}`}
+              className="w-full p-3 border rounded-lg mb-2"
+            />
+          ))}
+          <button
+            type="button"
+            onClick={addProjectField}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-2"
+          >
+            + Add Project
+          </button>
+        </div>
+
+        {/* Submit */}
+        <div className="text-center">
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 transition"
+          >
+            {loading ? 'Uploading...' : 'Submit'}
+          </button>
         </div>
       </form>
-
-
-   
-
-
-   
-
 
       <AdminFooter />
     </>

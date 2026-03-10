@@ -1,3 +1,6 @@
+
+// First Attempt
+
 // "use client";
 // import { auth } from "../firebase/firebase.config";
 // import { useContext, createContext, useState, useEffect } from "react";
@@ -137,141 +140,432 @@
 // export const UserAuth = () => {
 //     return useContext(AuthContext);
 // };
+
+
+
+
+// Second attempt
+
+// "use client";
+
+// import { auth } from "../firebase/firebase.config";
+// import { useContext, createContext, useState, useEffect } from "react";
+// import CryptoJS from "crypto-js";
+// import Cookies from "js-cookie";
+// import {
+//   createUserWithEmailAndPassword,
+//   GoogleAuthProvider,
+//   onAuthStateChanged,
+//   signInWithEmailAndPassword,
+//   signInWithPopup,
+//   signOut,
+//   updateProfile,
+// } from "firebase/auth";
+
+// export const AuthContext = createContext();
+
+// // Use environment variable for secret key
+// const SECRET_KEY = process.env.NEXT_PUBLIC_SECRET_KEY || "fallback_secret_key";
+
+// // ----- Encryption/Decryption -----
+// const encryptData = (data) => CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
+
+// const decryptData = (cipherText) => {
+//   try {
+//     const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
+//     return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+//   } catch {
+//     return null;
+//   }
+// };
+
+// // ----- Session Storage Functions (Firebase User) -----
+// const saveUserToSession = (userData, key = "user") => {
+//   sessionStorage.setItem(key, encryptData(userData));
+// };
+// const getUserFromSession = (key = "user") => {
+//   const storedData = sessionStorage.getItem(key);
+//   return storedData ? decryptData(storedData) : null;
+// };
+// const removeUserFromSession = (key = "user") => sessionStorage.removeItem(key);
+
+// // ----- Cookie Functions (Manual Login User) -----
+// const saveUserToCookie = (userData, key = "manualUser") => {
+//   Cookies.set(key, encryptData(userData), {
+//     expires: 7,
+//     secure: true,
+//     sameSite: "Strict",
+//   });
+// };
+// const getUserFromCookie = (key = "manualUser") => {
+//   const storedData = Cookies.get(key);
+//   return storedData ? decryptData(storedData) : null;
+// };
+// const removeUserFromCookie = (key = "manualUser") => Cookies.remove(key);
+
+// export const AuthContextProvider = ({ children }) => {
+//   const [user, setUser] = useState(null); // Firebase user
+//   const [ManualUser, setManualUser] = useState(null); // Manual login user
+//   const [loading, setLoading] = useState(true);
+
+//   // ----- Manual Login -----
+//   const loginUserManual = (userData, expiryMinutes = 30) => {
+//     const expireAt = new Date().getTime() + expiryMinutes * 60 * 1000;
+//     const dataWithExpiry = { ...userData, expireAt };
+//     setManualUser(dataWithExpiry);
+//     saveUserToCookie(dataWithExpiry, "manualUser");
+//   };
+
+//   const logOutUserManual = () => {
+//     setManualUser(null);
+//     removeUserFromCookie("manualUser");
+//   };
+
+//   // ----- Firebase Auth Functions -----
+//   const createUser = (email, password) => {
+//     setLoading(true);
+//     return createUserWithEmailAndPassword(auth, email, password);
+//   };
+
+//   const signInUser = (email, password) => {
+//     setLoading(true);
+//     return signInWithEmailAndPassword(auth, email, password);
+//   };
+
+//   const signOutUser = async () => {
+//     setLoading(true);
+//     await signOut(auth);
+//     setUser(null);
+//     removeUserFromSession();
+//     setLoading(false);
+//   };
+
+//   const updateUserProfile = async (user, name) => {
+//     await updateProfile(user, { displayName: name });
+//   };
+
+//   const googleSignIn = async () => {
+//     const provider = new GoogleAuthProvider();
+//     const result = await signInWithPopup(auth, provider);
+//     setUser(result.user);
+//     saveUserToSession(result.user);
+//   };
+
+//   const logOut = async () => {
+//     await signOut(auth);
+//     setUser(null);
+//     removeUserFromSession();
+//   };
+
+//   // ----- Auto Logout Timer for Manual User -----
+//   useEffect(() => {
+//     let timer;
+//     if (ManualUser?.expireAt) {
+//       const timeLeft = ManualUser.expireAt - new Date().getTime();
+//       if (timeLeft > 0) {
+//         timer = setTimeout(() => {
+//           logOutUserManual();
+//         }, timeLeft);
+//       } else {
+//         logOutUserManual();
+//       }
+//     }
+//     return () => clearTimeout(timer);
+//   }, [ManualUser]);
+
+//   // ----- Auto Logout Timer for Firebase User -----
+//   useEffect(() => {
+//     let firebaseTimer;
+//     if (user) {
+//       firebaseTimer = setTimeout(() => {
+//         logOut();
+//       }, 60 * 60 * 1000); // 1 hour auto logout
+//     }
+//     return () => clearTimeout(firebaseTimer);
+//   }, [user]);
+
+//   // ----- Auth State Listener -----
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+//       if (currentUser) {
+//         setUser(currentUser);
+//         saveUserToSession(currentUser);
+//       } else {
+//         setUser(null);
+//         removeUserFromSession();
+//       }
+//       setLoading(false);
+//     });
+
+//     // Load manual user from cookie
+//     const storedManualUser = getUserFromCookie("manualUser");
+//     if (storedManualUser) {
+//       const now = new Date().getTime();
+//       if (storedManualUser.expireAt > now) {
+//         setManualUser(storedManualUser);
+//       } else {
+//         removeUserFromCookie("manualUser");
+//       }
+//     }
+
+//     // Load Firebase user from session storage
+//     const storedUser = getUserFromSession();
+//     if (storedUser) setUser(storedUser);
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   return (
+//     <AuthContext.Provider
+//       value={{
+//         user,
+//         ManualUser,
+//         loginUserManual,
+//         logOutUserManual,
+//         loading,
+//         googleSignIn,
+//         logOut,
+//         createUser,
+//         signInUser,
+//         signOutUser,
+//         updateUserProfile,
+//       }}
+//     >
+//       {!loading && children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export const UserAuth = () => useContext(AuthContext);
+
+
+// Third attempt
 "use client";
+
 import { auth } from "../firebase/firebase.config";
 import { useContext, createContext, useState, useEffect } from "react";
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 import {
-    createUserWithEmailAndPassword,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    signOut,
-    updateProfile
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
 } from "firebase/auth";
 
 export const AuthContext = createContext();
+const SECRET_KEY = process.env.NEXT_PUBLIC_SECRET_KEY || "fallback_secret_key";
 
-const SECRET_KEY = "your_secret_key_here"; // Change to a secure key
-
-const encryptData = (data) => {
-    return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-};
+/* ---------- Encryption / Decryption ---------- */
+const encryptData = (data) =>
+  CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
 
 const decryptData = (cipherText) => {
-    try {
-        const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
-        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-    } catch {
-        return null;
-    }
+  try {
+    const bytes = CryptoJS.AES.decrypt(cipherText, SECRET_KEY);
+    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+  } catch {
+    return null;
+  }
 };
 
-// ---- Session Storage Functions (for firebase user) ----
-const saveUserToSession = (userData, key = "user") => {
-    sessionStorage.setItem(key, encryptData(userData));
-};
+/* ---------- Session Storage ---------- */
+const saveUserToSession = (userData, key = "user") =>
+  sessionStorage.setItem(key, encryptData(userData));
+
 const getUserFromSession = (key = "user") => {
-    const storedData = sessionStorage.getItem(key);
-    return storedData ? decryptData(storedData) : null;
-};
-const removeUserFromSession = (key = "user") => {
-    sessionStorage.removeItem(key);
+  const storedData = sessionStorage.getItem(key);
+  return storedData ? decryptData(storedData) : null;
 };
 
-// ---- Cookie Functions (for manual login user) ----
+const removeUserFromSession = (key = "user") => sessionStorage.removeItem(key);
+
+/* ---------- Cookie Functions ---------- */
 const saveUserToCookie = (userData, key = "manualUser") => {
-    Cookies.set(key, encryptData(userData), { expires: 7, secure: true });
+  Cookies.set(key, encryptData(userData), {
+    expires: 7,
+    secure: true,
+    sameSite: "Strict",
+  });
+  if (userData.email)
+    Cookies.set("user_email", userData.email, {
+      expires: 7,
+      secure: true,
+      sameSite: "Strict",
+    });
+  if (userData.name)
+    Cookies.set("user_name", userData.name, {
+      expires: 7,
+      secure: true,
+      sameSite: "Strict",
+    });
 };
+
 const getUserFromCookie = (key = "manualUser") => {
-    const storedData = Cookies.get(key);
-    return storedData ? decryptData(storedData) : null;
+  const storedData = Cookies.get(key);
+  return storedData ? decryptData(storedData) : null;
 };
+
 const removeUserFromCookie = (key = "manualUser") => {
-    Cookies.remove(key);
+  Cookies.remove(key);
+  Cookies.remove("user_email");
+  Cookies.remove("user_name");
 };
 
+/* ---------- Auth Context Provider ---------- */
 export const AuthContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [ManualUser, setManualUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null); // Firebase user
+  const [ManualUser, setManualUser] = useState(null); // Manual login user
+  const [loading, setLoading] = useState(true);
 
-    // Manual login (COOKIE storage)
-    const loginUserManual = (userData) => {
-        setManualUser(userData);
-        saveUserToCookie(userData, "manualUser");
-    };
-    const logOutUserManual = () => {
-        setManualUser(null);
-        removeUserFromCookie("manualUser");
-    };
+  /* ---------- Manual Login ---------- */
+  // const loginUserManual = (userData, expiryMinutes = 30) => {
+  //   const expireAt = new Date().getTime() + expiryMinutes * 60 * 1000;
+  //   const dataWithExpiry = { ...userData, expireAt };
+  //   setManualUser(dataWithExpiry);
+  //   saveUserToCookie(dataWithExpiry, "manualUser");
+  // };
 
-    // Firebase functions
-    const createUser = (email, password) => {
-        setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
-    };
-    const signInUser = (email, password) => {
-        setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password);
-    };
-    const signOutUser = async () => {
-        setLoading(true);
-        await signOut(auth);
+  const loginUserManual = (userData) => {
+    const expireAt = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours
+    const dataWithExpiry = { ...userData, expireAt };
+    setManualUser(dataWithExpiry);
+    saveUserToCookie(dataWithExpiry, "manualUser");
+  };
+
+
+  const logOutUserManual = () => {
+    setManualUser(null);
+    removeUserFromCookie("manualUser");
+  };
+
+  /* ---------- Firebase Auth ---------- */
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const signInUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const updateUserProfile = async (user, name) => {
+    await updateProfile(user, { displayName: name });
+  };
+
+  const googleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    setUser(result.user);
+    saveUserToSession(result.user);
+    return result;
+  };
+
+  /* ---------- Unified Logout ---------- */
+  const logoutAll = async () => {
+    try {
+      // Firebase logout
+      await signOut(auth);
+
+      // Clear both manual + firebase states
+      setUser(null);
+      setManualUser(null);
+
+      removeUserFromSession();
+      removeUserFromCookie();
+
+      // Also clear extra storage
+      sessionStorage.removeItem("manualUser");
+      localStorage.removeItem("blog_draft");
+      localStorage.removeItem("blogDraft");
+
+    } catch (err) {
+      console.error("Error during logout:", err);
+    }
+  };
+
+  // Auto Logout for Manual User
+  useEffect(() => {
+    let timer;
+    if (ManualUser?.expireAt) {
+      const timeLeft = ManualUser.expireAt - Date.now();
+      if (timeLeft > 0) {
+        timer = setTimeout(() => {
+          logoutAll();  // instead of only logOutUserManual
+        }, timeLeft);
+      } else {
+        logoutAll();
+      }
+    }
+    return () => clearTimeout(timer);
+  }, [ManualUser]);
+
+  // Auto Logout for Firebase User (24h)
+  useEffect(() => {
+    let firebaseTimer;
+    if (user) {
+      firebaseTimer = setTimeout(() => {
+        logoutAll();
+      }, 24 * 60 * 60 * 1000); // 24 hours
+    }
+    return () => clearTimeout(firebaseTimer);
+  }, [user]);
+
+  /* ---------- Firebase Auth State Listener ---------- */
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        saveUserToSession(currentUser);
+      } else {
         setUser(null);
         removeUserFromSession();
-        setLoading(false);
-    };
-    const updateUserProfile = async (user, name) => {
-        await updateProfile(user, { displayName: name });
-    };
-    const googleSignIn = async () => {
-        const provider = new GoogleAuthProvider();
-        const result = await signInWithPopup(auth, provider);
-        setUser(result.user);
-        saveUserToSession(result.user);
-    };
-    const logOut = async () => {
-        await signOut(auth);
-        setUser(null);
-        removeUserFromSession();
-    };
 
-    // Auth state listener
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                setUser(currentUser);
-                saveUserToSession(currentUser);
-            } else {
-                setUser(null);
-                removeUserFromSession();
-            }
-            setLoading(false);
-        });
+      }
+      setLoading(false);
+    });
 
-        // Load from storage
-        const storedUser = getUserFromSession();
-        if (storedUser) setUser(storedUser);
+    // Load manual user
+    const storedManualUser = getUserFromCookie("manualUser");
+    if (storedManualUser && storedManualUser.expireAt > new Date().getTime()) {
+      setManualUser(storedManualUser);
+    } else {
+      removeUserFromCookie("manualUser");
+    }
 
-        const storedManualUser = getUserFromCookie("manualUser");
-        if (storedManualUser) setManualUser(storedManualUser);
+    // Load Firebase user
+    const storedUser = getUserFromSession();
+    if (storedUser) setUser(storedUser);
 
-        return () => unsubscribe();
-    }, []);
+    return () => unsubscribe();
+  }, []);
 
-    return (
-        <AuthContext.Provider value={{
-            user, ManualUser, loginUserManual, logOutUserManual, loading,
-            googleSignIn, logOut, createUser, signInUser, signOutUser, updateUserProfile
-        }}>
-            {!loading && children}
-        </AuthContext.Provider>
-    );
+  /* ---------- Combined Logged-In User ---------- */
+  const loggedInUser = ManualUser || user;
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user, // Firebase user
+        ManualUser, // Manual user
+        loggedInUser, //  unified user object
+        loginUserManual,
+        logOutUserManual,
+        loading,
+        googleSignIn,
+        logoutAll, //  single logout
+        createUser,
+        signInUser,
+        updateUserProfile,
+      }}
+    >
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };
 
-export const UserAuth = () => {
-    return useContext(AuthContext);
-};
+export const UserAuth = () => useContext(AuthContext);

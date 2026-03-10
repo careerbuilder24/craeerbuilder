@@ -20,7 +20,7 @@ import useRegistered from "@/hooks/useRegistered";
 
 export default function Navbar() {
   const router = useRouter();
-  const { user, logOut, ManualUser } = UserAuth();
+  const { user, logoutAll, ManualUser } = UserAuth();
   const [userProfile, setUserProfile] = useState(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isTopBarVisible, setIsTopBarVisible] = useState(true);
@@ -30,6 +30,19 @@ export default function Navbar() {
   const [register] = useRegistered();
 
 
+
+  // Determine which user is logged in
+  const loggedInUser = ManualUser || user || null;
+
+  const userName = ManualUser?.name
+    || user?.displayName
+    || user?.email?.split("@")[0]
+    || "User";
+
+  const userPhoto = ManualUser?.photoURL
+    || user?.photoURL
+    || userProfile?.photo_url
+    || userIcon;
 
 
 
@@ -61,9 +74,25 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  // const handleSignOut = async () => {
+  //   try {
+  //     await logOut();
+  //     sessionStorage.removeItem("manualUser");
+  //     Cookies.remove("manualUser");
+  //     localStorage.removeItem("blog_draft");
+  //     localStorage.removeItem("blogDraft");
+  //     setUserProfile(null);
+
+  //     window.location.replace("/log_in");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+
   const handleSignOut = async () => {
     try {
-      await logOut();
+      await logoutAll();
       sessionStorage.removeItem("manualUser");
       Cookies.remove("manualUser");
       localStorage.removeItem("blog_draft");
@@ -71,10 +100,17 @@ export default function Navbar() {
       setUserProfile(null);
 
       window.location.replace("/log_in");
+      await logoutAll();
+      localStorage.removeItem("blog_draft");
+      localStorage.removeItem("blogDraft");
+      setUserProfile(null);
+      router.push("/log_in"); // better than window.location.replace
     } catch (error) {
       console.log(error);
     }
   };
+
+
 
   // const handleDashboardRedirect = () => {
   //   router.push("/DashBoard/Student");
@@ -110,7 +146,7 @@ export default function Navbar() {
       router.push(`/DashBoard/Student?email=${encodeURIComponent(emailFromCookie)}`);
     }
   };
-
+  // console.log(user?.photoURL)
 
   return (
     <header className="fixed top-0 w-full z-30 transition-all duration-300">
@@ -250,7 +286,7 @@ export default function Navbar() {
         </div>
 
         {/* User Profile */}
-        <div className="flex items-center space-x-3">
+        {/* <div className="flex items-center space-x-3">
           {ManualUser ? (
             <div className="relative group">
               <div className="flex justify-center items-center text-white gap-2 cursor-pointer">
@@ -266,6 +302,56 @@ export default function Navbar() {
                   className="rounded-full"
                 />
                 <p className="hidden lg:block text-sm">{ManualUser.name}</p>
+              </div>
+
+            
+              <div className="hidden group-hover:block absolute right-0 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                <Link
+                  href="/Pro_file"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                >
+                  Profile
+                </Link>
+
+                <button
+                  onClick={handleDashboardRedirect}
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                >
+                  Dashboard
+                </button>
+
+                <button
+                  onClick={handleSignOut}
+                  className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Link
+              href="/log_in"
+              className="text-white hover:text-blue-400 font-medium text-sm"
+            >
+              Login
+            </Link>
+          )}
+        </div> */}
+
+        {/* User Profile */}
+        <div className="flex items-center space-x-3">
+          {loggedInUser ? (
+            <div className="relative group">
+              <div className="flex justify-center items-center text-white gap-2 cursor-pointer">
+                <Image
+                  src={userPhoto}
+                  alt="User"
+                  width={36}
+                  height={36}
+                  className="rounded-full"
+                  unoptimized
+                />
+                <p className="hidden lg:block text-sm">{userName}</p>
               </div>
 
               {/* Dropdown Menu */}
@@ -301,6 +387,7 @@ export default function Navbar() {
             </Link>
           )}
         </div>
+
       </nav>
 
       {/* Mobile Dropdown Menu */}

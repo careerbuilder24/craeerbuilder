@@ -21,7 +21,8 @@ import Image from 'next/image';
 import Head from 'next/head';
 import StudentsAdded from '../Students_Dashboards_Components/Admin/Students_Added/StudentsAdded';
 import CourseAdded from '../Students_Dashboards_Components/Admin/Course_Added/CourseAdded';
-import UniversityBioDataAdded from '../Students_Dashboards_Components/Admin/University_BioData_Added/UniversityBioDataAdded';
+// import UniversityBioDataAdded from '../Students_Dashboards_Components/Admin/University_BioData_Added/UniversityBioDataAdded';
+import AllStudentAdmin from '../Students_Dashboards_Components/Admin/AllStudentAdmin/AllStudentAdmin';
 import CareerGuideBlogAdded from '../Students_Dashboards_Components/Admin/Career_Guide_Blog_Added/CareerGuideBlogAdded';
 import FAQAdded from '../Students_Dashboards_Components/Admin/FAQ_Added/FAQAdded';
 import AboutUsAdded from '../Students_Dashboards_Components/Admin/About_Us_Added/AboutUsAdded';
@@ -68,9 +69,9 @@ const adminSectionIcons = {
   Manage_Users: <FiUsers />,
   Course_Added: <FiBookOpen />,
   Gallery_Added: <FiImage />,
-  University_Added: <FiGlobe />,
+  // University_Added: <FiGlobe />,
   // Career_Guide_Blog: <FiFileText />,
-  Published_Post: <FiMessageSquare />,
+  // Published_Post: <FiMessageSquare />,
   FAQ_Added: <FiHelpCircle />,
   About_Us_Added: <FiInfo />,
   Contact_Us_Added: <FiPhone />
@@ -102,9 +103,28 @@ import { IoNotificationsSharp } from 'react-icons/io5';
 import { IoMdHome } from 'react-icons/io';
 import useRegistered from '@/hooks/useRegistered';
 import { HiOutlineArrowLeftEndOnRectangle } from 'react-icons/hi2';
-import ProfileEdit from '../Students_Dashboards_Components/ProfileEdit/ProfileEdit';
+import CvEdit from '../Students_Dashboards_Components/CvEdit/CvEdit';
 import useStudentEditProfile from '@/hooks/useStudentEditProfile';
 import { TfiWorld } from 'react-icons/tfi';
+import AllUniversity from '../Students_Dashboards_Components/Admin/AllUniversity/AllUniversity';
+import AddedUniversity from '../Students_Dashboards_Components/Admin/AddedUniversity/AddedUniversity';
+import RunningStudentAdmin from '../Students_Dashboards_Components/Admin/RunningStudentAdmin/RunningStudentAdmin';
+import RunningInternAdmin from '../Students_Dashboards_Components/Admin/RunningInternAdmin/RunningInternAdmin';
+import EmployedStudent from '../Students_Dashboards_Components/Admin/EmployedStudent/EmployedStudent';
+import CircularJobAdmin from '../Students_Dashboards_Components/Admin/CircularJobAdmin/CircularJobAdmin';
+import ALLJobs from '../Students_Dashboards_Components/Admin/ALLJobs/ALLJobs';
+import JobApplicant from '../Students_Dashboards_Components/Admin/JobApplicant/JobApplicant';
+import AddUniversity from '../Students_Dashboards_Components/Admin/AddAbroadUniversity/AddAbroadUniversity';
+import AddAbroadUniversity from '../Students_Dashboards_Components/Admin/AddAbroadUniversity/AddAbroadUniversity';
+import AllAddAbroadUniversity from '../Students_Dashboards_Components/Admin/AllAddAbroadUniversity/AllAddAbroadUniversity';
+import AllJobApplicant from '../Students_Dashboards_Components/Admin/AllAbroadUniversityApplicant/AllAbroadUniversityApplicant';
+import AllAbroadUniversityApplicant from '../Students_Dashboards_Components/Admin/AllAbroadUniversityApplicant/AllAbroadUniversityApplicant';
+import ApprovedApplicationAbroadUniversity from '../Students_Dashboards_Components/Admin/ApprovedApplicationAbroadUniversity/ApprovedApplicationAbroadUniversity';
+import DenyApplicationAbroadUniversity from '../Students_Dashboards_Components/Admin/DenyApplicationAbroadUniversity/DenyApplicationAbroadUniversity';
+import PendingApplicationAbroadUniversity from '../Students_Dashboards_Components/Admin/PendingApplicationAbroadUniversity/PendingApplicationAbroadUniversity';
+import AddLanguageCourse from '../Students_Dashboards_Components/Admin/AddLuageCourse/AddLanguageCourse';
+import AddedAllLanguageCourses from '../Students_Dashboards_Components/Admin/AddedAllLanguageCourses/AddedAllLanguageCourses';
+
 
 
 const PageContent = () => {
@@ -115,9 +135,14 @@ const PageContent = () => {
 
 
 
+
   console.log(firstUser)  // "Admin"
   const [studentEditProfile] = useStudentEditProfile();
 
+  const { ManualUser } = UserAuth();
+  const matchedProfile = studentEditProfile?.data?.find(
+    (profile) => profile.email === ManualUser?.email
+  );
 
 
   //  console.log(register?.data?.[0]?.role); 
@@ -125,7 +150,7 @@ const PageContent = () => {
 
   const sections = [
     // { key: "Enroll Course", icon: <BsPersonFillCheck />, label: "Enroll Course", uploadedKey: "Enroll_Course" },
-    { key: "courses", icon: <RiGraduationCapFill />, label: "Courses", uploadedKey: "UploadedCourses" },
+    { key: "courses", icon: <RiGraduationCapFill />, label: "Completed Courses", uploadedKey: "UploadedCourses" },
     { key: "portfolio", icon: <BsPersonVcard />, label: "Portfolio", uploadedKey: "UploadedPortfolio" },
     { key: "certificate", icon: <PiCertificateFill />, label: "Certificate", uploadedKey: "UploadedCertificate" },
     { key: "picture", icon: <AiFillPicture />, label: "Picture", uploadedKey: "UploadedPicture" },
@@ -133,18 +158,18 @@ const PageContent = () => {
 
   ];
   const sidebarMenu = [
-    {
-      label: "Page",
-      icon: <FiFileText />,
-      children: [
-        { label: "Create Page", key: "Create_Page" },
-        { label: "All Page", key: "All_Page" },
-        { label: "Page Category", key: "PageCategory" },
-        { label: "Main Page", key: "MainPage" },
-        { label: "Sub Page", key: "SubPage" },
-        { label: "Sub-Sub Page", key: "SubSubPage" }
-      ]
-    },
+    // {
+    //   label: "Page",
+    //   icon: <FiFileText />,
+    //   children: [
+    //     { label: "Create Page", key: "Create_Page" },
+    //     { label: "All Page", key: "All_Page" },
+    //     { label: "Page Category", key: "PageCategory" },
+    //     { label: "Main Page", key: "MainPage" },
+    //     { label: "Sub Page", key: "SubPage" },
+    //     { label: "Sub-Sub Page", key: "SubSubPage" }
+    //   ]
+    // },
     {
       label: "Blogs",
       icon: <FiMessageCircle />,
@@ -162,23 +187,23 @@ const PageContent = () => {
         { label: "All Courses", key: "All_Course" }
       ]
     },
-    {
-      label: "Category",
-      icon: <FiLayers />,
-      children: [
-        { label: "Create Category", key: "CreateCategory" },
-        { label: "All Categories", key: "AllCategories" }
-      ]
-    },
+    // {
+    //   label: "Category",
+    //   icon: <FiLayers />,
+    //   children: [
+    //     { label: "Create Category", key: "CreateCategory" },
+    //     { label: "All Categories", key: "AllCategories" }
+    //   ]
+    // },
     {
       label: "Student",
       icon: <FiUsers />,
       children: [
         { label: "Add Student", key: "Add_Student" },
-        { label: "Running Students", key: "RunningStudents" },
-        { label: "Intern Students", key: "InternStudents" },
-        { label: "Employed Students", key: "EmployedStudents" },
-        { label: "All Students", key: "All_Students" }
+        { label: "Running Students", key: "RunningStudentAdmin" },
+        { label: "Intern Students", key: "RunningInternAdmin" },
+        { label: "Employed Students", key: "EmployedStudent" },
+        { label: "All Students", key: "AllStudentAdmin" }
       ]
     },
     {
@@ -216,20 +241,20 @@ const PageContent = () => {
       icon: <FiGlobe />,
       badgeCount: 3, // <- add this
       children: [
-        { label: "Add University", key: "AddUniversity" },
-        { label: "All Universities", key: "AllUniversities" }
+        { label: "Add University", key: "AddedUniversity" },
+        { label: "All Universities", key: "AllUniversity" }
       ]
     },
     {
       label: "Study Abroad",
       icon: <FiTrendingUp />,
       children: [
-        { label: "Add University", key: "SA_AddUniversity" },
-        { label: "Candidate Application", key: "SA_CandidateApp" },
-        { label: "Pending Application", key: "SA_PendingApp" },
-        { label: "Approved Application", key: "SA_ApprovedApp" },
-        { label: "Rejected Application", key: "SA_RejectedApp" },
-        { label: "All Universities", key: "SA_AllUniversities" }
+        { label: "Add University", key: "AddAbroadUniversity" },
+        { label: "Candidate Application", key: "AllAbroadUniversityApplicant" },
+        { label: "Pending Application", key: "PendingApplicationAbroadUniversity" },
+        { label: "Approved Application", key: "ApprovedApplicationAbroadUniversity" },
+        { label: "Rejected Application", key: "DenyApplicationAbroadUniversity" },
+        { label: "All Universities", key: "AllAddAbroadUniversity" }
       ]
     },
     {
@@ -252,16 +277,16 @@ const PageContent = () => {
       icon: <FiBook />,
       children: [
         { label: "Add Language Course", key: "AddLanguageCourse" },
-        { label: "All Language Courses", key: "AllLanguageCourses" }
+        { label: "All Language Courses", key: "AddedAllLanguageCourses" }
       ]
     },
     {
       label: "Job Circular",
       icon: <FiBriefcase />,
       children: [
-        { label: "Circular Job", key: "CircularJob" },
-        { label: "Job Applicants", key: "JobApplicants" },
-        { label: "All Jobs", key: "AllJobs" }
+        { label: "Circular Job", key: "CircularJobAdmin" },
+        { label: "Job Applicants", key: "JobApplicant" },
+        { label: "All Jobs", key: "ALLJobs" }
       ]
     }
   ];
@@ -302,7 +327,7 @@ const PageContent = () => {
   }, [openSections, sections]);
   // state managements
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState(null);
   const dropdownRefs = useRef({});
 
 
@@ -312,7 +337,7 @@ const PageContent = () => {
 
 
 
-  const { ManualUser } = UserAuth();
+  console.log(matchedProfile)
   const { userAdmin } = usersAdmin();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -323,10 +348,10 @@ const PageContent = () => {
     'Manage_Users',
     // 'Course_Added',
     // 'Gallery_Added',
-    'University_Added',
+    // 'University_Added',
     // 'Career_Guide_Blog',
-    "Profile_Edit",
-    'Published_Post',
+    // "Profile_Edit",
+    // 'Published_Post',
     'FAQ_Added',
     'About_Us_Added',
     'Contact_Us_Added',
@@ -370,43 +395,54 @@ const PageContent = () => {
 
 
 
-  // Set default section based on role
   useEffect(() => {
-    if (!userAdmin || !ManualUser) return;
+    if (!userAdmin?.length || !ManualUser?.email) return; // wait until both loaded
+    if (userRole) return;
 
-    const isAdmin = userAdmin.some(admin =>
-      admin?.email?.toLowerCase() === ManualUser.email?.toLowerCase() &&
-      admin?.role?.toLowerCase() === 'admin'
-    );
+    const isAdmin = userAdmin.some(admin => {
+      const adminEmail = admin?.email?.trim().toLowerCase();
+      const manualEmail = ManualUser.email?.trim().toLowerCase();
+      const role = admin?.role?.trim().toLowerCase();
+      return adminEmail === manualEmail && role === "admin";
+    });
+
+    const sectionParam = searchParams.get("section");
 
     if (isAdmin) {
-      setUserRole("Admin");   //  exact string match
-      setActiveSection("AdminWelcomePage");
+      setUserRole("Admin");
+      setActiveSection(sectionParam || "AdminWelcomePage");
     } else {
-      setUserRole("Student"); //  not "user", use "Student"
-      setActiveSection("Welcome_Page");
+      setUserRole("Student");
+      setActiveSection(sectionParam || "dashboard");
     }
-  }, [userAdmin, ManualUser]);
+  }, [userAdmin, ManualUser, searchParams, userRole]);
 
 
 
 
 
 
-
-
-
-
-
-  // While loading role, render nothing (no flicker)
+  // While determining role, show loader (prevents flicker)
   if (userRole === null) {
     return (
-      <div className="flex flex-col justify-center items-center h-screen text-lg font-semibold ">
-        <span className='text-red-500 text-3xl'> You have no Access to see this page </span>
-        <Link className='p-5 bg-blue-500 rounded-md text-white' href={'/'}>Back to home</Link>
+      <div className="flex flex-col justify-center items-center h-screen text-lg font-semibold">
+        {/* <span className="text-red-500 text-2xl animate-pulse">You have no Access to see this page</span>
+        <Link className='p-5 bg-blue-500 rounded-md text-white' href={'/'}>Back to home</Link> */}
+
+        <p className='text-blue-500'>Loading...</p>
       </div>
     );
   }
+
+  // If user has no role after load (not Admin or Student)
+  // if (userRole !== "Admin" && userRole !== "Student") {
+  //   return (
+  //     <div className="flex flex-col justify-center items-center h-screen text-lg font-semibold ">
+  //       <span className='text-red-500 text-3xl'> You have no Access to see this page </span>
+  //       <Link className='p-5 bg-blue-500 rounded-md text-white' href={'/'}>Back to home</Link>
+  //     </div>
+  //   );
+  // }
 
 
 
@@ -537,7 +573,7 @@ const PageContent = () => {
 
 
           <div
-            className={`sidebar ${isSidebarOpen ? 'open' : ''} bg-[#222222]   text-white h-screen overflow-y-auto `}
+            className={`sidebar ${isSidebarOpen ? 'open' : ''} bg-[#222222] text-white h-screen overflow-y-scroll scrollbar-hide`}
           >
             <button
               className="w-full text-left p-2 hover:bg-red-500"
@@ -578,27 +614,40 @@ const PageContent = () => {
                 <IoMdHome className="hover:bg-blue-100 hover:text-blue-700 text-xl" />
                 Visit Website
               </Link>
-
               <li
                 onClick={() => {
                   const matchedProfile = studentEditProfile?.data?.find(
                     (profile) => profile.email === ManualUser?.email
                   );
                   if (matchedProfile) {
-                    router.push(
-                      `/${matchedProfile.category}/${matchedProfile.id}?tab=profile&email=${matchedProfile.email}`
-                    );
+                    // Create slug: lowercase, spaces → dashes, special chars removed
+                    const urlName = matchedProfile.name
+                      ? matchedProfile.name.trim().toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "")
+                      : "no-name";
+
+                    // Combine name + id into ONE slug
+                    router.push(`/profile/${urlName}-${matchedProfile.id}?tab=profile`);
                   } else {
                     router.push("/"); // fallback
                   }
                 }}
                 className="px-2 flex items-center gap-3 cursor-pointer hover:bg-blue-100 hover:text-blue-800 rounded"
               >
-                <TfiWorld className='hover:bg-blue-100 hover:text-blue-700' />
-
-
+                <TfiWorld className="hover:bg-blue-100 hover:text-blue-700" />
                 Visit Profile
               </li>
+
+
+
+              <li
+                onClick={() => handleSectionClick('Enroll_Course')}
+                className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
+              >
+                <BsPersonFillCheck className='   hover:bg-blue-100 hover:text-blue-700   ' />
+                Enroll Course
+              </li>
+
+
 
               <li
                 onClick={() => handleSectionClick('Profile')}
@@ -612,14 +661,14 @@ const PageContent = () => {
                 className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
               >
                 <MdOutlineSystemUpdateAlt className='   hover:bg-blue-100 hover:text-blue-700   ' />
-                CV Update
+                Cv Generate
               </li>
               <li
-                onClick={() => handleSectionClick('Enroll_Course')}
+                onClick={() => handleSectionClick('CvEdit')}
                 className="px-2 flex items-center gap-3  cursor-pointer     hover:bg-blue-100 hover:text-blue-800  rounded"
               >
-                <BsPersonFillCheck className='   hover:bg-blue-100 hover:text-blue-700   ' />
-                Enroll Course
+                <MdOutlineSystemUpdateAlt className='   hover:bg-blue-100 hover:text-blue-700   ' />
+                My Cv 
               </li>
 
 
@@ -627,38 +676,29 @@ const PageContent = () => {
               {sections.map(({ key, label, icon, uploadedKey }) => {
                 const isOpen = !!openSections[key];
                 return (
-                  <div
-                    key={key}
-                    className=" bg-[#222222] rounded my-5"
-                  >
+                  <div key={key} className="bg-[#222222] rounded my-5">
                     <div
                       onClick={() => {
                         toggleSection(key);
-                        handleSectionClick(key);  // Important for middle content load
+                        handleSectionClick(key);
                       }}
-                      className="flex items-center justify-between px-2  cursor-pointer   hover:bg-blue-100 hover:text-blue-800 rounded"
+                      className="flex items-center justify-between px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-800 rounded"
                     >
-
                       <span className="flex items-center gap-2">
                         {icon}
-                        <p>{label}</p>
+                        <p className="whitespace-nowrap">{label}</p>
                       </span>
-                      {isOpen ? (
-                        <FiChevronDown />
-                      ) : (
-                        <FiChevronRight />
-                      )}
+                      {isOpen ? <FiChevronDown /> : <FiChevronRight />}
                     </div>
-                    {/* text-[#DCDCDE] */}
                     <div
                       ref={(el) => (contentRefs.current[key] = el)}
                       className="overflow-hidden transition-all duration-500 ease-in-out"
                       style={{ maxHeight: "0px" }}
                     >
-                      <ul className=" ">
+                      <ul>
                         <li
                           onClick={() => handleSectionClick(uploadedKey)}
-                          className="px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded  "
+                          className="px-2 cursor-pointer hover:bg-blue-100 hover:text-blue-700 rounded"
                         >
                           Uploaded {label}
                         </li>
@@ -667,6 +707,7 @@ const PageContent = () => {
                   </div>
                 );
               })}
+
 
               <li
                 onClick={() => handleSectionClick('Videos')}
@@ -694,10 +735,10 @@ const PageContent = () => {
 
             </ul>
 
-            <div className=" relative bottom-0 lg:mt-36 md:mt-36 ">
+            <div className=" relative bottom-0 lg:mt-28 md:mt-36 ">
               <Link
                 href="/"
-                className="flex items-center justify-center gap-2 font-bold p-10 bg-[#17549A] py-2 hover:bg-blue-100 hover:text-blue-700 rounded duration-300 ease-in-out"
+                className="flex items-center justify-center gap-2 font-bold p-5 bg-[#17549A] py-2 hover:bg-blue-100 hover:text-blue-700 rounded duration-300 ease-in-out"
               >
                 <HiOutlineArrowLeftEndOnRectangle className='text-2xl ' />
                 Back Home
@@ -711,98 +752,93 @@ const PageContent = () => {
 
 
   const renderActiveSection = () => {
-    // admin side dashboard
-    if (userRole === 'Admin') {
+    if (userRole === null) {
+      return (
+        <div className="flex flex-col justify-center items-center h-screen text-lg font-semibold">
+          <span className="text-blue-500 text-2xl animate-pulse">
+            Loading Sidebar...
+          </span>
+        </div>
+      );
+    }
+
+    if (userRole === "Admin") {
       switch (activeSection) {
-        case 'Create_Page':
-          return <Create_Page />;
-        case 'All_Page':
-          return <All_Page />;
-        case 'Students_Added':
-          return <StudentsAdded />;
-        case 'pohelaboishakImage':
-          return <PohelaBoishakhImage />;
-        case 'EidUlFitre':
-          return <EidUlFitre />;
-        case 'EidUlAdha':
-          return <EidUlAdha />;
-        case 'UploadCharityImage':
-          return <UploadCharityImage />;
-        case 'News':
-          return <News />;
-        case 'AllPhoto':
-          return <AllPhoto />;
-        case 'OrientationImage':
-          return <OrientationImage />;
-        case 'AdminCertificationImage':
-          return <AdminCertificationImage />;
-        case 'AwardsGiving':
-          return <AwardsGiving />;
-        case 'University_Added':
-          return <UniversityBioDataAdded />;
-        case 'Create_Post':
-          return <CareerGuideBlogAdded />;
-        case 'Create_Course':
-          return <CourseAdded />;
-        case 'All_Course':
-          return <AllCourse />;
-        case 'All_Posts':
-          return <PublishedPost />;
-        case 'FAQ_Added':
-          return <FAQAdded />;
-        case 'About_Us_Added':
-          return <AboutUsAdded />;
-        case 'Contact_Us_Added':
-          return <ContactUsAdded />;
-        case 'Manage_Users':
-          return <ManageUsers />;
-        case 'Add_Student':
-          return <Add_Students />;
-        default: return <AdminWelcomePage />;
-      }
-    } else {
-      switch (activeSection) {
-        // student side dashboard components
-        case 'Profile':
-          return <Profile />;
-        case 'Profile_Edit':
-          return <ProfileEdit />;
-        case 'CvUpdate':
-          return <CvUpload />;
-        case 'dashboard':
-          return <Welcome_Page />;
-        case 'Enroll_Course':
-          return <StudentEnrollCourse />;
-        case 'Achivements':
-          return <Achivements />;
-        case 'UploadedCourses':
-          return <UploadedCourses />;
-        case 'UploadedAchievements':
-          return <UploadedAchievements />;
-        case 'portfolio':
-          return <StudentsPortfolioEdit />;
-        case 'UploadedPortfolio':
-          return <UploadedPortfolio />;
-        case 'courses':
-          return <StudentsCourses />;
-        case 'certificate':
-          return <Certificate />;
-        case 'UploadedCertificate':
-          return <UploadedCertificate />;
-        case 'picture':
-          return <PicturesEdits />;
-        case 'UploadedPicture':
-          return <UploadedPicture />;
-        case 'Videos':
-          return <VideosEdits />;
-        case 'Blog':
-          return <BlogsEditsStudents />;
-        case 'AllBlogs':
-          return <AllBlogs />;
-        default: return <Welcome_Page />;
+        // case "Create_Page": return <Create_Page />;
+        // case "All_Page": return <All_Page />;
+        case "Students_Added": return <StudentsAdded />;
+        case "AllStudentAdmin": return <AllStudentAdmin />;
+        case "RunningStudentAdmin": return <RunningStudentAdmin />;
+        case "RunningInternAdmin": return <RunningInternAdmin />;
+        case "EmployedStudent": return <EmployedStudent />;
+        case "pohelaboishakImage": return <PohelaBoishakhImage />;
+        case "EidUlFitre": return <EidUlFitre />;
+        case "EidUlAdha": return <EidUlAdha />;
+        case "UploadCharityImage": return <UploadCharityImage />;
+        case "News": return <News />;
+        case "AllPhoto": return <AllPhoto />;
+        case "OrientationImage": return <OrientationImage />;
+        case "AdminCertificationImage": return <AdminCertificationImage />;
+        case "AwardsGiving": return <AwardsGiving />;
+        // case "University_Added": return <UniversityBioDataAdded />;
+        case "AddedUniversity": return <AddedUniversity />;
+        case "AllUniversity": return <AllUniversity />;
+        case "AddAbroadUniversity": return <AddAbroadUniversity />;
+        case "AllAddAbroadUniversity": return <AllAddAbroadUniversity />;
+        case "AddLanguageCourse": return <AddLanguageCourse />;
+        case "AddedAllLanguageCourses": return <AddedAllLanguageCourses />;
+        case "CircularJobAdmin": return <CircularJobAdmin />;
+        case "JobApplicant": return <JobApplicant/>;
+        case "AllAbroadUniversityApplicant": return <AllAbroadUniversityApplicant/>;
+        case "ApprovedApplicationAbroadUniversity": return <ApprovedApplicationAbroadUniversity/>;
+        case "DenyApplicationAbroadUniversity": return <DenyApplicationAbroadUniversity/>;
+        case "PendingApplicationAbroadUniversity": return <PendingApplicationAbroadUniversity/>;
+        case "ALLJobs": return <ALLJobs />;
+        case "Create_Post": return <CareerGuideBlogAdded />;
+        case "Create_Course": return <CourseAdded />;
+        case "All_Course": return <AllCourse />;
+        case "All_Posts": return <PublishedPost />;
+        case "FAQ_Added": return <FAQAdded />;
+        case "About_Us_Added": return <AboutUsAdded />;
+        case "Contact_Us_Added": return <ContactUsAdded />;
+        case "Manage_Users": return <ManageUsers />;
+        case "Add_Student": return <Add_Students />;
+        default: return <AdminWelcomePage />; //  Show welcome page initially
+
+
       }
     }
+
+    if (userRole === "Student") {
+      switch (activeSection) {
+        case "Profile": return <Profile />;
+        case "CvUpdate": return <CvUpload />;
+        case "CvEdit": return <CvEdit />;
+        case "dashboard": return <Welcome_Page />;
+        case "Enroll_Course": return <StudentEnrollCourse />;
+        case "Achivements": return <Achivements />;
+        case "UploadedCourses": return <UploadedCourses />;
+        case "UploadedAchievements": return <UploadedAchievements />;
+        case "portfolio": return <StudentsPortfolioEdit />;
+        case "UploadedPortfolio": return <UploadedPortfolio />;
+        case "courses": return <StudentsCourses />;
+        case "certificate": return <Certificate />;
+        case "UploadedCertificate": return <UploadedCertificate />;
+        case "picture": return <PicturesEdits />;
+        case "UploadedPicture": return <UploadedPicture />;
+        case "Videos": return <VideosEdits />;
+        case "Blog": return <BlogsEditsStudents />;
+        case "AllBlogs": return <AllBlogs />;
+        default: return <Welcome_Page />; //  Show welcome page initially
+
+
+      }
+    }
+
+    return null;
   };
+
+
 
   return (
     <>

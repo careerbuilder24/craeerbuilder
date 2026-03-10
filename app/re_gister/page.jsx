@@ -4,6 +4,7 @@ import Navbar from '../(with-navbar)/componenets/Navbar/Navbar';
 import { SiGmail } from 'react-icons/si';
 import gmailimg from '../../assets/gml.PNG'
 import gmailwrite from '../../assets/googleWrite.png'
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Link from 'next/link';
 import './re_gister.css';
 import Footer from '../(with-navbar)/componenets/Footer/Footer';
@@ -25,6 +26,9 @@ export default function Login() {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);  // Track loading state
   const router = useRouter();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 
 
@@ -139,9 +143,9 @@ export default function Login() {
             </div>
 
             {/* Password field */}
-            <div className='w-full '>
+            <div className='w-full relative'>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder='Password'
                 className={`w-full p-2 border rounded ${errors.password ? 'border-red-500' : 'border-gray-300'}`}
                 {...register("password", {
@@ -153,13 +157,35 @@ export default function Login() {
                   },
                 })}
               />
+              <div className="absolute right-2 top-2 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </div>
               <div className="h-5">
                 {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
               </div>
             </div>
 
+            <div className='w-full relative'>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder='Confirm Password'
+                className={`w-full p-2 border rounded ${errors.confirmPassword ? 'border-red-500' : 'border-gray-300'}`}
+                {...register("confirmPassword", {
+                  required: "Confirm password is required",
+                  validate: (value, formValues) =>
+                    value === formValues.password || "Passwords do not match",
+                })}
+              />
+              <div className="absolute right-2 top-2 cursor-pointer" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                {showConfirmPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </div>
+              <div className="h-5">
+                {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
+              </div>
+            </div>
 
-         
+
+
 
             <button type="submit" className='bg-blue-500 w-full h-10 rounded-md  hover:bg-[#17549A] ease-in-out duration-300 text-white'>Sign Up</button>
 

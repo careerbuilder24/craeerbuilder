@@ -1,8 +1,63 @@
-
 .input {
   @apply border border-gray-300 rounded-md px-2 py-2 w-full;
 }
 
 .section-title {
   @apply text-xl font-bold border-b border-gray-300 pb-1 mb-3 text-blue-800;
+}
+
+/* Hide everything except the form when printing */
+@media print {
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  form, form * {
+    visibility: visible;
+  }
+
+  form {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0.5in !important; /* safe margin */
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: white !important;
+    page-break-inside: avoid;
+  }
+
+  /* Fit content to a single A4 page */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Hide interactive controls */
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+
+  /* Remove icons */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none !important;
+    -webkit-appearance: none;
+  }
+  select {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-image: none !important;
+  }
 }

@@ -671,5 +671,47 @@
     "location": "",
     "image": "https://i.postimg.cc/PrNJwnsg/insta10.avif",
     "pdfUrl": "/cv/dmk2.pdf"
+  },
+  {
+    "id": 96,
+    "name": "Emma Anderson",
+    "batch": "12",
+    "courseId": "0082640",
+    "courseName": "Web Development",
+    "duration": "8 Months",
+    "internship": "3 Months",
+    "phone": "",
+    "email": "",
+    "location": "",
+    "image": "https://i.postimg.cc/PrNJwnsg/insta10.avif",
+    "pdfUrl": "/cv/dmk2.pdf"
+  },
+  {
+    "id": 97,
+    "name": "Emma Anderson",
+    "batch": "12",
+    "courseId": "0082640",
+    "courseName": "Web Development",
+    "duration": "8 Months",
+    "internship": "3 Months",
+    "phone": "",
+    "email": "",
+    "location": "",
+    "image": "https://i.postimg.cc/PrNJwnsg/insta10.avif",
+    "pdfUrl": "/cv/dmk2.pdf"
+  },
+  {
+    "id": 100,
+    "name": "Emma Anderson",
+    "batch": "12",
+    "courseId": "0082640",
+    "courseName": "Web Development",
+    "duration": "8 Months",
+    "internship": "3 Months",
+    "phone": "",
+    "email": "",
+    "location": "",
+    "image": "https://i.postimg.cc/PrNJwnsg/insta10.avif",
+    "pdfUrl": "/cv/dmk2.pdf"
   }
 ]

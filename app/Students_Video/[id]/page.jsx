@@ -1,232 +1,210 @@
-// Page.js (student detail page)
 'use client';
-
-import { useParams, useSearchParams, useRouter } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import 'react-tabs/style/react-tabs.css';
-import useRegistered from '@/hooks/useRegistered';
-import useStudentEditProfile from '@/hooks/useStudentEditProfile';
-import { UserAuth } from '@/app/context/AuthContext';
-import useVideo from '@/hooks/useVideo';
-import useMotion from '@/hooks/useMotion';
-import useStudents from '@/hooks/useStudents';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
+import Image from 'next/image';
 
 import Navbar from '@/app/(with-navbar)/componenets/Navbar/Navbar';
 import Footer from '@/app/(with-navbar)/componenets/Footer/Footer';
 import HelmetHead from '@/app/HelmetHead/HelmetHead';
+import img1 from '../../../assets/image1.PNG';
+
 import CuriculamVite from '@/app/(with-navbar)/componenets/RunningVideoEditing/VideoEditingCV/VideoEditingCV';
 import Achivements from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/Achivements/Achivements';
 import CourseDuration from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/CourseDuration/CourseDuration';
-import PortFolio from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/PortFolio/PortFolio';
 import Certifactes from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/Certifactes/Certifactes';
+import PortFolio from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/PortFolio/PortFolio';
 import GraphicsStudentsGallery from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/GraphicsStudentsGallery/GraphicsStudentsGallery';
 import StudentsBlogs from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/StudentsBlogs/StudentsBlogs';
 import GraphicsVideos from '@/app/(with-navbar)/componenets/RunningGraphicsStudents/GraphicsVideo/GraphicsVideos';
-import img1 from '../../../assets/image1.PNG';
-import Image from 'next/image';
-import { RiArrowRightSLine, RiArrowLeftSLine } from 'react-icons/ri';
+
+import useStudentEditProfile from '@/hooks/useStudentEditProfile';
+import useRegistered from '@/hooks/useRegistered';
+import { UserAuth } from '@/app/context/AuthContext';
 import './VideoEdit.css';
-import 'swiper/css';
-import 'swiper/css/navigation';
 
-export default function Page() {
-    const { id } = useParams();
-    const searchParams = useSearchParams();
-    const router = useRouter();
-    const sidebarRef = useRef(null);
+// ✅ Helper: make clean slug from name
+const formatSlug = (text = '') =>
+  text.trim().replace(/\s+/g, '_').replace(/[^\w_]/g, '');
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [activeTabIndex, setActiveTabIndex] = useState(0);
+export default function VideoEditingStudent() {
+  const { id } = useParams();
+  const searchParams = useSearchParams();
+  const sidebarRef = useRef(null);
 
-    const [students] = useStudents();
-    const VideoEdit = useVideo();
-    const motionsData = useMotion();
-    const [register] = useRegistered();
-    const { ManualUser } = UserAuth();
-    const { studentEditProfile } = useStudentEditProfile();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const tabCategories = [
-        { name: "Profile (CV)", slug: "profile" },
-        { name: "Achievements", slug: "achievements" },
-        { name: "Courses", slug: "courses" },
-        { name: "Portfolio", slug: "portfolio" },
-        { name: "Certificate", slug: "certificate" },
-        { name: "Gallery", slug: "gallery" },
-        { name: "Videos", slug: "videos" },
-        { name: "Blog", slug: "blog" }
-    ];
+  const [studentEditProfile] = useStudentEditProfile();
+  const [register] = useRegistered();
+  const { ManualUser } = UserAuth();
 
-    // Wait for studentEditProfile to load and set URL dynamically
-    useEffect(() => {
-        if (!studentEditProfile?.data) return;
+  const motions = studentEditProfile?.data || [];
+  const motion = useMemo(() => motions.find((s) => s.id === Number(id)), [motions, id]);
 
-        const profile = studentEditProfile.data.find(p => p.id === Number(id));
-        if (!profile) return;
+  const tabCategories = [
+    { name: 'Profile (CV)', slug: 'profile' },
+    { name: 'Achievements', slug: 'achievements' },
+    { name: 'Courses', slug: 'courses' },
+    { name: 'Portfolio', slug: 'portfolio' },
+    { name: 'Certificate', slug: 'certificate' },
+    { name: 'Pictures', slug: 'pictures' },
+    { name: 'Videos', slug: 'videos' },
+    { name: 'Blog', slug: 'blog' },
+  ];
 
-        const category = profile.category || "Students_Video";
-        const email = profile.email || ManualUser?.email || "";
-        const tab = searchParams.get("tab") || "profile";
-        const tabIndex = tabCategories.findIndex(t => t.slug === tab);
+  // Set active tab from URL
+  useEffect(() => {
+    const tabSlug = searchParams.get('tab');
+    if (tabSlug) {
+      const foundIndex = tabCategories.findIndex((t) => t.slug === tabSlug);
+      if (foundIndex !== -1) setActiveTabIndex(foundIndex);
+    }
+  }, [searchParams]);
 
-        if (tabIndex !== -1) setActiveTabIndex(tabIndex);
 
-        const emailParam = searchParams.get("email");
-        if (email && !emailParam) {
-            router.replace(`/${category}/${id}?tab=${tab}&email=${email}`);
-        }
-    }, [studentEditProfile, id, searchParams, router, ManualUser]);
+  // Update URL slug like /Students-Video/name/id?tab=profile
+  useEffect(() => {
+    if (!motion) return;
+    const currentTab = searchParams.get('tab') || 'profile';
+    const nameSlug = formatSlug(motion.name || 'student');
+    const newUrl = `/Students-Video/${nameSlug}/${motion.id}?tab=${currentTab}`;
+    window.history.replaceState(null, '', newUrl);
+  }, [motion, searchParams]);
 
-    const VideoEdits = VideoEdit?.find(Onestudent => Onestudent?.id === Number(id));
+  const handleTabChange = (index) => {
+    setActiveTabIndex(index);
+    if (!motion) return;
+    const tabSlug = tabCategories[index].slug;
+    const nameSlug = formatSlug(motion.name || 'student');
+    const newUrl = `/Students-Video/${nameSlug}/${motion.id}?tab=${tabSlug}`;
+    window.history.replaceState(null, '', newUrl);
+  };
 
-    const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
-    const handleClickOutside = (event) => {
-        if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-            setIsSidebarOpen(false);
-        }
+
+  const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
+
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) setIsSidebarOpen(false);
+  };
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.classList.add('no-scroll');
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.body.classList.remove('no-scroll');
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.body.classList.remove('no-scroll');
+      document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, [isSidebarOpen]);
 
-    useEffect(() => {
-        if (isSidebarOpen) {
-            document.body.classList.add('no-scroll');
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.body.classList.remove('no-scroll');
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
-        return () => {
-            document.body.classList.remove('no-scroll');
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [isSidebarOpen]);
+  if (!motion) return <div className="text-center py-20">Loading...</div>;
 
-    const handleTabChange = (index) => {
-        setActiveTabIndex(index);
-        setIsSidebarOpen(false);
+  return (
+    <>
+      <HelmetHead
+        title={`${motion.name} - Video Editing Student`}
+        description={`Details of Video Editing student ${motion.name}`}
+        keywords="video editing student, portfolio, courses, achievements"
+        author="Muhibullah"
+      />
+      <Navbar />
 
-        if (!studentEditProfile?.data) return;
+      <main className="lg:mt-16 mt-24 mb-10 overflow-hidden">
+        {/* Cover Image */}
+        <div className="w-full flex flex-col justify-center items-center">
+          <div className="relative lg:w-7/12 overflow-hidden rounded-lg mt-5 container">
+            {motion.pdfUrl && (
+              <div className="absolute bottom-5 right-6">
+                <a
+                  href={motion.pdfUrl}
+                  download
+                  className="mt-2 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
+                >
+                  Download CV
+                </a>
+              </div>
+            )}
+            <div className="relative w-full h-40 md:h-48 lg:h-56 rounded-lg overflow-hidden mt-5">
+              <Image src={img1} alt="cover Image" fill className="object-cover" priority />
+            </div>
+          </div>
+        </div>
 
-        const profile = studentEditProfile.data.find(p => p.id === Number(id));
-        if (!profile) return;
+        {/* Tabs + Sidebar */}
+        <div className="border-b-2 border-slate-200 lg:w-7/12 container mx-auto rounded-xl relative">
+          {/* Mobile sidebar toggle */}
+          <div className="block lg:hidden fixed top-64 right-1 z-40">
+            <button
+              onClick={toggleSidebar}
+              className="p-2 bg-[#87d3ec] rounded-full text-white transition-all duration-300 transform hover:scale-110"
+            >
+              {isSidebarOpen ? <RiArrowLeftSLine size={24} /> : <RiArrowRightSLine size={24} />}
+            </button>
+          </div>
 
-        const category = profile.category || "Students_Video";
-        const slug = tabCategories[index].slug;
-        const email = profile.email || ManualUser?.email || "";
+          {/* Mobile sidebar */}
+          <div className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div ref={sidebarRef} className="w-64 bg-[#17549A] text-white h-full p-4">
+              <h2 className="text-lg font-bold mb-4">Categories</h2>
+              <ul className="flex flex-col">
+                {tabCategories.map((category, index) => (
+                  <li
+                    key={index}
+                    className="p-2 hover:bg-gray-200 hover:text-black cursor-pointer"
+                    onClick={() => { handleTabChange(index); setIsSidebarOpen(false); }}
+                  >
+                    {category.name}
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+              >
+                Hire Me
+              </button>
+            </div>
+          </div>
 
-        router.replace(`/${category}/${id}?tab=${slug}${email ? `&email=${email}` : ""}`);
-    };
+          {/* Desktop Tabs */}
+          <Tabs selectedIndex={activeTabIndex} onSelect={handleTabChange} className="flex flex-col md:flex-row h-auto w-full">
+            <TabList className="hidden lg:flex flex-col border-r border-gray-300 bg-[#17549A] w-2/12 h-auto text-white">
+              <Image src={motion.uploadedImage} alt={motion.name} width={100} height={100} className="mt-4 mx-auto border-2 border-white mb-4" />
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-blue-500 text-white rounded-xl w-8/12 h-10 hover:bg-[#44b5e6] transition duration-300 mx-auto mb-5"
+              >
+                Hire Me
+              </button>
+              {tabCategories.map((tab, index) => (
+                <Tab key={index} className={`p-2 text-left hover:bg-blue-200 hover:text-blue-600 cursor-pointer ${activeTabIndex === index ? 'bg-blue-200 text-blue-600' : 'text-[#8dbff7]'}`}>
+                  {tab.name}
+                </Tab>
+              ))}
+            </TabList>
 
-    return (
-        <>
-            <HelmetHead
-                title="Video Editing Students"
-                description="Here have the specific data of Video Editing students who have completed the courses"
-                keywords="Batch VideoEditing,CV Education,objective,courses,portfolio,Blog"
-                author="Muhibullah"
-            />
-            <Navbar />
-            <main className='lg:mt-14 mt-24 mb-10 overflow-hidden container mx-auto'>
-                <div className='w-full flex flex-col justify-center items-center container'>
-                    <div className='relative lg:w-7/12 w-full overflow-hidden rounded-lg mt-5 container mx-auto'>
-                        {VideoEdits && (
-                            <div className='absolute bottom-5 right-6 z-10'>
-                                <a
-                                    href={VideoEdits?.pdfUrl}
-                                    download
-                                    className="mt-2 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300"
-                                >
-                                    Download CV
-                                </a>
-                            </div>
-                        )}
-                        <Image
-                            src={img1}
-                            alt="Cover Image"
-                            width={300}        // Match sidebar width on medium devices
-                            height={400}       // Adjust height to maintain aspect ratio
-                            className="w-full  h-auto  object-fill rounded-lg mx-auto transition-transform duration-300 ease-in-out"
-                        />
-                    </div>
-
-
-
-                </div>
-
-                <div className='border-b-2 border-slate-200 lg:w-7/12 container mx-auto rounded-xl'>
-                    {/* Mobile Sidebar Toggle */}
-                    <div className="block lg:hidden fixed top-64 right-1 z-40">
-                        <button
-                            onClick={toggleSidebar}
-                            className="p-2 bg-[#87d3ec] rounded-full text-white transition-all duration-300 transform hover:scale-110"
-                        >
-                            {isSidebarOpen ? <RiArrowLeftSLine size={24} /> : <RiArrowRightSLine size={24} />}
-                        </button>
-                    </div>
-
-                    {/* Mobile Sidebar */}
-                    <div className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-30 lg:hidden transition-transform duration-500 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                        <div ref={sidebarRef} className="w-64 bg-[#17549A] text-white h-full p-4">
-                            <h2 className="text-lg font-bold">Categories</h2>
-                            <ul className="flex flex-col">
-                                {tabCategories.map((category, index) => (
-                                    <li
-                                        key={index}
-                                        className="p-2 hover:bg-gray-200 hover:text-black cursor-pointer"
-                                        onClick={() => handleTabChange(index)}
-                                    >
-                                        {category.name}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <Tabs selectedIndex={activeTabIndex} onSelect={handleTabChange} className='flex flex-col md:flex-row h-auto w-full'>
-                        <TabList className='flex flex-col border-r border-gray-300 cursor-pointer text-white hidden lg:flex bg-[#17549A] w-2/12 h-auto'>
-                            {VideoEdits ? (
-                                <div className='flex flex-col text-white w-full'>
-                                    <img
-                                        src={VideoEdits?.image}
-                                        alt={VideoEdits?.title || 'user profile pic'}
-                                        className="mt-4 shadow-lg w-10/12 mx-auto transition-transform duration-300 hover:scale-105 mb-8"
-                                        width={100}
-                                        height={100}
-                                        style={{ border: '4px solid #ffffff' }}
-                                    />
-                                </div>
-                            ) : (
-                                <div className="flex justify-center items-center w-9/12 mx-auto lg:mb-5 h-40">
-                                    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white"></div>
-                                </div>
-                            )}
-
-                            <div className="flex justify-center">
-                                <button className='bg-blue-500 text-white rounded-xl w-8/12 h-10 hover:bg-[#44b5e6] transition duration-300 mb-5'>
-                                    Hire Me
-                                </button>
-                            </div>
-
-                            {tabCategories.map((tab, index) => (
-                                <Tab key={index} style={{ borderBottom: '1px solid #8dbff7' }} className='p-4 text-left hover:bg-blue-200 text-[#8dbff7] hover:text-blue-600 focus:outline-none'>
-                                    {tab.name}
-                                </Tab>
-                            ))}
-                        </TabList>
-
-                        <div className='w-full'>
-                            <TabPanel><CuriculamVite /></TabPanel>
-                            <TabPanel><Achivements /></TabPanel>
-                            <TabPanel><CourseDuration /></TabPanel>
-                            <TabPanel><PortFolio /></TabPanel>
-                            <TabPanel><Certifactes /></TabPanel>
-                            <TabPanel><GraphicsStudentsGallery /></TabPanel>
-                            <TabPanel><GraphicsVideos /></TabPanel>
-                            <TabPanel><StudentsBlogs /></TabPanel>
-                        </div>
-                    </Tabs>
-                </div>
-            </main>
-            <Footer />
-        </>
-    );
+            <div className="w-full px-2 sm:px-4 lg:px-0 mt-5">
+              <TabPanel><CuriculamVite motion={motion} /></TabPanel>
+              <TabPanel><Achivements /></TabPanel>
+              <TabPanel><CourseDuration /></TabPanel>
+              <TabPanel><PortFolio /></TabPanel>
+              <TabPanel><Certifactes /></TabPanel>
+              <TabPanel><GraphicsStudentsGallery /></TabPanel>
+              <TabPanel><GraphicsVideos /></TabPanel>
+              <TabPanel><StudentsBlogs /></TabPanel>
+            </div>
+          </Tabs>
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
 }

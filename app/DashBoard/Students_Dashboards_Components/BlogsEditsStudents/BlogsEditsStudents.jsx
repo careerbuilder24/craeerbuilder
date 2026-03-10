@@ -10,19 +10,51 @@ export default function Page() {
     const [note, setNote] = useState('');
     const [category, setCategory] = useState('');
     const [featuredImage, setFeaturedImage] = useState(null);
+    const [imageAlt, setImageAlt] = useState('');
+    const [imageCaption, setImageCaption] = useState('');
+    const [imageDescription, setImageDescription] = useState('');
     const [alignment, setAlignment] = useState('left');
     const [fontSize, setFontSize] = useState('16');
     const [linkUrl, setLinkUrl] = useState('');
     const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false);
-    const [showPreview, setShowPreview] = useState(false);
     const [blogContent, setBlogContent] = useState('');
     const [savedRange, setSavedRange] = useState(null);
 
     const { matchedStudent } = useUserMatching();
-    //    console.log(matchedStudent?.email)
-
     const editorRef = useRef(null);
 
+    // Generate keywords for SEO
+    const getBlogKeywords = () => {
+        const raw = (title + " " + note + " " + category).toLowerCase().replace(/[^\w\s]/g, "");
+        const words = raw.split(/\s+/).filter(word => word.length >= 3);
+        return Array.from(new Set(words));
+    };
+
+    const getImageSeoMatchPercent = () => {
+        const keywords = getBlogKeywords();
+        if (keywords.length === 0) return 0;
+        const seoText = [imageAlt, imageCaption, imageDescription].join(" ").toLowerCase();
+        const matchedKeywords = keywords.filter(word => seoText.includes(word));
+        return Math.round((matchedKeywords.length / keywords.length) * 100);
+    };
+
+    const getContentSeoMatchPercent = () => {
+        const keywords = getBlogKeywords();
+        if (keywords.length === 0) return 0;
+        const contentText = [title, note, editorRef.current?.innerText || ''].join(" ").toLowerCase();
+        const matchedKeywords = keywords.filter(word => contentText.includes(word));
+        return Math.round((matchedKeywords.length / keywords.length) * 100);
+    };
+
+    const [imageSeoMatchPercent, setImageSeoMatchPercent] = useState(0);
+    const [contentSeoMatchPercent, setContentSeoMatchPercent] = useState(0);
+
+    useEffect(() => {
+        setImageSeoMatchPercent(getImageSeoMatchPercent());
+        setContentSeoMatchPercent(getContentSeoMatchPercent());
+    }, [title, note, category, imageAlt, imageCaption, imageDescription, blogContent]);
+
+    // Load draft
     useEffect(() => {
         const savedDraft = localStorage.getItem('blog_draft');
         if (savedDraft) {
@@ -31,16 +63,19 @@ export default function Page() {
             setNote(draft.note || '');
             setCategory(draft.category || '');
             setFeaturedImage(draft.featuredImage || null);
+            setImageAlt(draft.imageAlt || '');
+            setImageCaption(draft.imageCaption || '');
+            setImageDescription(draft.imageDescription || '');
             if (editorRef.current && draft.blogContent) {
                 editorRef.current.innerHTML = draft.blogContent;
             }
         }
     }, []);
 
+    // Image upload
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
-
         const formData = new FormData();
         formData.append('image', file);
 
@@ -49,56 +84,48 @@ export default function Page() {
                 method: 'POST',
                 body: formData
             });
-
             const data = await res.json();
-
             if (data.success) {
-                setFeaturedImage(data.data.url); // Set the hosted image URL
+                setFeaturedImage(data.data.url);
                 Swal.fire('Uploaded!', 'Image successfully uploaded to ImgBB.', 'success');
-            } else {
-                throw new Error('ImgBB upload failed');
-            }
+            } else throw new Error('ImgBB upload failed');
         } catch (error) {
             console.error('Upload error:', error);
             Swal.fire('Error', 'Failed to upload image.', 'error');
         }
     };
 
-
     const handleCancelImage = () => {
         setFeaturedImage(null);
+        setImageAlt('');
+        setImageCaption('');
+        setImageDescription('');
     };
 
+    // Text formatting
     const toggleBold = () => document.execCommand('bold');
     const toggleItalic = () => document.execCommand('italic');
-
     const handleAlign = (alignType) => {
         setAlignment(alignType);
         document.execCommand('justify' + alignType.charAt(0).toUpperCase() + alignType.slice(1));
     };
-
     const handleFontSizeChange = (e) => {
-        const selectedSize = e.target.value;
-        setFontSize(selectedSize);
-        if (editorRef.current) {
-            editorRef.current.style.fontSize = `${selectedSize}pt`;
-        }
+        const size = e.target.value;
+        setFontSize(size);
+        if (editorRef.current) editorRef.current.style.fontSize = `${size}pt`;
     };
 
+    // Links
     const handleOpenLinkDialog = () => {
         const selection = window.getSelection();
-        if (selection.rangeCount > 0) {
-            setSavedRange(selection.getRangeAt(0).cloneRange());
-        }
+        if (selection.rangeCount > 0) setSavedRange(selection.getRangeAt(0).cloneRange());
         setIsLinkDialogOpen(true);
     };
-
     const handleInsertLink = () => {
         if (linkUrl && savedRange) {
             const selection = window.getSelection();
             selection.removeAllRanges();
             selection.addRange(savedRange);
-
             const linkNode = document.createElement('a');
             linkNode.href = linkUrl;
             linkNode.target = '_blank';
@@ -112,72 +139,62 @@ export default function Page() {
         }
     };
 
-    const handlePreview = () => {
-        if (editorRef.current) {
-            setBlogContent(editorRef.current.innerHTML);
-            setShowPreview(true);
-        }
-    };
-
+    // Save draft
     const handleSaveDraft = () => {
         if (editorRef.current) {
-            Swal.fire({
-                title: 'Save as Draft?',
-                text: "Do you want to save this blog as a draft?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#17549A',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Save Draft',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const draft = {
-
-                        title,
-                        note,
-                        category,
-                        featuredImage,
-                        blogContent: editorRef.current.innerHTML,
-                        dateSaved: new Date().toISOString()
-                    };
-                    localStorage.setItem('blog_draft', JSON.stringify(draft));
-
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Draft Saved!',
-                        text: 'Your blog draft has been successfully saved.',
-                        confirmButtonColor: '#17549A'
-                    });
-                }
-            });
+            const draft = {
+                title,
+                note,
+                category,
+                featuredImage,
+                imageAlt,
+                imageCaption,
+                imageDescription,
+                blogContent: editorRef.current.innerHTML,
+                dateSaved: new Date().toISOString()
+            };
+            localStorage.setItem('blog_draft', JSON.stringify(draft));
+            Swal.fire('Saved!', 'Draft saved successfully.', 'success');
         }
     };
 
+    // Publish
     const handlePublishBlog = async () => {
-        if (editorRef.current) {
+        if (!editorRef.current) return;
+
+        if (!matchedStudent?.email) {
             Swal.fire({
-                title: 'Publish Blog?',
-                text: 'Are you sure you want to publish this blog?',
+                title: 'Warning!',
+                text: 'Please Fill Up your profile Edit.',
                 icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#17549A',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Publish',
-                cancelButtonText: 'Cancel'
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    const blogData = {
-                        title,
-                        note,
-                        category,
-                        featuredImage, // this is now the ImgBB URL
-                        email: matchedStudent?.email,
-                        blogContent: editorRef.current.innerHTML
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
 
+        Swal.fire({
+            title: 'Publish Blog?',
+            text: "Do you want to publish this blog?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Publish',
+            cancelButtonText: 'Cancel',
+            reverseButtons: true,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const blogData = {
+                    title,
+                    note,
+                    category,
+                    featuredImage,
+                    imageAlt,
+                    imageCaption,
+                    imageDescription,
+                    email: matchedStudent?.email,
+                    blogContent: editorRef.current.innerHTML
+                };
 
-                    };
-
+                try {
                     const res = await fetch('/api/StudentBlog', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -190,39 +207,66 @@ export default function Page() {
                     } else {
                         Swal.fire('Failed!', 'Blog could not be published.', 'error');
                     }
-                } else {
-                    Swal.fire('Cancelled', 'Your blog was not published.', 'info');
+                } catch (err) {
+                    Swal.fire('Error!', 'Something went wrong while publishing.', 'error');
                 }
-            });
-        }
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire('Cancelled', 'Blog publishing was cancelled.', 'info');
+            }
+        });
+    };
+
+    const getBarColor = (percent) => percent >= 80 ? '#4caf50' : '#ff9800';
+
+    // Live preview (opens new tab)
+    const handlePreview = () => {
+        if (!editorRef.current) return;
+
+        const content = editorRef.current.innerHTML;
+        const previewWindow = window.open('', '_blank', 'width=900,height=700,scrollbars=yes');
+
+        const html = `
+          <html>
+            <head>
+              <title>Live Preview - ${title}</title>
+              <style>
+                body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+                h1 { color: #17549A; }
+                img { max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; }
+                p { margin-bottom: 10px; }
+              </style>
+            </head>
+            <body>
+              <h1>${title}</h1>
+              <p><em>${note}</em></p>
+              ${featuredImage ? `<img src="${featuredImage}" alt="${imageAlt}" />` : ''}
+              <div>${content}</div>
+              <hr/>
+              <small>Category: ${category}</small>
+            </body>
+          </html>
+        `;
+
+        previewWindow.document.write(html);
+        previewWindow.document.close();
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', padding: '20px', maxWidth: '1200px', margin: '0 auto', flexWrap: 'wrap' }}>
-            <div style={{ flex: 2, minWidth: '300px' }}>
+        <div className="flex flex-wrap gap-5 p-5 max-w-[1200px] mx-auto">
+            <div className="flex-[3] min-w-[300px] space-y-4">
                 <div>
-                    <label><strong>Title:</strong></label>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        placeholder="Enter title"
-                        style={{ width: '100%', padding: '8px', margin: '8px 0', borderRadius: '5px' }}
-                        className='border'
-                    />
+                    <label className="font-bold">Title:</label>
+                    <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Enter title" className="border w-full p-2 rounded" />
                 </div>
                 <div>
-                    <label><strong>Short Note:</strong></label>
-                    <Textarea
-                        value={note}
-                        onChange={(e) => setNote(e.target.value)}
-                        placeholder="Enter a short note"
-                        style={{ width: '100%', padding: '8px', margin: '8px 0', height: '100px', borderRadius: '5px' }}
-                    />
+                    <label className="font-bold">Short Note:</label>
+                    <Textarea value={note} onChange={e => setNote(e.target.value)} placeholder="Enter a short note" className="border w-full p-2 rounded h-24" />
                 </div>
-                <div style={{ backgroundColor: '#fff' }} className="border p-2 mt-10">
+
+                {/* Editor */}
+                <div className="border p-2 mt-10 bg-white">
                     <div className="mb-5 text-center">
-                        <label><strong>Blog Section</strong></label>
+                        <label className="font-bold">Blog Section</label>
                     </div>
                     <div className="flex space-x-3 mb-2 items-center">
                         <button onClick={toggleBold}><FaBold /></button>
@@ -231,11 +275,7 @@ export default function Page() {
                         <button onClick={() => handleAlign('center')} className={alignment === 'center' ? 'text-blue-500' : ''}><FaAlignCenter /></button>
                         <button onClick={() => handleAlign('right')} className={alignment === 'right' ? 'text-blue-500' : ''}><FaAlignRight /></button>
                         <select value={fontSize} onChange={handleFontSizeChange}>
-                            <option value="10">10 pt</option>
-                            <option value="12">12 pt</option>
-                            <option value="14">14 pt</option>
-                            <option value="16">16 pt</option>
-                            <option value="18">18 pt</option>
+                            {[10, 12, 14, 16, 18].map(size => <option key={size} value={size}>{size} pt</option>)}
                         </select>
                         <button onClick={handleOpenLinkDialog}><FaLink /></button>
                     </div>
@@ -243,114 +283,56 @@ export default function Page() {
                     {isLinkDialogOpen && (
                         <div>
                             <label>Enter URL:</label>
-                            <input
-                                type="text"
-                                value={linkUrl}
-                                onChange={(e) => setLinkUrl(e.target.value)}
-                                placeholder="https://example.com"
-                                style={{
-                                    padding: '8px',
-                                    margin: '8px 0',
-                                    borderRadius: '5px',
-                                }}
-                            />
-                            <button
-                                onClick={handleInsertLink}
-                                style={{
-                                    padding: '8px',
-                                    backgroundColor: '#17549A',
-                                    color: 'white',
-                                    borderRadius: '5px',
-                                    marginBottom: '10px',
-                                }}
-                            >
-                                Insert Link
-                            </button>
-                            <button
-                                onClick={() => setIsLinkDialogOpen(false)}
-                                style={{
-                                    padding: '8px',
-                                    backgroundColor: '#ccc',
-                                    color: 'white',
-                                    borderRadius: '5px',
-                                }}
-                            >
-                                Cancel
-                            </button>
+                            <input type="text" value={linkUrl} onChange={e => setLinkUrl(e.target.value)} placeholder="https://example.com" className="border w-full p-2 rounded my-2" />
+                            <div className="flex gap-2">
+                                <button onClick={handleInsertLink} className="p-2 bg-blue-600 text-white rounded">Insert Link</button>
+                                <button onClick={() => setIsLinkDialogOpen(false)} className="p-2 bg-gray-400 text-white rounded">Cancel</button>
+                            </div>
                         </div>
                     )}
 
-                    <div
-                        ref={editorRef}
-                        contentEditable
-                        data-gramm="false"
-                        data-gramm_editor="false"
-                        suppressContentEditableWarning={true}
-                        style={{
-                            width: '100%',
-                            padding: '10px',
-                            minHeight: '200px',
-                            border: '1px solid #ccc',
-                            borderRadius: '5px',
-                            textAlign: alignment,
-                            fontSize: `${fontSize}pt`,
-                        }}
-                        placeholder="Start typing your blog content..."
-                    ></div>
-
-                    {showPreview && (
-                        <div style={{ marginTop: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '15px', backgroundColor: '#f9f9f9' }}>
-                            <h3 className='font-bold'>Live Preview</h3>
-                            <div
-                                dangerouslySetInnerHTML={{ __html: blogContent }}
-                                style={{ whiteSpace: 'normal', wordWrap: 'break-word' }}
-                            />
-                            <button
-                                onClick={() => setShowPreview(false)}
-                                style={{ marginTop: '10px', padding: '8px', backgroundColor: '#ccc', borderRadius: '5px' }}
-                            >
-                                Close Preview
-                            </button>
-                        </div>
-                    )}
+                    <div ref={editorRef} contentEditable suppressContentEditableWarning className="border rounded p-3 min-h-[200px]" style={{ textAlign: alignment, fontSize: `${fontSize}pt` }}></div>
                 </div>
             </div>
 
-            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr', gap: '20px', minWidth: '300px' }}>
-                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#fff' }}>
-                    <h3 className='font-bold'>Actions</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                        <button
-                            onClick={handleSaveDraft}
-                            style={{ padding: '10px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px' }}
-                        >
-                            Save Draft
-                        </button>
-                        <button
-                            onClick={handlePreview}
-                            style={{ padding: '10px', backgroundColor: '#17549A', color: 'white', borderRadius: '5px' }}
-                        >
-                            Preview
-                        </button>
+            {/* Right Sidebar */}
+            <div className="flex-[1] min-w-[300px] sticky top-28 self-start flex flex-col gap-5">
+                {/* Image SEO */}
+                <div className="p-3 border rounded bg-white">
+                    <h3 className="font-bold mb-2">Image SEO</h3>
+                    <div className="w-full h-4 bg-gray-300 rounded">
+                        <div className="h-4 rounded transition-all" style={{ width: `${imageSeoMatchPercent}%`, backgroundColor: getBarColor(imageSeoMatchPercent) }} />
                     </div>
-                    <button
-                        onClick={handlePublishBlog}
-                        style={{
-                            padding: '10px',
-                            backgroundColor: '#17549A',
-                            color: 'white',
-                            borderRadius: '5px',
-                            marginTop: '10px'
-                        }}
-                        className='w-full'
-                    >
-                        Publish
-                    </button>
+                    <p className={`mt-1 font-bold ${imageSeoMatchPercent >= 80 ? 'text-green-600' : 'text-orange-600'}`}>
+                        {imageSeoMatchPercent >= 80 ? 'Image SEO Perfect' : 'Keep optimizing image SEO!'}
+                    </p>
                 </div>
 
-                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#fff' }}>
-                    <h3 className='font-bold'>Category</h3>
-                    <select value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: '100%', padding: '8px', borderRadius: '5px' }} className='border'>
+                {/* Content SEO */}
+                <div className="p-3 border rounded bg-white">
+                    <h3 className="font-bold mb-2">Content SEO</h3>
+                    <div className="w-full h-4 bg-gray-300 rounded">
+                        <div className="h-4 rounded transition-all" style={{ width: `${contentSeoMatchPercent}%`, backgroundColor: getBarColor(contentSeoMatchPercent) }} />
+                    </div>
+                    <p className={`mt-1 font-bold ${contentSeoMatchPercent >= 80 ? 'text-green-600' : 'text-orange-600'}`}>
+                        {contentSeoMatchPercent >= 80 ? 'Content SEO Perfect' : 'Keep optimizing content!'}
+                    </p>
+                </div>
+
+                {/* Actions */}
+                <div className="border p-3 rounded bg-white">
+                    <h3 className="font-bold mb-2">Actions</h3>
+                    <div className="grid grid-cols-2 gap-2">
+                        <button onClick={handleSaveDraft} className="p-2 bg-blue-700 text-white rounded">Save Draft</button>
+                        <button onClick={handlePreview} className="p-2 bg-blue-700 text-white rounded">Preview</button>
+                    </div>
+                    <button onClick={handlePublishBlog} className="mt-3 w-full p-2 bg-blue-700 text-white rounded">Publish</button>
+                </div>
+
+                {/* Category */}
+                <div className="border p-3 rounded bg-white">
+                    <h3 className="font-bold mb-2">Category</h3>
+                    <select value={category} onChange={e => setCategory(e.target.value)} className="border w-full p-2 rounded">
                         <option value="">Select a category</option>
                         <option value="technology">Technology</option>
                         <option value="health">Health</option>
@@ -359,13 +341,17 @@ export default function Page() {
                     </select>
                 </div>
 
-                <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '5px', backgroundColor: '#fff' }}>
-                    <h3 className='font-bold'>Featured Image</h3>
-                    <input type="file" onChange={handleImageUpload} style={{ width: '100%', padding: '8px', borderRadius: '5px' }} />
+                {/* Featured Image + SEO fields */}
+                <div className="border p-3 rounded bg-white">
+                    <h3 className="font-bold mb-2">Featured Image</h3>
+                    <input type="file" onChange={handleImageUpload} className="border w-full p-2 rounded" />
                     {featuredImage && (
-                        <div style={{ marginTop: '10px' }}>
-                            <Image width={200} height={200} src={featuredImage} alt="Featured Preview" style={{ width: '100%', borderRadius: '5px' }} />
-                            <button onClick={handleCancelImage} style={{ padding: '8px', marginTop: '10px', backgroundColor: '#ccc', borderRadius: '5px' }}>Remove Image</button>
+                        <div className="mt-3 space-y-2">
+                            <Image width={200} height={200} src={featuredImage} alt={imageAlt || 'Featured image'} className="w-full rounded" />
+                            <input type="text" value={imageAlt} onChange={e => setImageAlt(e.target.value)} placeholder="Alt text (SEO)" className="border w-full p-2 rounded" />
+                            <input type="text" value={imageCaption} onChange={e => setImageCaption(e.target.value)} placeholder="Caption" className="border w-full p-2 rounded" />
+                            <Textarea value={imageDescription} onChange={e => setImageDescription(e.target.value)} placeholder="Description" className="border w-full p-2 rounded h-20" />
+                            <button onClick={handleCancelImage} className="mt-2 p-2 bg-gray-400 text-white rounded">Remove Image</button>
                         </div>
                     )}
                 </div>
@@ -373,3 +359,4 @@ export default function Page() {
         </div>
     );
 }
+

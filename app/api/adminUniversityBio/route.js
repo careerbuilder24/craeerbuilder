@@ -88,17 +88,13 @@ export async function GET() {
 
 
 
-
+// PUT method
 export async function PUT(req) {
   try {
-    // Parse the request body
     const body = await req.json();
-    console.log('Request body:', body);
-
-    // Destructure the required fields
     const {
       id,
-      university_logo,
+      university_logo = "",
       university_name,
       undergraduate_course,
       undergraduate_credits,
@@ -106,91 +102,44 @@ export async function PUT(req) {
       postgraduate_credits,
       diploma_course_name,
       university_link,
-      university_cost,
-      diploma_course_cost
+      university_cost = "",
+      diploma_course_cost = "",
     } = body;
 
-    // Parse costs as floats
-    const parsedUniversityCost = parseFloat(university_cost);
-    const parsedDiplomaCourseCost = parseFloat(diploma_course_cost);
-
-    // console.log('Parsed costs:', parsedUniversityCost, parsedDiplomaCourseCost);
-
-    // Check if any required field is missing
-    if (
-      !id || !university_name || !undergraduate_course || !undergraduate_credits ||
-      !postgraduate_course || !postgraduate_credits || isNaN(parsedUniversityCost) ||
-      !diploma_course_name || !university_link || isNaN(parsedDiplomaCourseCost)
-    ) {
-      return NextResponse.json({
-        success: false,
-        message: 'Missing required fields or invalid cost values'
-      }, { status: 400 });
+    if (!id || !university_name || !undergraduate_course || !undergraduate_credits ||
+      !postgraduate_course || !postgraduate_credits || !diploma_course_name || !university_link) {
+      return NextResponse.json({ success: false, message: "Missing required fields" }, { status: 400 });
     }
 
-    // Check if the university exists
-    const checkQuery = 'SELECT * FROM users_login.university_data WHERE id = ?';
-    const [checkResult] = await db.execute(checkQuery, [id]);
+    // Check if exists
+    const [check] = await db.execute("SELECT * FROM users_login.university_data WHERE id = ?", [id]);
+    if (check.length === 0) return NextResponse.json({ success: false, message: "University not found" }, { status: 404 });
 
-    console.log('Check result:', checkResult);
-
-    if (checkResult.length === 0) {
-      return NextResponse.json({
-        success: false,
-        message: 'University not found'
-      }, { status: 404 });
-    }
-
-    // Update the university data in the database
+    // Update
     const updateQuery = `
       UPDATE users_login.university_data
-      SET 
-        university_logo = ?, 
-        university_name = ?, 
-        undergraduate_course = ?, 
-        undergraduate_credits = ?, 
-        postgraduate_course = ?, 
-        postgraduate_credits = ?, 
-        university_cost = ?, 
-        diploma_course_name = ?, 
-        diploma_course_cost = ?, 
-        university_link = ?
+      SET university_logo = ?, university_name = ?, undergraduate_course = ?, undergraduate_credits = ?, 
+          postgraduate_course = ?, postgraduate_credits = ?, university_cost = ?, diploma_course_name = ?, 
+          diploma_course_cost = ?, university_link = ?
       WHERE id = ?
     `;
+    const values = [university_logo, university_name, undergraduate_course, undergraduate_credits,
+      postgraduate_course, postgraduate_credits, university_cost, diploma_course_name, diploma_course_cost, university_link, id];
 
-    const values = [
-      university_logo,
-      university_name,
-      undergraduate_course,
-      undergraduate_credits,
-      postgraduate_course,
-      postgraduate_credits,
-      parsedUniversityCost,
-      diploma_course_name,
-      parsedDiplomaCourseCost,
-      university_link,
-      id
-    ];
+    await db.execute(updateQuery, values);
 
-    const [result] = await db.execute(updateQuery, values);
-    console.log('Update result:', result);
+    // Return updated row
+    const [updatedRow] = await db.execute("SELECT * FROM users_login.university_data WHERE id = ?", [id]);
 
-    // Return success response
-    return NextResponse.json({
-      success: true,
-      message: 'University data updated successfully',
-      result
-    }, { status: 200 });
+    return NextResponse.json({ success: true, message: "Updated successfully", data: updatedRow[0] }, { status: 200 });
 
   } catch (err) {
-    console.error('Full error object:', err);
-    return NextResponse.json({
-      success: false,
-      message: 'Error updating university data',
-      error: err.message
-    }, { status: 500 });
+    console.error("Error updating:", err);
+    return NextResponse.json({ success: false, message: "Error updating", error: err.message }, { status: 500 });
   }
 }
+
+
 
 
 

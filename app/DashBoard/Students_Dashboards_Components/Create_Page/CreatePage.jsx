@@ -1,343 +1,169 @@
-// 'use client';
-// import React, { useState, useEffect } from 'react';
-
-// export default function Create_Page() {
-//   const [title, setTitle] = useState('');
-//   const [slug, setSlug] = useState('');
-//   const [content, setContent] = useState('');
-//   const [category, setCategory] = useState('');
-//   const [pageType, setPageType] = useState('blog');
-//   const [status, setStatus] = useState('draft');
-//   const [successMessage, setSuccessMessage] = useState('');
-
-//   // Generate slug when title changes
-//   useEffect(() => {
-//     const generatedSlug = title
-//       .toLowerCase()
-//       .replace(/[^a-z0-9]+/g, '-')
-//       .replace(/(^-|-$)+/g, '');
-//     setSlug(generatedSlug);
-//   }, [title]);
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     const newPage = {
-//       title,
-//       slug,
-//       content,
-//       category,
-//       pageType,
-//       status,
-//     };
-
-//     console.log('Saving Page:', newPage);
-//     // TODO: Send to backend via fetch/axios
-
-//     setSuccessMessage(' Page created successfully!');
-//     setTimeout(() => setSuccessMessage(''), 3000);
-//   };
-
-//   return (
-//     <div className="p-6 max-w-4xl mx-auto bg-white shadow-lg rounded-lg">
-//       <h1 className="text-3xl font-bold mb-6 text-center text-blue-700"> Create New Page</h1>
-
-//       {successMessage && (
-//         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4 text-center">
-//           {successMessage}
-//         </div>
-//       )}
-
-//       <form onSubmit={handleSubmit} className="space-y-5">
-//         <div>
-//           <label className="block font-medium">Title</label>
-//           <input
-//             type="text"
-//             className="w-full border px-4 py-2 rounded focus:outline-none focus:ring focus:border-blue-400"
-//             value={title}
-//             onChange={(e) => setTitle(e.target.value)}
-//             placeholder="Enter your page title"
-//             required
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-medium">Slug</label>
-//           <input
-//             type="text"
-//             className="w-full border px-4 py-2 rounded bg-gray-100"
-//             value={slug}
-//             readOnly
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-medium">Category</label>
-//           <input
-//             type="text"
-//             className="w-full border px-4 py-2 rounded"
-//             value={category}
-//             onChange={(e) => setCategory(e.target.value)}
-//             placeholder="e.g., Tech, Education"
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-medium">Page Type</label>
-//           <select
-//             className="w-full border px-4 py-2 rounded"
-//             value={pageType}
-//             onChange={(e) => setPageType(e.target.value)}
-//           >
-//             <option value="blog">Blog</option>
-//             <option value="static">Static Page</option>
-//             <option value="faq">FAQ</option>
-//           </select>
-//         </div>
-
-//         <div>
-//           <label className="block font-medium">Content</label>
-//           <textarea
-//             className="w-full border px-4 py-2 rounded h-32"
-//             value={content}
-//             onChange={(e) => setContent(e.target.value)}
-//             placeholder="Write your content here..."
-//             required
-//           />
-//         </div>
-
-//         <div>
-//           <label className="block font-medium">Status</label>
-//           <div className="flex gap-6 mt-1">
-//             <label>
-//               <input
-//                 type="radio"
-//                 name="status"
-//                 value="published"
-//                 checked={status === 'published'}
-//                 onChange={() => setStatus('published')}
-//               />{' '}
-//               Publish
-//             </label>
-//             <label>
-//               <input
-//                 type="radio"
-//                 name="status"
-//                 value="draft"
-//                 checked={status === 'draft'}
-//                 onChange={() => setStatus('draft')}
-//               />{' '}
-//               Save as Draft
-//             </label>
-//           </div>
-//         </div>
-
-//         <button
-//           type="submit"
-//           className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
-//         >
-//           Save Page
-//         </button>
-//       </form>
-
-//       {/* Live Preview */}
-//       <div className="mt-10 border-t pt-6">
-//         <h2 className="text-xl font-bold mb-2 text-gray-700"> Live Preview</h2>
-//         <div className="bg-gray-50 p-4 rounded border">
-//           <h3 className="text-xl font-semibold">{title || 'Page Title Preview'}</h3>
-//           <p className="text-gray-600 mt-2 whitespace-pre-wrap">{content || 'Your content will appear here.'}</p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
+'use client';
 import React, { useState } from 'react';
 
 export default function CreatePage() {
-  const [activeSection, setActiveSection] = useState('banner');
+  const [blocks, setBlocks] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const [tempHeading, setTempHeading] = useState('');
+  const [tempParagraph, setTempParagraph] = useState('');
+  const [tempImage, setTempImage] = useState(null);
+  const [imageWidth, setImageWidth] = useState(100); // default 100%
+  const [imageHeight, setImageHeight] = useState(100); // default 100%
+
+  const handleAddBlock = () => {
+    const newBlock = { heading: 'New Heading', paragraph: 'New paragraph...', image: null, width: 100, height: 100 };
+    setBlocks([...blocks, newBlock]);
+  };
+
+  const handleEditClick = (index) => {
+    setEditingIndex(index);
+    setTempHeading(blocks[index].heading);
+    setTempParagraph(blocks[index].paragraph);
+    setTempImage(blocks[index].image);
+    setImageWidth(blocks[index].width || 100);
+    setImageHeight(blocks[index].height || 100);
+    setShowSidebar(true);
+  };
+
+  const handleSave = () => {
+    const updatedBlocks = [...blocks];
+    updatedBlocks[editingIndex] = {
+      heading: tempHeading,
+      paragraph: tempParagraph,
+      image: tempImage,
+      width: imageWidth,
+      height: imageHeight,
+    };
+    setBlocks(updatedBlocks);
+    setShowSidebar(false);
+    setEditingIndex(null);
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => setTempImage(e.target.result);
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Homepage Edit Panel</h1>
-
-      <div className="flex gap-4 mb-6">
-        {['banner', 'sponsor', 'reviews', 'footer'].map((section) => (
+    <div className="flex relative min-h-screen ">
+      {/* Main Content */}
+      <div className="flex-1  lg:px-28 container mx-auto">
+        <div className="flex justify-between">
+          <div></div>
           <button
-            key={section}
-            onClick={() => setActiveSection(section)}
-            className={`px-4 py-2 rounded ${activeSection === section ? 'bg-blue-600 text-white' : 'bg-gray-200'
-              }`}
+            onClick={handleAddBlock}
+            className="bg-[#17549A] text-white px-4 py-2 rounded mb-4"
           >
-            {section.charAt(0).toUpperCase() + section.slice(1)} Edit
+            Add Section
           </button>
+        </div>
+
+        {blocks.map((block, index) => (
+          <div key={index} className="mb-6 relative overflow-hidden ">
+            {block.image && (
+              <img
+                src={block.image}
+                alt=""
+                style={{ width: `${block.width}%`, height: `${block.height}%`, objectFit: 'cover' }}
+              />
+            )}
+            <div className="p-2">
+              {block.heading && <h2 className="text-xl font-bold">{block.heading}</h2>}
+              {block.paragraph && <p className="mt-2 text-justify">{block.paragraph}</p>}
+            </div>
+            <button
+              onClick={() => handleEditClick(index)}
+              className="absolute top-2 right-2 bg-[#00ADEF] text-white px-2 py-1 rounded text-sm"
+            >
+              Edit
+            </button>
+          </div>
         ))}
       </div>
 
-      <div className="bg-white p-6 rounded shadow">
-        {activeSection === 'banner' && <BannerEditor />}
-        {activeSection === 'sponsor' && <SponsorUploader />}
-        {activeSection === 'reviews' && <ReviewsEditor />}
-        {activeSection === 'footer' && <FooterEditor />}
-      </div>
-    </div>
-  );
-}
-
-
-
-function BannerEditor() {
-  const [title, setTitle] = useState('');
-  const [subtitle, setSubtitle] = useState('');
-  const [images, setImages] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    const imageUrls = files.map(file => URL.createObjectURL(file));
-    setImages(prev => [...prev, ...imageUrls]);
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  };
-
-  return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Edit Banner</h2>
-
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="w-full mb-2 border p-2"
-      />
-      <input
-        type="text"
-        placeholder="Subtitle"
-        value={subtitle}
-        onChange={(e) => setSubtitle(e.target.value)}
-        className="w-full mb-2 border p-2"
-      />
-      <input
-        type="file"
-        accept="image/*"
-        multiple
-        onChange={handleImageUpload}
-        className="mb-2"
-      />
-
-      {images.length > 0 && (
-        <div className="relative w-full max-w-md mx-auto my-4">
-          <img
-            src={images[currentIndex]}
-            alt={`Banner ${currentIndex + 1}`}
-            className="w-full h-64 object-cover rounded"
-          />
-
-          <button
-            onClick={prevSlide}
-            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-700 text-white px-2 py-1 rounded"
-          >
-            ‹
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 text-white px-2 py-1 rounded"
-          >
-            ›
-          </button>
-
-          <div className="text-center mt-2 text-sm text-gray-500">
-            {currentIndex + 1} / {images.length}
+      {/* Right Sidebar */}
+      {showSidebar && (
+        <div className="w-96 bg-gray-100 p-6 border-l border-gray-300 fixed right-0 top-0 h-full overflow-y-auto shadow-lg">
+          <h2 className="text-xl font-bold mb-4">Edit Block</h2>
+          <div className="mb-4">
+            <label className="block font-semibold mb-1">Heading</label>
+            <input
+              type="text"
+              value={tempHeading}
+              onChange={(e) => setTempHeading(e.target.value)}
+              className="border p-2 w-full"
+            />
           </div>
+          <div className="mb-4">
+            <label className="block font-semibold mb-1">Paragraph</label>
+            <textarea
+              value={tempParagraph}
+              onChange={(e) => setTempParagraph(e.target.value)}
+              className="border p-2 w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block font-semibold mb-1">Image</label>
+            <input type="file" onChange={handleImageUpload} />
+            {tempImage && (
+              <>
+                <img
+                  src={tempImage}
+                  alt=""
+                  className="mt-2"
+                  style={{
+                    width: `${imageWidth}%`,
+                    maxWidth: '100%',
+                    height: `${imageHeight}px`, // use px instead of %
+                    objectFit: 'cover'
+                  }}
+                />
+
+                <div className="mt-2">
+                  <label className="block">Width: {imageWidth}%</label>
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={imageWidth}
+                    onChange={(e) => setImageWidth(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+                <div className="mt-2">
+                  <label className="block">Height: {imageHeight}%</label>
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value={imageHeight}
+                    onChange={(e) => setImageHeight(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+              </>
+            )}
+          </div>
+          <button
+            onClick={handleSave}
+            className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+          >
+            Save
+          </button>
+          <button
+            onClick={() => setShowSidebar(false)}
+            className="bg-gray-300 px-4 py-2 rounded"
+          >
+            Cancel
+          </button>
         </div>
       )}
-
-      <button className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
-    </div>
-  );
-}
-
-
-function SponsorUploader() {
-  const [image, setImage] = useState(null);
-
-  return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Upload Sponsor Image</h2>
-      <input
-        type="file"
-        onChange={(e) => setImage(e.target.files[0])}
-        className="mb-2"
-      />
-      <button className="bg-green-500 text-white px-4 py-2 rounded">Upload</button>
-    </div>
-  );
-}
-
-function ReviewsEditor() {
-  const [reviews, setReviews] = useState([{ name: '', review: '' }]);
-
-  const handleChange = (i, field, value) => {
-    const newReviews = [...reviews];
-    newReviews[i][field] = value;
-    setReviews(newReviews);
-  };
-
-  const addReview = () => setReviews([...reviews, { name: '', review: '' }]);
-
-  return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Edit Reviews</h2>
-      {reviews.map((r, i) => (
-        <div key={i} className="mb-4">
-          <input
-            type="text"
-            placeholder="Name"
-            value={r.name}
-            onChange={(e) => handleChange(i, 'name', e.target.value)}
-            className="w-full mb-2 border p-2"
-          />
-          <textarea
-            placeholder="Review"
-            value={r.review}
-            onChange={(e) => handleChange(i, 'review', e.target.value)}
-            className="w-full mb-2 border p-2"
-          />
-        </div>
-      ))}
-      <button
-        onClick={addReview}
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
-      >
-        Add Review
-      </button>
-      <button className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
-    </div>
-  );
-}
-
-function FooterEditor() {
-  const [footerText, setFooterText] = useState('');
-
-  return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Edit Footer</h2>
-      <textarea
-        placeholder="Footer content"
-        value={footerText}
-        onChange={(e) => setFooterText(e.target.value)}
-        className="w-full mb-2 border p-2"
-      />
-      <button className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
     </div>
   );
 }

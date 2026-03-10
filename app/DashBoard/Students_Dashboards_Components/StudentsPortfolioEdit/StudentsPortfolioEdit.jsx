@@ -31,6 +31,16 @@ export default function Page() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+           if (!matchedStudent?.email) {
+                            Swal.fire({
+                                title: 'Warning!',
+                                text: 'Please Fill Up your profile Edit.',
+                                icon: 'warning',
+                                confirmButtonText: 'OK'
+                            });
+                            return;
+                        }
+
         // ✅ Basic Empty Fields Check
         if (
             !portfolioTitle.trim() ||
